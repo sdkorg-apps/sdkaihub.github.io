@@ -3,39 +3,114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SDK AI Hub is the studio page for SDK Equipment LLC. Orgora Charts is the first app: a private org chart for iPhone and iPad.">
 <meta name="apple-itunes-app" content="app-id=6792418699">
-<title>SDK AI Hub</title>
+<title>SDK AI Hub — software by SDK Equipment LLC</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 640px; margin: 0 auto; padding: 48px 24px; line-height: 1.6;
-         background: #0d1117; color: #e6edf3; }
-  a { color: #58a6ff; text-decoration: none; }
+  :root {
+    --ink: #1c1c1e;
+    --muted: #5c6560;
+    --line: #e4eee6;
+    --paper: #f6f8f5;
+    --card: #ffffff;
+    --green: #178a52;
+    --mint: #e7f8ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  h1 { font-size: 1.6rem; }
-  .app { border: 1px solid #30363d; border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
-  .app h2 { margin: 0 0 8px; font-size: 1.2rem; }
-  .muted { color: #8b949e; font-size: 0.9rem; }
+  header, main, footer { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+  header { padding: 28px 0 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  .brand { font-weight: 700; letter-spacing: -0.03em; font-size: 1.05rem; }
+  .brand span { color: var(--muted); font-weight: 500; }
+  .hero { padding: 28px 0 12px; }
+  h1 { font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.04em; margin: 0 0 12px; max-width: 14ch; }
+  .lede { max-width: 42rem; color: var(--muted); font-size: 1.08rem; margin: 0; }
+  .apps { display: grid; grid-template-columns: 1fr; gap: 18px; padding: 28px 0 48px; }
+  @media (min-width: 860px) {
+    .apps { grid-template-columns: 1.4fr 0.8fr; align-items: start; }
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(40, 60, 40, 0.05);
+  }
+  .card-body { padding: 22px 22px 20px; }
+  .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
+  .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
+  h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
+  .shots { display: flex; gap: 12px; padding: 0 22px 22px; overflow: auto; }
+  .shots img { width: min(320px, 78vw); border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .btn {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 650;
+  }
+  .btn:hover { text-decoration: none; filter: brightness(1.08); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .links { margin: 14px 0 0; color: var(--muted); font-size: 0.92rem; }
+  .slot {
+    border: 1px dashed #c9d5ca;
+    border-radius: 20px;
+    min-height: 220px;
+    padding: 22px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.45);
+  }
+  .slot strong { display: block; color: var(--ink); margin-bottom: 6px; }
+  footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
-  <h1>SDK AI Hub</h1>
-  <p class="muted">Privacy-first apps. Your data stays on your device.</p>
-
-  <div class="app">
-    <h2>Orgora Charts</h2>
-    <p>Build and manage org charts privately on iPhone, iPad, and Mac.
-       Everything is stored on your device — no accounts, no servers, no tracking.</p>
-    <p>
-      <a href="https://apps.apple.com/app/id6792418699">Download on the App Store</a> ·
-      <a href="/orgora-charts/clipper.html">Chrome &amp; Safari Clipper</a><br>
-      <a href="/orgora-charts/">Support</a> ·
-      <a href="/orgora-charts/privacy.html">Privacy Policy</a>
-    </p>
-  </div>
-
-  <footer class="muted" style="margin-top: 48px; font-size: 0.8rem;">
-    SDK AI Hub is a brand of SDK Equipment LLC.
-  </footer>
+  <header>
+    <div class="brand">SDK AI Hub <span>· SDK Equipment LLC</span></div>
+    <a href="/orgora-charts/privacy.html">Privacy</a>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Software that stays on the device.</h1>
+      <p class="lede">SDK AI Hub is the studio behind the apps. Orgora Charts is the first. More will sit in this grid as they ship. No accounts. No servers for your chart data.</p>
+    </section>
+    <section class="apps" aria-label="Apps">
+      <article class="card">
+        <div class="card-body">
+          <div class="eyebrow"><span class="live">Live</span> First app</div>
+          <h2>Orgora Charts</h2>
+          <p>A private org chart for iPhone and iPad. Map people, products, and use cases. Everything stays on the device. No account, no tracking, no chart data sent to us.</p>
+          <div class="actions">
+            <a class="btn" href="https://apps.apple.com/us/app/orgora-charts/id6792418699">Download on the App Store</a>
+            <a class="btn ghost" href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba">Get Clipper for Chrome</a>
+          </div>
+          <p class="links">
+            <a href="/orgora-charts/clipper.html">Safari and Chrome setup</a> ·
+            <a href="/orgora-charts/">Support</a> ·
+            <a href="/orgora-charts/privacy.html">Privacy policy</a>
+          </p>
+        </div>
+        <div class="shots">
+          <img src="/assets/orgora-tree.png" alt="Orgora Charts showing a four-layer org tree for Northwind Robotics">
+          <img src="/assets/orgora-zoom.png" alt="A closer Orgora Charts view of an engineering branch">
+        </div>
+      </article>
+      <aside class="slot">
+        <strong>Next apps</strong>
+        This column is the grid. When the next app ships, it gets a card here with its own screenshot and store link. Nothing else is listed yet.
+      </aside>
+    </section>
+  </main>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
 </html>
