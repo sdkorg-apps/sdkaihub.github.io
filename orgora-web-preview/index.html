@@ -47,8 +47,34 @@
   -->
   <script>
     (function () {
+      // Boot-time OAuth redirect_uri (before Flutter can leave path as "/").
+      var origin = window.location.origin;
+      var path = "/";
+      var baseEl = document.querySelector("base");
+      var href = baseEl && baseEl.getAttribute("href");
+      if (href && href !== "/orgora-web-preview/") {
+        if (href.indexOf("http://") === 0 || href.indexOf("https://") === 0) {
+          try {
+            path = new URL(href).pathname || "/";
+          } catch (e) {
+            path = window.location.pathname || "/";
+          }
+        } else {
+          path = href.charAt(0) === "/" ? href : "/" + href;
+        }
+      } else {
+        path = window.location.pathname || "/";
+      }
+      if (!path) path = "/";
+      if (path.charAt(path.length - 1) !== "/") path = path + "/";
+      window.__ORGORA_OAUTH_REDIRECT__ = origin + path;
+
       var hash = window.location.hash || "";
-      if (hash.indexOf("access_token=") !== -1 || hash.indexOf("error=") !== -1) {
+      if (
+        hash.indexOf("access_token=") !== -1 ||
+        hash.indexOf("id_token=") !== -1 ||
+        hash.indexOf("error=") !== -1
+      ) {
         sessionStorage.setItem("orgora.web.drive.grant", hash);
         if (window.history && window.history.replaceState) {
           history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -56,6 +82,6 @@
       }
     })();
   </script>
-  <script src="flutter_bootstrap.js" async></script>
+  <script src="flutter_bootstrap.js?v=5e0d3ab" async></script>
 </body>
 </html>
