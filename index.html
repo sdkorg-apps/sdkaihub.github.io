@@ -85,18 +85,35 @@
 </head>
 <body>
   <script>
-    /* __ORGORA_OAUTH_ROOT_CATCHER__: forward mistaken root OAuth returns */
+    /* __ORGORA_OAUTH_ROOT_CATCHER__: forward mistaken root OAuth returns;
+       skip marketing homepage when an Orgora web session already exists. */
     (function () {
       var path = window.location.pathname || "/";
       if (path !== "/" && path !== "") return;
+      var home = "/orgora-web-preview/?v=d6feb5a";
       var hash = window.location.hash || "";
       if (
         hash.indexOf("access_token") !== -1 ||
         hash.indexOf("id_token") !== -1 ||
         hash.indexOf("error=") !== -1
       ) {
-        location.replace("/orgora-web-preview/?v=d6feb5a" + hash);
+        location.replace(home + hash);
+        return;
       }
+      /* Google Drive Orgora web session: sessionStorage key written by
+         google_web_sign_in_button_web.dart after OAuth.
+         JSON shape {email, token, scope}; require email+token presence only.
+         Microsoft OneDrive/MSAL is not wired on web (no parallel session key). */
+      try {
+        var raw = sessionStorage.getItem("orgora.web.drive.session");
+        if (raw) {
+          var o = JSON.parse(raw);
+          if (o && o.email && o.token) {
+            location.replace(home);
+            return;
+          }
+        }
+      } catch (e) {}
     })();
   </script>
   <header>
