@@ -61,6 +61,15 @@
   }
   .btn:hover { text-decoration: none; filter: brightness(1.08); }
   .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn.primary { background: var(--green); }
+  .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 14px; }
+  .store-badges a { display: inline-flex; line-height: 0; }
+  .store-badges img.app-store-badge { height: 40px; width: auto; display: block; }
+  .coming-badge {
+    display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
+    border-radius: 8px; border: 1px solid var(--line); background: #fff;
+    color: var(--muted); font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em;
+  }
   .links { margin: 14px 0 0; color: var(--muted); font-size: 0.92rem; }
   .slot {
     border: 1px dashed #c9d5ca;
@@ -86,7 +95,7 @@
         hash.indexOf("id_token") !== -1 ||
         hash.indexOf("error=") !== -1
       ) {
-        location.replace("/orgora-web-preview/" + hash);
+        location.replace("/orgora-web-preview/?v=d6feb5a" + hash);
       }
     })();
   </script>
@@ -106,9 +115,13 @@
           <h2>Orgora Charts</h2>
           <p>A private org chart for iPhone and iPad. Map people, products, and use cases. Everything stays on the device. No account, no tracking, no chart data sent to us.</p>
           <div class="actions">
-            <a class="btn" href="https://sdkaihub.com/orgora-web-preview/?v=d6feb5a">Open Orgora Charts</a>
-            <a class="btn" href="https://apps.apple.com/us/app/orgora-charts/id6792418699">Download on the App Store</a>
-            <a class="btn ghost" href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba">Get Clipper for Chrome</a>
+            <a class="btn primary" href="https://sdkaihub.com/orgora-web-preview/?v=d6feb5a">Open Orgora Charts</a>
+          </div>
+          <div class="store-badges" aria-label="Get Orgora Charts">
+            <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699" aria-label="Download on the App Store">
+              <img class="app-store-badge" src="/assets/download-on-the-app-store.svg" width="120" height="40" alt="Download on the App Store">
+            </a>
+            <span class="coming-badge" title="Chrome Web Store listing is not live yet">Chrome Clipper coming</span>
           </div>
           <p class="links">
             <a href="/orgora-charts/clipper.html">Safari and Chrome setup</a> ·
