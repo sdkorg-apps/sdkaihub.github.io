@@ -38,7 +38,7 @@
 </head>
 <body>
   <!--
-    You can customize the "flutter_bootstrap.js?v=30282ff" script.
+    You can customize the "flutter_bootstrap.js?v=5932a2e" script.
     This is useful to provide a custom configuration to the Flutter loader
     or to give the user feedback during the initialization process.
 
@@ -71,18 +71,34 @@
       window.__ORGORA_OAUTH_REDIRECT__ = origin + path;
 
       var hash = window.location.hash || "";
+      var search = window.location.search || "";
+      var provider = sessionStorage.getItem("orgora.web.oauth.provider") || "";
+      var grantPayload = "";
       if (
         hash.indexOf("access_token=") !== -1 ||
         hash.indexOf("id_token=") !== -1 ||
         hash.indexOf("error=") !== -1
       ) {
-        sessionStorage.setItem("orgora.web.drive.grant", hash);
+        grantPayload = hash;
+      } else if (
+        search.indexOf("code=") !== -1 ||
+        search.indexOf("error=") !== -1
+      ) {
+        grantPayload = search;
+      }
+      if (grantPayload) {
+        if (provider === "microsoft") {
+          sessionStorage.setItem("orgora.web.onedrive.grant", grantPayload);
+        } else {
+          sessionStorage.setItem("orgora.web.drive.grant", grantPayload);
+        }
+        sessionStorage.removeItem("orgora.web.oauth.provider");
         if (window.history && window.history.replaceState) {
-          history.replaceState(null, "", window.location.pathname + window.location.search);
+          history.replaceState(null, "", window.location.pathname);
         }
       }
     })();
   </script>
-  <script src="flutter_bootstrap.js?v=30282ff" async></script>
+  <script src="flutter_bootstrap.js?v=5932a2e" async></script>
 </body>
 </html>
