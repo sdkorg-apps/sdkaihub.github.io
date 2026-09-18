@@ -48,6 +48,12 @@
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
+  .app-title { display: flex; align-items: center; gap: 12px; margin: 10px 0 8px; }
+  .app-title h2 { margin: 0; }
+  .orgora-mark {
+    width: 40px; height: 40px; border-radius: 9px; display: block;
+    flex: 0 0 auto; background: #f3f7f2;
+  }
   .shots { display: flex; gap: 12px; padding: 0 22px 22px; overflow: auto; }
   .shots img { width: min(320px, 78vw); border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
@@ -139,7 +145,10 @@
       <article class="card">
         <div class="card-body">
           <div class="eyebrow"><span class="live">Live</span> First app</div>
-          <h2>Orgora Charts</h2>
+          <div class="app-title">
+            <img class="orgora-mark" src="/assets/orgora_mark.png" width="40" height="40" alt="Orgora mark">
+            <h2>Orgora Charts</h2>
+          </div>
           <p>A private org chart for iPhone and iPad. Map people, products, and use cases. Sign in with Google Drive or Microsoft OneDrive — that cloud account is your identity. No Orgora username, no tracking, and chart files stay in your cloud.</p>
           <div class="actions">
             <a class="btn primary" href="https://sdkaihub.com/orgora/?v=4dd077d">Open Orgora Charts</a>
