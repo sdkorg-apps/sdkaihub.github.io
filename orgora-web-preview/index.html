@@ -1,88 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/orgora-web-preview/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Open your Orgora chart from your own Google Drive.">
-  <!-- Web application client on sdkaihub-orgora. Authorized origins and
-       redirect URIs include the private host used for preview, not only
-       127.0.0.1:7357. Public identifier, not a secret. -->
-  <meta name="google-signin-client_id" content="230813554864-vr623b4jhaqmkee59eugos8k5valb8t9.apps.googleusercontent.com">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Orgora Charts">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>Orgora Charts</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <!--
-    You can customize the "flutter_bootstrap.js?v=4dd077d" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+  <meta charset="utf-8">
+  <title>Moved to Orgora Charts</title>
+  <link rel="canonical" href="https://sdkaihub.com/orgora/">
+  <meta http-equiv="refresh" content="0;url=https://sdkaihub.com/orgora/">
+  <meta name="robots" content="noindex">
   <script>
     (function () {
-      // Boot-time OAuth redirect_uri (before Flutter can leave path as "/").
-      var origin = window.location.origin;
-      var path = "/";
-      var baseEl = document.querySelector("base");
-      var href = baseEl && baseEl.getAttribute("href");
-      var unreplacedBase = "$" + "FLUTTER_BASE_HREF";
-      if (href && href !== unreplacedBase) {
-        if (href.indexOf("http://") === 0 || href.indexOf("https://") === 0) {
-          try {
-            path = new URL(href).pathname || "/";
-          } catch (e) {
-            path = window.location.pathname || "/";
-          }
-        } else {
-          path = href.charAt(0) === "/" ? href : "/" + href;
-        }
-      } else {
-        path = window.location.pathname || "/";
-      }
-      if (!path) path = "/";
-      if (path.charAt(path.length - 1) !== "/") path = path + "/";
-      window.__ORGORA_OAUTH_REDIRECT__ = origin + path;
-
-      var hash = window.location.hash || "";
-      if (
-        hash.indexOf("access_token=") !== -1 ||
-        hash.indexOf("id_token=") !== -1 ||
-        hash.indexOf("error=") !== -1
-      ) {
-        sessionStorage.setItem("orgora.web.drive.grant", hash);
-        if (window.history && window.history.replaceState) {
-          history.replaceState(null, "", window.location.pathname + window.location.search);
-        }
-      }
+      var dest = "https://sdkaihub.com/orgora/" +
+        (window.location.search || "") +
+        (window.location.hash || "");
+      location.replace(dest);
     })();
   </script>
-  <script src="flutter_bootstrap.js?v=4dd077d" async></script>
+</head>
+<body>
+  <p>Orgora Charts preview has moved to the public product at
+    <a href="https://sdkaihub.com/orgora/">https://sdkaihub.com/orgora/</a>.</p>
 </body>
 </html>
