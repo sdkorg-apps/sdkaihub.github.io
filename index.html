@@ -100,20 +100,29 @@
         location.replace(home + hash);
         return;
       }
-      /* Google Drive Orgora web session: sessionStorage key written by
-         google_web_sign_in_button_web.dart after OAuth.
+      /* Session key contract (must match Dart):
+         Google:  orgora.web.drive.session     — google_web_sign_in_button_web.dart
+         Microsoft: orgora.web.onedrive.session — microsoft_web_sign_in_button_web.dart
          JSON shape {email, token, scope}; require email+token presence only.
-         Microsoft OneDrive/MSAL is not wired on web (no parallel session key). */
-      try {
-        var raw = sessionStorage.getItem("orgora.web.drive.session");
-        if (raw) {
+         Hub tip stamp unchanged (?v=b2a75a1) until a new preview deploy.
+         MS web OAuth blocked until Azure SPA redirect registered (CoS/Nik). */
+      function orgoraHasCloudSession(key) {
+        try {
+          var raw = sessionStorage.getItem(key);
+          if (!raw) return false;
           var o = JSON.parse(raw);
-          if (o && o.email && o.token) {
-            location.replace(home);
-            return;
-          }
+          return !!(o && o.email && o.token);
+        } catch (e) {
+          return false;
         }
-      } catch (e) {}
+      }
+      if (
+        orgoraHasCloudSession("orgora.web.drive.session") ||
+        orgoraHasCloudSession("orgora.web.onedrive.session")
+      ) {
+        location.replace(home);
+        return;
+      }
     })();
   </script>
   <header>
