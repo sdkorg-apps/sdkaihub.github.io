@@ -80,6 +80,8 @@
     border-radius: 16px;
     padding: 16px 18px;
   }
+  .point-brands { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .point-brands img { width: 32px; height: 32px; display: block; }
   .point strong { display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
   .point p { margin: 0; color: var(--muted); font-size: 0.94rem; }
   .apps { padding: 20px 0 48px; }
@@ -116,11 +118,13 @@
   .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 14px; }
   .store-badges a { display: inline-flex; line-height: 0; }
   .store-badges img.app-store-badge { height: 40px; width: auto; display: block; }
-  .coming-badge {
+  .coming-badge, .cws-badge {
     display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
     border-radius: 8px; border: 1px solid var(--line); background: var(--card);
     color: var(--muted); font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em;
   }
+  .cws-badge { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .cws-badge:hover { text-decoration: none; filter: brightness(1.08); }
   .links { margin: 14px 0 8px; color: var(--muted); font-size: 0.92rem; }
   footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
@@ -181,12 +185,19 @@
         <p>Build people, reporting lines, products, and use cases offline. No Orgora account to create.</p>
       </div>
       <div class="point">
+        <div class="point-brands">
+          <img src="/assets/logo-google.svg" width="32" height="32" alt="Google">
+          <img src="/assets/logo-onedrive.svg" width="32" height="32" alt="Microsoft OneDrive">
+        </div>
         <strong>Your Drive or OneDrive</strong>
         <p>Continue with Google or Microsoft so charts save in cloud storage you already own.</p>
       </div>
       <div class="point">
+        <div class="point-brands">
+          <img src="/assets/logo-linkedin.svg" width="32" height="32" alt="LinkedIn">
+        </div>
         <strong>Clip from LinkedIn</strong>
-        <p>Safari Clipper ships in the app. Chrome Clipper is on the way. Nothing is sent to us.</p>
+        <p>Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.</p>
       </div>
     </section>
     <section class="apps" aria-label="Apps">
@@ -200,14 +211,13 @@
           <p>Map an organization without handing the map to a third party. Continue with Google or Microsoft — that connects your Drive or OneDrive, which is where charts are stored. Pro on Apple platforms is an in-app subscription.</p>
           <div class="actions">
             <a class="btn primary" href="/orgora/">Open in the browser</a>
-            <a class="btn" href="https://apps.apple.com/us/app/orgora-charts/id6792418699">App Store</a>
           </div>
           <div class="store-badges" aria-label="Get Orgora Charts">
             <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699" aria-label="Download on the App Store">
               <img class="app-store-badge" src="/assets/download-on-the-app-store.svg" width="120" height="40" alt="Download on the App Store">
             </a>
             <span class="coming-badge">Mac App Store soon</span>
-            <span class="coming-badge" title="Chrome Web Store listing is not live yet">Chrome Clipper coming</span>
+            <a class="cws-badge" href="https://chromewebstore.google.com/search/Orgora%20Clipper">Chrome Web Store</a>
           </div>
           <p class="links">
             <a href="/orgora-charts/clipper.html">Safari and Chrome setup</a> ·
