@@ -12911,7 +12911,7 @@ case 4:s=l.a
 s===$&&A.a()
 s=A.bS(s,200)
 r=A.bS(A.adl(l,B.rk,B.Ob),24)
-q=A.bS(A.adl(l,B.rk,B.OT),32)
+q=A.bS(A.adl(l,B.rk,B.OU),32)
 p=A.bS(l.a,10)
 o=A.bS(l.a,12)
 l.d===$&&A.a()
@@ -22550,7 +22550,7 @@ r.toString
 A.fB(r)
 q=a.h(0,"swipeEdge")
 q.toString
-return new A.pK(s,r,B.OC[A.dJ(q)])},
+return new A.pK(s,r,B.OD[A.dJ(q)])},
 HO:function HO(a,b){this.a=a
 this.b=b},
 pK:function pK(a,b,c){this.a=a
@@ -30225,7 +30225,7 @@ ab6:function ab6(){},
 ab7:function ab7(a,b){this.a=a
 this.b=b},
 b7f(a){var s,r
-for(s=0;s<5;++s){r=B.PO[s]
+for(s=0;s<5;++s){r=B.PN[s]
 if(r.b===a)return r}return null},
 b7g(a){var s,r,q
 if(!t.a.b(a))return null
@@ -33134,7 +33134,7 @@ case 16:f=m
 e=f.c
 f=f.b
 s=18
-return A.h(new A.agw(e,f).MY(B.OP),$async$lt)
+return A.h(new A.agw(e,f).MY(B.OQ),$async$lt)
 case 18:l=a1
 s=l!=null&&l.a.length!==0?19:20
 break
@@ -35043,7 +35043,7 @@ l.push(new A.eY(n[0],n[1],n[2],n[3],B.ma[m]))}return l},
 dn(a){var s,r,q=this.a
 q===$&&A.a()
 s=q.a.getGlyphPositionAtCoordinate(a.a,a.b)
-r=B.OF[J.az(s.affinity.value)]
+r=B.OG[J.az(s.affinity.value)]
 return new A.ay(J.az(s.pos),r)},
 R1(a){var s=this.a
 s===$&&A.a()
@@ -35541,7 +35541,7 @@ A.rh.prototype={
 H(){return"CanvasKitVariant."+this.b}}
 A.afc.prototype={
 goF(){var s=this.b,r=s==null?null:s.canvasKitVariant
-return A.aVu(B.ON,r==null?"auto":r)},
+return A.aVu(B.OO,r==null?"auto":r)},
 gNa(){var s,r=this.b
 if(r==null)s=null
 else{r=r.canvasKitMaximumSurfaces
@@ -40363,7 +40363,7 @@ ajr(){var s=this,r=s.r
 if(r==null){r=s.r=new A.OQ(s.c)
 r.d=new A.aeO(s)}return r},
 Qa(a){var s,r=this
-if(B.b.n(B.PN,a.type)){s=r.ajr()
+if(B.b.n(B.PM,a.type)){s=r.ajr()
 s.toString
 s.sazO(r.c.$0().Ts(5e5))
 if(r.f!==B.qv){r.f=B.qv
@@ -54825,7 +54825,7 @@ if(r<0||r>285)return-1
 if(r===256)break
 if(r<256){s.be(r&255)
 continue}q=r-257
-p=B.Px[q]+k.k7(B.PP[q])
+p=B.Px[q]+k.k7(B.PO[q])
 o=k.Lm(b)
 if(o<0||o>29)return-1
 n=B.Pz[o]+k.k7(B.iN[o])
@@ -57008,7 +57008,7 @@ r=A.py(B.Sr,B.f,r==null?1:r)
 r.toString
 q=p.ak(0,q.gt(q))
 if(q==null)q=1
-return A.aYr(A.aXm(null,B.p,new A.xT(q,B.OA,new A.cQ(B.EP,this.e)),s,1,B.WZ),r)}}
+return A.aYr(A.aXm(null,B.p,new A.xT(q,B.OB,new A.cQ(B.EP,this.e)),s,1,B.WZ),r)}}
 A.NE.prototype={
 l(){var s=this,r=s.bX$
 if(r!=null)r.J(0,s.giq())
@@ -61034,7 +61034,7 @@ A.zU.prototype={
 H(){return"_CornerId."+this.b}}
 A.o_.prototype={}
 A.xU.prototype={
-mG(){var s,r,q,p=this,o=A.bfo(B.OR,new A.aln(p,p.b.gb8().X(0,p.a.gb8()))),n=p.a
+mG(){var s,r,q,p=this,o=A.bfo(B.OS,new A.aln(p,p.b.gb8().X(0,p.a.gb8()))),n=p.a
 n.toString
 s=o.a
 r=p.tj(n,s)
@@ -67014,7 +67014,7 @@ return s.b}}
 A.kZ.prototype={
 H(){return"_ListTileSlot."+this.b}}
 A.a1d.prototype={
-gHP(){return B.OL},
+gHP(){return B.OM},
 Ne(a){var s,r=this
 switch(a.a){case 0:s=r.d
 break
@@ -67826,7 +67826,7 @@ $R:3,
 $S:154}
 A.U2.prototype={
 aem(a){var s=t.Tr
-s=A.a3(new A.aa(B.OQ,new A.anr(a),s),s.i("aA.E"))
+s=A.a3(new A.aa(B.OR,new A.anr(a),s),s.i("aA.E"))
 return s},
 j(a,b){if(b==null)return!1
 if(this===b)return!0
@@ -74903,7 +74903,7 @@ p=h.gqm(0)
 o=h.r
 o=o==null?g:o*a2+a1
 n=h.w
-n=n==null?g:B.PQ[B.e.dl(n.gp8(0),0,8)]
+n=n==null?g:B.PP[B.e.dl(n.gp8(0),0,8)]
 m=h.y
 m=m==null?g:m*a6+a5
 l=h.z
@@ -109288,7 +109288,7 @@ return A.n($async$$0,r)},
 $S:74}
 A.aOL.prototype={
 $1(a){var s=null,r=A.a2("This chart changed in "+this.a+" since this device last saved it. Keep this device, or use the other copy?",s,s,s,s,s,s,s,s)
-return A.kj(A.b([A.e3(B.a2k,s,s,s,new A.aOJ(a),s,s),A.hp(B.a2g,new A.aOK(a),s)],t.p),r,s)},
+return A.kj(A.b([A.e3(B.a2j,s,s,s,new A.aOJ(a),s,s),A.hp(B.a2g,new A.aOK(a),s)],t.p),r,s)},
 $S:32}
 A.aOJ.prototype={
 $0(){A.bG(this.a,!1).cj(!1)
@@ -109593,7 +109593,7 @@ if(q){j=m.CW
 if(j==null)j=m.y}else j=m.b
 k.push(A.a2(l,n,n,n,n,n,A.cB(n,n,j,n,n,n,n,n,n,n,n,12,n,n,B.bz,n,n,!0,n,n,n,n,n,n,n,n),n,n))
 p.push(A.eA(A.co(k,B.ag,B.n,B.z),1))
-p.push(A.e3(B.a1U,n,n,n,o.r,n,n))
+p.push(A.e3(B.a1V,n,n,n,o.r,n,n))
 p.push(B.eX)
 l=o.e?o.f:n
 p.push(A.hp(A.a2(q?"Update":"Add to chart",n,n,n,n,n,n,n,n),l,n))
@@ -109704,7 +109704,7 @@ G(a){var s,r,q=null,p=A.I(a),o=p.ok.z
 if(o==null)o=q
 else{s=p.ax
 r=s.rx
-o=o.bc(r==null?s.k3:r)}return A.co(A.b([A.a2("Safari Clipper ships inside the Orgora Charts app for iPhone, iPad, and Mac. The LinkedIn app does not share that login \u2014 open profiles in Safari.",q,q,q,q,q,o,q,q),B.am,A.lq(B.LR,B.a4a,B.a2C,this.w),B.av,A.aWS(B.qP,B.DS,B.Dx,this.f),B.am,B.a6x,B.a6w,B.a6v],t.p),B.ag,B.n,B.z)}}
+o=o.bc(r==null?s.k3:r)}return A.co(A.b([A.a2("Safari Clipper ships inside the Orgora Charts app for iPhone, iPad, and Mac. The LinkedIn app does not share that login \u2014 open profiles in Safari.",q,q,q,q,q,o,q,q),B.am,A.lq(B.LR,B.a4a,B.a2C,this.w),B.av,A.aWS(B.qP,B.DS,B.Dx,this.f),B.am,B.a6y,B.a6x,B.a6u],t.p),B.ag,B.n,B.z)}}
 A.Z5.prototype={
 G(a){var s,r,q,p=null,o=A.I(a)
 if(this.d){s=o.ok.z
@@ -109715,8 +109715,8 @@ s=s.bc(q==null?r.k3:q)}return A.co(A.b([A.a2("Chrome on iPhone and iPad cannot i
 if(s==null)s=p
 else{r=o.ax
 q=r.rx
-s=s.bc(q==null?r.k3:q)}s=A.b([A.a2("Add Orgora Clipper from the Chrome Web Store, then clip a LinkedIn profile. Nothing is sent to us.",p,p,p,p,p,s,p,p),B.am,A.lq(B.cc,B.a4t,B.a2a,this.e),B.av,A.aWS(B.qP,B.DS,B.Dx,this.f),B.am,B.a6t,B.a6u],t.p)
-s.push(B.a6y)
+s=s.bc(q==null?r.k3:q)}s=A.b([A.a2("Add Orgora Clipper from the Chrome Web Store. On a LinkedIn profile, tap Orgora on the photo (or Clip to Orgora in the corner). Orgora opens with that person ready to import. Nothing is sent to us.",p,p,p,p,p,s,p,p),B.am,A.lq(B.cc,B.a4t,B.a2a,this.e),B.av,A.aWS(B.qP,B.DS,B.Dx,this.f),B.am,B.a6t,B.a6v],t.p)
+s.push(B.a6w)
 return A.co(s,B.ag,B.n,B.z)}}
 A.ob.prototype={
 G(a){var s=null
@@ -109921,7 +109921,7 @@ aeb(){return this.wD(new A.hx("gp-"+B.c6.lp(),"","#2563eb"),!0)},
 G(a){var s,r,q,p,o,n=null
 this.a.toString
 $.jh()
-s=A.OZ(n,n,n,n,n,n,n,B.a2q)
+s=A.OZ(n,n,n,n,n,n,n,B.a2p)
 r=this.gaea()
 q=A.aQ1(B.GX,B.cc,B.Dw,r)
 if(this.d)r=B.hR
@@ -109929,7 +109929,7 @@ else{p=A.I(a).ax
 o=p.ry
 if(o==null){o=p.q
 p=o==null?p.k3:o}else p=o
-r=A.eg(new A.aZ(B.eq,A.co(A.b([A.dM(B.lZ,p,n,72),B.am,A.a2("No products yet",n,n,n,n,n,A.I(a).ok.r,n,n),B.av,B.a2c,B.hr,A.lq(B.cc,n,B.a1L,r)],t.p),B.y,B.n,B.aa),n),n,n)}return A.GX(s,n,r,q)}}
+r=A.eg(new A.aZ(B.eq,A.co(A.b([A.dM(B.lZ,p,n,72),B.am,A.a2("No products yet",n,n,n,n,n,A.I(a).ok.r,n,n),B.av,B.a2c,B.hr,A.lq(B.cc,n,B.a1K,r)],t.p),B.y,B.n,B.aa),n),n,n)}return A.GX(s,n,r,q)}}
 A.aCu.prototype={
 $1(a){var s=this.a
 if(s.c!=null)s.Y(new A.aCt(s))},
@@ -110009,7 +110009,7 @@ return A.n($async$Bl,r)},
 k5(a){var s=this.f.h(0,a),r=s==null?null:$.a4.af$.x.h(0,s)
 if(r==null)return
 A.arB(r,0.04,B.mY,B.aP,B.JL)},
-G(a6){var s,r,q,p,o=this,n=null,m="What a mature chart looks like",l="Free and Pro",k=A.OZ(n,n,n,n,n,n,n,B.a2p),j=o.f,i=j.h(0,"mature"),h=A.co(B.OU,B.ag,B.n,B.z),g=t.p,f=A.co(A.b([new A.hQ("1",m,new A.aCF(o),B.a4g),new A.hQ("2","Getting started",new A.aCG(o),B.a4h),new A.hQ("3","Charts",new A.aCH(o),B.a47),new A.hQ("4","Save a chart",new A.aCJ(o),B.a49),new A.hQ("5","People",new A.aCK(o),B.a4u),new A.hQ("6","Products and use cases",new A.aCL(o),B.a4b),new A.hQ("7","Import from LinkedIn",new A.aCM(o),B.a4q),new A.hQ("8","Connectors",new A.aCN(o),B.a4j),new A.hQ("9","Import contacts from email",new A.aCO(o),B.a4i),new A.hQ("10","Sharing a chart",new A.aCP(o),B.a4d),new A.hQ("11",l,new A.aCQ(o),B.a4e),new A.hQ("12","Privacy",new A.aCI(o),B.a4n)],g),B.y,B.n,B.z),e=j.h(0,"start"),d=j.h(0,"charts"),c=j.h(0,"save"),b=j.h(0,"people"),a=j.h(0,"products"),a0=j.h(0,"clipper"),a1=j.h(0,"connectors"),a2=j.h(0,"email"),a3=j.h(0,"sharing"),a4=j.h(0,"pro"),a5=A.a2("Free includes every feature, with room for 3 org charts (the sample counts) and up to 30 people per chart. Pro unlocks unlimited org charts and lifts the people cap. Pro attaches to your signed-in Google or Microsoft account \u2014 not the device, not a mailbox, and not the chart file. Subscribe with Apple on iPhone/Mac or Stripe on the web after checkout is live; the same account unlocks Pro on both.\n\nOn iPhone or Mac, subscribe or restore with Apple from the sheet that appears when you hit a limit (Settings \u2192 Apple Account \u2192 Subscriptions to manage). Checkout on the web waits. Subscribe on iPhone or Mac \u2014 Pro is recognized on both so you are not charged twice. Pro follows the Google or Microsoft account you signed in with \u2014 pay on iPhone or on the web, then the other side is Pro after you sign in. Sign out from your photo (Account) clears this device session; Pro stays on the cloud account that paid.",n,n,n,n,n,n,n,n)
+G(a6){var s,r,q,p,o=this,n=null,m="What a mature chart looks like",l="Free and Pro",k=A.OZ(n,n,n,n,n,n,n,B.a2o),j=o.f,i=j.h(0,"mature"),h=A.co(B.PQ,B.ag,B.n,B.z),g=t.p,f=A.co(A.b([new A.hQ("1",m,new A.aCF(o),B.a4g),new A.hQ("2","Getting started",new A.aCG(o),B.a4h),new A.hQ("3","Charts",new A.aCH(o),B.a47),new A.hQ("4","Save a chart",new A.aCJ(o),B.a49),new A.hQ("5","People",new A.aCK(o),B.a4u),new A.hQ("6","Products and use cases",new A.aCL(o),B.a4b),new A.hQ("7","Import from LinkedIn",new A.aCM(o),B.a4q),new A.hQ("8","Connectors",new A.aCN(o),B.a4j),new A.hQ("9","Import contacts from email",new A.aCO(o),B.a4i),new A.hQ("10","Sharing a chart",new A.aCP(o),B.a4d),new A.hQ("11",l,new A.aCQ(o),B.a4e),new A.hQ("12","Privacy",new A.aCI(o),B.a4n)],g),B.y,B.n,B.z),e=j.h(0,"start"),d=j.h(0,"charts"),c=j.h(0,"save"),b=j.h(0,"people"),a=j.h(0,"products"),a0=j.h(0,"clipper"),a1=j.h(0,"connectors"),a2=j.h(0,"email"),a3=j.h(0,"sharing"),a4=j.h(0,"pro"),a5=A.a2("Free includes every feature, with room for 3 org charts (the sample counts) and up to 30 people per chart. Pro unlocks unlimited org charts and lifts the people cap. Pro attaches to your signed-in Google or Microsoft account \u2014 not the device, not a mailbox, and not the chart file. Subscribe with Apple on iPhone/Mac or Stripe on the web; the same account unlocks Pro on both.\n\nOn iPhone or Mac, subscribe or restore with Apple from the sheet that appears when you hit a limit (Settings \u2192 Apple Account \u2192 Subscriptions to manage). Subscribe with Stripe on the web. Pro is the Google or Microsoft account that paid \u2014 not the chart file. iPhone and Mac stay on Apple In-App Purchase. Pro follows the Google or Microsoft account you signed in with \u2014 pay on iPhone or on the web, then the other side is Pro after you sign in. Sign out from your photo (Account) clears this device session; Pro stays on the cloud account that paid.",n,n,n,n,n,n,n,n)
 j=j.h(0,"privacy")
 s=A.I(a6)
 r=s.ok.Q
@@ -110019,7 +110019,7 @@ p=q.ry
 if(p==null){p=q.q
 q=p==null?q.k3:p}else q=p
 q=r.bc(q)
-r=q}r=A.b([new A.dD(new A.fW(B.iG,m,h,n),i),B.ae,new A.fW(B.LM,"Contents",f,n),B.ae,new A.dD(B.a5n,e),B.ae,new A.dD(B.a5q,d),B.ae,new A.dD(B.a5j,c),B.ae,new A.dD(B.a5l,b),B.ae,new A.dD(B.a5k,a),B.ae,new A.dD(B.a5r,a0),B.ae,new A.dD(B.a5o,a1),B.ae,new A.dD(B.a5s,a2),B.ae,new A.dD(B.a5p,a3),B.ae,new A.dD(new A.fW(B.m1,l,a5,n),a4),B.ae,new A.dD(B.a5m,j),B.hr,new A.dD(A.iE(B.aG,new A.aZ(B.dz,A.a2("Orgora Charts  0.9.4",n,n,n,n,n,r,B.aC,n),n),B.a5,!1,B.a4p,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,o.gaqB(),n,n,n,n,n,n,!1,B.bC),o.e)],g)
+r=q}r=A.b([new A.dD(new A.fW(B.iG,m,h,n),i),B.ae,new A.fW(B.LM,"Contents",f,n),B.ae,new A.dD(B.a5m,e),B.ae,new A.dD(B.a5r,d),B.ae,new A.dD(B.a5j,c),B.ae,new A.dD(B.a5o,b),B.ae,new A.dD(B.a5k,a),B.ae,new A.dD(B.a5n,a0),B.ae,new A.dD(B.a5p,a1),B.ae,new A.dD(B.a5s,a2),B.ae,new A.dD(B.a5q,a3),B.ae,new A.dD(new A.fW(B.m1,l,a5,n),a4),B.ae,new A.dD(B.a5l,j),B.hr,new A.dD(A.iE(B.aG,new A.aZ(B.dz,A.a2("Orgora Charts  0.9.4",n,n,n,n,n,r,B.aC,n),n),B.a5,!1,B.a4p,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,o.gaqB(),n,n,n,n,n,n,!1,B.bC),o.e)],g)
 if(o.w)B.b.M(r,A.b([B.ae,o.auP(a6)],g))
 r.push(B.hr)
 return A.GX(k,n,A.atQ(A.co(r,B.bK,B.n,B.z),n,B.a5,B.le,n,B.a7),n)},
@@ -110576,7 +110576,7 @@ $1(a){return this.a.f1()},
 $S:69}
 A.aDi.prototype={
 $1(a){var s=null,r=this.a,q=A.hI(s,!0,r,B.Mr,!0,s,s,s,s,1,s,new A.aDf(a),B.bQ,s)
-return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aDg(a),s,s),A.hp(B.a1H,new A.aDh(a,r),s)],t.p),q,B.nG)},
+return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aDg(a),s,s),A.hp(B.a1G,new A.aDh(a,r),s)],t.p),q,B.nG)},
 $S:32}
 A.aDf.prototype={
 $1(a){A.bG(this.a,!1).cj(a)
@@ -110593,7 +110593,7 @@ return null},
 $S:0}
 A.aDq.prototype={
 $1(a){var s=null,r=this.a,q=A.a2('Export "'+r.b+'"',s,s,s,s,s,s,s,s),p=this.b
-return A.kj(A.b([A.e3(B.DB,s,s,s,new A.aDn(a),s,s),A.e3(B.a2v,s,s,s,new A.aDo(p,a),s,s),A.hp(B.a1P,new A.aDp(p,r,a),s)],t.p),B.a22,q)},
+return A.kj(A.b([A.e3(B.DB,s,s,s,new A.aDn(a),s,s),A.e3(B.a2v,s,s,s,new A.aDo(p,a),s,s),A.hp(B.a1Q,new A.aDp(p,r,a),s)],t.p),B.a23,q)},
 $S:32}
 A.aDn.prototype={
 $0(){A.bG(this.a,!1).cj(null)
@@ -110639,7 +110639,7 @@ $1(a){return B.Lc},
 $S:666}
 A.aDE.prototype={
 $1(a){var s=null
-return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aDC(a),s,s),A.hp(B.a1J,new A.aDD(a),s)],t.p),B.a2h,B.a2y)},
+return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aDC(a),s,s),A.hp(B.a1I,new A.aDD(a),s)],t.p),B.a2h,B.a2y)},
 $S:32}
 A.aDC.prototype={
 $0(){A.bG(this.a,!1).cj(!1)
@@ -110744,7 +110744,7 @@ return},
 $S:0}
 A.a1a.prototype={
 G(a){var s=null
-return A.ex(B.U,B.a1Q,B.p,s,new A.cF(B.c7,s,s,A.dd(8),s,s,B.aA),s,40,s,s,s,s,40)}}
+return A.ex(B.U,B.a1R,B.p,s,new A.cF(B.c7,s,s,A.dd(8),s,s,B.aA),s,40,s,s,s,s,40)}}
 A.a45.prototype={
 G(a){var s,r,q,p=null,o=A.I(a).ax,n=o.Q
 if(n==null)n=o.y
@@ -111058,7 +111058,7 @@ return new A.rl(s.b,s.a,null)},
 $S:671}
 A.ahh.prototype={
 $1(a){var s=null
-return A.kj(A.b([A.e3(B.Dy,s,s,s,new A.ahg(a),s,s)],t.p),B.a2D,B.a1G)},
+return A.kj(A.b([A.e3(B.Dy,s,s,s,new A.ahg(a),s,s)],t.p),B.a2D,B.a1F)},
 $S:32}
 A.ahg.prototype={
 $0(){A.bG(this.a,!1).cj(null)
@@ -111480,7 +111480,7 @@ $1(a){if(a==="report")this.a.w.$0()
 if(a==="remove")this.a.x.$0()},
 $S:17}
 A.aAn.prototype={
-$1(a){return B.PJ},
+$1(a){return B.PI},
 $S:93}
 A.aAp.prototype={
 $0(){var s=this.a
@@ -111678,7 +111678,7 @@ if(m!=null){k=l.Q
 B.b.M(r,A.b([B.ae,A.a2(m,o,o,o,o,o,k==null?o:k.bc(n.fy),B.aC,o)],q))}r.push(B.am)
 m=p.f||!p.gYk()?o:p.garj()
 k=A.aQ0(o,o,B.X3,new A.cQ(A.dd(16),B.q),o)
-r.push(A.hp(p.f?B.X8:B.a1W,m,k))
+r.push(A.hp(p.f?B.X8:B.a1X,m,k))
 r.push(B.ae)
 m=l.Q
 if(m==null)m=o
@@ -111696,7 +111696,7 @@ if(n==null)return B.Ta
 if(n.b==null){s=a.ok.z
 if(s==null)s=p
 else{r=o.rx
-s=s.bc(r==null?o.k3:r)}return A.co(A.b([A.a2("Subscriptions aren't available right now. This is usually temporary \u2014 please try again later.",p,p,p,p,p,s,B.aC,p),A.e3(B.a1N,p,p,p,this.gaoN(),p,p)],t.p),B.y,B.n,B.aa)}s=a.ok
+s=s.bc(r==null?o.k3:r)}return A.co(A.b([A.a2("Subscriptions aren't available right now. This is usually temporary \u2014 please try again later.",p,p,p,p,p,s,B.aC,p),A.e3(B.a1M,p,p,p,this.gaoN(),p,p)],t.p),B.y,B.n,B.aa)}s=a.ok
 r=s.w
 r=A.a2("$4.99/month for your first 3 months, then $9.99/month",p,p,p,p,p,r==null?p:r.El(B.bo),B.aC,p)
 s=s.Q
@@ -112049,7 +112049,7 @@ s.$3(r.gBw(),q.c,"company")},
 $S:0}
 A.aGa.prototype={
 $1(a){var s=null
-return A.kj(A.b([A.e3(B.DC,s,s,s,new A.aG6(a),s,s),A.hp(B.Dz,new A.aG7(a),s)],t.p),B.a2w,B.a23)},
+return A.kj(A.b([A.e3(B.DC,s,s,s,new A.aG6(a),s,s),A.hp(B.Dz,new A.aG7(a),s)],t.p),B.a2w,B.a24)},
 $S:32}
 A.aG6.prototype={
 $0(){A.bG(this.a,!1).cj(!1)
@@ -112064,7 +112064,7 @@ $0(){return this.a.ax=!1},
 $S:0}
 A.aGl.prototype={
 $1(a){var s=null
-return A.kj(A.b([A.e3(B.DB,s,s,s,new A.aGj(a),s,s),A.lq(B.qV,s,B.a1F,new A.aGk(a,this.a))],t.p),B.a2j,B.a1O)},
+return A.kj(A.b([A.e3(B.DB,s,s,s,new A.aGj(a),s,s),A.lq(B.qV,s,B.a1E,new A.aGk(a,this.a))],t.p),B.a1N,B.a1P)},
 $S:32}
 A.aGj.prototype={
 $0(){A.bG(this.a,!1).cj(null)
@@ -112076,7 +112076,7 @@ A.Bn(A.cq(this.b,0,null),B.fV)},
 $S:0}
 A.aGi.prototype={
 $1(a){var s=null,r=A.a2(this.a,s,s,s,s,s,s,s,s),q=this.b,p=A.hI(s,!0,q,A.tj(s,s,s,s,s,s,s,s,!0,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,this.c,!0,!0,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s),!0,s,s,s,s,1,s,new A.aGf(a),B.XX,s)
-return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aGg(a),s,s),A.hp(B.a1S,new A.aGh(a,q),s)],t.p),p,r)},
+return A.kj(A.b([A.e3(B.cW,s,s,s,new A.aGg(a),s,s),A.hp(B.a1T,new A.aGh(a,q),s)],t.p),p,r)},
 $S:32}
 A.aGf.prototype={
 $1(a){var s=B.c.Z(a)
@@ -112131,7 +112131,7 @@ k=a1.ax?B.X9:B.LU
 j=a1.gYT()
 i=A.b([],t.I4)
 for(h=t.f_,g=0;g<8;++g){f=B.rx[g]
-i.push(new A.oV(f,A.cg(A.b([A.ex(b,b,B.p,b,new A.cF(A.aSV(A.I(a3).ax,f),b,b,b,b,b,B.cD),b,10,b,b,b,b,10),B.c_,A.a2(f.c,b,b,b,b,b,b,b,b)],p),B.y,B.n,B.aa,0),B.e9,b,h))}a2=A.b([a2,B.am,s,B.ae,r,B.ae,o,q,B.cS,n,B.ae,l,new A.d0(B.d0,b,b,new A.I4(!0,m,b,b,b,b,B.p,b,!1,b,!0,b,new A.a5t(B.a2n,k,b,b,b),b),b),B.cS,A.b6N(B.Mv,j,i,new A.aGt(a1),t.Pr),B.am],p)
+i.push(new A.oV(f,A.cg(A.b([A.ex(b,b,B.p,b,new A.cF(A.aSV(A.I(a3).ax,f),b,b,b,b,b,B.cD),b,10,b,b,b,b,10),B.c_,A.a2(f.c,b,b,b,b,b,b,b,b)],p),B.y,B.n,B.aa,0),B.e9,b,h))}a2=A.b([a2,B.am,s,B.ae,r,B.ae,o,q,B.cS,n,B.ae,l,new A.d0(B.d0,b,b,new A.I4(!0,m,b,b,b,b,B.p,b,!1,b,!0,b,new A.a5t(B.a2m,k,b,b,b),b),b),B.cS,A.b6N(B.Mv,j,i,new A.aGt(a1),t.Pr),B.am],p)
 if(!a1.a.e)B.b.M(a2,A.b([a1.aoA(a3),B.am],p))
 s=a1.gxL()
 a2.push(A.a2("Use cases ("+s.a+")",b,b,b,b,b,A.I(a3).ok.x,b,b))
@@ -112142,7 +112142,7 @@ B.b.M(q,a1.db)
 o=q.length
 g=0
 for(;g<q.length;q.length===o||(0,A.y)(q),++g){e=q[g]
-r.push(A.af2(b,A.a2(e.b,b,b,b,b,b,b,b,b),new A.aGu(a1,e),s.n(0,e.a),b,b))}r.push(A.aUc(B.qS,B.a1D,a1.gagH()))
+r.push(A.af2(b,A.a2(e.b,b,b,b,b,b,b,b,b),new A.aGu(a1,e),s.n(0,e.a),b,b))}r.push(A.aUc(B.qS,B.a1C,a1.gagH()))
 a2.push(A.zM(B.c1,r,B.e5,4,8))
 a2.push(B.am)
 s=a1.gxl()
@@ -112286,7 +112286,7 @@ G(a){var s,r,q,p,o,n,m,l,k,j,i,h=this,g=null
 $.jh()
 s=h.c.x
 r=s.length
-if(r===0)return A.eg(new A.aZ(B.eq,A.co(A.b([B.a1V,B.cj,A.lq(B.cc,B.DU,B.nH,new A.aoS(h,a))],t.p),B.y,B.n,B.aa),g),g,g)
+if(r===0)return A.eg(new A.aZ(B.eq,A.co(A.b([B.a1W,B.cj,A.lq(B.cc,B.DU,B.nH,new A.aoS(h,a))],t.p),B.y,B.n,B.aa),g),g,g)
 r=A.lq(B.cc,B.DU,B.nH,new A.aoT(h,a))
 q=t.p
 p=A.b([],q)
@@ -112390,7 +112390,7 @@ if(a==="open")s.a.d.$1(s.b)
 if(a==="remove")s.a.e.$1(s.b)},
 $S:17}
 A.atF.prototype={
-$1(a){return B.OD},
+$1(a){return B.OE},
 $S:93}
 A.Uz.prototype={
 G(a){var s=null,r=this.c,q=A.b15(r.c),p=A.dd(999)
@@ -112517,7 +112517,7 @@ case 4:case 1:return A.m(q,r)}})
 return A.n($async$u5,r)},
 My(a){return this.u5(a,A.aRi(B.c6.lp(),"","","",null),!0)},
 G(a){var s=this,r=null,q=s.c.w.length
-if(q===0)return A.eg(new A.aZ(B.eq,A.co(A.b([B.a1M,B.cj,A.lq(B.cc,B.DT,B.nF,new A.awu(s,a))],t.p),B.y,B.n,B.aa),r),r,r)
+if(q===0)return A.eg(new A.aZ(B.eq,A.co(A.b([B.a1L,B.cj,A.lq(B.cc,B.DT,B.nF,new A.awu(s,a))],t.p),B.y,B.n,B.aa),r),r,r)
 return A.co(A.b([new A.aZ(B.pT,new A.d0(B.d0,r,r,A.lq(B.cc,B.DT,B.nF,new A.awv(s,a)),r),r),A.eA(A.aiU(new A.aww(s),q,B.pV,new A.awx()),1)],t.p),B.bK,B.n,B.z)}}
 A.awq.prototype={
 $1(a){var s=this
@@ -112888,10 +112888,10 @@ A:{if(1===r){j=A.aQ1("web-chart-add-usecase",B.cc,B.nF,new A.aLY(l,a))
 break A}if(2===r){j=A.aQ1("web-chart-add-product",B.cc,B.nH,new A.aLZ(l,a))
 break A}j=new A.rP(B.qQ,"Add person at top level","web-chart-add-person",new A.aM_(l),!1,B.a5f,o,o)
 break A}q=A.b([],s)
-if(i.d===0)q.push(A.dZ(!1,B.E,!0,o,A.e2(new A.aZ(B.Kk,A.cg(A.b([B.a1I,B.eW,l.a0A(B.hS,"Detail"),B.c_,l.a0A(B.He,"Title")],s),B.y,B.n,B.z,0),o),o,1/0),B.p,B.ei,0,o,o,o,o,o,B.b4))
+if(i.d===0)q.push(A.dZ(!1,B.E,!0,o,A.e2(new A.aZ(B.Kk,A.cg(A.b([B.a1H,B.eW,l.a0A(B.hS,"Detail"),B.c_,l.a0A(B.He,"Title")],s),B.y,B.n,B.z,0),o),o,1/0),B.p,B.ei,0,o,o,o,o,o,B.b4))
 i=l.r
 if(i!=null)q.push(A.dZ(!1,B.E,!0,o,A.e2(new A.aZ(B.Ko,A.a2(i,o,o,o,o,o,o,o,o),o),o,1/0),B.p,B.IU,0,o,o,o,o,o,B.b4))
-i=l.gem().f.length===0?A.eg(new A.aZ(B.eq,A.co(A.b([B.a1E,B.am,A.lq(B.qQ,o,B.a2_,new A.aM0(l))],s),B.y,B.n,B.aa),o),o,o):new A.FB(l.gem(),l.e,l.gahS(),new A.aM1(l),new A.aM2(),new A.aM3(),o)
+i=l.gem().f.length===0?A.eg(new A.aZ(B.eq,A.co(A.b([B.a1D,B.am,A.lq(B.qQ,o,B.a20,new A.aM0(l))],s),B.y,B.n,B.aa),o),o,o):new A.FB(l.gem(),l.e,l.gahS(),new A.aM1(l),new A.aM2(),new A.aM3(),o)
 p=l.gL3()
 q.push(A.eA(new A.HW(A.b([i,new A.IH(l.gem(),p,o),new A.G8(l.gem(),p,o,o)],s),o),1))
 return new A.kO(n,A.GX(k,m.ax.k2,A.co(q,B.y,B.n,B.z),j),o)},
@@ -118561,14 +118561,14 @@ B.rb=new A.tA(3,"center")
 B.N4=new A.tA(4,"bottom")
 B.qM=new A.bK(62072,"MaterialIcons",!1)
 B.LS=new A.dL(B.qM,null,null,null,null)
-B.a20=new A.aV("Create new person",null,null,null,null,null,null,null,null,null)
-B.N5=new A.ty(B.LS,B.a20,null,null,null,B.M,null,null,null)
+B.a21=new A.aV("Create new person",null,null,null,null,null,null,null,null,null)
+B.N5=new A.ty(B.LS,B.a21,null,null,null,B.M,null,null,null)
 B.dE=s([82,9,106,213,48,54,165,56,191,64,163,158,129,243,215,251,124,227,57,130,155,47,255,135,52,142,67,68,196,222,233,203,84,123,148,50,166,194,35,61,238,76,149,11,66,250,195,78,8,46,161,102,40,217,36,178,118,91,162,73,109,139,209,37,114,248,246,100,134,104,152,22,212,164,92,204,93,101,182,146,108,112,72,80,253,237,185,218,94,21,70,87,167,141,157,132,144,216,171,0,140,188,211,10,247,228,88,5,184,179,69,6,208,44,30,143,202,63,15,2,193,175,189,3,1,19,138,107,58,145,17,65,79,103,220,234,151,242,207,206,240,180,230,115,150,172,116,34,231,173,53,133,226,249,55,232,28,117,223,110,71,241,26,113,29,41,197,137,111,183,98,14,170,24,190,27,252,86,62,75,198,210,121,32,154,219,192,254,120,205,90,244,31,221,168,51,136,7,199,49,177,18,16,89,39,128,236,95,96,81,127,169,25,181,74,13,45,229,122,159,147,201,156,239,160,224,59,77,174,42,245,176,200,235,187,60,131,83,153,97,23,43,4,126,186,119,214,38,225,105,20,99,85,33,12,125],t.t)
 B.N7=s([B.iM,B.m5,B.m4],t.T3)
-B.OS=s([1373.2198709594231,-1100.4251190754821,-7.278681089101213],t.n)
-B.Oy=s([-271.815969077903,559.6580465940733,-32.46047482791194],t.n)
+B.OT=s([1373.2198709594231,-1100.4251190754821,-7.278681089101213],t.n)
+B.Oz=s([-271.815969077903,559.6580465940733,-32.46047482791194],t.n)
 B.PS=s([1.9622899599665666,-57.173814538844006,308.7233197812385],t.n)
-B.N9=s([B.OS,B.Oy,B.PS],t.zg)
+B.N9=s([B.OT,B.Oz,B.PS],t.zg)
 B.rc=s([0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0],t.t)
 B.rd=s(["text","multiline","number","phone","datetime","emailAddress","url","visiblePassword","name","address","none","webSearch","twitter"],t.s)
 B.Na=s([239,191,189],t.t)
@@ -118582,8 +118582,8 @@ B.Mh=new A.lv(B.M9,!1,0,"png")
 B.M7=new A.n4(B.Pw,B.Mh,0,"png")
 B.PA=s([71,73,70,56,55,97],t.Z)
 B.M6=new A.n4(B.PA,B.iH,1,"gif87a")
-B.OO=s([71,73,70,56,57,97],t.Z)
-B.M5=new A.n4(B.OO,B.iH,2,"gif89a")
+B.OP=s([71,73,70,56,57,97],t.Z)
+B.M5=new A.n4(B.OP,B.iH,2,"gif89a")
 B.Nb=s([255,216,255],t.Z)
 B.Ma=new A.pa(2,"jpeg")
 B.Ml=new A.lv(B.Ma,!1,3,"jpeg")
@@ -118598,10 +118598,10 @@ B.NE=s([B.M7,B.M6,B.M5,B.M8,B.M4,B.M3],A.aC("H<n4>"))
 B.oa=new A.M1(0,"named")
 B.El=new A.M1(1,"anonymous")
 B.NN=s([B.oa,B.El],A.aC("H<M1>"))
-B.OB=s([0.41233895,0.35762064,0.18051042],t.n)
+B.OC=s([0.41233895,0.35762064,0.18051042],t.n)
 B.Od=s([0.2126,0.7152,0.0722],t.n)
-B.PL=s([0.01932141,0.11916382,0.95034478],t.n)
-B.dF=s([B.OB,B.Od,B.PL],t.zg)
+B.PK=s([0.01932141,0.11916382,0.95034478],t.n)
+B.dF=s([B.OC,B.Od,B.PK],t.zg)
 B.re=s([0,4,12,1,5,13,3,7,15],t.t)
 B.NR=s([1,2,4,8,16,32,64,128,27,54,108,216,171,77,154,47,94,188,99,198,151,53,106,212,179,125,250,239,197,145],t.t)
 B.NS=s([65533],t.t)
@@ -118632,15 +118632,15 @@ B.Pl=s([2.33888662,1.28698796],t.n)
 B.Pn=s([2.48660575,1.36351941],t.n)
 B.O9=s([2.62226596,1.44717976],t.n)
 B.Of=s([2.7514899,1.53385819],t.n)
-B.OM=s([3.36298265,1.98288283],t.n)
+B.ON=s([3.36298265,1.98288283],t.n)
 B.Oq=s([4.08649929,2.23811846],t.n)
-B.OE=s([4.85481134,2.47563463],t.n)
+B.OF=s([4.85481134,2.47563463],t.n)
 B.Oc=s([5.62945551,2.72948597],t.n)
 B.On=s([6.43023796,2.98020421],t.n)
-B.rf=s([B.Om,B.Ng,B.Pl,B.Pn,B.O9,B.Of,B.OM,B.Oq,B.OE,B.Oc,B.On],t.zg)
+B.rf=s([B.Om,B.Ng,B.Pl,B.Pn,B.O9,B.Of,B.ON,B.Oq,B.OF,B.Oc,B.On],t.zg)
 B.O5=s([5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],t.t)
-B.a2r=new A.aV("Promote to global",null,null,null,null,null,null,null,null,null)
-B.U2=new A.h5("promote",!0,48,B.a2r,null,t.wI)
+B.a2q=new A.aV("Promote to global",null,null,null,null,null,null,null,null,null)
+B.U2=new A.h5("promote",!0,48,B.a2q,null,t.wI)
 B.DA=new A.aV("Delete",null,null,null,null,null,null,null,null,null)
 B.BE=new A.h5("delete",!0,48,B.DA,null,t.wI)
 B.O7=s([B.U2,B.BE],t.Do)
@@ -118684,22 +118684,22 @@ B.rl=s([B.a56,B.a5b,B.a59,B.a5a,B.a58,B.a57],A.aC("H<o0>"))
 B.rm=s([0,21,51,121,151,191,271,321,360],t.n)
 B.dG=s([0,79764919,159529838,222504665,319059676,398814059,445009330,507990021,638119352,583659535,797628118,726387553,890018660,835552979,1015980042,944750013,1276238704,1221641927,1167319070,1095957929,1595256236,1540665371,1452775106,1381403509,1780037320,1859660671,1671105958,1733955601,2031960084,2111593891,1889500026,1952343757,2552477408,2632100695,2443283854,2506133561,2334638140,2414271883,2191915858,2254759653,3190512472,3135915759,3081330742,3009969537,2905550212,2850959411,2762807018,2691435357,3560074640,3505614887,3719321342,3648080713,3342211916,3287746299,3467911202,3396681109,4063920168,4143685023,4223187782,4286162673,3779000052,3858754371,3904687514,3967668269,881225847,809987520,1023691545,969234094,662832811,591600412,771767749,717299826,311336399,374308984,453813921,533576470,25881363,88864420,134795389,214552010,2023205639,2086057648,1897238633,1976864222,1804852699,1867694188,1645340341,1724971778,1587496639,1516133128,1461550545,1406951526,1302016099,1230646740,1142491917,1087903418,2896545431,2825181984,2770861561,2716262478,3215044683,3143675388,3055782693,3001194130,2326604591,2389456536,2200899649,2280525302,2578013683,2640855108,2418763421,2498394922,3769900519,3832873040,3912640137,3992402750,4088425275,4151408268,4197601365,4277358050,3334271071,3263032808,3476998961,3422541446,3585640067,3514407732,3694837229,3640369242,1762451694,1842216281,1619975040,1682949687,2047383090,2127137669,1938468188,2001449195,1325665622,1271206113,1183200824,1111960463,1543535498,1489069629,1434599652,1363369299,622672798,568075817,748617968,677256519,907627842,853037301,1067152940,995781531,51762726,131386257,177728840,240578815,269590778,349224269,429104020,491947555,4046411278,4126034873,4172115296,4234965207,3794477266,3874110821,3953728444,4016571915,3609705398,3555108353,3735388376,3664026991,3290680682,3236090077,3449943556,3378572211,3174993278,3120533705,3032266256,2961025959,2923101090,2868635157,2813903052,2742672763,2604032198,2683796849,2461293480,2524268063,2284983834,2364738477,2175806836,2238787779,1569362073,1498123566,1409854455,1355396672,1317987909,1246755826,1192025387,1137557660,2072149281,2135122070,1912620623,1992383480,1753615357,1816598090,1627664531,1707420964,295390185,358241886,404320391,483945776,43990325,106832002,186451547,266083308,932423249,861060070,1041341759,986742920,613929101,542559546,756411363,701822548,3316196985,3244833742,3425377559,3370778784,3601682597,3530312978,3744426955,3689838204,3819031489,3881883254,3928223919,4007849240,4037393693,4100235434,4180117107,4259748804,2310601993,2373574846,2151335527,2231098320,2596047829,2659030626,2470359227,2550115596,2947551409,2876312838,2788305887,2733848168,3165939309,3094707162,3040238851,2985771188],t.t)
 B.rn=s([23,114,69,56,80,144],t.t)
-B.Ox=s([-1,0,0,1,0,0,-1,0,1,0,0,0,-1,1,0,1,1,1,1,0],t.n)
+B.Oy=s([-1,0,0,1,0,0,-1,0,1,0,0,0,-1,1,0,1,1,1,1,0],t.n)
 B.EM=new A.Po(2,"outer")
 B.pj=new A.K(0.09803921568627451,0,0,0,B.h)
 B.f=new A.i(0,0)
 B.Fn=new A.bO(0.2,B.EM,B.pj,B.f,11)
-B.OA=s([B.Fn],t.E)
+B.OB=s([B.Fn],t.E)
 B.D1=new A.HO(0,"left")
 B.D2=new A.HO(1,"right")
-B.OC=s([B.D1,B.D2],A.aC("H<HO>"))
-B.a27=new A.aV("Open",null,null,null,null,null,null,null,null,null)
-B.U6=new A.h5("open",!0,48,B.a27,null,t.wI)
-B.a25=new A.aV("Remove from device",null,null,null,null,null,null,null,null,null)
-B.U1=new A.h5("remove",!0,48,B.a25,null,t.wI)
-B.OD=s([B.U6,B.U1],t.Do)
+B.OD=s([B.D1,B.D2],A.aC("H<HO>"))
+B.a28=new A.aV("Open",null,null,null,null,null,null,null,null,null)
+B.U6=new A.h5("open",!0,48,B.a28,null,t.wI)
+B.a26=new A.aV("Remove from device",null,null,null,null,null,null,null,null,null)
+B.U1=new A.h5("remove",!0,48,B.a26,null,t.wI)
+B.OE=s([B.U6,B.U1],t.Do)
 B.aw=new A.I3(0,"upstream")
-B.OF=s([B.aw,B.k],A.aC("H<I3>"))
+B.OG=s([B.aw,B.k],A.aC("H<I3>"))
 B.aL=new A.uW(0,"rtl")
 B.a6=new A.uW(1,"ltr")
 B.ma=s([B.aL,B.a6],A.aC("H<uW>"))
@@ -118708,14 +118708,14 @@ B.dm=new A.kZ(0,"leading")
 B.c2=new A.kZ(1,"title")
 B.dn=new A.kZ(2,"subtitle")
 B.f8=new A.kZ(3,"trailing")
-B.OL=s([B.dm,B.c2,B.dn,B.f8],A.aC("H<kZ>"))
+B.OM=s([B.dm,B.c2,B.dn,B.f8],A.aC("H<kZ>"))
 B.H6=new A.rh(0,"auto")
 B.H7=new A.rh(1,"full")
 B.H8=new A.rh(2,"chromium")
-B.ON=s([B.H6,B.H7,B.H8,B.d4],A.aC("H<rh>"))
-B.OP=s([u.O],t.s)
+B.OO=s([B.H6,B.H7,B.H8,B.d4],A.aC("H<rh>"))
+B.OQ=s([u.O],t.s)
 B.bk=new A.h8(1,"fuchsia")
-B.OQ=s([B.an,B.bk,B.N,B.b6,B.aQ,B.b7],A.aC("H<h8>"))
+B.OR=s([B.an,B.bk,B.N,B.b6,B.aQ,B.b7],A.aC("H<h8>"))
 B.fW=s([619,720,127,481,931,816,813,233,566,247,985,724,205,454,863,491,741,242,949,214,733,859,335,708,621,574,73,654,730,472,419,436,278,496,867,210,399,680,480,51,878,465,811,169,869,675,611,697,867,561,862,687,507,283,482,129,807,591,733,623,150,238,59,379,684,877,625,169,643,105,170,607,520,932,727,476,693,425,174,647,73,122,335,530,442,853,695,249,445,515,909,545,703,919,874,474,882,500,594,612,641,801,220,162,819,984,589,513,495,799,161,604,958,533,221,400,386,867,600,782,382,596,414,171,516,375,682,485,911,276,98,553,163,354,666,933,424,341,533,870,227,730,475,186,263,647,537,686,600,224,469,68,770,919,190,373,294,822,808,206,184,943,795,384,383,461,404,758,839,887,715,67,618,276,204,918,873,777,604,560,951,160,578,722,79,804,96,409,713,940,652,934,970,447,318,353,859,672,112,785,645,863,803,350,139,93,354,99,820,908,609,772,154,274,580,184,79,626,630,742,653,282,762,623,680,81,927,626,789,125,411,521,938,300,821,78,343,175,128,250,170,774,972,275,999,639,495,78,352,126,857,956,358,619,580,124,737,594,701,612,669,112,134,694,363,992,809,743,168,974,944,375,748,52,600,747,642,182,862,81,344,805,988,739,511,655,814,334,249,515,897,955,664,981,649,113,974,459,893,228,433,837,553,268,926,240,102,654,459,51,686,754,806,760,493,403,415,394,687,700,946,670,656,610,738,392,760,799,887,653,978,321,576,617,626,502,894,679,243,440,680,879,194,572,640,724,926,56,204,700,707,151,457,449,797,195,791,558,945,679,297,59,87,824,713,663,412,693,342,606,134,108,571,364,631,212,174,643,304,329,343,97,430,751,497,314,983,374,822,928,140,206,73,263,980,736,876,478,430,305,170,514,364,692,829,82,855,953,676,246,369,970,294,750,807,827,150,790,288,923,804,378,215,828,592,281,565,555,710,82,896,831,547,261,524,462,293,465,502,56,661,821,976,991,658,869,905,758,745,193,768,550,608,933,378,286,215,979,792,961,61,688,793,644,986,403,106,366,905,644,372,567,466,434,645,210,389,550,919,135,780,773,635,389,707,100,626,958,165,504,920,176,193,713,857,265,203,50,668,108,645,990,626,197,510,357,358,850,858,364,936,638],t.t)
 B.E_=new A.zU(0,"topLeft")
 B.E2=new A.zU(3,"bottomRight")
@@ -118725,15 +118725,9 @@ B.E0=new A.zU(1,"topRight")
 B.E1=new A.zU(2,"bottomLeft")
 B.a51=new A.o_(B.E0,B.E1)
 B.a52=new A.o_(B.E1,B.E0)
-B.OR=s([B.a50,B.a53,B.a51,B.a52],A.aC("H<o_>"))
+B.OS=s([B.a50,B.a53,B.a51,B.a52],A.aC("H<o_>"))
 B.ro=s([1,4,13,40,121,364,1093,3280,9841,29524,88573,265720,797161,2391484],t.t)
-B.OT=s([35,30,20,25,30,35,30,25,25],t.n)
-B.a2m=new A.aV("A finished org chart is a reporting tree, not a contact list. Every person sits under a manager. Products and use cases are tagged on the people who own them \u2014 when a use case is linked to a product, they appear on the same row so you can read coverage at a glance.",null,null,null,null,null,null,null,null,null)
-B.ae=new A.cw(null,12,null,null)
-B.a5t=new A.Km("assets/help/mature_overview.png","Example: Acme Rockets sample \u2014 a reporting tree with products and use cases tagged on the people who own them.",null)
-B.a5u=new A.Km("assets/help/mature_card.png","Detail view: each product on the left, its linked use case on the right. Nothing hides behind +N.",null)
-B.a1Y=new A.aV("You get there by adding people, placing them in the tree, then tagging products and use cases. The sections below walk through each step.",null,null,null,null,null,null,null,null,null)
-B.OU=s([B.a2m,B.ae,B.a5t,B.ae,B.a5u,B.ae,B.a1Y],t.p)
+B.OU=s([35,30,20,25,30,35,30,25,25],t.n)
 B.KK=new A.jw(1,"icloud")
 B.KL=new A.jw(2,"outlook")
 B.KM=new A.jw(3,"yahoo")
@@ -118805,14 +118799,14 @@ B.mx=new A.iS(6,"scrollLockModifier")
 B.my=new A.iS(7,"functionModifier")
 B.xI=new A.iS(8,"symbolModifier")
 B.rw=s([B.eB,B.eC,B.eD,B.eE,B.mv,B.mw,B.mx,B.my,B.xI],A.aC("H<iS>"))
-B.a1K=new A.aV("Add direct report",null,null,null,null,null,null,null,null,null)
-B.U_=new A.h5("report",!0,48,B.a1K,null,t.wI)
+B.a1J=new A.aV("Add direct report",null,null,null,null,null,null,null,null,null)
+B.U_=new A.h5("report",!0,48,B.a1J,null,t.wI)
 B.DD=new A.aV("Remove",null,null,null,null,null,null,null,null,null)
 B.TZ=new A.h5("remove",!0,48,B.DD,null,t.wI)
-B.PJ=s([B.U_,B.TZ],t.Do)
+B.PI=s([B.U_,B.TZ],t.Do)
 B.mg=s([!0,!1],t.HZ)
-B.PM=s([8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8],t.t)
-B.PN=s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup","wheel"],t.s)
+B.PL=s([8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8],t.t)
+B.PM=s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup","wheel"],t.s)
 B.mG=new A.el("Champion",0,"champion")
 B.mH=new A.el("Coach",1,"coach")
 B.eG=new A.el("Economic Buyer",2,"economicBuyer")
@@ -118825,16 +118819,22 @@ B.rx=s([B.mG,B.mH,B.eG,B.mK,B.he,B.mJ,B.mI,B.dd],A.aC("H<el>"))
 B.KW=new A.p_("From your inbox scan",1,"emailScan")
 B.KX=new A.p_("From an email signature",2,"emailSignature")
 B.KV=new A.p_("Added by your AI via MCP",4,"mcp")
-B.PO=s([B.qo,B.KW,B.KX,B.fL,B.KV],A.aC("H<p_>"))
-B.PP=s([0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0,0,0],t.t)
+B.PN=s([B.qo,B.KW,B.KX,B.fL,B.KV],A.aC("H<p_>"))
+B.PO=s([0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0,0,0],t.t)
 B.lV=new A.i4(100)
 B.L2=new A.i4(200)
 B.L3=new A.i4(300)
 B.x=new A.i4(400)
 B.au=new A.i4(500)
 B.qt=new A.i4(900)
-B.PQ=s([B.lV,B.L2,B.L3,B.x,B.au,B.bz,B.bo,B.fN,B.qt],A.aC("H<i4>"))
+B.PP=s([B.lV,B.L2,B.L3,B.x,B.au,B.bz,B.bo,B.fN,B.qt],A.aC("H<i4>"))
 B.ry=s([49,65,89,38,83,89],t.t)
+B.a2l=new A.aV("A finished org chart is a reporting tree, not a contact list. Every person sits under a manager. Products and use cases are tagged on the people who own them \u2014 when a use case is linked to a product, they appear on the same row so you can read coverage at a glance.",null,null,null,null,null,null,null,null,null)
+B.ae=new A.cw(null,12,null,null)
+B.a5t=new A.Km("assets/help/mature_overview.png","Example: Acme Rockets sample \u2014 roles (Economic Buyer, Champion, Stakeholder, and others), products, and use cases on the people who own them.",null)
+B.a5u=new A.Km("assets/help/mature_card.png","Detail view: each product on the left, its linked use case on the right. Nothing hides behind +N.",null)
+B.a1Z=new A.aV("You get there by adding people, placing them in the tree, then tagging products and use cases. The sections below walk through each step.",null,null,null,null,null,null,null,null,null)
+B.PQ=s([B.a2l,B.ae,B.a5t,B.ae,B.a5u,B.ae,B.a1Z],t.p)
 B.PR=s([0.015176349177441876,0.045529047532325624,0.07588174588720938,0.10623444424209313,0.13658714259697685,0.16693984095186062,0.19729253930674434,0.2276452376616281,0.2579979360165119,0.28835063437139563,0.3188300904430532,0.350925934958123,0.3848314933096426,0.42057480301049466,0.458183274052838,0.4976837250274023,0.5391024159806381,0.5824650784040898,0.6277969426914107,0.6751227633498623,0.7244668422128921,0.775853049866786,0.829304845476233,0.8848452951698498,0.942497089126609,1.0022825574869039,1.0642236851973577,1.1283421258858297,1.1946592148522128,1.2631959812511864,1.3339731595349034,1.407011200216447,1.4823302800086415,1.5599503113873272,1.6398909516233677,1.7221716113234105,1.8068114625156377,1.8938294463134073,1.9832442801866852,2.075074464868551,2.1693382909216234,2.2660538449872063,2.36523901573795,2.4669114995532007,2.5710888059345764,2.6777882626779785,2.7870270208169257,2.898822059350997,3.0131901897720907,3.1301480604002863,3.2497121605402226,3.3718988244681087,3.4967242352587946,3.624204428461639,3.754355295633311,3.887192587735158,4.022731918402185,4.160988767090289,4.301978482107941,4.445716283538092,4.592217266055746,4.741496401646282,4.893568542229298,5.048448422192488,5.20615066083972,5.3666897647573375,5.5300801301023865,5.696336044816294,5.865471690767354,6.037501145825082,6.212438385869475,6.390297286737924,6.571091626112461,6.7548350853498045,6.941541251256611,7.131223617812143,7.323895587840543,7.5195704746346665,7.7182615035334345,7.919981813454504,8.124744458384042,8.332562408825165,8.543448553206703,8.757415699253682,8.974476575321063,9.194643831691977,9.417930041841839,9.644347703669503,9.873909240696694,10.106627003236781,10.342513269534024,10.58158024687427,10.8238400726681,11.069304815507364,11.317986476196008,11.569896988756009,11.825048221409341,12.083451977536606,12.345119996613247,12.610063955123938,12.878295467455942,13.149826086772048,13.42466730586372,13.702830557985108,13.984327217668513,14.269168601521828,14.55736596900856,14.848930523210871,15.143873411576273,15.44220572664832,15.743938506781891,16.04908273684337,16.35764934889634,16.66964922287304,16.985093187232053,17.30399201960269,17.62635644741625,17.95219714852476,18.281524751807332,18.614349837764564,18.95068293910138,19.290534541298456,19.633915083172692,19.98083495742689,20.331304511189067,20.685334046541502,21.042933821039977,21.404114048223256,21.76888489811322,22.137256497705877,22.50923893145328,22.884842241736916,23.264076429332462,23.6469514538663,24.033477234264016,24.42366364919083,24.817520537484558,25.21505769858089,25.61628489293138,26.021211842414342,26.429848230738664,26.842203703840827,27.258287870275353,27.678110301598522,28.10168053274597,28.529008062403893,28.96010235337422,29.39497283293396,29.83362889318845,30.276079891419332,30.722335150426627,31.172403958865512,31.62629557157785,32.08401920991837,32.54558406207592,33.010999283389665,33.4802739966603,33.953417292456834,34.430438229418264,34.911345834551085,35.39614910352207,35.88485700094671,36.37747846067349,36.87402238606382,37.37449765026789,37.87891309649659,38.38727753828926,38.89959975977785,39.41588851594697,39.93615253289054,40.460400508064545,40.98864111053629,41.520882981230194,42.05713473317016,42.597404951718396,43.141702194811224,43.6900349931913,44.24241185063697,44.798841244188324,45.35933162437017,45.92389141541209,46.49252901546552,47.065252796817916,47.64207110610409,48.22299226451468,48.808024568002054,49.3971762874833,49.9904556690408,50.587870934119984,51.189430279724725,51.79514187861014,52.40501387947288,53.0190544071392,53.637271562750364,54.259673423945976,54.88626804504493,55.517063457223934,56.15206766869424,56.79128866487574,57.43473440856916,58.08241284012621,58.734331877617365,59.39049941699807,60.05092333227251,60.715611475655585,61.38457167773311,62.057811747619894,62.7353394731159,63.417162620860914,64.10328893648692,64.79372614476921,65.48848194977529,66.18756403501224,66.89098006357258,67.59873767827808,68.31084450182222,69.02730813691093,69.74813616640164,70.47333615344107,71.20291564160104,71.93688215501312,72.67524319850172,73.41800625771542,74.16517879925733,74.9167682708136,75.67278210128072,76.43322770089146,77.1981124613393,77.96744375590167,78.74122893956174,79.51947534912904,80.30219030335869,81.08938110306934,81.88105503125999,82.67721935322541,83.4778813166706,84.28304815182372,85.09272707154808,85.90692527145302,86.72564993000343,87.54890820862819,88.3767072518277,89.2090541872801,90.04595612594655,90.88742016217518,91.73345337380438,92.58406282226491,93.43925555268066,94.29903859396902,95.16341895893969,96.03240364439274,96.9059996312159,97.78421388448044,98.6670533535366,99.55452497210776],t.n)
 B.UE=new A.af(0.7078,8.3194)
 B.Uw=new A.af(0.7895,2.4523)
@@ -118945,8 +118945,8 @@ B.Fg=new A.bO(-7,B.a0,B.co,B.Sm,15)
 B.Sq=new A.i(0,24)
 B.Fy=new A.bO(3,B.a0,B.cp,B.Sq,38)
 B.Fs=new A.bO(8,B.a0,B.c8,B.xV,46)
-B.Oz=s([B.Fg,B.Fy,B.Fs],t.E)
-B.Rm=new A.dg([0,B.Pd,1,B.Py,2,B.O4,3,B.Pq,4,B.Nf,6,B.Oe,8,B.NB,9,B.NQ,12,B.Ol,16,B.Ok,24,B.Oz],A.aC("dg<q,J<bO>>"))
+B.OA=s([B.Fg,B.Fy,B.Fs],t.E)
+B.Rm=new A.dg([0,B.Pd,1,B.Py,2,B.O4,3,B.Pq,4,B.Nf,6,B.Oe,8,B.NB,9,B.NQ,12,B.Ol,16,B.Ok,24,B.OA],A.aC("dg<q,J<bO>>"))
 B.nb=new A.av(B.cd,!1,!1,!0,!1,B.o)
 B.ce=new A.j(4294968066)
 B.n8=new A.av(B.ce,!1,!1,!0,!1,B.o)
@@ -119462,33 +119462,33 @@ B.NI=s([54,null,null,8589935158],t.Z)
 B.NJ=s([55,null,null,8589935159],t.Z)
 B.NK=s([56,null,null,8589935160],t.Z)
 B.NM=s([57,null,null,8589935161],t.Z)
-B.OG=s([8589934852,8589934852,8589934853,null],t.Z)
+B.OH=s([8589934852,8589934852,8589934853,null],t.Z)
 B.Nj=s([4294967555,null,4294967555,null],t.Z)
 B.Nk=s([4294968065,null,null,8589935154],t.Z)
 B.Nl=s([4294968066,null,null,8589935156],t.Z)
 B.Nm=s([4294968067,null,null,8589935158],t.Z)
 B.Nn=s([4294968068,null,null,8589935160],t.Z)
 B.Ns=s([4294968321,null,null,8589935157],t.Z)
-B.OH=s([8589934848,8589934848,8589934849,null],t.Z)
+B.OI=s([8589934848,8589934848,8589934849,null],t.Z)
 B.Ni=s([4294967423,null,null,8589935150],t.Z)
 B.No=s([4294968069,null,null,8589935153],t.Z)
 B.Nh=s([4294967309,null,null,8589935117],t.Z)
 B.Np=s([4294968070,null,null,8589935159],t.Z)
 B.Nt=s([4294968327,null,null,8589935152],t.Z)
-B.OI=s([8589934854,8589934854,8589934855,null],t.Z)
+B.OJ=s([8589934854,8589934854,8589934855,null],t.Z)
 B.Nq=s([4294968071,null,null,8589935155],t.Z)
 B.Nr=s([4294968072,null,null,8589935161],t.Z)
-B.OJ=s([8589934850,8589934850,8589934851,null],t.Z)
-B.xC=new A.dg(["*",B.Nu,"+",B.Nv,"-",B.Nw,".",B.Nx,"/",B.Ny,"0",B.Nz,"1",B.NA,"2",B.ND,"3",B.NF,"4",B.NG,"5",B.NH,"6",B.NI,"7",B.NJ,"8",B.NK,"9",B.NM,"Alt",B.OG,"AltGraph",B.Nj,"ArrowDown",B.Nk,"ArrowLeft",B.Nl,"ArrowRight",B.Nm,"ArrowUp",B.Nn,"Clear",B.Ns,"Control",B.OH,"Delete",B.Ni,"End",B.No,"Enter",B.Nh,"Home",B.Np,"Insert",B.Nt,"Meta",B.OI,"PageDown",B.Nq,"PageUp",B.Nr,"Shift",B.OJ],A.aC("dg<k,J<q?>>"))
+B.OK=s([8589934850,8589934850,8589934851,null],t.Z)
+B.xC=new A.dg(["*",B.Nu,"+",B.Nv,"-",B.Nw,".",B.Nx,"/",B.Ny,"0",B.Nz,"1",B.NA,"2",B.ND,"3",B.NF,"4",B.NG,"5",B.NH,"6",B.NI,"7",B.NJ,"8",B.NK,"9",B.NM,"Alt",B.OH,"AltGraph",B.Nj,"ArrowDown",B.Nk,"ArrowLeft",B.Nl,"ArrowRight",B.Nm,"ArrowUp",B.Nn,"Clear",B.Ns,"Control",B.OI,"Delete",B.Ni,"End",B.No,"Enter",B.Nh,"Home",B.Np,"Insert",B.Nt,"Meta",B.OJ,"PageDown",B.Nq,"PageUp",B.Nr,"Shift",B.OK],A.aC("dg<k,J<q?>>"))
 B.NL=s([B.rH,null,null,B.xn],t.L)
 B.Pj=s([B.x9,null,null,B.xo],t.L)
 B.Oj=s([B.xa,null,null,B.xp],t.L)
-B.OK=s([B.xb,null,null,B.dK],t.L)
+B.OL=s([B.xb,null,null,B.dK],t.L)
 B.N6=s([B.xc,null,null,B.xq],t.L)
 B.PC=s([B.xd,null,null,B.mq],t.L)
 B.Pv=s([B.xe,null,null,B.h7],t.L)
 B.NV=s([B.xf,null,null,B.dL],t.L)
-B.PK=s([B.xg,null,null,B.h8],t.L)
+B.PJ=s([B.xg,null,null,B.h8],t.L)
 B.Pu=s([B.xh,null,null,B.dM],t.L)
 B.NP=s([B.xi,null,null,B.mr],t.L)
 B.Nc=s([B.xj,null,null,B.dN],t.L)
@@ -119512,7 +119512,7 @@ B.NZ=s([B.h6,B.h6,B.iX,null],t.L)
 B.Ow=s([B.h1,null,null,B.h8],t.L)
 B.P0=s([B.h2,null,null,B.ha],t.L)
 B.O_=s([B.da,B.da,B.dJ,null],t.L)
-B.RC=new A.dg(["*",B.NL,"+",B.Pj,"-",B.Oj,".",B.OK,"/",B.N6,"0",B.PC,"1",B.Pv,"2",B.NV,"3",B.PK,"4",B.Pu,"5",B.NP,"6",B.Nc,"7",B.O6,"8",B.Pk,"9",B.Pm,"Alt",B.NX,"AltGraph",B.PD,"ArrowDown",B.Or,"ArrowLeft",B.Os,"ArrowRight",B.Ot,"ArrowUp",B.PH,"Clear",B.Pr,"Control",B.NY,"Delete",B.OV,"End",B.Ou,"Enter",B.NO,"Home",B.Ov,"Insert",B.Ps,"Meta",B.NZ,"PageDown",B.Ow,"PageUp",B.P0,"Shift",B.O_],A.aC("dg<k,J<j?>>"))
+B.RC=new A.dg(["*",B.NL,"+",B.Pj,"-",B.Oj,".",B.OL,"/",B.N6,"0",B.PC,"1",B.Pv,"2",B.NV,"3",B.PJ,"4",B.Pu,"5",B.NP,"6",B.Nc,"7",B.O6,"8",B.Pk,"9",B.Pm,"Alt",B.NX,"AltGraph",B.PD,"ArrowDown",B.Or,"ArrowLeft",B.Os,"ArrowRight",B.Ot,"ArrowUp",B.PH,"Clear",B.Pr,"Control",B.NY,"Delete",B.OV,"End",B.Ou,"Enter",B.NO,"Home",B.Ov,"Insert",B.Ps,"Meta",B.NZ,"PageDown",B.Ow,"PageUp",B.P0,"Shift",B.O_],A.aC("dg<k,J<j?>>"))
 B.Sh={"content-type":0,accept:1}
 B.RD=new A.c1(B.Sh,["application/json","application/json"],t.li)
 B.Sa={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,KeyK:10,KeyL:11,KeyM:12,KeyN:13,KeyO:14,KeyP:15,KeyQ:16,KeyR:17,KeyS:18,KeyT:19,KeyU:20,KeyV:21,KeyW:22,KeyX:23,KeyY:24,KeyZ:25,Digit1:26,Digit2:27,Digit3:28,Digit4:29,Digit5:30,Digit6:31,Digit7:32,Digit8:33,Digit9:34,Digit0:35,Minus:36,Equal:37,BracketLeft:38,BracketRight:39,Backslash:40,Semicolon:41,Quote:42,Backquote:43,Comma:44,Period:45,Slash:46}
@@ -119939,14 +119939,14 @@ B.TV=new A.yf(1,"scroll")
 B.TW=new A.yf(3,"scale")
 B.TX=new A.yf(4,"unknown")
 B.TY=new A.G0(null)
-B.a2s=new A.aV("Company logo & website\u2026",null,null,null,null,null,null,null,null,null)
-B.U0=new A.h5("logo",!0,48,B.a2s,null,t.wI)
-B.a21=new A.aV("Save chart to Google Drive",null,null,null,null,null,null,null,null,null)
-B.U3=new A.h5("googleDrive",!0,48,B.a21,null,t.wI)
-B.a26=new A.aV("Save chart to OneDrive",null,null,null,null,null,null,null,null,null)
-B.U4=new A.h5("oneDrive",!0,48,B.a26,null,t.wI)
-B.a1Z=new A.aV("Export JSON",null,null,null,null,null,null,null,null,null)
-B.U5=new A.h5("export",!0,48,B.a1Z,null,t.wI)
+B.a2r=new A.aV("Company logo & website\u2026",null,null,null,null,null,null,null,null,null)
+B.U0=new A.h5("logo",!0,48,B.a2r,null,t.wI)
+B.a22=new A.aV("Save chart to Google Drive",null,null,null,null,null,null,null,null,null)
+B.U3=new A.h5("googleDrive",!0,48,B.a22,null,t.wI)
+B.a27=new A.aV("Save chart to OneDrive",null,null,null,null,null,null,null,null,null)
+B.U4=new A.h5("oneDrive",!0,48,B.a27,null,t.wI)
+B.a2_=new A.aV("Export JSON",null,null,null,null,null,null,null,null,null)
+B.U5=new A.h5("export",!0,48,B.a2_,null,t.wI)
 B.U7=new A.Up(0,"over")
 B.U8=new A.Up(1,"under")
 B.U9=new A.yk(null,null,null,null,null,null,null,null,null,null,null,null,null)
@@ -120689,35 +120689,36 @@ B.a09=new A.C(!0,B.a4,null,".AppleSystemUIFont",null,null,null,null,null,null,nu
 B.a0v=new A.C(!0,B.l,null,".AppleSystemUIFont",null,null,null,null,null,null,null,null,null,null,null,null,null,B.i,null,null,null,"blackRedwoodCity labelMedium",null,null,null,null)
 B.Yz=new A.C(!0,B.l,null,".AppleSystemUIFont",null,null,null,null,null,null,null,null,null,null,null,null,null,B.i,null,null,null,"blackRedwoodCity labelSmall",null,null,null,null)
 B.a1B=new A.eG(B.a_m,B.Zh,B.a_n,B.a_Q,B.YY,B.Z5,B.ZB,B.a_K,B.ZO,B.a0c,B.Ys,B.YK,B.a09,B.a0v,B.Yz)
-B.a1D=new A.aV("New use case",null,null,null,null,null,null,null,null,null)
-B.a1E=new A.aV("No people yet. Tap + to add the first person \u2014 usually the top of the organization.",null,null,B.aC,null,null,null,null,null,null)
-B.a1F=new A.aV("Open profile",null,null,null,null,null,null,null,null,null)
-B.a1G=new A.aV("Import contacts from email",null,null,null,null,null,null,null,null,null)
-B.a1H=new A.aV("Create",null,null,null,null,null,null,null,null,null)
-B.a1I=new A.aV("View",null,B.Du,null,null,null,null,null,null,null)
+B.a1C=new A.aV("New use case",null,null,null,null,null,null,null,null,null)
+B.a1D=new A.aV("No people yet. Tap + to add the first person \u2014 usually the top of the organization.",null,null,B.aC,null,null,null,null,null,null)
+B.a1E=new A.aV("Open profile",null,null,null,null,null,null,null,null,null)
+B.a1F=new A.aV("Import contacts from email",null,null,null,null,null,null,null,null,null)
+B.a1G=new A.aV("Create",null,null,null,null,null,null,null,null,null)
+B.a1H=new A.aV("View",null,B.Du,null,null,null,null,null,null,null)
 B.Dw=new A.aV("New product",null,null,null,null,null,null,null,null,null)
-B.a1J=new A.aV("Sign out",null,null,null,null,null,null,null,null,null)
-B.a1L=new A.aV("Create your first product",null,null,null,null,null,null,null,null,null)
-B.a1M=new A.aV("Capture the use cases that matter to this organization: what hurts today, and what a positive business outcome looks like. Then tag them to people on the chart.",null,null,B.aC,null,null,null,null,null,null)
-B.a1N=new A.aV("Retry",null,null,null,null,null,null,null,null,null)
+B.a1I=new A.aV("Sign out",null,null,null,null,null,null,null,null,null)
+B.a1K=new A.aV("Create your first product",null,null,null,null,null,null,null,null,null)
+B.a1L=new A.aV("Capture the use cases that matter to this organization: what hurts today, and what a positive business outcome looks like. Then tag them to people on the chart.",null,null,B.aC,null,null,null,null,null,null)
+B.a1M=new A.aV("Retry",null,null,null,null,null,null,null,null,null)
 B.jL=new A.aV("Save",null,null,null,null,null,null,null,null,null)
-B.a1O=new A.aV("LinkedIn blocked the direct fetch",null,null,null,null,null,null,null,null,null)
-B.a1P=new A.aV("Share\u2026",null,null,null,null,null,null,null,null,null)
+B.a1N=new A.aV("LinkedIn often gates profile pages for visitors who aren't signed in. Open the profile in Safari (where you're logged in) and tap Orgora on the photo (or Clip to Orgora in the corner) \u2014 it grabs the photo and details reliably.",null,null,null,null,null,null,null,null,null)
+B.a1P=new A.aV("LinkedIn blocked the direct fetch",null,null,null,null,null,null,null,null,null)
+B.a1Q=new A.aV("Share\u2026",null,null,null,null,null,null,null,null,null)
 B.nE=new A.aV("Continue",null,null,null,null,null,null,null,null,null)
 B.Dx=new A.aV("Open LinkedIn",null,null,null,null,null,null,null,null,null)
 B.ZH=new A.C(!0,B.j,null,null,null,null,18,B.fN,null,-0.5,null,null,1,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a1Q=new A.aV("in",null,B.ZH,null,null,null,null,null,null,null)
+B.a1R=new A.aV("in",null,B.ZH,null,null,null,null,null,null,null)
 B.Dy=new A.aV("OK",null,null,null,null,null,null,null,null,null)
-B.a1S=new A.aV("Add",null,null,null,null,null,null,null,null,null)
-B.a1U=new A.aV("Discard",null,null,null,null,null,null,null,null,null)
-B.a1V=new A.aV("Add your products here, then tag people and use cases with them so you can see coverage at a glance.\n\nProducts you offer to every organization are best created once as global products (home screen \u2192 More \u2192 Products) \u2014 they show up in all charts.",null,null,B.aC,null,null,null,null,null,null)
-B.a1W=new A.aV("Subscribe with Stripe",null,null,null,null,null,null,null,null,null)
+B.a1T=new A.aV("Add",null,null,null,null,null,null,null,null,null)
+B.a1V=new A.aV("Discard",null,null,null,null,null,null,null,null,null)
+B.a1W=new A.aV("Add your products here, then tag people and use cases with them so you can see coverage at a glance.\n\nProducts you offer to every organization are best created once as global products (home screen \u2192 More \u2192 Products) \u2014 they show up in all charts.",null,null,B.aC,null,null,null,null,null,null)
+B.a1X=new A.aV("Subscribe with Stripe",null,null,null,null,null,null,null,null,null)
 B.cW=new A.aV("Cancel",null,null,null,null,null,null,null,null,null)
-B.a2_=new A.aV("Add person",null,null,null,null,null,null,null,null,null)
+B.a20=new A.aV("Add person",null,null,null,null,null,null,null,null,null)
 B.Dz=new A.aV("Replace",null,null,null,null,null,null,null,null,null)
 B.DB=new A.aV("Close",null,null,null,null,null,null,null,null,null)
-B.a22=new A.aV("Copy the chart JSON to the clipboard or share it as text. Exports contain your chart data \u2014 share carefully.",null,null,null,null,null,null,null,null,null)
-B.a23=new A.aV("Replace existing photo?",null,null,null,null,null,null,null,null,null)
+B.a23=new A.aV("Copy the chart JSON to the clipboard or share it as text. Exports contain your chart data \u2014 share carefully.",null,null,null,null,null,null,null,null,null)
+B.a24=new A.aV("Replace existing photo?",null,null,null,null,null,null,null,null,null)
 B.a29=new A.aV("Top level (no manager)",null,null,null,null,null,null,null,null,null)
 B.nF=new A.aV("Add use case",null,null,null,null,null,null,null,null,null)
 B.a2a=new A.aV("Add to Chrome",null,null,null,null,null,null,null,null,null)
@@ -120727,11 +120728,10 @@ B.a2d=new A.aV("Turn tester access off",null,null,null,null,null,null,null,null,
 B.a2f=new A.aV("Privacy Policy",null,null,null,null,null,null,null,null,null)
 B.a2g=new A.aV("Keep this device",null,null,null,null,null,null,null,null,null)
 B.a2h=new A.aV("This clears Google Drive or Microsoft OneDrive sign-in on this device and returns you to the sign-in screen. Charts for this account are removed from the device (they stay in your cloud).",null,null,null,null,null,null,null,null,null)
-B.a2j=new A.aV("LinkedIn often gates profile pages for visitors who aren't signed in. Open the profile in Safari (where you're logged in) and use the \"Clip to Orgora\" button instead \u2014 it grabs the photo and details reliably.",null,null,null,null,null,null,null,null,null)
-B.a2k=new A.aV("Use the other copy",null,null,null,null,null,null,null,null,null)
-B.a2n=new A.aV("Fetch from LinkedIn (fills empty fields only)",null,null,null,null,null,null,null,null,null)
-B.a2p=new A.aV("Help",null,null,null,null,null,null,null,null,null)
-B.a2q=new A.aV("Products",null,null,null,null,null,null,null,null,null)
+B.a2j=new A.aV("Use the other copy",null,null,null,null,null,null,null,null,null)
+B.a2m=new A.aV("Fetch from LinkedIn (fills empty fields only)",null,null,null,null,null,null,null,null,null)
+B.a2o=new A.aV("Help",null,null,null,null,null,null,null,null,null)
+B.a2p=new A.aV("Products",null,null,null,null,null,null,null,null,null)
 B.nG=new A.aV("New org chart",null,null,null,null,null,null,null,null,null)
 B.DC=new A.aV("Keep current",null,null,null,null,null,null,null,null,null)
 B.nH=new A.aV("Add product",null,null,null,null,null,null,null,null,null)
@@ -121024,29 +121024,29 @@ B.Eb=new A.Ad(3,"recede")
 B.LF=new A.bK(61284,"MaterialIcons",!1)
 B.a2e=new A.aV("Sign-in is sync. After you continue with Google or Microsoft, your charts live in that Google Drive or OneDrive and stay synced across web, iPhone, and Mac. There is no separate backup product \u2014 sign-in already syncs. Each chart is one Orgora file in your account \u2014 not Pro and not a public link. There is no Orgora server.",null,null,null,null,null,null,null,null,null)
 B.a5j=new A.fW(B.LF,"Save a chart",B.a2e,null)
-B.a24=new A.aV("Create products (the software you sell) and use cases (the pains and outcomes that matter). Tag them onto people.\n\nWhen a use case is linked to a product, the person card shows them on one row: product on the left, use case on the right. Unlinked tags get their own line. Detail view lists every tag \u2014 nothing is hidden behind a +N chip.\n\nProducts can live on one chart or in a device-wide catalog (tap your photo \u2192 Products) so the same product appears in every org you map.",null,null,null,null,null,null,null,null,null)
-B.a5k=new A.fW(B.lZ,"Products and use cases",B.a24,null)
-B.a28=new A.aV("Add someone from the chart, import contacts from email (tap your photo \u2192 Import contacts from email \u2014 iPhone and Mac; not on the web yet), or clip a LinkedIn profile from the blue Home Import from LinkedIn tile.\n\nWaiting clips show on that tile as Review N. Account \u2192 Import from LinkedIn opens the same inbox on iPhone and Mac, or Help on the web.\n\nFind people lives inside Import contacts from email (Find people \u2014 create charts from companies) \u2014 not on Home. It scans your own mail for work addresses and can create an org chart from that domain. Personal mail domains are grouped separately and are never suggested as a company chart.\n\nInbox imports land in a list on the left, not on the tree. Drag someone onto a person to make them a report, or onto empty canvas for a top-level seat. Anyone you leave in the list stays off the hierarchy.\n\nLong-press a card to drag that person under a new manager.",null,null,null,null,null,null,null,null,null)
-B.a5l=new A.fW(B.qM,"People",B.a28,null)
+B.a25=new A.aV("Create products (the software you sell) and use cases (the pains and outcomes that matter). Tag them onto people.\n\nWhen a use case is linked to a product, the person card shows them on one row: product on the left, use case on the right. Unlinked tags get their own line. Detail view lists every tag \u2014 nothing is hidden behind a +N chip.\n\nProducts can live on one chart or in a device-wide catalog (tap your photo \u2192 Products) so the same product appears in every org you map.",null,null,null,null,null,null,null,null,null)
+B.a5k=new A.fW(B.lZ,"Products and use cases",B.a25,null)
 B.Lu=new A.bK(58289,"MaterialIcons",!1)
-B.a1X=new A.aV("Your Google or Microsoft SSO is your Orgora account. Chart files live in your own Drive or OneDrive (and may cache on this device). Orgora never hosts the file and does not offer it as a public link. No separate login database, no analytics, and no tracking. Optional inbox connect and LinkedIn clipping talk only to your provider or stay on-device. Sign out from your photo (Account) clears the SSO session on this device.\n\nPrivacy policy: https://sdkaihub.com/orgora-charts/privacy.html",null,null,null,null,null,null,null,null,null)
-B.a5m=new A.fW(B.Lu,"Privacy",B.a1X,null)
+B.a1Y=new A.aV("Your Google or Microsoft SSO is your Orgora account. Chart files live in your own Drive or OneDrive (and may cache on this device). Orgora never hosts the file and does not offer it as a public link. No separate login database, no analytics, and no tracking. Optional inbox connect and LinkedIn clipping talk only to your provider or stay on-device. Sign out from your photo (Account) clears the SSO session on this device.\n\nPrivacy policy: https://sdkaihub.com/orgora-charts/privacy.html",null,null,null,null,null,null,null,null,null)
+B.a5l=new A.fW(B.Lu,"Privacy",B.a1Y,null)
 B.LJ=new A.bK(61563,"MaterialIcons",!1)
-B.a1R=new A.aV("Orgora Charts maps people, reporting lines, products, and use cases. You sign in with Google or Microsoft \u2014 that SSO is your Orgora account. Sign-in is sync: charts live in your Google Drive or OneDrive across web, iPhone, and Mac. There is no separate backup product \u2014 sign-in already syncs.\n\nAfter sign-in, Home lists your cloud charts plus the sample and LinkedIn tools. Search is in the bar. Tap your photo for account: Import contacts, Products, LinkedIn, MCP, Help, then Sign out at the bottom.\n\nOpen the sample chart to look around first. The sample counts toward the free-tier chart limit (three charts including the sample).",null,null,null,null,null,null,null,null,null)
-B.a5n=new A.fW(B.LJ,"Getting started",B.a1R,null)
-B.a2o=new A.aV("Tap your photo \u2192 MCP connector. On the Mac app this connects your local charts to AI clients (Grok, Claude, Cursor). On iPhone and the web the same Account item is honest: the connector runs on the Mac app.\n\nGrok, Claude, and GPT are labeled Beta. Beta does not mean the marketplace listing is approved. None of those listings are approved.",null,null,null,null,null,null,null,null,null)
-B.a5o=new A.fW(B.m0,"Connectors",B.a2o,null)
+B.a1S=new A.aV("Orgora Charts maps people, reporting lines, products, and use cases. You sign in with Google or Microsoft \u2014 that SSO is your Orgora account. Sign-in is sync: charts live in your Google Drive or OneDrive across web, iPhone, and Mac. There is no separate backup product \u2014 sign-in already syncs.\n\nAfter sign-in, Home lists your cloud charts plus the sample and LinkedIn tools. Search is in the bar. Tap your photo for account: Import contacts, Products, LinkedIn, MCP, Help, then Sign out at the bottom.\n\nOpen the sample chart to look around first. The sample counts toward the free-tier chart limit (three charts including the sample).",null,null,null,null,null,null,null,null,null)
+B.a5m=new A.fW(B.LJ,"Getting started",B.a1S,null)
+B.a2t=new A.aV("Orgora Clipper copies a LinkedIn profile into the app. Nothing is sent to us. On the photo, tap Orgora (or Clip to Orgora in the corner). Waiting clips show on the Home Import from LinkedIn tile as a blue Review N row. Account \u2192 Import from LinkedIn opens that inbox on iPhone, Mac, and web. Chrome on the computer opens Orgora with the person ready to import \u2014 it does not download a file.",null,null,null,null,null,null,null,null,null)
+B.Ox=s([B.a2t,B.am,B.p6],t.p)
+B.IW=new A.CQ(B.a7,B.n,B.z,B.ag,null,B.cw,null,0,B.Ox,null)
+B.a5n=new A.fW(B.m_,"Import from LinkedIn",B.IW,null)
+B.a1O=new A.aV("Add someone from the chart, import contacts from email (tap your photo \u2192 Import contacts from email \u2014 iPhone and Mac; not on the web yet), or clip a LinkedIn profile from the blue Home Import from LinkedIn tile. Tag a role on the person: Economic Buyer, Champion, Coach, Stakeholder, Technical, Influencer, or Gatekeeper.\n\nWaiting clips show on that tile as a blue Review N row with the name. Account \u2192 Import from LinkedIn opens the same inbox on iPhone, Mac, and web.\n\nFind people lives inside Import contacts from email (Find people \u2014 create charts from companies) \u2014 not on Home. It scans your own mail for work addresses and can create an org chart from that domain. Personal mail domains are grouped separately and are never suggested as a company chart.\n\nInbox imports land in a list on the left, not on the tree. Drag someone onto a person to make them a report, or onto empty canvas for a top-level seat. Anyone you leave in the list stays off the hierarchy.\n\nLong-press a card to drag that person under a new manager.",null,null,null,null,null,null,null,null,null)
+B.a5o=new A.fW(B.qM,"People",B.a1O,null)
+B.a2n=new A.aV("Tap your photo \u2192 MCP connector. On the Mac app this connects your local charts to AI clients (Grok, Claude, Cursor). On iPhone and the web the same Account item is honest: the connector runs on the Mac app.\n\nGrok, Claude, and GPT are labeled Beta. Beta does not mean the marketplace listing is approved. None of those listings are approved.",null,null,null,null,null,null,null,null,null)
+B.a5p=new A.fW(B.m0,"Connectors",B.a2n,null)
 B.Lt=new A.bK(58189,"MaterialIcons",!1)
-B.a2l=new A.aV("Open a chart, then Share (not the account avatar menu). Send a PDF picture, or an Orgora file the other person opens in Orgora Charts.\n\nViewing a shared chart is free. Creating a new chart from one still follows the free-tier size limits unless you are Pro.",null,null,null,null,null,null,null,null,null)
-B.a5p=new A.fW(B.Lt,"Sharing a chart",B.a2l,null)
-B.a2t=new A.aV("Each chart is its own org. Search by name or website, star favorites, and tap New org chart under the list.\n\nCharts for your signed-in account load on Home automatically (sign-in is sync \u2014 no Drive picker and no separate backup product). Share a chart from inside it \u2014 not from home. You can send a PDF, or an Orgora file the other person opens in the app.\n\nInside a chart: tap a person to edit them, drag to change who reports to whom, and use the view-mode control to switch between compact titles and full detail.",null,null,null,null,null,null,null,null,null)
-B.a5q=new A.fW(B.iG,"Charts",B.a2t,null)
-B.a1C=new A.aV("Orgora Clipper copies a LinkedIn profile into the app. Nothing is sent to us. Pick Safari or Chrome below, then tap through to turn it on. Waiting clips show on the Home Import from LinkedIn tile (Review N). Account \u2192 Import from LinkedIn opens that inbox on iPhone and Mac, or Help on the web.",null,null,null,null,null,null,null,null,null)
-B.PI=s([B.a1C,B.am,B.p6],t.p)
-B.IW=new A.CQ(B.a7,B.n,B.z,B.ag,null,B.cw,null,0,B.PI,null)
-B.a5r=new A.fW(B.m_,"Import from LinkedIn",B.IW,null)
-B.a1T=new A.aV("Optional and separate from sign-in. Your Orgora account is Google or Microsoft SSO \u2014 Import contacts from email does not create the account.\n\nTap your photo \u2192 Import contacts from email (iPhone and Mac; not in the web app yet). Connect Microsoft, Gmail (app password), or Advanced (iCloud, Yahoo, IMAP). Connect as many mailboxes as you want. Find people scans companies in your mail and can create an org chart from a domain \u2014 not only import into a chart you already have. That is on that screen, not on Home.\n\nCredentials stay in the device keychain; mail is read directly from your provider. Turn scanning off at any time. Disconnecting removes that mailbox from this device; it does not sign you out of Orgora.",null,null,null,null,null,null,null,null,null)
-B.a5s=new A.fW(B.fQ,"Import contacts from email",B.a1T,null)
+B.a2k=new A.aV("Open a chart, then Share (not the account avatar menu). Send a PDF picture, or an Orgora file the other person opens in Orgora Charts.\n\nViewing a shared chart is free. Creating a new chart from one still follows the free-tier size limits unless you are Pro.",null,null,null,null,null,null,null,null,null)
+B.a5q=new A.fW(B.Lt,"Sharing a chart",B.a2k,null)
+B.a2s=new A.aV("Each chart is its own org. Search by name or website, star favorites, and tap New org chart under the list.\n\nCharts for your signed-in account load on Home automatically (sign-in is sync \u2014 no Drive picker and no separate backup product). Share a chart from inside it \u2014 not from home. You can send a PDF, or an Orgora file the other person opens in the app.\n\nInside a chart: tap a person to edit them, drag to change who reports to whom, and use the view-mode control to switch between compact titles and full detail.",null,null,null,null,null,null,null,null,null)
+B.a5r=new A.fW(B.iG,"Charts",B.a2s,null)
+B.a1U=new A.aV("Optional and separate from sign-in. Your Orgora account is Google or Microsoft SSO \u2014 Import contacts from email does not create the account.\n\nTap your photo \u2192 Import contacts from email (iPhone and Mac; not in the web app yet). Connect Microsoft, Gmail (app password), or Advanced (iCloud, Yahoo, IMAP). Connect as many mailboxes as you want. Find people scans companies in your mail and can create an org chart from a domain \u2014 not only import into a chart you already have. That is on that screen, not on Home.\n\nCredentials stay in the device keychain; mail is read directly from your provider. Turn scanning off at any time. Disconnecting removes that mailbox from this device; it does not sign you out of Orgora.",null,null,null,null,null,null,null,null,null)
+B.a5s=new A.fW(B.fQ,"Import contacts from email",B.a1U,null)
 B.e6=new A.qx(0,"pressed")
 B.f7=new A.qx(1,"hover")
 B.Ec=new A.qx(2,"focus")
@@ -121153,11 +121153,11 @@ B.WS=new A.E(100,0)
 B.a6r=new A.o8(B.WS,B.al,B.eM,null,null)
 B.a6s=new A.o8(B.H,B.al,B.eM,null,null)
 B.a6t=new A.ob(1,"Click Add to Chrome on the Chrome Web Store, then Confirm.",null)
-B.a6u=new A.ob(2,"Open a LinkedIn profile in Chrome and click Clip to Orgora on the page, or the toolbar icon.",null)
-B.a6v=new A.ob(3,"Allow linkedin.com, then clip a profile and tap Open Orgora.",null)
-B.a6w=new A.ob(2,"iPhone/iPad: Settings \u2192 Apps \u2192 Safari \u2192 Extensions \u2192 Orgora Clipper, turn it on. Mac: Safari \u2192 Settings \u2192 Extensions, check Orgora Clipper.",null)
-B.a6x=new A.ob(1,"Install Orgora Charts and open it once so the device registers the extension.",null)
-B.a6y=new A.ob(3,"Tap Open Orgora on the clip toast to return here.",null)
+B.a6u=new A.ob(3,"Allow linkedin.com, then clip a profile and tap Open Orgora.",null)
+B.a6v=new A.ob(2,"Open a LinkedIn profile in Chrome and tap Orgora on the photo, or Clip to Orgora in the corner or toolbar.",null)
+B.a6w=new A.ob(3,"Orgora opens here. Import from LinkedIn shows the person \u2014 add them to a chart.",null)
+B.a6x=new A.ob(2,"iPhone/iPad: Settings \u2192 Apps \u2192 Safari \u2192 Extensions \u2192 Orgora Clipper, turn it on. Mac: Safari \u2192 Settings \u2192 Extensions, check Orgora Clipper.",null)
+B.a6y=new A.ob(1,"Install Orgora Charts and open it once so the device registers the extension.",null)
 B.En=new A.B0(0,"first")
 B.a6z=new A.B0(1,"middle")
 B.Eo=new A.B0(2,"last")
@@ -121334,7 +121334,7 @@ return A.b([A.R(A.R(A.aD(),q),"Alphabetic"),A.R(A.R(A.aD(),q),"Ideographic")],t.
 s($,"bnX","b41",()=>{var q="PlaceholderAlignment"
 return A.b([A.R(A.R(A.aD(),q),"Baseline"),A.R(A.R(A.aD(),q),"AboveBaseline"),A.R(A.R(A.aD(),q),"BelowBaseline"),A.R(A.R(A.aD(),q),"Top"),A.R(A.R(A.aD(),q),"Bottom"),A.R(A.R(A.aD(),q),"Middle")],t.O)})
 r($,"bnM","b3V",()=>A.dR().ga3j()+"roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2")
-s($,"bne","b3x",()=>A.b8X(B.Ox))
+s($,"bne","b3x",()=>A.b8X(B.Oy))
 s($,"bnd","aP9",()=>A.aja(A.b5C($.b3x())))
 s($,"bjH","dA",()=>{var q,p=A.R(A.R(A.r0(),"window"),"screen")
 p=p==null?null:A.R(p,"width")
@@ -121478,7 +121478,7 @@ s($,"bj1","aT9",()=>A.aQx(0))
 s($,"bmD","b39",()=>A.aRU(B.iO,B.rc,257,286,15))
 s($,"bmC","b38",()=>A.aRU(B.ri,B.iN,0,30,15))
 s($,"bmB","b37",()=>A.aRU(null,B.Ne,0,19,7))
-s($,"bk0","b1G",()=>A.Sc(B.PM))
+s($,"bk0","b1G",()=>A.Sc(B.PL))
 s($,"bk_","b1F",()=>A.Sc(B.O5))
 s($,"bjO","b1B",()=>new A.Q())
 s($,"bnh","b3A",()=>A.auf(1,1,500))
