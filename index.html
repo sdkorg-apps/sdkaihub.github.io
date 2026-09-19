@@ -145,7 +145,7 @@
       }
       function orgoraHasCloudSession(key) {
         try {
-          var raw = sessionStorage.getItem(key);
+          var raw = sessionStorage.getItem(key) || localStorage.getItem(key);
           if (!raw) return false;
           var o = JSON.parse(raw);
           return !!(o && o.email && o.token);
