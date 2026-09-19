@@ -6,57 +6,88 @@
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>Support — Orgora Charts</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 640px; margin: 0 auto; padding: 48px 24px; line-height: 1.6;
-         background: #0d1117; color: #e6edf3; }
-  a { color: #58a6ff; text-decoration: none; }
+  :root {
+    --ink: #1c1c1e; --muted: #5c6560; --line: #dce8de; --paper: #f4f7f3;
+    --card: #ffffff; --green: #178a52; --mint: #e7f8ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8eee9; --muted: #9aa89e; --line: #2a3830; --paper: #121614;
+      --card: #1a1f1c; --mint: #1a3a2a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink); background: var(--paper); line-height: 1.6;
+  }
+  a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.1rem; margin-top: 32px; }
-  .muted { color: #8b949e; font-size: 0.9rem; }
+  header, main, footer { width: min(720px, calc(100% - 40px)); margin: 0 auto; }
+  header { padding: 22px 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .brand { font-weight: 700; letter-spacing: -0.03em; }
+  .brand span { color: var(--muted); font-weight: 500; }
+  nav { display: flex; gap: 16px; font-size: 0.92rem; font-weight: 600; }
+  nav a { color: var(--ink); }
+  main { padding: 24px 0 48px; }
+  h1 { font-size: 1.7rem; letter-spacing: -0.03em; margin: 0 0 8px; }
+  h2 { font-size: 1.08rem; margin-top: 32px; }
+  .muted { color: var(--muted); font-size: 0.92rem; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin: 18px 0; }
+  footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
-  <h1>Orgora Charts — Support</h1>
+  <header>
+    <a class="brand" href="/">SDK AI Hub</a>
+    <nav aria-label="Site">
+      <a href="/orgora/">Open</a>
+      <a href="/orgora-charts/privacy.html">Privacy</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Orgora Charts — Support</h1>
+    <p class="muted">Private org charts for iPhone, iPad, Mac, and the web.</p>
 
-  <p>Orgora Charts lets you build and manage org charts privately on iPhone,
-     iPad, and Mac. All data stays on your device.</p>
+    <div class="card">
+      <p>
+        <a href="https://apps.apple.com/app/id6792418699"><strong>Download on the App Store</strong></a>
+        · <a href="/orgora/">Open in the browser</a>
+        · <a href="clipper.html">Safari and Chrome Clipper</a>
+      </p>
+    </div>
 
-  <p>
-    <a href="https://apps.apple.com/app/id6792418699"><strong>Download on the App Store</strong></a>
-    · <a href="clipper.html">Install Orgora Clipper for Chrome or Safari</a>
-  </p>
+    <h2>Frequently asked questions</h2>
 
-  <h2>Frequently asked questions</h2>
+    <p><strong>Where is my data stored?</strong><br>
+       On your device. If you continue with Google or Microsoft, charts you save
+       also live in your own Google Drive or OneDrive. SDK AI Hub does not host
+       your files and cannot read them.</p>
 
-  <p><strong>Where is my data stored?</strong><br>
-     Entirely on your device. There are no accounts and no servers. Your data
-     is included in your normal device backups.</p>
+    <p><strong>Do I create an Orgora account?</strong><br>
+       No. There is no Orgora sign-up. Continue with Google or Microsoft connects
+       the cloud storage you already have. Signing out on the device clears the
+       local session.</p>
 
-  <p><strong>How do I move data to a new device?</strong><br>
-     Restore the new device from a backup of the old one, and your charts come
-     with it.</p>
+    <p><strong>How do I move data to a new device?</strong><br>
+       Sign in with the same Google or Microsoft account, or restore the new
+       device from a backup of the old one.</p>
 
-  <p><strong>Is email sync required?</strong><br>
-     No. It is optional and off by default. If enabled, the app talks directly
-     to your own email provider and stores credentials only in your device
-     keychain.</p>
+    <p><strong>Is email sync required?</strong><br>
+       No. It is optional. If you enable it, the app talks directly to your own
+       email provider. Credentials stay in the device keychain.</p>
 
-  <p><strong>Can I clip LinkedIn profiles from Google Chrome?</strong><br>
-     Yes. Safari Clipper is already inside Orgora Charts. For Chrome on a Mac,
-     add the free Orgora Clipper extension — you do not write any code.
-     <a href="clipper.html">Install Clipper</a>.</p>
+    <p><strong>Can I clip LinkedIn profiles from Chrome?</strong><br>
+       Safari Clipper is already inside Orgora Charts. Chrome Clipper is not
+       live on the Chrome Web Store yet — use Safari until it is.
+       <a href="clipper.html">Clipper setup</a>.</p>
 
-  <h2>Contact</h2>
-  <p>Found a bug or have a feature request?
-     <a href="https://github.com/sdkorg-apps/sdkaihub.github.io/issues">Open an
-     issue on GitHub</a> and we'll take a look.</p>
-
-  <p class="muted"><a href="/orgora-charts/privacy.html">Privacy Policy</a></p>
-
-  <footer class="muted" style="margin-top: 48px; font-size: 0.8rem;">
-    SDK AI Hub is a brand of SDK Equipment LLC.
-  </footer>
+    <h2>Contact</h2>
+    <p>Found a bug or have a question?
+       <a href="https://github.com/sdkorg-apps/sdkaihub.github.io/issues">Open an
+       issue on GitHub</a>.</p>
+  </main>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
 </html>

@@ -5,125 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — Orgora Charts</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 640px; margin: 0 auto; padding: 48px 24px; line-height: 1.6;
-         background: #0d1117; color: #e6edf3; }
-  a { color: #58a6ff; text-decoration: none; }
+  :root {
+    --ink: #1c1c1e; --muted: #5c6560; --line: #dce8de; --paper: #f4f7f3;
+    --green: #178a52;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8eee9; --muted: #9aa89e; --line: #2a3830; --paper: #121614;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink); background: var(--paper); line-height: 1.6;
+  }
+  a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.1rem; margin-top: 32px; }
-  .muted { color: #8b949e; font-size: 0.9rem; }
+  header, main, footer { width: min(720px, calc(100% - 40px)); margin: 0 auto; }
+  header { padding: 22px 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .brand { font-weight: 700; letter-spacing: -0.03em; }
+  nav { display: flex; gap: 16px; font-size: 0.92rem; font-weight: 600; }
+  nav a { color: var(--ink); }
+  main { padding: 24px 0 48px; }
+  h1 { font-size: 1.7rem; letter-spacing: -0.03em; margin: 0 0 8px; }
+  h2 { font-size: 1.08rem; margin-top: 32px; }
+  .muted { color: var(--muted); font-size: 0.92rem; }
+  code { font-size: 0.9em; }
+  footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
-  <h1>Privacy Policy — Orgora Charts</h1>
-  <p class="muted">Effective date: September 1, 2026</p>
+  <header>
+    <a class="brand" href="/">SDK AI Hub</a>
+    <nav aria-label="Site">
+      <a href="/orgora/">Open</a>
+      <a href="/orgora-charts/">Support</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Privacy Policy — Orgora Charts</h1>
+    <p class="muted">Effective date: September 19, 2026</p>
 
-  <p>Orgora Charts is designed so that your data never leaves your control.
-     This policy describes what the app does — and, more importantly, what it
-     does not do.</p>
+    <p>Orgora Charts is designed so that your data stays in your control.
+       This policy describes what the app does — and what it does not do.
+       SDK AI Hub (a brand of SDK Equipment LLC) operates the app.</p>
 
-  <h2>Data we collect</h2>
-  <p><strong>None.</strong> We do not collect, transmit, store, sell, or share
-     any personal data. Orgora Charts has no accounts, no sign-up, no analytics,
-     no advertising, no crash-reporting SDKs, and no third-party tracking of any
-     kind.</p>
+    <h2>Data we collect</h2>
+    <p><strong>None.</strong> We do not collect, transmit, store, sell, or share
+       personal data on our own servers. There is no Orgora sign-up, no
+       analytics, no advertising, no crash-reporting SDK, and no third-party
+       tracking. Continue with Google or Microsoft connects <em>your</em> cloud
+       storage. It does not create an account with us.</p>
 
-  <h2>Where your data lives</h2>
-  <p>All org charts, people, notes, and settings you create are stored locally
-     on your device. They are included in your device backups (e.g. iCloud or
-     encrypted local backups) according to your own device settings, which are
-     controlled by you and Apple — not by us. We have no servers and no access
-     to your data.</p>
+    <h2>Where your data lives</h2>
+    <p>Org charts, people, notes, and settings you create are stored on your
+       device. If you continue with Google or Microsoft, charts you save are
+       written to your own Google Drive or OneDrive. We cannot read those
+       files. Device backups (for example iCloud) follow your own device
+       settings — not ours.</p>
 
-  <h2>Sharing charts</h2>
-  <p>You can share a chart as a read-only <code>.orgora</code> file. Share
-     files are created entirely on your device and are sent only through
-     channels you choose (AirDrop, Messages, Mail, iCloud Drive, or any app
-     in the share sheet). They never touch SDK AI Hub servers — we have
-     none — and we have no way of knowing that a share happened, who
-     received it, or what it contained.</p>
-  <p>A share file may contain personal data about the people on your chart
-     (such as names, job titles, and work email addresses — and, only if
-     you explicitly switch it on, your private notes and activity data).
-     By default the app excludes notes, lead status, email activity, and
-     phone numbers from share files. You are responsible for having the
-     right to share the information in a chart, and for choosing recipients
-     you trust: anyone who has the file can read it and pass it on.</p>
-  <p>Charts shared with you are stored locally on your device, like
-     everything else. Sharing changes nothing about our headline promise:
-     your data never leaves your device unless <em>you</em> send it to
-     someone. The App Store privacy label remains "Data Not Collected."</p>
+    <h2>Google user data</h2>
+    <p>If you choose Continue with Google, Orgora Charts uses Google Sign-In
+       so the app can open and save charts in your Google Drive from this
+       device. Tokens stay in the device keychain. We never receive your
+       Google password, Drive files, or tokens. Drive is used only as storage
+       you control. Mail you optionally connect is processed on the device to
+       help you discover contacts, and is not used for advertising.</p>
+    <p>Mailbox and Drive data is never used to develop, improve, or train any
+       artificial-intelligence or machine-learning model, and is never sent to
+       any third-party AI service.</p>
 
-  <h2>Optional email sync</h2>
-  <p>If you choose to connect an email account (via IMAP or by signing in with
-     your provider using OAuth), the connection is made directly from your
-     device to your own email provider. Your email credentials and sign-in
-     tokens are stored only in your device's secure keychain and are never
-     sent to us. Email data fetched by the app is processed and stored on your
-     device only. This feature is off by default and entirely optional.</p>
+    <h2>Microsoft user data</h2>
+    <p>If you choose Continue with Microsoft, the app uses Microsoft sign-in
+       so charts can be saved in your OneDrive. Tokens stay on the device. We
+       never receive your Microsoft password, OneDrive files, or tokens.</p>
 
-  <h2>Google user data</h2>
-  <p>Orgora Charts does not use Google Sign-In. If you connect Gmail, you
-     use an app password over IMAP. The app talks only to Google's IMAP
-     servers from your device; we never receive your Gmail credentials or
-     mail. Mail is processed on your device to help you discover contacts
-     for your org charts, and is not used for advertising.</p>
-  <p>Mailbox data is never used to develop, improve, or train any
-     artificial-intelligence or machine-learning model, and is never sent to
-     any third-party AI service. The app contains no AI or ML functionality.</p>
+    <h2>Purchases</h2>
+    <p>Orgora Pro on iPhone, iPad, and Mac is an auto-renewable subscription
+       sold through Apple. Apple processes payment. We do not receive your
+       card number. The web app does not take public payment until we say so
+       on this site.</p>
 
-  <h2>Data retention and deletion</h2>
-  <p>Everything Orgora Charts stores lives on your device, so retention is in
-     your hands.</p>
-  <ul>
-    <li><strong>Mailbox data.</strong> Messages read from a connected inbox
-        are processed in memory to identify contacts and are not retained as
-        messages. What persists is only what you choose to import: a person's
-        name, email address, and the date and count of messages exchanged,
-        saved in the app's local files on your device.</li>
-    <li><strong>Deleting data.</strong> Deleting a person or a chart removes
-        that data from your device immediately. Disconnecting your email
-        account revokes Orgora Charts' access to your mailbox and deletes the
-        stored sign-in token from the device keychain. Deleting the app removes
-        all charts, people, notes, and credentials it created.</li>
-    <li><strong>No server-side retention.</strong> We operate no servers and
-        receive no copy of your data, so there is nothing for us to retain and
-        no deletion request to make of us. Any copy in your own device backups
-        is governed by your device backup settings.</li>
-  </ul>
+    <h2>Sharing charts</h2>
+    <p>You can share a chart as a read-only <code>.orgora</code> file. Share
+       files are created on your device and sent only through channels you
+       choose (AirDrop, Messages, Mail, or any app in the share sheet). They
+       never touch SDK AI Hub servers — we have none — and we have no way of
+       knowing that a share happened.</p>
+    <p>A share file may contain personal data about the people on your chart
+       (such as names, job titles, and work email addresses — and, only if
+       you explicitly switch it on, your private notes and activity data).
+       By default the app excludes notes, lead status, email activity, and
+       phone numbers from share files. You are responsible for having the
+       right to share the information in a chart. The App Store privacy label
+       remains "Data Not Collected."</p>
 
-  <h2>Orgora Clipper (Safari and Chrome)</h2>
-  <p>Orgora Clipper is a browser extension that copies the LinkedIn profile
-     you choose to clip into Orgora Charts. It runs only on an explicit
-     click, on the single profile page you already opened. It does not crawl,
-     does not run in the background, and does not send profile data to SDK AI
-     Hub — we have no servers. Clipped fields (such as name, headline, company,
-     location, and an optional photo) are stored on your device, either in the
-     app's local clip inbox or as a clip file you import. You can delete a
-     clip or the person at any time.</p>
+    <h2>Optional email sync</h2>
+    <p>If you connect an email account (IMAP or by signing in with your
+       provider), the connection is made from your device to your own email
+       provider. Credentials and tokens stay in the device keychain. Email
+       data fetched by the app is processed and stored on your device only.
+       This feature is off by default.</p>
 
-  <h2>Network access</h2>
-  <p>The app makes no network connections except the optional, user-initiated
-     email sync described above. The Clipper extension talks only to the
-     LinkedIn page already open in your browser, and only when you click Clip.</p>
+    <h2>Data retention and deletion</h2>
+    <p>Everything Orgora Charts stores lives on your device or in cloud
+       storage you control, so retention is in your hands.</p>
+    <ul>
+      <li><strong>Mailbox data.</strong> Messages read from a connected inbox
+          are processed in memory to identify contacts and are not retained as
+          messages. What persists is only what you choose to import: a person's
+          name, email address, and the date and count of messages exchanged,
+          saved in the app's local files on your device.</li>
+      <li><strong>Deleting data.</strong> Deleting a person or a chart removes
+          that data from your device immediately. Sign out clears the local
+          session and tokens. Deleting the app removes local charts, people,
+          notes, and credentials. Files already in your Drive or OneDrive stay
+          there until you delete them in that service.</li>
+      <li><strong>No server-side retention.</strong> We operate no servers that
+          hold your charts, so there is nothing for us to retain and no
+          deletion request to make of us.</li>
+    </ul>
 
-  <h2>Children's privacy</h2>
-  <p>Because we collect no data from anyone, we also collect no data from
-     children.</p>
+    <h2>Orgora Clipper (Safari and Chrome)</h2>
+    <p>Orgora Clipper is a browser extension that copies the LinkedIn profile
+       you choose to clip into Orgora Charts. It runs only on an explicit
+       click, on the single profile page you already opened. It does not crawl,
+       does not run in the background, and does not send profile data to SDK AI
+       Hub. Clipped fields (such as name, headline, company, location, and an
+       optional photo) are stored on your device.</p>
 
-  <h2>Changes to this policy</h2>
-  <p>If this policy ever changes, the updated version will be posted at this
-     URL with a new effective date. Since the app collects nothing, changes are
-     expected to be rare and editorial.</p>
+    <h2>Network access</h2>
+    <p>The app makes network connections only when you ask it to: Google Drive,
+       Microsoft OneDrive, optional email, and — for Clipper — the LinkedIn
+       page already open in your browser. There is no analytics beacon.</p>
 
-  <h2>Contact</h2>
-  <p>Questions? Open an issue or reach us via the
-     <a href="/orgora-charts/">support page</a>.</p>
+    <h2>Children's privacy</h2>
+    <p>Because we collect no data from anyone, we also collect no data from
+       children.</p>
 
-  <footer class="muted" style="margin-top: 48px; font-size: 0.8rem;">
-    SDK AI Hub is a brand of SDK Equipment LLC.
-  </footer>
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the updated version will be posted at this
+       URL with a new effective date.</p>
+
+    <h2>Contact</h2>
+    <p>Questions? Open an issue or reach us via the
+       <a href="/orgora-charts/">support page</a>.</p>
+  </main>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
 </html>

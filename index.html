@@ -3,18 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="SDK AI Hub is the studio page for SDK Equipment LLC. Orgora Charts is the first app: a private org chart for iPhone and iPad.">
+<meta name="description" content="SDK AI Hub builds privacy-first apps. Orgora Charts is a private org chart for iPhone, iPad, Mac, and the web. Charts stay in your Google Drive or OneDrive — we do not host your files.">
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>SDK AI Hub — software by SDK Equipment LLC</title>
 <style>
   :root {
     --ink: #1c1c1e;
     --muted: #5c6560;
-    --line: #e4eee6;
-    --paper: #f6f8f5;
+    --line: #dce8de;
+    --paper: #f4f7f3;
     --card: #ffffff;
     --green: #178a52;
     --mint: #e7f8ee;
+    --shadow: 0 12px 40px rgba(28, 44, 32, 0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8eee9;
+      --muted: #9aa89e;
+      --line: #2a3830;
+      --paper: #121614;
+      --card: #1a1f1c;
+      --mint: #1a3a2a;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
   }
   * { box-sizing: border-box; }
   body {
@@ -26,77 +38,102 @@
   }
   a { color: var(--green); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  header, main, footer { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
-  header { padding: 28px 0 8px; display: flex; justify-content: space-between; align-items: baseline; }
+  header, main, footer { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+  header {
+    padding: 22px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
   .brand { font-weight: 700; letter-spacing: -0.03em; font-size: 1.05rem; }
   .brand span { color: var(--muted); font-weight: 500; }
-  .hero { padding: 28px 0 12px; }
-  h1 { font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.04em; margin: 0 0 12px; max-width: 14ch; }
-  .lede { max-width: 42rem; color: var(--muted); font-size: 1.08rem; margin: 0; }
-  .apps { display: grid; grid-template-columns: 1fr; gap: 18px; padding: 28px 0 48px; }
-  @media (min-width: 860px) {
-    .apps { grid-template-columns: 1.4fr 0.8fr; align-items: start; }
+  nav { display: flex; gap: 18px; font-size: 0.92rem; font-weight: 600; }
+  nav a { color: var(--ink); }
+  .hero { padding: 36px 0 8px; }
+  .kicker {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--mint);
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
   }
+  h1 { font-size: clamp(2.1rem, 4.4vw, 3.25rem); line-height: 1.06; letter-spacing: -0.045em; margin: 0 0 14px; max-width: 16ch; }
+  .lede { max-width: 40rem; color: var(--muted); font-size: 1.12rem; margin: 0; }
+  .points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 28px 0 8px;
+  }
+  @media (min-width: 760px) {
+    .points { grid-template-columns: repeat(3, 1fr); }
+  }
+  .point {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 18px;
+  }
+  .point strong { display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
+  .point p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+  .apps { padding: 20px 0 48px; }
   .card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-radius: 20px;
+    border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(40, 60, 40, 0.05);
+    box-shadow: var(--shadow);
   }
-  .card-body { padding: 22px 22px 20px; }
+  .card-body { padding: 24px 24px 12px; }
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
   .app-title { display: flex; align-items: center; gap: 12px; margin: 10px 0 8px; }
   .app-title h2 { margin: 0; }
   .orgora-mark {
-    width: 40px; height: 40px; border-radius: 9px; display: block;
-    flex: 0 0 auto; background: #f3f7f2;
+    width: 44px; height: 44px; border-radius: 10px; display: block;
+    flex: 0 0 auto; background: var(--mint);
   }
-  .shots { display: flex; gap: 12px; padding: 0 22px 22px; overflow: auto; }
-  .shots img { width: min(320px, 78vw); border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
+  .shots { display: flex; gap: 12px; padding: 8px 24px 24px; overflow: auto; }
+  .shots img { width: min(340px, 78vw); border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .btn {
     display: inline-block;
     background: var(--ink);
-    color: #fff;
+    color: var(--paper);
     border-radius: 999px;
-    padding: 10px 16px;
+    padding: 11px 18px;
     font-weight: 650;
   }
   .btn:hover { text-decoration: none; filter: brightness(1.08); }
-  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-  .btn.primary { background: var(--green); }
+  .btn.primary { background: var(--green); color: #fff; }
   .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 14px; }
   .store-badges a { display: inline-flex; line-height: 0; }
   .store-badges img.app-store-badge { height: 40px; width: auto; display: block; }
   .coming-badge {
     display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
-    border-radius: 8px; border: 1px solid var(--line); background: #fff;
+    border-radius: 8px; border: 1px solid var(--line); background: var(--card);
     color: var(--muted); font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em;
   }
-  .links { margin: 14px 0 0; color: var(--muted); font-size: 0.92rem; }
-  .slot {
-    border: 1px dashed #c9d5ca;
-    border-radius: 20px;
-    min-height: 220px;
-    padding: 22px;
-    color: var(--muted);
-    background: rgba(255,255,255,0.45);
-  }
-  .slot strong { display: block; color: var(--ink); margin-bottom: 6px; }
+  .links { margin: 14px 0 8px; color: var(--muted); font-size: 0.92rem; }
   footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
   <script>
-    /* __ORGORA_OAUTH_ROOT_CATCHER__: forward mistaken root OAuth returns;
-       skip marketing homepage when an Orgora web session already exists. */
+    /* Forward mistaken root OAuth returns to the app. Skip the studio
+       homepage when an Orgora web session already exists. Always land on
+       /orgora/ (no tip SHA — version.json / stamped assets handle cache). */
     (function () {
       var path = window.location.pathname || "/";
       if (path !== "/" && path !== "") return;
-      var home = "/orgora/?v=c32a045";
+      var home = "/orgora/";
       var hash = window.location.hash || "";
       if (
         hash.indexOf("access_token") !== -1 ||
@@ -106,12 +143,6 @@
         location.replace(home + hash);
         return;
       }
-      /* Session key contract (must match Dart):
-         Google:  orgora.web.drive.session     — google_web_sign_in_button_web.dart
-         Microsoft: orgora.web.onedrive.session — microsoft_web_sign_in_button_web.dart
-         JSON shape {email, token, scope}; require email+token presence only.
-         Public product path: /orgora/ (trailing slash). Azure SPA redirect must include
-         https://sdkaihub.com/orgora/ before Microsoft sign-in works in prod. */
       function orgoraHasCloudSession(key) {
         try {
           var raw = sessionStorage.getItem(key);
@@ -127,35 +158,55 @@
         orgoraHasCloudSession("orgora.web.onedrive.session")
       ) {
         location.replace(home);
-        return;
       }
     })();
   </script>
   <header>
     <div class="brand">SDK AI Hub <span>· SDK Equipment LLC</span></div>
-    <a href="/orgora-charts/privacy.html">Privacy</a>
+    <nav aria-label="Site">
+      <a href="/orgora/">Open</a>
+      <a href="/orgora-charts/">Support</a>
+      <a href="/orgora-charts/privacy.html">Privacy</a>
+    </nav>
   </header>
   <main>
     <section class="hero">
+      <div class="kicker">Studio page</div>
       <h1>Software that stays on the device.</h1>
-      <p class="lede">SDK AI Hub is the studio behind the apps. Orgora Charts is the first. More will sit in this grid as they ship. Charts live in your own Google Drive or OneDrive — Orgora does not host your files.</p>
+      <p class="lede">SDK AI Hub builds privacy-first apps. Orgora Charts is the first: a private org chart for iPhone, iPad, Mac, and the web. Charts live in your own Google Drive or OneDrive. We do not host your files and we do not track you.</p>
+    </section>
+    <section class="points" aria-label="What Orgora does">
+      <div class="point">
+        <strong>On your device</strong>
+        <p>Build people, reporting lines, products, and use cases offline. No Orgora account to create.</p>
+      </div>
+      <div class="point">
+        <strong>Your Drive or OneDrive</strong>
+        <p>Continue with Google or Microsoft so charts save in cloud storage you already own.</p>
+      </div>
+      <div class="point">
+        <strong>Clip from LinkedIn</strong>
+        <p>Safari Clipper ships in the app. Chrome Clipper is on the way. Nothing is sent to us.</p>
+      </div>
     </section>
     <section class="apps" aria-label="Apps">
       <article class="card">
         <div class="card-body">
           <div class="eyebrow"><span class="live">Live</span> First app</div>
           <div class="app-title">
-            <img class="orgora-mark" src="/assets/orgora_mark.png" width="40" height="40" alt="Orgora mark">
+            <img class="orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
             <h2>Orgora Charts</h2>
           </div>
-          <p>A private org chart for iPhone and iPad. Map people, products, and use cases. Continue with Google or Microsoft — that SSO is your Orgora account. Charts stay in your Google Drive or OneDrive. No tracking.</p>
+          <p>Map an organization without handing the map to a third party. Continue with Google or Microsoft — that connects your Drive or OneDrive, which is where charts are stored. Pro on Apple platforms is an in-app subscription.</p>
           <div class="actions">
-            <a class="btn primary" href="https://sdkaihub.com/orgora/?v=c32a045">Open Orgora Charts</a>
+            <a class="btn primary" href="/orgora/">Open in the browser</a>
+            <a class="btn" href="https://apps.apple.com/us/app/orgora-charts/id6792418699">App Store</a>
           </div>
           <div class="store-badges" aria-label="Get Orgora Charts">
             <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699" aria-label="Download on the App Store">
               <img class="app-store-badge" src="/assets/download-on-the-app-store.svg" width="120" height="40" alt="Download on the App Store">
             </a>
+            <span class="coming-badge">Mac App Store soon</span>
             <span class="coming-badge" title="Chrome Web Store listing is not live yet">Chrome Clipper coming</span>
           </div>
           <p class="links">
@@ -165,16 +216,12 @@
           </p>
         </div>
         <div class="shots">
-          <img src="/assets/orgora-tree.png" alt="Orgora Charts showing a four-layer org tree for Northwind Robotics">
+          <img src="/assets/orgora-tree.png" alt="Orgora Charts showing a four-layer org tree">
           <img src="/assets/orgora-zoom.png" alt="A closer Orgora Charts view of an engineering branch">
         </div>
       </article>
-      <aside class="slot">
-        <strong>Next apps</strong>
-        This column is the grid. When the next app ships, it gets a card here with its own screenshot and store link. Nothing else is listed yet.
-      </aside>
     </section>
   </main>
-  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC. More apps will land on this page as they ship.</footer>
 </body>
 </html>
