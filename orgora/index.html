@@ -38,7 +38,7 @@
 </head>
 <body>
   <!--
-    You can customize the "flutter_bootstrap.js?v=ce5b2f5" script.
+    You can customize the "flutter_bootstrap.js?v=1f0064f" script.
     This is useful to provide a custom configuration to the Flutter loader
     or to give the user feedback during the initialization process.
 
@@ -97,8 +97,26 @@
           history.replaceState(null, "", window.location.pathname);
         }
       }
+      // Chrome Clipper: stash #orgora_clip= before Flutter's hash URL
+      // strategy or the SSO gate can drop it.
+      var clipHash = window.location.hash || "";
+      if (clipHash.indexOf("orgora_clip=") !== -1) {
+        try {
+          sessionStorage.setItem(
+            "orgora.web.clip.pending",
+            clipHash.charAt(0) === "#" ? clipHash.substring(1) : clipHash
+          );
+        } catch (e) {}
+        if (window.history && window.history.replaceState) {
+          history.replaceState(
+            null,
+            "",
+            window.location.pathname + (window.location.search || "")
+          );
+        }
+      }
     })();
   </script>
-  <script src="flutter_bootstrap.js?v=ce5b2f5" async></script>
+  <script src="flutter_bootstrap.js?v=1f0064f" async></script>
 </body>
 </html>
