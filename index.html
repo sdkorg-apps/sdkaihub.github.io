@@ -85,8 +85,17 @@
     padding: 2px 8px;
   }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
-  .app-title { display: flex; align-items: center; gap: 12px; margin: 10px 0 8px; }
+  .app-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 10px 0 8px;
+    flex-wrap: wrap;
+  }
+  .app-title-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
   .app-title h2 { margin: 0; }
+  .app-title .btn { margin: 0; padding: 8px 14px; font-size: 0.92rem; }
   .app-mark {
     width: 44px; height: 44px; border-radius: 10px; display: block;
     flex: 0 0 auto;
@@ -107,6 +116,7 @@
   .feature p { margin: 0; color: var(--muted); font-size: 0.9rem; }
   .shots { padding: 8px 24px 24px; display: grid; gap: 12px; }
   .shots img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
+  .feature-shot { padding: 16px; }
   .store-badges img.cws-badge { height: 40px; width: auto; display: block; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .btn {
@@ -164,7 +174,7 @@
     })();
   </script>
   <header>
-    <div class="brand">SDK AI Hub <span>· SDK Equipment LLC</span></div>
+    <div class="brand">SDK AI Hub</div>
     <nav aria-label="Site">
       <a href="/orgora/">Orgora</a>
       <a href="/orgora-charts/">Support</a>
@@ -181,10 +191,13 @@
         <div class="card-body">
           <div class="eyebrow"><span class="live">Live</span> Org charts</div>
           <div class="app-title">
-            <img class="app-mark orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
-            <h2>Orgora Charts</h2>
+            <div class="app-title-left">
+              <img class="app-mark orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
+              <h2>Orgora Charts</h2>
+            </div>
+            <a class="btn primary" href="/orgora/">Open in the browser</a>
           </div>
-          <p>See who reports to whom. Build people, reporting lines, products, and use cases on iPhone, iPad, Mac, and the web. Free to start; Pro unlocks more charts. On iPhone and Mac, Pro is an App Store subscription.</p>
+          <p>Map the buying committee — not just the org chart. Tag Economic Buyers and Champions, run MEDDIC on the tree, and keep the map in your Drive. iPhone, iPad, Mac, and the web. Free to start.</p>
           <div class="features">
             <div class="feature">
               <div class="feature-brands">
@@ -201,9 +214,6 @@
               <strong>Clip from LinkedIn</strong>
               <p>Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.</p>
             </div>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="/orgora/">Open in the browser</a>
           </div>
           <div class="store-badges" aria-label="Get Orgora Charts">
             <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699" aria-label="Download on the App Store">
@@ -223,8 +233,11 @@
           </p>
         </div>
         <div class="shots">
-          <img src="/assets/orgora-tree.png" alt="Acme Rockets sample org chart with Economic Buyer, Champion, Stakeholder, and other roles">
-          <img src="/assets/orgora-clipper.png" alt="Orgora Clipper on a profile: tap Orgora on the photo to import into Orgora Charts">
+          <img src="/assets/orgora-tree.png" alt="Sample org chart with Economic Buyer, Champion, Stakeholder, and other sales roles tagged on people">
+          <div class="feature feature-shot">
+            <strong>Import contacts from your inbox</strong>
+            <p>On iPhone and Mac, connect Microsoft or Gmail and Find people — scan your own mail for work domains and start a new org chart from a company. Credentials stay on the device. LinkedIn clips land the same way: a person on the chart, not a file we host.</p>
+          </div>
         </div>
       </article>
       <article class="card">
