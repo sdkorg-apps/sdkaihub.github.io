@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Orgora Charts — private org charts for iPhone, iPad, Mac, and the web. Clip from LinkedIn. Charts stay in your Google Drive or OneDrive.">
+<meta name="description" content="SDK AI Hub — privacy-first apps from SDK Equipment LLC. Orgora Charts is live. Penni, a shopping assistant, is in development.">
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>SDK AI Hub — software by SDK Equipment LLC</title>
 <style>
@@ -15,6 +15,7 @@
     --card: #ffffff;
     --green: #178a52;
     --mint: #e7f8ee;
+    --cream: #f6efe4;
     --shadow: 0 12px 40px rgba(28, 44, 32, 0.07);
   }
   @media (prefers-color-scheme: dark) {
@@ -25,6 +26,7 @@
       --paper: #121614;
       --card: #1a1f1c;
       --mint: #1a3a2a;
+      --cream: #2a241c;
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
     }
   }
@@ -50,46 +52,59 @@
   .brand span { color: var(--muted); font-weight: 500; }
   nav { display: flex; gap: 18px; font-size: 0.92rem; font-weight: 600; }
   nav a { color: var(--ink); }
-  .hero { padding: 36px 0 8px; }
-  h1 { font-size: clamp(2.1rem, 4.4vw, 3.25rem); line-height: 1.06; letter-spacing: -0.045em; margin: 0 0 14px; max-width: 18ch; }
-  .lede { max-width: 40rem; color: var(--muted); font-size: 1.12rem; margin: 0; }
-  .points {
+  .hero { padding: 40px 0 12px; }
+  h1 { font-size: clamp(2.1rem, 4.4vw, 3.25rem); line-height: 1.06; letter-spacing: -0.045em; margin: 0 0 14px; max-width: 16ch; }
+  .lede { max-width: 38rem; color: var(--muted); font-size: 1.12rem; margin: 0; }
+  .apps {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 28px 0 8px;
+    gap: 20px;
+    padding: 28px 0 48px;
+    align-items: stretch;
   }
-  @media (min-width: 760px) {
-    .points { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 860px) {
+    .apps { grid-template-columns: 1fr 1fr; }
   }
-  .point {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 16px 18px;
-  }
-  .point-brands { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-  .point-brands img { width: 32px; height: 32px; display: block; }
-  .point strong { display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
-  .point p { margin: 0; color: var(--muted); font-size: 0.94rem; }
-  .apps { padding: 20px 0 48px; }
   .card {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 22px;
     overflow: hidden;
     box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
   }
-  .card-body { padding: 24px 24px 12px; }
+  .card-body { padding: 24px 24px 8px; flex: 1 1 auto; }
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
+  .soon {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
   .app-title { display: flex; align-items: center; gap: 12px; margin: 10px 0 8px; }
   .app-title h2 { margin: 0; }
-  .orgora-mark {
+  .app-mark {
     width: 44px; height: 44px; border-radius: 10px; display: block;
-    flex: 0 0 auto; background: var(--mint);
+    flex: 0 0 auto;
   }
+  .orgora-mark { background: var(--mint); }
+  .penni-mark { background: var(--cream); }
+  .card-body > p { margin: 0 0 14px; }
+  .features { display: grid; gap: 10px; margin: 4px 0 6px; }
+  .feature {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  .feature-brands { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .feature-brands img { width: 28px; height: 28px; display: block; }
+  .feature strong { display: block; margin-bottom: 2px; letter-spacing: -0.02em; font-size: 0.95rem; }
+  .feature p { margin: 0; color: var(--muted); font-size: 0.9rem; }
   .shots { padding: 8px 24px 24px; display: grid; gap: 12px; }
   .shots img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
   .store-badges img.cws-badge { height: 40px; width: auto; display: block; }
@@ -108,6 +123,7 @@
   .store-badges a { display: inline-flex; line-height: 0; }
   .store-badges img.app-store-badge { height: 40px; width: auto; display: block; }
   .links { margin: 14px 0 8px; color: var(--muted); font-size: 0.92rem; }
+  .muted { color: var(--muted); }
   footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
@@ -150,46 +166,42 @@
   <header>
     <div class="brand">SDK AI Hub <span>· SDK Equipment LLC</span></div>
     <nav aria-label="Site">
-      <a href="/orgora/">Open</a>
+      <a href="/orgora/">Orgora</a>
       <a href="/orgora-charts/">Support</a>
       <a href="/orgora-charts/privacy.html">Privacy</a>
     </nav>
   </header>
   <main>
     <section class="hero">
-      <h1>Org charts that stay yours.</h1>
-      <p class="lede">Orgora Charts for iPhone, iPad, Mac, and the web.</p>
-    </section>
-    <section class="points" aria-label="What Orgora does">
-      <div class="point">
-        <strong>On your device</strong>
-        <p>Build people, reporting lines, products, and use cases offline. No Orgora account to create.</p>
-      </div>
-      <div class="point">
-        <div class="point-brands">
-          <img src="/assets/logo-google.svg" width="32" height="32" alt="Google">
-          <img src="/assets/logo-onedrive.svg" width="32" height="32" alt="Microsoft OneDrive">
-        </div>
-        <strong>Your Drive or OneDrive</strong>
-        <p>Continue with Google or Microsoft so charts save in cloud storage you already own.</p>
-      </div>
-      <div class="point">
-        <div class="point-brands">
-          <img src="/assets/logo-linkedin.svg" width="32" height="32" alt="LinkedIn">
-        </div>
-        <strong>Clip from LinkedIn</strong>
-        <p>Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.</p>
-      </div>
+      <h1>Your data stays yours.</h1>
+      <p class="lede">Privacy-first apps from SDK AI Hub. Two products — one live, one in development.</p>
     </section>
     <section class="apps" aria-label="Apps">
       <article class="card">
         <div class="card-body">
-          <div class="eyebrow"><span class="live">Live</span> First app</div>
+          <div class="eyebrow"><span class="live">Live</span> Org charts</div>
           <div class="app-title">
-            <img class="orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
+            <img class="app-mark orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
             <h2>Orgora Charts</h2>
           </div>
-          <p>See who reports to whom. Clip people from LinkedIn. Save the chart in your Google Drive or OneDrive — we never host your files. Free to start; Pro unlocks more charts. On iPhone and Mac, Pro is an App Store subscription.</p>
+          <p>See who reports to whom. Build people, reporting lines, products, and use cases on iPhone, iPad, Mac, and the web. Free to start; Pro unlocks more charts. On iPhone and Mac, Pro is an App Store subscription.</p>
+          <div class="features">
+            <div class="feature">
+              <div class="feature-brands">
+                <img src="/assets/logo-google.svg" width="28" height="28" alt="Google">
+                <img src="/assets/logo-onedrive.svg" width="28" height="28" alt="Microsoft OneDrive">
+              </div>
+              <strong>Your Drive or OneDrive</strong>
+              <p>Continue with Google or Microsoft so charts save in cloud storage you already own. We never host your files.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-brands">
+                <img src="/assets/logo-linkedin.svg" width="28" height="28" alt="LinkedIn">
+              </div>
+              <strong>Clip from LinkedIn</strong>
+              <p>Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.</p>
+            </div>
+          </div>
           <div class="actions">
             <a class="btn primary" href="/orgora/">Open in the browser</a>
           </div>
@@ -213,6 +225,29 @@
         <div class="shots">
           <img src="/assets/orgora-tree.png" alt="Acme Rockets sample org chart with Economic Buyer, Champion, Stakeholder, and other roles">
           <img src="/assets/orgora-clipper.png" alt="Orgora Clipper on a profile: tap Orgora on the photo to import into Orgora Charts">
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-body">
+          <div class="eyebrow"><span class="soon">In development</span> Shopping</div>
+          <div class="app-title">
+            <img class="app-mark penni-mark" src="/assets/penni_mark.png" width="44" height="44" alt="Penni mark, Pip the hedgehog">
+            <h2>Penni</h2>
+          </div>
+          <p>Find cheaper swaps for what you already buy. Penni inventories your own Amazon orders, looks for evidence-backed alternatives, and never checks out for you.</p>
+          <div class="features">
+            <div class="feature">
+              <strong>On your device</strong>
+              <p>Purchase history stays on the phone. There is no Penni account to create, and the app never stores an Amazon password.</p>
+            </div>
+            <div class="feature">
+              <strong>iPhone, with a web companion</strong>
+              <p>First release is iPhone and the web. Live price research runs on iPhone. Coming soon — not in stores yet.</p>
+            </div>
+          </div>
+        </div>
+        <div class="shots">
+          <img src="/assets/penni-hero.jpg" alt="Pip, the Penni mascot: a cream hedgehog with a penny locket, price-tag scarf, and notepad">
         </div>
       </article>
     </section>
