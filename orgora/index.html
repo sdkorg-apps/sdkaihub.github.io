@@ -19,10 +19,10 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Open your Orgora chart from your own Google Drive.">
-  <!-- Web application client on sdkaihub-orgora. Authorized origins and
-       redirect URIs include the private host used for preview, not only
-       127.0.0.1:7357. Public identifier, not a secret. -->
-  <meta name="google-signin-client_id" content="230813554864-vr623b4jhaqmkee59eugos8k5valb8t9.apps.googleusercontent.com">
+  <!-- Do not set google-signin-client_id. Chrome FedCM treats that meta as
+       a license to show One Tap ("Sign in to Orgora Charts with Google")
+       after implicit OAuth already signed the user in. Drive SSO uses
+       accounts.google.com/o/oauth2/v2/auth, not GIS One Tap. -->
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -38,7 +38,7 @@
 </head>
 <body>
   <!--
-    You can customize the "flutter_bootstrap.js?v=2d993a7" script.
+    You can customize the "flutter_bootstrap.js?v=b5273e3" script.
     This is useful to provide a custom configuration to the Flutter loader
     or to give the user feedback during the initialization process.
 
@@ -117,6 +117,6 @@
       }
     })();
   </script>
-  <script src="flutter_bootstrap.js?v=2d993a7" async></script>
+  <script src="flutter_bootstrap.js?v=b5273e3" async></script>
 </body>
 </html>
