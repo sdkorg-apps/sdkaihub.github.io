@@ -90,8 +90,9 @@
     width: 44px; height: 44px; border-radius: 10px; display: block;
     flex: 0 0 auto; background: var(--mint);
   }
-  .shots { padding: 8px 24px 24px; }
+  .shots { padding: 8px 24px 24px; display: grid; gap: 12px; }
   .shots img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
+  .store-badges img.cws-badge { height: 40px; width: auto; display: block; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .btn {
     display: inline-block;
@@ -106,12 +107,6 @@
   .store-badges { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 14px; }
   .store-badges a { display: inline-flex; line-height: 0; }
   .store-badges img.app-store-badge { height: 40px; width: auto; display: block; }
-  .cws-badge {
-    display: inline-flex; align-items: center; height: 40px; padding: 0 14px;
-    border-radius: 8px; border: 1px solid var(--ink); background: var(--ink);
-    color: var(--paper); font-size: 0.82rem; font-weight: 650; letter-spacing: -0.01em;
-  }
-  .cws-badge:hover { text-decoration: none; filter: brightness(1.08); }
   .links { margin: 14px 0 8px; color: var(--muted); font-size: 0.92rem; }
   footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
@@ -205,7 +200,9 @@
             <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699?mt=12" aria-label="Download on the Mac App Store">
               <img class="app-store-badge" src="/assets/download-on-the-mac-app-store.svg" width="156" height="40" alt="Download on the Mac App Store">
             </a>
-            <a class="cws-badge" href="https://chromewebstore.google.com/search/Orgora%20Clipper">Chrome Web Store</a>
+            <a href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba" aria-label="Available in the Chrome Web Store">
+              <img class="cws-badge" src="/assets/available-in-chrome-web-store.png" width="206" height="58" alt="Available in the Chrome Web Store">
+            </a>
           </div>
           <p class="links">
             <a href="/orgora-charts/clipper.html">Safari and Chrome setup</a> ·
@@ -215,6 +212,7 @@
         </div>
         <div class="shots">
           <img src="/assets/orgora-tree.png" alt="Acme Rockets sample org chart with Economic Buyer, Champion, Stakeholder, and other roles">
+          <img src="/assets/orgora-clipper.png" alt="Orgora Clipper on a profile: tap Orgora on the photo to import into Orgora Charts">
         </div>
       </article>
     </section>

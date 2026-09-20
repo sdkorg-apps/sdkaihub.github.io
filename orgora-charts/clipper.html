@@ -44,6 +44,8 @@
   .btn-chrome { background: var(--green); color: #fff; }
   code { font-size: 0.9em; background: var(--mint); padding: 1px 6px; border-radius: 4px; }
   .card { border: 1px solid var(--line); background: var(--card); border-radius: 16px; padding: 16px 20px; margin: 16px 0; }
+  .shot { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); margin: 12px 0 4px; }
+  .cws-badge { height: 40px; width: auto; display: block; }
   footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
@@ -83,9 +85,12 @@
 
     <h2>Chrome — Chrome Web Store</h2>
     <div class="card">
-      <p><a class="btn btn-chrome" href="https://chromewebstore.google.com/search/Orgora%20Clipper">Add Orgora Clipper from the Chrome Web Store</a></p>
+      <p><a href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba" aria-label="Available in the Chrome Web Store">
+        <img class="cws-badge" src="/assets/available-in-chrome-web-store.png" width="206" height="58" alt="Available in the Chrome Web Store">
+      </a></p>
+      <img class="shot" src="/assets/orgora-clipper.png" alt="Orgora Clipper on a profile: tap Orgora on the photo to import into Orgora Charts">
       <p class="muted">Chrome on iPhone and iPad cannot install extensions — use Safari there.
-         On a computer, install from the Chrome Web Store. On a LinkedIn profile,
+         On a computer, add Orgora Clipper from the Chrome Web Store. On a LinkedIn profile,
          tap <strong>Orgora</strong> on the photo (or Clip to Orgora in the corner).
          Orgora Charts opens with that person ready to import — no file download.
          Nothing is sent to us.
