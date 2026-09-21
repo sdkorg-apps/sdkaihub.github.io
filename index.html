@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="SDK AI Hub — privacy-first apps from SDK Equipment LLC. Orgora Charts is live. Penni, a shopping assistant, is in development.">
+<meta name="description" content="Orgora Charts — private org charts for sales. Tag Economic Buyers and Champions. Charts stay in your Google Drive or OneDrive.">
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>SDK AI Hub — software by SDK Equipment LLC</title>
 <style>
@@ -15,7 +15,6 @@
     --card: #ffffff;
     --green: #178a52;
     --mint: #e7f8ee;
-    --cream: #f6efe4;
     --shadow: 0 12px 40px rgba(28, 44, 32, 0.07);
   }
   @media (prefers-color-scheme: dark) {
@@ -26,7 +25,6 @@
       --paper: #121614;
       --card: #1a1f1c;
       --mint: #1a3a2a;
-      --cream: #2a241c;
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
     }
   }
@@ -60,10 +58,6 @@
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 28px 0 48px;
-    align-items: stretch;
-  }
-  @media (min-width: 860px) {
-    .apps { grid-template-columns: 1fr 1fr; }
   }
   .card {
     background: var(--card);
@@ -77,13 +71,6 @@
   .card-body { padding: 24px 24px 8px; flex: 1 1 auto; }
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
-  .soon {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 2px 8px;
-  }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
   .app-title {
     display: flex;
@@ -101,7 +88,6 @@
     flex: 0 0 auto;
   }
   .orgora-mark { background: var(--mint); }
-  .penni-mark { background: var(--cream); }
   .card-body > p { margin: 0 0 14px; }
   .features { display: grid; gap: 10px; margin: 4px 0 6px; }
   .feature {
@@ -184,7 +170,7 @@
   <main>
     <section class="hero">
       <h1>Your data stays yours.</h1>
-      <p class="lede">Privacy-first apps from SDK AI Hub. Two products — one live, one in development.</p>
+      <p class="lede">Orgora Charts maps the buying committee. Charts stay in your Drive — we never host your files.</p>
     </section>
     <section class="apps" aria-label="Apps">
       <article class="card">
@@ -240,31 +226,8 @@
           </div>
         </div>
       </article>
-      <article class="card">
-        <div class="card-body">
-          <div class="eyebrow"><span class="soon">In development</span> Shopping</div>
-          <div class="app-title">
-            <img class="app-mark penni-mark" src="/assets/penni_mark.png" width="44" height="44" alt="Penni mark, Pip the hedgehog">
-            <h2>Penni</h2>
-          </div>
-          <p>Find cheaper swaps for what you already buy. Penni inventories your own Amazon orders, looks for evidence-backed alternatives, and never checks out for you.</p>
-          <div class="features">
-            <div class="feature">
-              <strong>On your device</strong>
-              <p>Purchase history stays on the phone. There is no Penni account to create, and the app never stores an Amazon password.</p>
-            </div>
-            <div class="feature">
-              <strong>iPhone, with a web companion</strong>
-              <p>First release is iPhone and the web. Live price research runs on iPhone. Coming soon — not in stores yet.</p>
-            </div>
-          </div>
-        </div>
-        <div class="shots">
-          <img src="/assets/penni-hero.jpg" alt="Pip, the Penni mascot: a cream hedgehog with a penny locket, price-tag scarf, and notepad">
-        </div>
-      </article>
     </section>
   </main>
-  <footer>SDK AI Hub is a brand of SDK Equipment LLC. More apps will land on this page as they ship.</footer>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
 </html>

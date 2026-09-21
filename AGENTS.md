@@ -7,13 +7,13 @@ GitHub Pages. That fact drives every rule below.
 ## What this is
 
 **SDK AI Hub** (a brand of SDK Equipment LLC) builds privacy-first apps.
-The homepage is a two-product studio: **Orgora Charts** (live org charts)
-and **Penni** (shopping assistant, in development — do not claim it is in
-stores). This repo is the public website: the homepage, and per-app
-privacy policy and support pages (`orgora-charts/`). `CNAME` binds the
-custom domain and the `google*.html` file is Google site verification —
-never delete or rename either. Plain static HTML by design; no build
-step, no frameworks.
+The public homepage is **Orgora Charts only** (Founder 2026-09-20: hide
+other products for now). Do not list Penni or other in-development apps
+on sdkaihub.com until the Founder says so. This repo is the public
+website: the homepage, and per-app privacy policy and support pages
+(`orgora-charts/`). `CNAME` binds the custom domain and the
+`google*.html` file is Google site verification — never delete or rename
+either. Plain static HTML by design; no build step, no frameworks.
 
 The business is operated by a solo founder plus AI agents. The operating
 rules, decision history, and recovery runbooks live in the account's
