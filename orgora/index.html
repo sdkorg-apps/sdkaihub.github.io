@@ -38,7 +38,7 @@
 </head>
 <body>
   <!--
-    You can customize the "flutter_bootstrap.js?v=46208c8" script.
+    You can customize the "flutter_bootstrap.js?v=74464bc" script.
     This is useful to provide a custom configuration to the Flutter loader
     or to give the user feedback during the initialization process.
 
@@ -115,8 +115,31 @@
           );
         }
       }
+      // Salesforce custom button / embed: stash Account context before
+      // Flutter's URL strategy drops query/hash. OAuth grant already handled.
+      search = window.location.search || "";
+      hash = window.location.hash || "";
+      if (
+        !grantPayload &&
+        (search.indexOf("sf_account=") !== -1 ||
+          search.indexOf("sf_website=") !== -1 ||
+          hash.indexOf("orgora_sf=") !== -1)
+      ) {
+        try {
+          sessionStorage.setItem(
+            "orgora.web.sf.pending",
+            search.indexOf("sf_account=") !== -1 ||
+              search.indexOf("sf_website=") !== -1
+              ? search
+              : hash
+          );
+        } catch (e) {}
+        if (window.history && window.history.replaceState) {
+          history.replaceState(null, "", window.location.pathname);
+        }
+      }
     })();
   </script>
-  <script src="flutter_bootstrap.js?v=46208c8" async></script>
+  <script src="flutter_bootstrap.js?v=74464bc" async></script>
 </body>
 </html>
