@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>Support — Orgora Charts</title>
+<link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
 <style>
   :root {
     --ink: #1c1c1e; --muted: #5c6560; --line: #dce8de; --paper: #f4f7f3;
@@ -26,8 +27,9 @@
   a:hover { text-decoration: underline; }
   header, main, footer { width: min(720px, calc(100% - 40px)); margin: 0 auto; }
   header { padding: 22px 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .brand { font-weight: 700; letter-spacing: -0.03em; }
-  .brand span { color: var(--muted); font-weight: 500; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { width: 36px; height: 36px; border-radius: 8px; display: block; }
   nav { display: flex; gap: 16px; font-size: 0.92rem; font-weight: 600; }
   nav a { color: var(--ink); }
   main { padding: 24px 0 48px; }
@@ -40,7 +42,10 @@
 </head>
 <body>
   <header>
-    <a class="brand" href="/">SDK AI Hub</a>
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/sdkaihub_mark.png" width="36" height="36" alt="">
+      SDK AI Hub
+    </a>
     <nav aria-label="Site">
       <a href="/orgora/">Open</a>
       <a href="/orgora-charts/privacy.html">Privacy</a>
