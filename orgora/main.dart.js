@@ -112890,7 +112890,7 @@ o=p.ry
 if(o==null){o=p.t
 p=o==null?p.k3:o}else p=o
 p=q.b0(p)
-q=p}q=A.b([new A.dO(new A.fZ(B.kn,l,g,m),h),B.av,new A.fZ(B.WF,"Contents",e,m),B.av,new A.dO(B.aYb,d),B.av,new A.dO(B.aYj,c),B.av,new A.dO(B.aYk,b),B.av,new A.dO(B.aYd,a),B.av,new A.dO(B.aYe,a0),B.av,new A.dO(B.aYg,a1),B.av,new A.dO(B.aYh,a2),B.av,new A.dO(B.aYc,a3),B.av,new A.dO(B.aYi,a4),B.av,new A.dO(new A.fZ(B.pm,k,a6,m),a5),B.av,new A.dO(B.aYf,a7),B.av,new A.dO(new A.fZ(B.Wv,"Report a bug or request a feature",s,m),i),B.j9,new A.dO(A.j5(B.bq,new A.aK(B.eJ,A.V("Orgora Charts  1.0.3+47",m,m,m,m,m,q,B.bi,m),m),B.aJ,!1,B.aWM,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,n.gasE(),m,m,m,m,m,m,!1,B.cC),n.e)],f)
+q=p}q=A.b([new A.dO(new A.fZ(B.kn,l,g,m),h),B.av,new A.fZ(B.WF,"Contents",e,m),B.av,new A.dO(B.aYb,d),B.av,new A.dO(B.aYj,c),B.av,new A.dO(B.aYk,b),B.av,new A.dO(B.aYd,a),B.av,new A.dO(B.aYe,a0),B.av,new A.dO(B.aYg,a1),B.av,new A.dO(B.aYh,a2),B.av,new A.dO(B.aYc,a3),B.av,new A.dO(B.aYi,a4),B.av,new A.dO(new A.fZ(B.pm,k,a6,m),a5),B.av,new A.dO(B.aYf,a7),B.av,new A.dO(new A.fZ(B.Wv,"Report a bug or request a feature",s,m),i),B.j9,new A.dO(A.j5(B.bq,new A.aK(B.eJ,A.V("Orgora Charts  1.0.4+48",m,m,m,m,m,q,B.bi,m),m),B.aJ,!1,B.aWM,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,n.gasE(),m,m,m,m,m,m,!1,B.cC),n.e)],f)
 if(n.w)B.l.J(q,A.b([B.av,n.axi(a8)],f))
 q.push(B.j9)
 return A.on(j,m,A.A6(A.bT(q,B.cm,B.N,B.U),m,B.aJ,B.eK,m,B.aP),m)},
@@ -115946,7 +115946,7 @@ l=n.y
 l===$&&A.a()
 l=l==="feature"?"feature":"bug"
 s=7
-return A.h(f.BW(0,new A.aza(l,B.m.M(j.a.a),B.m.M(h.a.a),n.gav9(),"1.0.3+47","web","web","app")),$async$Eo)
+return A.h(f.BW(0,new A.aza(l,B.m.M(j.a.a),B.m.M(h.a.a),n.gav9(),"1.0.4+48","web","web","app")),$async$Eo)
 case 7:if(n.c==null){s=1
 break}n.O(new A.aME(n))
 p=2
