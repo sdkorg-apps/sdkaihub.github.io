@@ -96,9 +96,22 @@
 
     <h2>Purchases</h2>
     <p>Orgora Pro on iPhone, iPad, and Mac is an auto-renewable subscription
-       sold through Apple. Apple processes payment. We do not receive your
-       card number. The web app does not take public payment until we say so
-       on this site.</p>
+       sold through Apple. Apple processes that payment. We do not receive
+       your card number. Cancel in Settings, Apple Account, Subscriptions.
+       Orgora Pro in the app opens that same Apple list. Pro stays through
+       the time Apple already charged. The next time you open Orgora on that
+       iPhone or Mac after the period ends, Pro turns off for the Google or
+       Microsoft account you signed in with.</p>
+    <p>On the web, Orgora Pro is an auto-renewable subscription processed by
+       Stripe. We do not receive your card number. Cancel from your photo,
+       then Orgora Pro, which opens Stripe. Pro stays through the time you
+       already paid. The next time you open Orgora after that period ends,
+       Pro turns off.</p>
+    <p>To decide whether a web subscription should stay Pro, the app sends
+       the Stripe subscription id to <code>orgora-verify.sdkaihub.com</code>.
+       That check does not include your chart, your name, or your card. The
+       iPhone and Mac apps ask Apple on the device whether an Apple
+       subscription is still active. They do not send the receipt to us.</p>
 
     <h2>Sharing charts</h2>
     <p>You can share a chart as a read-only <code>.orgora</code> file. Share
@@ -164,8 +177,10 @@
     <p>The app makes network connections only when you ask it to: Google Drive,
        Microsoft OneDrive, optional email, Clipper on the LinkedIn page already
        open in your browser, and Help reports to
-       <code>tickets.sdkaihub.com</code>. The website also sends the visit
-       record above to <code>visits.sdkaihub.com</code>.</p>
+       <code>tickets.sdkaihub.com</code>. While you are signed in, Orgora also
+       asks <code>orgora-verify.sdkaihub.com</code> whether a web subscription
+       is still active. That request is the subscription id only. The website
+       also sends the visit record above to <code>visits.sdkaihub.com</code>.</p>
 
     <h2>Children's privacy</h2>
     <p>Orgora Charts is not directed at children. Optional Help reports are
