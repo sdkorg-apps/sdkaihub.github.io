@@ -6,7 +6,7 @@ GitHub Pages. That fact drives every rule below.
 
 ## What this is
 
-**SDK AI Hub** (a brand of SDK Equipment LLC) builds privacy-first apps.
+**SDK AI Hub** (a brand of SDK Equipment LLC) builds apps. **Orgora Charts** is the privacy-first product: it does not host customer charts and it does not run analytics. That promise is Orgora only. Other apps may store user data. Do not describe the company, or a non-Orgora app, as collecting zero data.
 The public homepage is **Orgora Charts only** (Founder 2026-09-20: hide
 other products for now). Do not list Penni or other in-development apps
 on sdkaihub.com until the Founder says so. This repo is the public
