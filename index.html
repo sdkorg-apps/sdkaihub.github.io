@@ -105,6 +105,64 @@
   .feature p { margin: 0; color: var(--muted); font-size: 0.9rem; }
   .shots { padding: 8px 24px 24px; display: grid; gap: 12px; }
   .shots img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
+  .reel { display: grid; gap: 10px; }
+  .reel-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    min-height: 180px;
+    padding: 12px;
+  }
+  .shots .reel-frame img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 640px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s ease;
+  }
+  .shots .reel-frame img.is-on {
+    position: relative;
+    opacity: 1;
+  }
+  .reel-bar { display: flex; align-items: center; gap: 10px; }
+  .reel-caption { flex: 1; margin: 0; color: var(--muted); font-size: 0.95rem; min-height: 1.4em; }
+  .reel-nav, .reel-dots button {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+  }
+  .reel-nav { width: 36px; height: 36px; flex: 0 0 auto; line-height: 1; }
+  .reel-nav:hover, .reel-dots button:hover { border-color: var(--green); }
+  .reel-dots { display: flex; gap: 8px; justify-content: center; }
+  .reel-dots button { width: 10px; height: 10px; padding: 0; }
+  .reel-dots button[aria-current="true"] { background: var(--green); border-color: var(--green); }
+  .tour { margin: 4px 0 0; }
+  .tour video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: #111;
+  }
+  .tour figcaption { margin-top: 8px; color: var(--muted); font-size: 0.92rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .shots .reel-frame img { transition: none; }
+  }
   .feature-shot { padding: 16px; }
   .store-badges img.cws-badge { height: 40px; width: auto; display: block; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
@@ -225,7 +283,26 @@
           </p>
         </div>
         <div class="shots">
-          <img src="/assets/orgora-tree.png" alt="Sample org chart with Economic Buyer, Champion, Stakeholder, and other sales roles tagged on people">
+          <div class="reel" data-reel>
+            <div class="reel-frame">
+              <img class="is-on" src="/assets/orgora-shot-chart.jpg" alt="Sample org chart. Priya Raman at the top, with titles and role chips on each person." data-label="Chart" data-caption="The chart. Each person shows a title and a role.">
+              <img src="/assets/orgora-shot-person.jpg" alt="Edit person sheet for Priya Raman, with role chips such as Economic Buyer and Gatekeeper." data-label="Person" data-caption="Open a person to set the role, department, and use cases." aria-hidden="true">
+              <img src="/assets/orgora-shot-usecases.jpg" alt="Use case named HR Modernization, with the pain, the business outcome, and the people on it." data-label="Use cases" data-caption="A use case names the pain, the outcome, and the people on it." aria-hidden="true">
+              <img src="/assets/orgora-shot-home.jpg" alt="Orgora Charts home, with Import from LinkedIn and the sample chart." data-label="Home" data-caption="Start from Home. Import from LinkedIn, then open a chart." aria-hidden="true">
+            </div>
+            <div class="reel-bar">
+              <button type="button" class="reel-nav" data-reel-prev aria-label="Previous screen">‹</button>
+              <p class="reel-caption"></p>
+              <button type="button" class="reel-nav" data-reel-next aria-label="Next screen">›</button>
+            </div>
+            <div class="reel-dots" role="tablist" aria-label="Product screens"></div>
+          </div>
+          <figure class="tour" id="tour">
+            <video controls playsinline preload="none" poster="/assets/orgora-tour.jpg">
+              <source src="/assets/orgora-tour.mp4" type="video/mp4">
+            </video>
+            <figcaption>Watch a short tour of Orgora Charts. Created with Grok.</figcaption>
+          </figure>
           <div class="feature feature-shot">
             <strong>Import contacts from your inbox</strong>
             <p>On iPhone and Mac, connect Microsoft or Gmail and Find people — scan your own mail for work domains and start a new org chart from a company. Credentials stay on the device. LinkedIn clips land the same way: a person on the chart, not a file we host.</p>
@@ -235,5 +312,53 @@
     </section>
   </main>
   <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
+  <script>
+    (function () {
+      var root = document.querySelector("[data-reel]");
+      if (!root) return;
+      var slides = Array.prototype.slice.call(root.querySelectorAll(".reel-frame img"));
+      var caption = root.querySelector(".reel-caption");
+      var dots = root.querySelector(".reel-dots");
+      var i = 0;
+      var timer = 0;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function (img, idx) {
+          var on = idx === i;
+          img.classList.toggle("is-on", on);
+          img.setAttribute("aria-hidden", on ? "false" : "true");
+        });
+        caption.textContent = slides[i].getAttribute("data-caption") || "";
+        Array.prototype.forEach.call(dots.children, function (button, idx) {
+          button.setAttribute("aria-current", idx === i ? "true" : "false");
+        });
+      }
+      function arm() {
+        clearInterval(timer);
+        if (reduce || document.hidden) return;
+        timer = setInterval(function () { show(i + 1); }, 5000);
+      }
+      slides.forEach(function (img, idx) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-label", img.getAttribute("data-label") || ("Screen " + (idx + 1)));
+        button.addEventListener("click", function () { show(idx); arm(); });
+        dots.appendChild(button);
+      });
+      root.querySelector("[data-reel-prev]").addEventListener("click", function () { show(i - 1); arm(); });
+      root.querySelector("[data-reel-next]").addEventListener("click", function () { show(i + 1); arm(); });
+      root.addEventListener("mouseenter", function () { clearInterval(timer); });
+      root.addEventListener("mouseleave", arm);
+      root.addEventListener("focusin", function () { clearInterval(timer); });
+      root.addEventListener("focusout", function (event) {
+        if (!root.contains(event.relatedTarget)) arm();
+      });
+      document.addEventListener("visibilitychange", arm);
+      show(0);
+      arm();
+    })();
+  </script>
 </body>
 </html>
