@@ -107,11 +107,14 @@
        then Orgora Pro, which opens Stripe. Pro stays through the time you
        already paid. The next time you open Orgora after that period ends,
        Pro turns off.</p>
-    <p>To decide whether a web subscription should stay Pro, the app sends
-       the Stripe subscription id to <code>orgora-verify.sdkaihub.com</code>.
-       That check does not include your chart, your name, or your card. The
-       iPhone and Mac apps ask Apple on the device whether an Apple
-       subscription is still active. They do not send the receipt to us.</p>
+    <p>When web checkout finishes, the app sends the Stripe checkout id and
+       which Google or Microsoft account paid to
+       <code>orgora-verify.sdkaihub.com</code>. Later, to decide whether that
+       subscription should stay Pro, it sends the Stripe subscription id and
+       the same account. Those checks do not include your chart, your name,
+       or your card. The iPhone and Mac apps ask Apple on the device whether
+       an Apple subscription is still active. They do not send the receipt
+       to us.</p>
 
     <h2>Sharing charts</h2>
     <p>You can share a chart as a read-only <code>.orgora</code> file. Share
@@ -179,7 +182,8 @@
        open in your browser, and Help reports to
        <code>tickets.sdkaihub.com</code>. While you are signed in, Orgora also
        asks <code>orgora-verify.sdkaihub.com</code> whether a web subscription
-       is still active. That request is the subscription id only. The website
+       is still active. That request is the subscription id and which Google
+       or Microsoft account is signed in. The website
        also sends the visit record above to <code>visits.sdkaihub.com</code>.</p>
 
     <h2>Children's privacy</h2>
