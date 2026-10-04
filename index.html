@@ -134,33 +134,29 @@
   .shots { padding: 8px 24px 24px; display: grid; gap: 12px; }
   .shots img { display: block; width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); background: #f3f7f2; }
   .reel { display: grid; gap: 10px; }
+  /* All three frames are 16:9. Portrait slides keep the full photo sharp
+     in the center and continue that photo, softened, out to the edges. */
   .reel-frame {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
+    display: grid;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 16px;
-    min-height: 180px;
-    padding: 12px;
+    background: #141816;
   }
   .shots .reel-frame img {
-    position: absolute;
-    max-width: 100%;
-    max-height: 720px;
-    width: auto;
+    grid-area: 1 / 1;
+    width: 100%;
     height: auto;
-    object-fit: contain;
     border: 0;
-    border-radius: 12px;
+    border-radius: 0;
     background: transparent;
     opacity: 0;
     pointer-events: none;
     transition: opacity .45s ease;
   }
   .shots .reel-frame img.is-on {
-    position: relative;
     opacity: 1;
+    pointer-events: auto;
   }
   .reel-bar { display: flex; align-items: center; gap: 10px; }
   .reel-caption { flex: 1; margin: 0; color: var(--muted); font-size: 0.95rem; min-height: 1.4em; }
@@ -316,9 +312,9 @@
         <div class="shots">
           <div class="reel" data-reel>
             <div class="reel-frame">
-              <img class="is-on" src="/assets/orgora-shot-orgora.jpg" alt="Orgora Charts. A chart with Economic Buyer, Champion, and Gatekeeper." data-label="Orgora" data-caption="Orgora. Economic Buyer, Champion, and Gatekeeper on the chart.">
-              <img src="/assets/orgora-shot-devices.jpg" alt="Orgora Charts on an iPad, with the person sheet on an iPhone." data-label="iPhone and iPad" data-caption="The chart on iPad, and a person on iPhone." aria-hidden="true">
-              <img src="/assets/orgora-shot-meeting.jpg" alt="A meeting with the Orgora sample chart on the screen." data-label="The chart" data-caption="The same chart, up on the screen." aria-hidden="true">
+              <img class="is-on" src="/assets/orgora-shot-orgora-wide.jpg" width="1792" height="1008" alt="Orgora Charts. A chart with Economic Buyer, Champion, and Gatekeeper." data-label="Orgora" data-caption="Orgora. Economic Buyer, Champion, and Gatekeeper on the chart.">
+              <img src="/assets/orgora-shot-devices-wide.jpg" width="1792" height="1008" alt="Orgora Charts on an iPad, with the person sheet on an iPhone." data-label="iPhone and iPad" data-caption="The chart on iPad, and a person on iPhone." aria-hidden="true">
+              <img src="/assets/orgora-shot-meeting.jpg" width="1792" height="1008" alt="A meeting with the Orgora sample chart on the screen." data-label="The chart" data-caption="The same chart, up on the screen." aria-hidden="true">
             </div>
             <div class="reel-bar">
               <button type="button" class="reel-nav" data-reel-prev aria-label="Previous screen">‹</button>
