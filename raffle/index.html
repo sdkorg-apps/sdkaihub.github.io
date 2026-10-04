@@ -131,6 +131,12 @@
     font-size: 0.72rem;
     vertical-align: 1px;
   }
+  .tickets {
+    margin-left: 8px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
   .panel { padding: 20px; }
   .handle { font-size: 1.6rem; letter-spacing: -0.03em; margin: 0 0 6px; }
   .track {
@@ -298,12 +304,18 @@
             var name = document.createElement("span");
             name.className = "who";
             name.textContent = text(person && (person.displayName || person.name)) || "Name waiting";
+            var tickets = document.createElement("span");
+            tickets.className = "tickets";
             if (person && person.bonus_linkedin === true) {
               var mark = document.createElement("span");
               mark.className = "bonus-mark";
               mark.textContent = "Bonus";
               name.appendChild(mark);
+              tickets.textContent = "2 tickets";
+            } else {
+              tickets.textContent = "1 ticket";
             }
+            name.appendChild(tickets);
             var handle = document.createElement("span");
             handle.className = "at";
             var raw = text(person && person.handle).replace(/^@/, "");
