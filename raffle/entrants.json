@@ -1,0 +1,10 @@
+{
+  "status": "waiting",
+  "sample": true,
+  "note": "Stub only. Marked sample and waiting. The draw thread is not posted yet, so entrants is empty on purpose. Do not treat this file as a list of real people. followerCount stays null until a real count exists. thread stays null until the one locked thread is posted. Do not invent a thread URL, status id, or conversation id.",
+  "goalFollowers": 500,
+  "followerCount": null,
+  "thread": null,
+  "winner": null,
+  "entrants": []
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Raffle on sdkaihub.com. Follow @GenAIBiz, one repost, and a reply on one thread. Draw at 500 followers.">
+<title>Raffle — SDK AI Hub</title>
+<link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/sdkaihub_mark.png">
+<style>
+  :root {
+    --ink: #1c1c1e;
+    --muted: #5c6560;
+    --line: #dce8de;
+    --paper: #f4f7f3;
+    --card: #ffffff;
+    --green: #178a52;
+    --mint: #e7f8ee;
+    --gold: #a56b08;
+    --gold-bg: #fff6df;
+    --gold-line: #c98412;
+    --shadow: 0 12px 40px rgba(28, 44, 32, 0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8eee9;
+      --muted: #9aa89e;
+      --line: #2a3830;
+      --paper: #121614;
+      --card: #1a1f1c;
+      --mint: #1a3a2a;
+      --gold: #f3d48a;
+      --gold-bg: #3a2e14;
+      --gold-line: #e2b34a;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+  }
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header, main, footer { width: min(880px, calc(100% - 40px)); margin: 0 auto; }
+  header {
+    padding: 22px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.03em; font-size: 1.05rem; color: var(--ink); }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { width: 22px; height: 22px; display: block; flex: 0 0 auto; }
+  nav { display: flex; gap: 16px; font-size: 0.92rem; font-weight: 600; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  nav a { color: var(--ink); }
+  nav a[aria-current="page"] { color: var(--green); }
+  main { padding: 18px 0 36px; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.02; letter-spacing: -0.045em; margin: 0 0 10px; }
+  h2 { margin: 0 0 8px; font-size: 1.25rem; letter-spacing: -0.03em; }
+  .lede { margin: 0 0 22px; color: var(--muted); font-size: 1.08rem; max-width: 38rem; }
+  .board {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .ticket, .panel, .rule, .wait-card, .winner {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+  .ticket {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 2px;
+    padding: 22px 16px;
+    text-align: center;
+    border: 2px dashed var(--green);
+  }
+  .kicker {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .count { font-size: 4rem; line-height: 0.9; font-weight: 800; letter-spacing: -0.05em; }
+  .count-label { color: var(--muted); font-weight: 700; }
+  .stamp {
+    margin-top: 10px;
+    border: 2px solid var(--gold-line);
+    color: var(--gold);
+    background: var(--gold-bg);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-weight: 800;
+    font-size: 0.92rem;
+  }
+  .panel { padding: 20px; }
+  .handle { font-size: 1.6rem; letter-spacing: -0.03em; margin: 0 0 6px; }
+  .track {
+    margin-top: 14px;
+    height: 18px;
+    border-radius: 999px;
+    border: 2px dashed var(--line);
+    background: repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(23, 138, 82, 0.08) 6px, rgba(23, 138, 82, 0.08) 12px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+  }
+  .rules { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; }
+  .rule { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 14px 16px; }
+  .num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--mint);
+    color: var(--green);
+    font-weight: 800;
+  }
+  .rule p { margin: 2px 0 0; color: var(--muted); font-size: 0.92rem; }
+  .wait-card, .winner, .names-wrap { padding: 18px 18px 16px; margin-bottom: 14px; }
+  .wait-card { border-style: dashed; }
+  .names { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  .names li, .seat {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--paper);
+    border: 1px dashed var(--line);
+  }
+  .seat { color: var(--muted); font-weight: 650; }
+  .who { font-weight: 750; }
+  .at { color: var(--muted); font-weight: 650; }
+  .winner p { margin: 0; font-size: 1.15rem; }
+  .fine { color: var(--muted); font-size: 0.92rem; }
+  footer { padding: 8px 0 40px; color: var(--muted); font-size: 0.85rem; }
+  @media (max-width: 700px) {
+    header { flex-wrap: wrap; row-gap: 10px; }
+    nav { flex-basis: 100%; margin-left: 0; justify-content: flex-start; row-gap: 8px; }
+    .board { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/sdkaihub_mark.png" width="22" height="22" alt="">
+      SDK AI Hub
+    </a>
+    <nav aria-label="Site">
+      <a href="/raffle" aria-current="page">Raffle</a>
+      <a href="/orgora-charts/">Support</a>
+      <a href="/orgora-charts/privacy.html">Privacy</a>
+      <a href="/orgora/">Log in</a>
+    </nav>
+  </header>
+  <main>
+    <p class="kicker">Raffle</p>
+    <h1>One thread. One draw.</h1>
+    <p class="lede">Follow @GenAIBiz, repost once, and reply on the locked thread. The draw waits for 500 followers.</p>
+    <div class="board">
+      <section class="ticket" aria-labelledby="count-label">
+        <span class="kicker">Entrants</span>
+        <span class="count" id="entrant-count">0</span>
+        <span class="count-label" id="count-label">entrants</span>
+        <span class="stamp">draw at 500 followers</span>
+      </section>
+      <section class="panel">
+        <h2 class="handle">@GenAIBiz</h2>
+        <p id="follower-line">Follower count waiting. The goal is 500. A live count is not available yet.</p>
+        <div class="track" role="img" aria-label="Progress toward 500 followers is waiting">500</div>
+      </section>
+    </div>
+    <section>
+      <h2>How to enter</h2>
+      <ol class="rules">
+        <li class="rule">
+          <span class="num">1</span>
+          <div>
+            <strong>Follow @GenAIBiz.</strong>
+            <p>The site only names the account. It does not follow anyone for you.</p>
+          </div>
+        </li>
+        <li class="rule">
+          <span class="num">2</span>
+          <div>
+            <strong>One repost.</strong>
+            <p>Repost the locked thread once.</p>
+          </div>
+        </li>
+        <li class="rule">
+          <span class="num">3</span>
+          <div>
+            <strong>Any reply on one locked X thread.</strong>
+            <p>One thread only. A reply on that thread counts.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+    <section class="wait-card" id="thread-card">
+      <h2>The thread</h2>
+      <p id="thread-line">The thread is not posted yet. Waiting. This page has no thread link, status id, or conversation id until that post exists.</p>
+    </section>
+    <section class="names-wrap">
+      <h2>Entrants</h2>
+      <p id="entrant-note">Waiting. This is a sample list with no people in it. Display names and handles show here after the thread is posted. Nobody on this page is a real entrant.</p>
+      <ul class="names" id="entrant-list">
+        <li class="seat"><span>Display name</span><span>Waiting</span></li>
+        <li class="seat"><span>Handle</span><span>Waiting</span></li>
+      </ul>
+    </section>
+    <section class="winner">
+      <h2>Winner</h2>
+      <p id="winner-line">After the draw, the winner shows here. No winner yet.</p>
+    </section>
+    <p class="fine">Orgora Charts is available on iOS, Mac, and Chrome. The public site is <a href="https://sdkaihub.com">https://sdkaihub.com</a>.</p>
+  </main>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
+  <script>
+    (function () {
+      var countEl = document.getElementById("entrant-count");
+      var labelEl = document.getElementById("count-label");
+      var noteEl = document.getElementById("entrant-note");
+      var listEl = document.getElementById("entrant-list");
+      var followerEl = document.getElementById("follower-line");
+      var threadEl = document.getElementById("thread-line");
+      var winnerEl = document.getElementById("winner-line");
+
+      function text(value) {
+        return value == null ? "" : String(value);
+      }
+
+      function apply(data) {
+        data = data || {};
+        var list = Array.isArray(data.entrants) ? data.entrants : [];
+        var sample = !!data.sample;
+        countEl.textContent = String(list.length);
+        var one = list.length === 1;
+        labelEl.textContent = sample
+          ? (one ? "sample entrant" : "sample entrants")
+          : (one ? "entrant" : "entrants");
+        if (sample) {
+          noteEl.textContent = list.length
+            ? "Sample list. These names are not real entrants."
+            : "Waiting. This is a sample list with no people in it. Display names and handles show here after the thread is posted. Nobody on this page is a real entrant.";
+        }
+        if (list.length) {
+          listEl.textContent = "";
+          list.forEach(function (person) {
+            var li = document.createElement("li");
+            var name = document.createElement("span");
+            name.className = "who";
+            name.textContent = text(person && (person.displayName || person.name)) || "Name waiting";
+            var handle = document.createElement("span");
+            handle.className = "at";
+            var raw = text(person && person.handle).replace(/^@/, "");
+            handle.textContent = raw ? "@" + raw : "Handle waiting";
+            li.appendChild(name);
+            li.appendChild(handle);
+            listEl.appendChild(li);
+          });
+        }
+        var followers = data.followerCount;
+        if (typeof followers === "number" && isFinite(followers) && followers >= 0) {
+          followerEl.textContent = "Followers now: " + followers + ". The draw is at 500 followers.";
+        }
+        var thread = data.thread;
+        var threadUrl = thread && typeof thread.url === "string" ? thread.url : "";
+        if (threadUrl) {
+          threadEl.textContent = "";
+          threadEl.appendChild(document.createTextNode("The locked thread is posted. "));
+          var link = document.createElement("a");
+          link.href = threadUrl;
+          link.textContent = threadUrl;
+          threadEl.appendChild(link);
+        }
+        var winner = data.winner;
+        var winnerName = winner && typeof winner === "object"
+          ? text(winner.displayName || winner.name || winner.handle)
+          : text(winner);
+        if (winnerName) winnerEl.textContent = winnerName;
+      }
+
+      fetch("/raffle/entrants.json")
+        .then(function (res) { if (!res.ok) throw new Error("raffle"); return res.json(); })
+        .then(apply)
+        .catch(function () {});
+    })();
+  </script>
+  <script src="/assets/visit.js" defer></script>
+</body>
+</html>
