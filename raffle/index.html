@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Raffle on sdkaihub.com. Follow @GenAIBiz, follow SDK AI Hub on LinkedIn, one repost, and a reply on one thread. Draw at 500 followers.">
+<meta name="description" content="Raffle on sdkaihub.com. Follow @GenAIBiz, one repost, and a reply on one thread for one ticket. An optional LinkedIn follow can add a second ticket. Draw at 500 followers.">
 <title>Raffle — SDK AI Hub</title>
 <link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/sdkaihub_mark.png">
@@ -65,7 +65,7 @@
   .lede { margin: 0 0 22px; color: var(--muted); font-size: 1.08rem; max-width: 38rem; }
   .board {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.05fr) minmax(0, 1.05fr);
     gap: 14px;
     margin-bottom: 18px;
   }
@@ -102,6 +102,40 @@
     padding: 4px 12px;
     font-weight: 800;
     font-size: 0.92rem;
+  }
+  .bonus {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 8px;
+    padding: 18px 16px;
+    background: var(--card);
+    border: 2px solid var(--gold-line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+  .bonus-mark {
+    display: inline-block;
+    border: 2px solid var(--gold-line);
+    color: var(--gold);
+    background: var(--gold-bg);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-weight: 800;
+    font-size: 0.78rem;
+  }
+  .bonus p { margin: 0; font-size: 0.95rem; overflow-wrap: anywhere; }
+  .who .bonus-mark {
+    margin-left: 8px;
+    padding: 1px 8px;
+    font-size: 0.72rem;
+    vertical-align: 1px;
+  }
+  .tickets {
+    margin-left: 8px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.82rem;
   }
   .panel { padding: 20px; }
   .handle { font-size: 1.6rem; letter-spacing: -0.03em; margin: 0 0 6px; }
@@ -172,7 +206,7 @@
   <main>
     <p class="kicker">Raffle</p>
     <h1>One thread. One draw.</h1>
-    <p class="lede">Follow @GenAIBiz, follow SDK AI Hub on LinkedIn, repost once, and reply on the locked thread. The draw waits for 500 followers.</p>
+    <p class="lede">Follow @GenAIBiz, repost once, and reply on the locked thread for one ticket. The draw waits for 500 followers. A LinkedIn follow is optional.</p>
     <div class="board">
       <section class="ticket" aria-labelledby="count-label">
         <span class="kicker">Entrants</span>
@@ -180,6 +214,10 @@
         <span class="count-label" id="count-label">entrants</span>
         <span class="stamp">draw at 500 followers</span>
       </section>
+      <aside class="bonus" aria-label="Optional bonus ticket">
+        <span class="bonus-mark">Bonus</span>
+        <p>Follow <a href="https://www.linkedin.com/company/sdkaihub/">https://www.linkedin.com/company/sdkaihub/</a> for a second ticket. Say so in the reply. We spot-check. The site does not follow the page for you.</p>
+      </aside>
       <section class="panel">
         <h2 class="handle">@GenAIBiz</h2>
         <p id="follower-line">Follower count waiting. The goal is 500. A live count is not available yet.</p>
@@ -199,19 +237,12 @@
         <li class="rule">
           <span class="num">2</span>
           <div>
-            <strong>Follow SDK AI Hub on LinkedIn.</strong>
-            <p><a href="https://www.linkedin.com/company/sdkaihub/">linkedin.com/company/sdkaihub</a>. The site does not follow the page for you.</p>
-          </div>
-        </li>
-        <li class="rule">
-          <span class="num">3</span>
-          <div>
             <strong>One repost.</strong>
             <p>Repost the locked thread once.</p>
           </div>
         </li>
         <li class="rule">
-          <span class="num">4</span>
+          <span class="num">3</span>
           <div>
             <strong>Any reply on one locked X thread.</strong>
             <p>One thread only. A reply on that thread counts.</p>
@@ -273,6 +304,18 @@
             var name = document.createElement("span");
             name.className = "who";
             name.textContent = text(person && (person.displayName || person.name)) || "Name waiting";
+            var tickets = document.createElement("span");
+            tickets.className = "tickets";
+            if (person && person.bonus_linkedin === true) {
+              var mark = document.createElement("span");
+              mark.className = "bonus-mark";
+              mark.textContent = "Bonus";
+              name.appendChild(mark);
+              tickets.textContent = "2 tickets";
+            } else {
+              tickets.textContent = "1 ticket";
+            }
+            name.appendChild(tickets);
             var handle = document.createElement("span");
             handle.className = "at";
             var raw = text(person && person.handle).replace(/^@/, "");
@@ -287,7 +330,10 @@
           followerEl.textContent = "Followers now: " + followers + ". The draw is at 500 followers.";
         }
         var thread = data.thread;
-        var threadUrl = thread && typeof thread.url === "string" ? thread.url : "";
+        var threadUrl = "";
+        if (thread && typeof thread === "object" && typeof thread.url === "string" && thread.url.indexOf("https://") === 0) {
+          threadUrl = thread.url;
+        }
         if (threadUrl) {
           threadEl.textContent = "";
           threadEl.appendChild(document.createTextNode("The locked thread is posted. "));
