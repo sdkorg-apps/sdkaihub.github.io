@@ -486,7 +486,18 @@
               ? (one ? "sample entrant" : "sample entrants")
               : (one ? "entrant" : "entrants");
           }
-          if (waitEl && sample) waitEl.textContent = "Sample list. Thread not posted yet";
+          var thread = data && data.thread;
+          var threadUrl = "";
+          if (thread && typeof thread.url === "string" && thread.url.indexOf("https://") === 0 && thread.url.indexOf("?") === -1) {
+            threadUrl = thread.url;
+          }
+          var teaser = document.querySelector(".raffle-teaser");
+          if (threadUrl && teaser) {
+            teaser.href = threadUrl;
+            if (waitEl) waitEl.textContent = "View the thread";
+          } else if (waitEl && sample) {
+            waitEl.textContent = "Sample list. Thread not posted yet";
+          }
         })
         .catch(function () {});
     })();
