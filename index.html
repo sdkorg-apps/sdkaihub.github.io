@@ -70,69 +70,8 @@
   .hero-copy { min-width: 0; }
   h1 { font-size: clamp(2.1rem, 4.4vw, 3.25rem); line-height: 1.06; letter-spacing: -0.045em; margin: 0 0 14px; max-width: 16ch; }
   .lede { max-width: 38rem; color: var(--muted); font-size: 1.12rem; margin: 0; }
-  .hero-raffle { margin: 14px 0 0; font-weight: 750; }
-  .raffle-teaser {
-    position: relative;
-    display: grid;
-    justify-items: center;
-    gap: 2px;
-    flex: 0 0 auto;
-    width: min(260px, 100%);
-    margin: 0;
-    padding: 16px 18px 14px;
-    text-align: center;
-    color: var(--ink);
-    background: var(--card);
-    border: 2px dashed var(--green);
-    border-radius: 18px;
-    box-shadow: var(--shadow);
-    transform: rotate(-1.5deg);
-  }
-  .raffle-teaser:hover { text-decoration: none; transform: rotate(0deg); }
-  .raffle-kicker {
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--green);
-  }
-  .raffle-count {
-    font-size: 3.1rem;
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-    font-weight: 800;
-  }
-  .raffle-count-label { color: var(--muted); font-weight: 700; font-size: 0.92rem; }
-  .raffle-stamp {
-    margin-top: 8px;
-    border: 2px solid #c98412;
-    color: #a56b08;
-    background: #fff6df;
-    border-radius: 999px;
-    padding: 3px 10px;
-    font-weight: 800;
-    font-size: 0.82rem;
-  }
-  .raffle-wait { color: var(--muted); font-size: 0.75rem; font-weight: 650; }
-  .raffle-teaser::before,
-  .raffle-teaser::after {
-    content: "";
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-  }
-  .raffle-teaser::before { top: -5px; left: 22px; background: var(--green); }
-  .raffle-teaser::after { right: -5px; bottom: 28px; background: #e85d4c; }
   @media (max-width: 800px) {
     .hero { flex-direction: column; align-items: stretch; }
-    .raffle-teaser, .raffle-teaser:hover { transform: none; }
-  }
-  @media (prefers-color-scheme: dark) {
-    .raffle-stamp { color: #f3d48a; background: #3a2e14; border-color: #e2b34a; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .raffle-teaser, .raffle-teaser:hover { transform: none; }
   }
   .apps {
     display: grid;
@@ -321,7 +260,6 @@
       SDK AI Hub
     </a>
     <nav aria-label="Site">
-      <a href="/raffle">Raffle</a>
       <a href="/orgora-charts/">Support</a>
       <a href="/orgora-charts/privacy.html">Privacy</a>
       <a class="login" href="/orgora/">Open Orgora</a>
@@ -332,15 +270,7 @@
       <div class="hero-copy">
         <h1>Your data stays yours.</h1>
         <p class="lede">Orgora Charts maps the buying committee. Charts stay in your Drive — we never host your files.</p>
-        <p class="hero-raffle"><a href="/raffle">Enter the raffle</a></p>
       </div>
-      <a class="raffle-teaser" href="/raffle">
-        <span class="raffle-kicker">Raffle</span>
-        <span class="raffle-count" id="raffle-count">0</span>
-        <span class="raffle-count-label" id="raffle-count-label">entrants</span>
-        <span class="raffle-stamp">draw at 500 followers</span>
-        <span class="raffle-wait" id="raffle-wait">Thread not posted yet</span>
-      </a>
     </section>
     <section class="apps" aria-label="Apps">
       <article class="card">
@@ -468,40 +398,7 @@
       arm();
     })();
   </script>
-  <script>
-    (function () {
-      var countEl = document.getElementById("raffle-count");
-      var labelEl = document.getElementById("raffle-count-label");
-      var waitEl = document.getElementById("raffle-wait");
-      if (!countEl) return;
-      fetch("/raffle/entrants.json")
-        .then(function (res) { if (!res.ok) throw new Error("raffle"); return res.json(); })
-        .then(function (data) {
-          var list = data && Array.isArray(data.entrants) ? data.entrants : [];
-          var sample = !!(data && data.sample);
-          countEl.textContent = String(list.length);
-          if (labelEl) {
-            var one = list.length === 1;
-            labelEl.textContent = sample
-              ? (one ? "sample entrant" : "sample entrants")
-              : (one ? "entrant" : "entrants");
-          }
-          var thread = data && data.thread;
-          var threadUrl = "";
-          if (thread && typeof thread.url === "string" && thread.url.indexOf("https://") === 0 && thread.url.indexOf("?") === -1) {
-            threadUrl = thread.url;
-          }
-          var teaser = document.querySelector(".raffle-teaser");
-          if (threadUrl && teaser) {
-            teaser.href = threadUrl;
-            if (waitEl) waitEl.textContent = "View the thread";
-          } else if (waitEl && sample) {
-            waitEl.textContent = "Sample list. Thread not posted yet";
-          }
-        })
-        .catch(function () {});
-    })();
-  </script>
+
   <script src="/assets/visit.js" defer></script>
 </body>
 </html>
