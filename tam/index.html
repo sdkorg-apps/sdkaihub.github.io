@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="TAM boards by SDK AI Hub. Company addressable-market papers, starting with SpaceX.">
+<meta name="description" content="TAM boards by SDK AI Hub. Company addressable-market papers, starting with SpaceX. Request a board for your company.">
 <title>TAM — SDK AI Hub</title>
 <link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
 <style>
@@ -105,6 +105,58 @@
     color: var(--ink);
   }
   .go { margin-top: auto; font-weight: 700; color: var(--copper); }
+  .ask {
+    border-top: 1px solid var(--line);
+    padding: 8px 0 8px;
+    max-width: 640px;
+  }
+  .ask h2 {
+    margin: 8px 0 8px;
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+  .ask > p { color: var(--muted); margin: 0 0 16px; }
+  form { display: grid; gap: 12px; }
+  label { display: grid; gap: 6px; font-weight: 700; font-size: 0.92rem; }
+  input, textarea {
+    width: 100%;
+    font: inherit;
+    font-weight: 450;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  .send {
+    justify-self: start;
+    border: 0;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .send:hover { background: var(--copper); }
+  .hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .out { margin-top: 16px; display: grid; gap: 10px; }
+  .out[hidden] { display: none; }
+  .out textarea { min-height: 160px; }
+  .out-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .give {
     display: flex;
     flex-wrap: wrap;
@@ -142,11 +194,104 @@
         <span class="go">Open the board</span>
       </a>
     </div>
+    <section class="ask" id="request">
+      <p class="kicker">Request</p>
+      <h2>A board for your company</h2>
+      <p>Leave the company and what to size. Send opens a message to support@sdkaihub.com from your mail app. This page does not keep the form.</p>
+      <form id="tam-request">
+        <label>Company
+          <input name="company" required maxlength="120" autocomplete="organization">
+        </label>
+        <label>Website
+          <input name="site" type="text" inputmode="url" maxlength="200" autocomplete="url" placeholder="https://">
+        </label>
+        <label>What should the board cover
+          <textarea name="note" required maxlength="1200"></textarea>
+        </label>
+        <label>How to reply
+          <input name="reply" required maxlength="120" autocomplete="email" placeholder="Email or X handle">
+        </label>
+        <label class="hp">Leave this empty
+          <input name="company_url" tabindex="-1" autocomplete="off">
+        </label>
+        <button class="send" type="submit">Send the request</button>
+      </form>
+      <div class="out" id="request-out" hidden>
+        <p id="request-status" role="status"></p>
+        <textarea id="request-copy" readonly></textarea>
+        <div class="out-actions">
+          <button class="send" type="button" id="copy-request">Copy</button>
+          <a class="donate" id="x-request" href="https://x.com/GenAIBiz" target="_blank" rel="noopener">Message @GenAIBiz</a>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="give">
     <p>If a board is useful, send a tip with X Money to @GenAIBiz. That account is on X. X Money is available to eligible accounts in the X app.</p>
     <a class="donate" href="https://x.com/GenAIBiz">Donate with X Money</a>
   </footer>
 </div>
+<script>
+var SUPPORT = "support@sdkaihub.com";
+
+function requestText(fields) {
+  return [
+    "TAM request",
+    "",
+    "Company: " + fields.company,
+    "Website: " + (fields.site || "not given"),
+    "Reply: " + fields.reply,
+    "",
+    fields.note
+  ].join("\n");
+}
+
+function requestMail(fields) {
+  var subject = "TAM request: " + fields.company;
+  return "mailto:" + SUPPORT + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(requestText(fields));
+}
+
+function readRequest(form) {
+  return {
+    company: form.company.value.trim(),
+    site: form.site.value.trim(),
+    note: form.note.value.trim(),
+    reply: form.reply.value.trim(),
+    trap: form.company_url.value.trim()
+  };
+}
+
+if (typeof document !== "undefined") {
+  var form = document.getElementById("tam-request");
+  var out = document.getElementById("request-out");
+  var status = document.getElementById("request-status");
+  var copyBox = document.getElementById("request-copy");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var fields = readRequest(form);
+    if (fields.trap) return;
+    if (!fields.company || !fields.note || !fields.reply) return;
+    var text = requestText(fields);
+    copyBox.value = text;
+    out.hidden = false;
+    status.textContent = "Your mail app should open a message to " + SUPPORT + ". If it does not, copy the request and message @GenAIBiz.";
+    window.location.href = requestMail(fields);
+  });
+  document.getElementById("copy-request").addEventListener("click", function () {
+    var text = copyBox.value;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = "Copied. Paste it into a message to @GenAIBiz, or into mail to " + SUPPORT + ".";
+      }, function () {
+        copyBox.focus();
+        copyBox.select();
+      });
+    } else {
+      copyBox.focus();
+      copyBox.select();
+    }
+  });
+}
+</script>
 </body>
 </html>
