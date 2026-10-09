@@ -1183,7 +1183,7 @@ function heldText(id, on, year) {
       const usd = sliceDollars(slice, year);
       if (usd == null) return;
       const others = slice.gates.filter(function (gateId) { return gateId !== id && !on.has(gateId); });
-      if (!on.has(id) && others.length) {
+      if (others.length) {
         if (slice.pool === "program") program += usd; else annual += usd;
         others.forEach(function (gateId) { names[gateId] = true; });
       }
@@ -1196,7 +1196,7 @@ function fmt(n) {
   const value = Math.round(n);
   const sign = value < 0 ? "−" : "";
   const abs = Math.abs(value);
-  if (abs >= 1e9) return sign + "$" + trimNum((abs / 1e9).toFixed(2)) + "B";
+  if (abs >= 1e9) return sign + "$" + trimNum((Math.round(abs / 1e7) / 100).toFixed(2)) + "B";
   if (abs >= 1e6) return sign + "$" + trimNum((abs / 1e6).toFixed(abs / 1e6 >= 100 ? 1 : 2)) + "M";
   return sign + "$" + abs.toLocaleString("en-US");
 }
@@ -1222,7 +1222,12 @@ function equation(factors) {
 }
 
 function readHash() {
-  const raw = decodeURIComponent(location.hash.replace(/^#/, ""));
+  let raw = "";
+  try {
+    raw = decodeURIComponent(location.hash.replace(/^#/, ""));
+  } catch (err) {
+    raw = "";
+  }
   let year = 2026;
   const on = new Set();
   raw.split("/").filter(Boolean).forEach(function (part) {
@@ -1240,7 +1245,6 @@ function writeHash(state) {
   const bits = [];
   if (state.year === 2030) bits.push("2030");
   if (ids.length) bits.push(ids.join("."));
-  const next = bits.length ? "#" + bits.join("/") : location.pathname + location.search;
   const target = bits.length ? location.pathname + location.search + "#" + bits.join("/") : location.pathname + location.search;
   if ((location.pathname + location.search + location.hash) !== target) history.replaceState(null, "", target);
 }
@@ -1442,8 +1446,11 @@ function boot() {
       const later = moneyEffect(gate.id, state.on, 2030);
       const laterHeld = heldText(gate.id, state.on, 2030);
       if (later.annual > 0) effectLine = "No 2026 dollars · later opens " + fmt(later.annual);
-      else if (laterHeld.annual) effectLine = "Holds " + fmt(laterHeld.annual) + " on the later lens until " + laterHeld.names.map(gateName).join(" and ") + " is open";
-      else effectLine = "No dollars attached";
+      else if (later.annual < 0) effectLine = "No 2026 dollars · later shuts " + fmt(-later.annual);
+      else if (laterHeld.annual || laterHeld.program) {
+        const laterAmount = laterHeld.annual || laterHeld.program;
+        effectLine = "Holds " + fmt(laterAmount) + " on the later lens until " + laterHeld.names.map(gateName).join(" and ") + " is open";
+      } else effectLine = "No dollars attached";
     } else effectLine = "No dollars attached";
     if (state.year === 2026 && effect.annual !== 0) {
       const laterMove = moneyEffect(gate.id, state.on, 2030);
@@ -1550,7 +1557,7 @@ function boot() {
       const name = action.getAttribute("data-action");
       if (name === "today") { state.on.clear(); state.year = 2026; }
       if (name === "all") GATES.forEach(function (gate) { state.on.add(gate.id); });
-      if (name === "copy") copyLink();
+      if (name === "copy") { copyLink(); return; }
       if (name === "close") { dialog.close(); sheetLine = null; return; }
       render();
       return;
@@ -1590,18 +1597,17 @@ function boot() {
   }
 
   function copyLink() {
-    const box = app.querySelector(".linkbox");
     const text = location.href;
+    function showField() {
+      const box = app.querySelector(".linkbox");
+      live.textContent = "Select the link and copy it.";
+      if (box) { box.focus(); box.select(); }
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(function () {
         live.textContent = "Link copied.";
-      }, function () {
-        if (box) { box.focus(); box.select(); }
-      });
-    } else if (box) {
-      box.focus();
-      box.select();
-    }
+      }, showField);
+    } else showField();
   }
 
   function renderSources() {
@@ -1653,6 +1659,21 @@ function audit() {
   assert(moneyEffect("lic-rest", new Set(), 2026).annual === 6.3e9, "landing rights");
   assert(shipOnly.annualOpen > laterShut.annualOpen, "Starship later");
   assert(orb.annualOpen > shipOnly.annualOpen, "orbital needs both gates");
+  assert(fmt(1015000000) === "$1.02B", "billion half-up");
+  assert(fmt(185.45e9) === "$185.45B", "genai billions");
+  assert(fmt(193.7e9) === "$193.7B", "nvidia billions");
+  assert(fmt(21e9) === "$21B", "whole billions");
+  assert(fmt(19.37e9) === "$19.37B", "terafab billions");
+  const fabOn = new Set(["fab"]);
+  const heldFab = heldText("fab", fabOn, 2026);
+  assert(heldFab.names.indexOf("node") !== -1 && heldFab.annual === Math.round(193.7e9 * 0.1), "open factory still holds Terafab");
+  assert(moneyEffect("own-net", new Set(["own-net"]), 2030).annual < 0, "own network later shuts when open");
+  LINES.forEach(function (line) {
+    line.slices.forEach(function (slice) {
+      if (slice.gates.indexOf("avi-fleet") === -1) return;
+      assert(fmt(sliceDollars(slice, 2026)) === "$1.02B", "aviation shut display");
+    });
+  });
   LINES.forEach(function (line) {
     line.slices.forEach(function (slice) {
       [2026, 2030].forEach(function (year) {
