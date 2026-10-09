@@ -49,17 +49,18 @@
   }
   .brand { display: flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-weight: 700; }
   .brand img { width: 22px; height: 22px; }
-  .donate {
+  a.donate {
     display: inline-block;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--card);
+    color: var(--ink);
+    border: 2px solid var(--ink);
     text-decoration: none;
     border-radius: 999px;
     padding: 8px 14px;
     font-weight: 700;
     font-size: 0.9rem;
   }
-  .donate:hover { background: var(--copper); color: #fff; }
+  a.donate:hover { background: var(--ink); color: var(--paper); }
   h1 {
     margin: 18px 0 0;
     font-family: var(--serif);
@@ -179,7 +180,7 @@
 <div class="wrap">
   <header class="top">
     <a class="brand" href="/"><img src="/assets/sdkaihub_mark.png" alt="">SDK AI Hub</a>
-    <a class="donate" href="https://x.com/GenAIBiz">Donate with X Money</a>
+    <a class="donate" href="https://x.com/messages/compose?recipient_id=2426099365&amp;text=Donation%20for%20the%20TAM%20boards" target="_blank" rel="noopener">Donate to @GenAIBiz</a>
   </header>
   <main>
     <p class="kicker">Company papers</p>
@@ -190,7 +191,7 @@
         <p class="kicker">S-1 · 20 May 2026</p>
         <h2>SpaceX</h2>
         <p class="figure">$28.5T</p>
-        <p>The filing's rounded claim. The printed parts sum to $28.44 trillion. The board starts with the narrow case in green and the rest of the filing in red.</p>
+        <p>Printed parts $28.44T. Green is sourced. Red is the rest of the filing.</p>
         <span class="go">Open the board</span>
       </a>
     </div>
@@ -227,8 +228,8 @@
     </section>
   </main>
   <footer class="give">
-    <p>If a board is useful, send a tip with X Money to @GenAIBiz. That account is on X. X Money is available to eligible accounts in the X app.</p>
-    <a class="donate" href="https://x.com/GenAIBiz">Donate with X Money</a>
+    <p>X has no public pay page for a handle. This opens a message to @GenAIBiz. A tip is sent inside the X app.</p>
+    <a class="donate" href="https://x.com/messages/compose?recipient_id=2426099365&amp;text=Donation%20for%20the%20TAM%20boards" target="_blank" rel="noopener">Donate to @GenAIBiz</a>
   </footer>
 </div>
 <script>
