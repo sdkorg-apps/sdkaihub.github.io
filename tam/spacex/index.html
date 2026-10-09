@@ -918,14 +918,20 @@ function boot() {
       el("p", { class: "src" }, slice.sources)
     ));
     pop.hidden = false;
-    if (!coarse && window.innerWidth > 700) {
-      const rect = button.getBoundingClientRect();
-      const width = pop.offsetWidth;
-      let left = rect.left;
-      if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
-      pop.style.left = Math.max(12, left) + "px";
-      pop.style.top = Math.min(window.innerHeight - pop.offsetHeight - 12, rect.bottom + 8) + "px";
+    if (window.innerWidth <= 700) {
+      pop.style.left = "";
+      pop.style.top = "";
+      return;
     }
+    const rect = button.getBoundingClientRect();
+    const width = pop.offsetWidth;
+    let left = rect.left;
+    if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+    pop.style.left = Math.max(12, left) + "px";
+    let top = rect.bottom + 8;
+    const height = pop.offsetHeight;
+    if (top + height > window.innerHeight - 12) top = Math.max(12, rect.top - height - 8);
+    pop.style.top = top + "px";
   }
 
   document.addEventListener("click", function (event) {
@@ -971,7 +977,6 @@ function boot() {
       sliceBtn.classList.add("lit");
       pinned = sliceBtn.getAttribute("data-slice");
       showPop(sliceBtn, true);
-      sliceBtn.scrollIntoView({ block: "center", inline: "nearest" });
       return;
     }
     const lineButton = event.target.closest("[data-line]");
