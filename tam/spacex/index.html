@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SpaceX total addressable market. The May 2026 S-1 prints $28.5 trillion. This board shows how much of that figure is open, and how much is still shut.">
+<title>SpaceX TAM</title>
+<link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
+<style>
+  :root {
+    --ink: #1c1914;
+    --muted: #5e574c;
+    --faint: #8a8172;
+    --line: #e3d8c4;
+    --paper: #f4efe4;
+    --card: #fffdf8;
+    --open: #0e7a43;
+    --open-ink: #f4fff8;
+    --shut: #a61d2e;
+    --shut-ink: #fff8f8;
+    --copper: #8a4e1c;
+    --shadow: 0 16px 40px rgba(60, 40, 10, 0.08);
+    --serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 500px at 10% -10%, rgba(138, 78, 28, 0.08), transparent 50%),
+      var(--paper);
+    font-family: var(--sans);
+    line-height: 1.45;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 8px;
+    background: #1c1914;
+    z-index: 5;
+  }
+  a { color: var(--copper); }
+  button, input { font: inherit; color: inherit; }
+  .wrap { width: min(1180px, calc(100vw - 48px)); margin: 0 auto; }
+  header.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 0 8px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-weight: 700; }
+  .brand img { width: 22px; height: 22px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .tools a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.92rem; }
+  .donate {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .donate:hover { background: var(--copper); color: #fff; }
+  .hero { padding: 12px 0 8px; }
+  .kicker {
+    margin: 0 0 8px;
+    color: var(--copper);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .lede { max-width: 68ch; color: var(--muted); font-size: 1.05rem; margin: 12px 0 0; }
+  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .rules li {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.86rem;
+  }
+  .figure {
+    margin-top: 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 22px 22px 16px;
+  }
+  .figure-top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+  .hero-num {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 8vw, 5.4rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-num.moved { animation: ink 0.6s ease; }
+  @keyframes ink { from { color: var(--copper); } to { color: var(--ink); } }
+  .hero-sub { margin: 8px 0 0; color: var(--muted); font-family: var(--mono); font-size: 0.92rem; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .hero-sub strong { color: var(--shut); font-weight: 650; white-space: nowrap; }
+  .hero-sub .open { color: var(--open); font-weight: 650; white-space: nowrap; }
+  .scale { margin: 8px 0 0; color: var(--faint); font-size: 0.88rem; max-width: 70ch; }
+  .year {
+    display: flex;
+    background: var(--paper);
+    border-radius: 999px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    gap: 4px;
+  }
+  .year button, .text-btn, .gate, .seg, .math {
+    cursor: pointer;
+  }
+  .year button {
+    border: 0;
+    background: transparent;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-weight: 650;
+  }
+  .year button[aria-pressed="true"] { background: #1c1914; color: #f4efe4; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+  .text-btn {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 650;
+  }
+  .text-btn:hover, .math:hover, .gate:hover { border-color: #1c1914; }
+  .linkbox {
+    flex: 1 1 220px;
+    min-width: 0;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .master { margin-top: 18px; }
+  .master-bar {
+    display: flex;
+    height: 28px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #efe6d4;
+    gap: 3px;
+  }
+  .chunk { display: flex; min-width: 4px; overflow: hidden; border-radius: 4px; }
+  .chunk i { display: block; height: 100%; }
+  .chunk i.open { background: var(--open); }
+  .chunk i.shut {
+    background-color: var(--shut);
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.22) 0 5px, transparent 5px 10px);
+  }
+  .key { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .key li { font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; background: var(--paper); border-radius: 999px; padding: 3px 8px; }
+  .key b { color: var(--ink); font-weight: 650; }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 332px;
+    gap: 22px;
+    align-items: start;
+    padding: 22px 0 48px;
+  }
+  .rail {
+    position: sticky;
+    top: 12px;
+    max-height: calc(100vh - 24px);
+    overflow: auto;
+    padding-right: 4px;
+  }
+  .rail h2, .lines h2 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 18px 0 8px; }
+  .group-deck { margin: -4px 0 10px; color: var(--muted); font-size: 0.92rem; }
+  .line {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 14px 12px;
+    margin: 0 0 10px;
+  }
+  .line header { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .line h3 { margin: 0; font-size: 1.05rem; letter-spacing: -0.02em; }
+  .blurb { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; }
+  .money { margin: 10px 0 8px; font-variant-numeric: tabular-nums; }
+  .money strong { font-family: var(--serif); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.03em; }
+  .bar {
+    display: grid;
+    height: 36px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #efe6d4;
+    gap: 3px;
+  }
+  .bar.empty {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--faint);
+    font-size: 0.85rem;
+    border: 1px dashed var(--line);
+    background: transparent;
+  }
+  .seg {
+    border: 0;
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+    height: 100%;
+  }
+  .seg.open { background: var(--open); color: var(--open-ink); }
+  .seg.shut {
+    color: var(--shut-ink);
+    background-color: var(--shut);
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.2) 0 6px, transparent 6px 12px);
+  }
+  .seg-label {
+    display: block;
+    padding: 0 8px;
+    line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+  .eq { margin: 8px 0 0; color: var(--faint); font-family: var(--mono); font-size: 11px; }
+  .math {
+    margin-top: 8px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: var(--copper);
+    font-weight: 700;
+    font-size: 0.86rem;
+  }
+  .chip {
+    flex: 0 0 auto;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 3px 7px;
+  }
+  .chip.published { background: #e5f4eb; color: #1d4e36; }
+  .chip.derived { background: #e7eef8; color: #1e3a5f; }
+  .chip.estimate { background: #f8efd8; color: #6a4a12; }
+  .chip.unknown { background: #ece7df; color: #3d3a36; }
+  .gate {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin: 0 0 8px;
+    border-left: 4px solid var(--shut);
+  }
+  .gate[aria-pressed="true"] { border-left-color: var(--open); background: #f3fbf6; }
+  .gate .gn { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; }
+  .gate .gs { display: block; margin-top: 4px; color: var(--muted); font-size: 0.8rem; font-weight: 450; }
+  .gate .ge { display: block; margin-top: 6px; font-family: var(--mono); font-size: 11px; color: var(--copper); }
+  .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .gate[aria-pressed="true"] .pill { color: var(--open); }
+  .gate[aria-pressed="false"] .pill { color: var(--shut); }
+  .pop {
+    position: fixed;
+    z-index: 30;
+    width: min(380px, calc(100vw - 24px));
+    background: #1c1914;
+    color: #f6f1e6;
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+    pointer-events: none;
+  }
+  .pop[hidden] { display: none; }
+  .pop .eqline { font-family: var(--mono); font-size: 12px; color: #f0d7b4; margin: 6px 0; }
+  .pop p { margin: 6px 0; font-size: 0.84rem; color: #e6dfd2; }
+  .pop .src { color: #b7ad9e; font-size: 0.78rem; }
+  dialog {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 0;
+    width: min(680px, calc(100vw - 24px));
+    background: var(--card);
+    color: var(--ink);
+  }
+  dialog::backdrop { background: rgba(28, 25, 20, 0.45); }
+  .sheet-body { padding: 18px 18px 22px; max-height: min(78vh, 820px); overflow: auto; }
+  .sheet-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .sheet-body h3 { font-family: var(--serif); font-size: 1.8rem; margin: 0; }
+  .slice-block { border-top: 1px solid var(--line); padding: 12px 0; }
+  .slice-block h4 { margin: 0 0 6px; }
+  .note { margin: 4px 0; color: var(--muted); font-size: 0.9rem; }
+  footer.colophon { padding: 0 0 40px; color: var(--muted); font-size: 0.86rem; }
+  footer.colophon h2 { font-size: 0.95rem; color: var(--ink); }
+  footer.colophon li { margin: 4px 0; }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  :focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+  @media (max-width: 900px) {
+    body::before { width: 0; }
+    .wrap { width: min(1180px, calc(100vw - 28px)); }
+    header.top { display: block; }
+    .tools { margin-top: 12px; }
+    .layout { grid-template-columns: 1fr; }
+    .rail { position: static; max-height: none; order: 2; }
+    .pop { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/tam/"><img src="/assets/sdkaihub_mark.png" alt="">TAM</a>
+    <nav class="tools">
+      <a href="/tam/">All companies</a>
+      <a class="donate" href="https://x.com/GenAIBiz">Donate with X Money</a>
+    </nav>
+  </header>
+  <p id="live" class="sr" aria-live="polite"></p>
+  <div id="app"></div>
+  <footer class="colophon" id="sources"></footer>
+</div>
+<script>
+const WHEN = "9 October 2026";
+
+const GATES = [
+  { id: "s1-space", group: "Filing", name: "Rest of the space pond", today: "The S-1 prints $370 billion for space-enabled solutions. The launch and Starshield lines are the part this board can build from narrower evidence.", kind: "published" },
+  { id: "s1-bb", group: "Filing", name: "Rest of Starlink broadband", today: "The S-1 prints $870 billion for Starlink broadband. The residential, enterprise, aviation, and maritime lines are a much smaller case.", kind: "published" },
+  { id: "s1-mobile", group: "Filing", name: "Rest of Starlink mobile", today: "The S-1 prints $740 billion for Starlink mobile. Direct to cell on this board is a partner-service case, not that pond.", kind: "published" },
+  { id: "s1-infra", group: "Filing", name: "Rest of AI infrastructure", today: "The S-1 prints $2.4 trillion for AI infrastructure. Terafab on this board is 10% of one NVIDIA year.", kind: "published" },
+  { id: "s1-subs", group: "Filing", name: "Rest of consumer subscriptions", today: "The S-1 prints $760 billion for consumer subscriptions across Grok and X.", kind: "published" },
+  { id: "s1-ads", group: "Filing", name: "Rest of digital advertising", today: "The S-1 prints $600 billion for digital advertising. The ads line below uses a $4.5 billion ceiling.", kind: "published" },
+  { id: "s1-apps", group: "Filing", name: "Rest of enterprise applications", today: "The S-1 prints $22.7 trillion for enterprise applications, from a digital-economy estimate. That is the filing's number, not a product forecast.", kind: "published" },
+  { id: "lic-rest", group: "Starlink", name: "Landing rights still closed", today: "Live in 160+ countries by September 2026, with about 50 still listed as coming.", kind: "published" },
+  { id: "d2c-spec", group: "Starlink", name: "Direct-to-cell spectrum", today: "Partner service is ramping. Many countries are not cleared.", kind: "estimate" },
+  { id: "own-net", group: "Starlink", name: "Starlink Mobile, own network", today: "The August 2026 earnings call said SpaceX plans to build its own mobile network, not only lease capacity.", kind: "published" },
+  { id: "avi-fleet", group: "Starlink", name: "Remaining airline fleets", today: "Aviation is in service. Linefit and supplemental type certificates still gate part of the fleet.", kind: "estimate" },
+  { id: "mar-flag", group: "Starlink", name: "Maritime beyond the 2026 forecast", today: "Quilty's 2026 maritime forecast is $1.94 billion. Anything past that is not a published market.", kind: "estimate" },
+  { id: "itar", group: "Starshield", name: "Allied export", today: "US programs are in service. Foreign military sales are a separate gate.", kind: "estimate" },
+  { id: "ship", group: "Launch", name: "Starship cadence", today: "Flight 14 on 28 September 2026 reached orbit and flew a paid mission. That is not a bookable year.", kind: "published" },
+  { id: "hls", group: "Launch", name: "Crewed lunar landing", today: "Starship is NASA's lander selection. No crew has landed on it.", kind: "published" },
+  { id: "orb", group: "Orbital", name: "Orbital power, heat, and links", today: "Filings describe orbital data centers as a future pool. Nothing is for sale. Cadence has to be open too.", kind: "published" },
+  { id: "chat-geo", group: "Grok", name: "Grok Chat where it is restricted", today: "Grok Chat is on sale on the web, in the apps, and on X. Some countries restrict it.", kind: "estimate" },
+  { id: "bot-ent", group: "Grok", name: "Grok Bot as an enterprise seat", today: "The bot on X is live. A company-wide seat with admin controls is not what is being sold.", kind: "estimate" },
+  { id: "build", group: "Grok", name: "Grok Build workplace", today: "Grok Build 0.1 is a live API model, priced at $1 and $2 per million tokens. It is not a coding workplace.", kind: "published" },
+  { id: "api-res", group: "Grok", name: "API residency", today: "The API is on sale, with a US region at a 10% premium. Places that require data to stay put are still shut.", kind: "published" },
+  { id: "fab", group: "Terafab", name: "Terafab yielding chips", today: "No factory is producing. A site in Grimes County has been discussed. It is not a line.", kind: "published" },
+  { id: "node", group: "Terafab", name: "Process partner", today: "On 6 October 2026 Musk said talks with TSMC were only discussions.", kind: "published" },
+  { id: "prem-geo", group: "X", name: "Premium billing in closed stores", today: "Premium is on sale. Some app-store and country combinations still block the charge.", kind: "estimate" },
+  { id: "money-intl", group: "X", name: "X Money outside the US", today: "Live for eligible US accounts, with Cross River Bank and a Visa card. Not a licensed global network.", kind: "published" },
+  { id: "brand", group: "X", name: "Advertiser categories still closed", today: "Ads are on sale. 2025 ad revenue was reported at $1.84 billion, well under the old peak.", kind: "estimate" }
+];
+
+const GROUPS = [
+  { id: "Filing", deck: "The May 2026 S-1 pond. $28.5 trillion is the rounded claim. The printed parts sum to $28.44 trillion, excluding China and Russia. Red is that pond minus the narrower lines below." },
+  { id: "Starlink", deck: "Connectivity. The cash engine in the 2025 figures." },
+  { id: "Starshield", deck: "Defense constellation. Kept off the commercial Starlink lines so Quilty's stack is not counted twice." },
+  { id: "Launch", deck: "Falcon, Dragon, Starship, and the lunar program." },
+  { id: "Orbital", deck: "Compute in orbit. Named in the filings. Not a product yet." },
+  { id: "Grok", deck: "xAI, inside the public company. Chat, Bot, Build, and the API." },
+  { id: "Terafab", deck: "Chips. Tesla and SpaceX. Not a factory yet." },
+  { id: "X", deck: "The social company inside SpaceX. Premium, Money, and ads." }
+];
+
+function F(label, value, unit, kind, note) {
+  return { label: label, value: value, unit: unit, kind: kind, note: note };
+}
+
+const S1 = "SpaceX preliminary S-1, 20 May 2026, as quoted in the filing summaries. The issuer excludes China and Russia. The rounded claim is $28.5 trillion. These parts are the figures the filing prints.";
+
+const LINES = [
+  {
+    id: "s1-space",
+    group: "Filing",
+    name: "Space, rest of the filing",
+    blurb: "The S-1 sizes space-enabled solutions at $370 billion. Falcon, Dragon, Starship, and Starshield are subtracted so they are not counted twice. The lunar program stays in the program rail and is not subtracted. What remains is the filing's pond.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-space-rest",
+        name: "Space-enabled solutions not in the lines below",
+        gates: ["s1-space"],
+        remainder: { pond: 370e9, lines: ["shield-us", "shield-allied", "falcon", "dragon", "starship"], note: "Printed S-1 space figure. Not a build-up from launch prices." },
+        sources: S1,
+        years: { 2026: [F("Issuer space TAM", 370e9, "usd", "published", "S-1: $370 billion from space-enabled solutions.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-bb",
+    group: "Filing",
+    name: "Starlink broadband, rest of the filing",
+    blurb: "The S-1 sizes Starlink broadband at $870 billion. Residential, enterprise, aviation, and maritime are subtracted. IoT is unpriced and is not subtracted.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-bb-rest",
+        name: "Broadband pond not in the lines below",
+        gates: ["s1-bb"],
+        remainder: { pond: 870e9, lines: ["residential", "enterprise", "aviation", "maritime"], note: "Printed S-1 broadband figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer Starlink broadband TAM", 870e9, "usd", "published", "S-1: $870 billion.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-mobile",
+    group: "Filing",
+    name: "Starlink mobile, rest of the filing",
+    blurb: "The S-1 sizes Starlink mobile at $740 billion. The direct-to-cell line is subtracted, including the later own-network case.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-mobile-rest",
+        name: "Mobile pond not in the direct-to-cell line",
+        gates: ["s1-mobile"],
+        remainder: { pond: 740e9, lines: ["d2c"], note: "Printed S-1 mobile figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer Starlink mobile TAM", 740e9, "usd", "published", "S-1: $740 billion.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-infra",
+    group: "Filing",
+    name: "AI infrastructure, rest of the filing",
+    blurb: "The S-1 sizes AI infrastructure at $2.4 trillion. Terafab is subtracted. Orbital compute is left outside this pond: coverage of the filing says space data centers were not inside the $28.5 trillion.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-infra-rest",
+        name: "Infrastructure pond not in Terafab",
+        gates: ["s1-infra"],
+        remainder: { pond: 2.4e12, lines: ["terafab"], note: "Printed S-1 AI infrastructure figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer AI infrastructure TAM", 2.4e12, "usd", "published", "S-1: $2.4 trillion.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-subs",
+    group: "Filing",
+    name: "Consumer subscriptions, rest of the filing",
+    blurb: "The S-1 sizes consumer subscriptions at $760 billion, from Grok and X. Chat and Premium are subtracted.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-subs-rest",
+        name: "Subscription pond not in Chat or Premium",
+        gates: ["s1-subs"],
+        remainder: { pond: 760e9, lines: ["chat", "premium"], note: "Printed S-1 consumer-subscription figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer consumer subscriptions TAM", 760e9, "usd", "published", "S-1: $760 billion.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-ads",
+    group: "Filing",
+    name: "Digital advertising, rest of the filing",
+    blurb: "The S-1 sizes digital advertising at $600 billion. The ads line below is subtracted.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-ads-rest",
+        name: "Advertising pond not in the ads line",
+        gates: ["s1-ads"],
+        remainder: { pond: 600e9, lines: ["ads"], note: "Printed S-1 digital-advertising figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer digital advertising TAM", 600e9, "usd", "published", "S-1: $600 billion.")] }
+      }
+    ]
+  },
+  {
+    id: "s1-apps",
+    group: "Filing",
+    name: "Enterprise applications, rest of the filing",
+    blurb: "The S-1 sizes enterprise applications at $22.7 trillion, drawn from a digital-economy estimate. Grok Bot, Grok Build, and the API are subtracted. This is the filing's pond, not a claim that those products can take the digital economy.",
+    counted: true,
+    slices: [
+      {
+        id: "s1-apps-rest",
+        name: "Enterprise pond not in Bot, Build, or the API",
+        gates: ["s1-apps"],
+        remainder: { pond: 22.7e12, lines: ["bot", "grok-build", "api"], note: "Printed S-1 enterprise-applications figure." },
+        sources: S1,
+        years: { 2026: [F("Issuer enterprise applications TAM", 22.7e12, "usd", "published", "S-1: $22.7 trillion. A digital-economy sizing, not a software bill.")] }
+      }
+    ]
+  },
+  {
+    id: "residential",
+    group: "Starlink",
+    name: "Residential and roam",
+    blurb: "Bernstein's selected-unconnected case tops out near $21 billion a year. Quilty's 2026 consumer forecast is $11.3 billion. Twelve million subscribers at $66 a month is about $9.5 billion across all of Starlink, not just homes. Roam and Mini sit in this line. Hardware is not separated. The bar is the $21 billion case, split by landing rights.",
+    counted: true,
+    slices: [
+      {
+        id: "res-open",
+        name: "Countries already licensed",
+        gates: [],
+        hold: true,
+        sources: "Bernstein via Investing.com, 3 October 2026. Country count: company and press counts of 160+ markets, September 2026. Quilty consumer forecast via Advanced Television, 24 March 2026. Subscriber and ARPU figures from 2026 coverage of the public company.",
+        years: {
+          2026: [
+            F("Top of Bernstein's selected-unconnected range", 21e9, "usd", "estimate", "The published range was $12 to $21 billion for selected unconnected households, and up to about $65 billion at 150 million subscribers. This board books the top of the lower range, not the bull case."),
+            F("Share in countries already licensed", 0.75, "share", "estimate", "Starlink was in 160+ countries, with about 50 still coming. The 75/25 split is this board's, not a subscriber table.")
+          ]
+        }
+      },
+      {
+        id: "res-shut",
+        name: "Countries still closed",
+        gates: ["lic-rest"],
+        hold: true,
+        sources: "Same Bernstein range. The closed share is an estimate.",
+        years: {
+          2026: [
+            F("Top of Bernstein's selected-unconnected range", 21e9, "usd", "estimate", "Same case as the open slice."),
+            F("Share in countries still closed", 0.25, "share", "estimate", "The complement of the 75% licensed assumption.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "enterprise",
+    group: "Starlink",
+    name: "Enterprise and backhaul",
+    blurb: "Civil agencies on commercial Starlink sit here. Starshield does not. Quilty's 2026 enterprise forecast is $1.68 billion, up from $1.38 billion in 2025 and $548 million in 2024. The open pool is just under double that forecast. The shut pool is the unlicensed share of the same idea.",
+    counted: true,
+    slices: [
+      {
+        id: "ent-open",
+        name: "Licensed markets",
+        gates: [],
+        hold: true,
+        sources: "Quilty enterprise path via Advanced Television, 24 March 2026.",
+        years: {
+          2026: [
+            F("Licensed contestible pool", 3.15e9, "usd", "estimate", "Just under double Quilty's $1.68 billion 2026 forecast. The extra is sites in countries already licensed that are not in that forecast. The multiple is this board's.")
+          ]
+        }
+      },
+      {
+        id: "ent-shut",
+        name: "Unlicensed markets",
+        gates: ["lic-rest"],
+        hold: true,
+        sources: "Same pool, unlicensed share.",
+        years: {
+          2026: [
+            F("Unlicensed contestible pool", 1.05e9, "usd", "estimate", "One third of the licensed pool, so the stack stays on the 75/25 country split. 3.15 ÷ 0.75 × 0.25 = 1.05.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "aviation",
+    group: "Starlink",
+    name: "Aviation",
+    blurb: "The pond is in-flight connectivity, $2.9 billion in 2026 and $4.7 billion in 2034. The bar lets Starlink contest the whole pond. A secondary read of Quilty puts 2026 aviation revenue near $1 billion, about 5% of a $20 billion year. Contestible is not the same as won. The later lens uses the 2034 figure early, and says so.",
+    counted: true,
+    slices: [
+      {
+        id: "avi-open",
+        name: "Fleets already bidable",
+        gates: [],
+        sources: "Stratview Research, October 2026. Quilty aviation growth via Advanced Television, 24 March 2026. The 5% share is from a secondary segment table, not the Advanced Television piece.",
+        years: {
+          2026: [
+            F("In-flight connectivity market, 2026", 2.9e9, "usd", "estimate", "Stratview: $2.9 billion in 2026, from $2.6 billion in 2025."),
+            F("Share of fleets already bidable", 0.65, "share", "estimate", "Not a published fleet count. The rest waits on linefit and type certificates.")
+          ],
+          2030: [
+            F("In-flight connectivity market, Stratview 2034, used on the later lens", 4.7e9, "usd", "estimate", "The published out-year is 2034, not 2030. It is used here so the later lens has a source, and it is labeled as such."),
+            F("Share of fleets already bidable", 0.65, "share", "estimate", "Same split. No later fleet study is cited.")
+          ]
+        }
+      },
+      {
+        id: "avi-shut",
+        name: "Fleets still gated",
+        gates: ["avi-fleet"],
+        sources: "Same Stratview pond.",
+        years: {
+          2026: [
+            F("In-flight connectivity market, 2026", 2.9e9, "usd", "estimate", "Same pond."),
+            F("Share still waiting on linefit and certificates", 0.35, "share", "estimate", "The complement of the 65% assumption.")
+          ],
+          2030: [
+            F("In-flight connectivity market, Stratview 2034, used on the later lens", 4.7e9, "usd", "estimate", "2034 figure, shown on the later lens."),
+            F("Share still waiting on linefit and certificates", 0.35, "share", "estimate", "Same complement.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "maritime",
+    group: "Starlink",
+    name: "Maritime",
+    blurb: "No maritime market study is cited, so none is invented. The open slice is Quilty's 2026 revenue forecast, which makes it a floor, not a pond. The shut slice is the same amount again, for hulls outside that forecast.",
+    counted: true,
+    slices: [
+      {
+        id: "mar-open",
+        name: "2026 forecast, in market",
+        gates: [],
+        hold: true,
+        sources: "Quilty via Advanced Television, 24 March 2026.",
+        years: {
+          2026: [
+            F("Quilty 2026 maritime revenue forecast", 1.94e9, "usd", "estimate", "Analyst forecast, up 55% on the prior year. Used as the in-market floor.")
+          ]
+        }
+      },
+      {
+        id: "mar-shut",
+        name: "Outside the forecast",
+        gates: ["mar-flag"],
+        hold: true,
+        sources: "No second source. The repeat is this board's ceiling.",
+        years: {
+          2026: [
+            F("A second increment, same size", 1.94e9, "usd", "estimate", "Ships, rigs, and flag states not in the 2026 forecast. There is no cited market size behind this. It is a hypothesis with the same magnitude as the forecast, so it cannot pretend to be more precise than that.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "d2c",
+    group: "Starlink",
+    name: "Direct to cell",
+    blurb: "Quilty looked for 25 million monthly direct-to-cell users by the end of 2026, and called mobile a ramp year. Four dollars a month is this board's wholesale assumption, not a consumer phone bill. The own-network case is only on the later lens, and it overlaps the partner service. Treat the sum as a ceiling.",
+    counted: true,
+    slices: [
+      {
+        id: "d2c-open",
+        name: "Partner service, cleared spectrum",
+        gates: [],
+        hold: true,
+        sources: "Quilty user figure via Advanced Television, 24 March 2026. The $4 is an assumption.",
+        years: {
+          2026: [
+            F("Monthly users, end of 2026, Quilty", 25e6, "count", "estimate", "Analyst figure for the partner service, not a company print of revenue."),
+            F("Wholesale revenue per user per month", 4, "usd", "estimate", "Assumption. Not a published Starlink Mobile price."),
+            F("Months", 12, "count", "derived", "Annualizes the monthly assumption."),
+            F("Share of that case already cleared", 0.7, "share", "estimate", "This board's split between live markets and spectrum that is still shut.")
+          ]
+        }
+      },
+      {
+        id: "d2c-shut",
+        name: "Spectrum still shut",
+        gates: ["d2c-spec"],
+        hold: true,
+        sources: "Same user case.",
+        years: {
+          2026: [
+            F("Monthly users, end of 2026, Quilty", 25e6, "count", "estimate", "Same case."),
+            F("Wholesale revenue per user per month", 4, "usd", "estimate", "Same assumption."),
+            F("Months", 12, "count", "derived", "Annualizes the monthly assumption."),
+            F("Share still waiting on spectrum", 0.3, "share", "estimate", "The complement of the 70% assumption.")
+          ]
+        }
+      },
+      {
+        id: "d2c-own",
+        name: "Own network",
+        gates: ["own-net"],
+        sources: "Earnings-call comment that SpaceX intends to build the network, August 2026. The user count and the price are assumptions.",
+        years: {
+          2030: [
+            F("Own-network subscribers, hypothesis", 40e6, "count", "estimate", "Not a forecast. A round case for a later lens if SpaceX is the carrier."),
+            F("Net service revenue per user per month", 8, "usd", "estimate", "Assumption of revenue to SpaceX, not a tariff."),
+            F("Months", 12, "count", "derived", "Annualizes the monthly assumption.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "iot",
+    group: "Starlink",
+    name: "IoT",
+    blurb: "Swarm is part of the constellation. SpaceX has not published an IoT revenue line. No dollar is entered. A switch that invented one would be a fiction.",
+    counted: false,
+    slices: []
+  },
+  {
+    id: "shield-us",
+    group: "Starshield",
+    name: "United States",
+    blurb: "Quilty's 2026 figure is $3.2 billion, from a secondary segment table, so it is an analyst estimate. Summaries of the May 2026 S-1 put fiscal 2025 near $1.8 billion, growing about 80%. The bar uses the 2026 analyst figure as the open US case. It is a revenue forecast, read here as the contestible US year, not as a ceiling on defense space.",
+    counted: true,
+    slices: [
+      {
+        id: "sh-us",
+        name: "US programs in market",
+        gates: [],
+        hold: true,
+        sources: "Secondary summaries of Quilty, 2026, and of the May 2026 S-1. Not a line read from the filing in this sitting.",
+        years: {
+          2026: [
+            F("Quilty 2026 Starshield figure", 3.2e9, "usd", "estimate", "Analyst estimate. The S-1 summary figure of about $1.8 billion is fiscal 2025, not this bar.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "shield-allied",
+    group: "Starshield",
+    name: "Allied forces",
+    blurb: "Foreign military sales start shut. The multiple, 1.25 times the US 2026 figure, is a hypothesis for a Five Eyes and NATO set. It is not a contract.",
+    counted: true,
+    slices: [
+      {
+        id: "sh-allied",
+        name: "Export case",
+        gates: ["itar"],
+        hold: true,
+        sources: "No allied Starshield revenue print. The multiple is this board's.",
+        years: {
+          2026: [
+            F("US 2026 analyst figure", 3.2e9, "usd", "estimate", "Same Quilty figure as the US line."),
+            F("Allied multiple", 1.25, "count", "estimate", "Hypothesis. 3.2 × 1.25 = 4. Shown as a count, not a share, because it is a multiple of the US case.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "falcon",
+    group: "Launch",
+    name: "Falcon and rideshare",
+    blurb: "The pond is a 2026 launch-services market of $18.39 billion. The 35% revenue share is this board's. SpaceX flies most missions and charges less than an expendable rocket, so revenue share is set below flight share. Company revenue in 2025 was about $18.7 billion, of which connectivity was about $11.4 billion. The rest, about $7.3 billion, covers launch and everything else. This line is kept under that remainder on purpose. It is not grown on the later lens. Starship carries the later launch market.",
+    counted: true,
+    slices: [
+      {
+        id: "falcon-open",
+        name: "Revenue-share hypothesis",
+        gates: [],
+        hold: true,
+        sources: "PW Consulting, June 2026, space launch market. 2025 company and connectivity revenue from coverage of the May 2026 IPO filing.",
+        years: {
+          2026: [
+            F("2026 launch-services market", 18.39e9, "usd", "estimate", "PW Consulting table: $18.39 billion in 2026. A vendor forecast, not a census of invoices."),
+            F("Revenue share", 0.35, "share", "estimate", "Chosen so the product stays near the non-connectivity remainder of 2025 revenue. Not a disclosed SpaceX launch-revenue line.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "dragon",
+    group: "Launch",
+    name: "Dragon crew and cargo",
+    blurb: "NASA's September 2026 modification is $946 million for three missions, taking the crew contract to $5.92 billion and 17 flights through 2030. Booked here as one year of crew work at that mission price, plus an estimate for cargo and private flights. The launch inside a crew mission also touches the launch pond. Do not add this line to Falcon and call it cash.",
+    counted: true,
+    slices: [
+      {
+        id: "dragon-crew",
+        name: "Crew, one working year",
+        gates: [],
+        hold: true,
+        sources: "NASA contract modification reported 18–23 September 2026. $946 million, three missions, total contract $5.92 billion.",
+        years: {
+          2026: [
+            F("September 2026 modification, used as one working year", 946e6, "usd", "derived", "Three missions for $946 million is about $315 million each. A year at three flights is the same $946 million. Crew-15, Crew-16, and Crew-17 are dated 2027 and 2028, so this is a run-rate, not a 2026 invoice.")
+          ]
+        }
+      },
+      {
+        id: "dragon-cargo",
+        name: "Cargo and private astronauts",
+        gates: [],
+        hold: true,
+        sources: "No fresh cargo split was used. The figure is an estimate.",
+        years: {
+          2026: [
+            F("Cargo and private-astronaut allowance", 250e6, "usd", "estimate", "A round allowance so crew is not the whole Dragon line. Commercial-crew development funding is historical and is not in this year.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "starship",
+    group: "Launch",
+    name: "Starship",
+    blurb: "Flight 14 on 28 September 2026 was the first paid orbital flight. The price was not disclosed. One flight is not a cadence. The shut billion is new demand on top of the Falcon pond, and only if the price per kilogram collapses. The later lens drops both of those and books 40% of a $40.12 billion 2030 launch market instead. Falcon is held flat there so the two lines are not both grown on the same missions.",
+    counted: true,
+    slices: [
+      {
+        id: "ship-flight",
+        name: "First paid flight",
+        gates: [],
+        sources: "Next Move Strategy Consulting write-up of flight 14, 3 October 2026. Price not disclosed.",
+        years: {
+          2026: [
+            F("Placeholder for one undisclosed ticket", 150e6, "usd", "estimate", "Order of magnitude only, in a heavy-launch neighborhood. Not a SpaceX price.")
+          ]
+        }
+      },
+      {
+        id: "ship-extra",
+        name: "New demand if price collapses",
+        gates: ["ship"],
+        sources: "No study. The billion is a round hypothesis, kept small so it does not swallow the published launch pond.",
+        years: {
+          2026: [
+            F("Extra missions that do not exist at today's price", 1e9, "usd", "estimate", "On top of the $18.39 billion pond already on the Falcon line. Not a forecast.")
+          ]
+        }
+      },
+      {
+        id: "ship-2030",
+        name: "Share of the 2030 launch market",
+        gates: ["ship"],
+        sources: "Next Move Strategy Consulting, October 2026: launch services $40.12 billion by 2030, from an older base year. Long-range vendor forecast.",
+        years: {
+          2030: [
+            F("Launch-services market, 2030", 40.12e9, "usd", "estimate", "Vendor forecast. The base year of the underlying study is old. Treat the out-year as a hypothesis."),
+            F("Starship revenue share if cadence is real", 0.4, "share", "estimate", "Falcon stays at its 2026 hypothesis on this lens, about $6.44 billion. Forty percent plus that Falcon line is a bit over half of the 2030 pond, which leaves the rest of the world in the pond.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "hls",
+    group: "Launch",
+    name: "Starship HLS",
+    blurb: "A program total. It stays out of the annual number. The $2.9 billion is the 2021 NASA selection as it has been reported since, not a contract this board re-read, and later modifications are not included. It is not an annual run-rate. The gate is a crewed landing, which has not happened.",
+    counted: true,
+    slices: [
+      {
+        id: "hls-program",
+        name: "Reported selection value",
+        gates: ["hls"],
+        pool: "program",
+        hold: true,
+        sources: "NASA Human Landing System selection, 2021, widely reported near $2.9 billion.",
+        years: {
+          2026: [
+            F("Reported 2021 selection", 2.9e9, "usd", "estimate", "Not re-read from the contract in this sitting. Modifications since 2021 are excluded, so this is a floor on the program, not a current ceiling.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "p2p",
+    group: "Launch",
+    name: "Point to point",
+    blurb: "Passenger Earth-to-Earth has no licensed vehicle, no city pair, and no fare. It is named so it is not forgotten. It is not priced. Opening every other gate does not fill this in.",
+    counted: false,
+    slices: []
+  },
+  {
+    id: "orbital",
+    group: "Orbital",
+    name: "Orbital compute",
+    blurb: "Filings describe Starlink and orbital data centers as the bulk of SpaceX's own view of the future, and older space work as about 1% of that internal view. They do not print a dollar TAM. A terawatt in space is a capacity ambition from the Terafab comments, and it is not this bar. The later lens books 0.2 gigawatts at an assumed rental. Nothing is in the 2026 total. The slice stays shut until orbital power and Starship cadence are both open. It overlaps Terafab, which is the chips, and Grok, which is the model.",
+    counted: true,
+    slices: [
+      {
+        id: "orb-rent",
+        name: "Rental hypothesis",
+        gates: ["orb", "ship"],
+        sources: "Ars Technica, 29 September 2026, on the filings. Rental math is an assumption. GPU power near 700 watts and a $2 hour are assumptions, not a quote.",
+        years: {
+          2030: [
+            F("Orbital IT load", 0.2, "gw", "estimate", "Hypothesis. Not the terawatt figure."),
+            F("GPUs booked per gigawatt", 1400000, "count", "estimate", "A gigawatt divided by 700 watts is about 1.43 million GPUs. This board books 1.4 million. The 700 watts is a current accelerator, not a 2030 part."),
+            F("Rental per GPU-hour", 2, "usd", "estimate", "Assumption. Rental prices move."),
+            F("Hours in a year", 8760, "count", "derived", "24 × 365. No downtime is assumed, which makes this a ceiling on the assumption.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "chat",
+    group: "Grok",
+    name: "Grok Chat",
+    blurb: "Fifteen million paid chats is not a disclosed subscriber count. Twenty dollars a month is a working price in the neighborhood of other consumer plans, not a quote. Premium+ is about $395 a year and bundles more than Grok, so it is not used as the price. X and Grok together were reported at about 550 million monthly actives on 31 March 2026. That is not a paying-user count.",
+    counted: true,
+    slices: [
+      {
+        id: "chat-open",
+        name: "Markets where Chat is on sale",
+        gates: [],
+        hold: true,
+        sources: "Monthly-active figure from prospectus coverage, 31 March 2026. Price and conversion are assumptions.",
+        years: {
+          2026: [
+            F("Paying chats, hypothesis", 15e6, "count", "estimate", "Not a disclosed Grok subscriber count."),
+            F("Price per month", 20, "usd", "estimate", "Working assumption. Not the Premium+ bundle."),
+            F("Months", 12, "count", "derived", "Annualizes the price."),
+            F("Share of that case already sellable", 0.85, "share", "estimate", "Allows a restricted-country remainder. Not a store-by-store census.")
+          ]
+        }
+      },
+      {
+        id: "chat-shut",
+        name: "Restricted countries",
+        gates: ["chat-geo"],
+        hold: true,
+        sources: "Same hypothesis.",
+        years: {
+          2026: [
+            F("Paying chats, hypothesis", 15e6, "count", "estimate", "Same case."),
+            F("Price per month", 20, "usd", "estimate", "Same assumption."),
+            F("Months", 12, "count", "derived", "Annualizes the price."),
+            F("Share still restricted", 0.15, "share", "estimate", "The complement of 85%.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "bot",
+    group: "Grok",
+    name: "Grok Bot",
+    blurb: "The open slice is the bot people already talk to on X, priced as a guess of value on top of Premium. The shut slice is an enterprise seat that is not on sale. Microsoft reported more than 30 million paid Copilot seats in July 2026. Five million seats here is a capture hypothesis, not a customer list. This line overlaps Chat and Premium.",
+    counted: true,
+    slices: [
+      {
+        id: "bot-x",
+        name: "Bot on X",
+        gates: [],
+        hold: true,
+        sources: "The product is public on X. The dollar is not.",
+        years: {
+          2026: [
+            F("Incremental value on X, hypothesis", 600e6, "usd", "estimate", "No separate price is published. Overlaps Premium and Chat. The overlap note on the page applies.")
+          ]
+        }
+      },
+      {
+        id: "bot-ent",
+        name: "Enterprise seat",
+        gates: ["bot-ent"],
+        hold: true,
+        sources: "Copilot seat count from Microsoft's July 2026 comments, used only as a comparison, not as an input.",
+        years: {
+          2026: [
+            F("Enterprise seats, hypothesis", 5e6, "count", "estimate", "A capture case, set well under the 30 million Copilot seats reported in July 2026."),
+            F("Price per seat per year", 240, "usd", "estimate", "Working price. Not a Grok list price.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "grok-build",
+    group: "Grok",
+    name: "Grok Build",
+    blurb: "Grok Build 0.1 is on the API list at $1 per million input tokens and $2 per million output tokens, as of the 29 September 2026 price page. Usage is not published. Eighty million dollars stands in for that live SKU and starts open. The workplace is the coding-agent market, and it stays shut until a workplace exists. Bloomberg Intelligence put coding agents near $5 billion in 2025 and about $100 billion by 2032. The 2026 pond of $12 billion is this board's step between those two prints, not a third print.",
+    counted: true,
+    slices: [
+      {
+        id: "build-api",
+        name: "Live API SKU",
+        gates: [],
+        hold: true,
+        sources: "xAI API pricing page, 29 September 2026.",
+        years: {
+          2026: [
+            F("Stand-in for unpublished token volume", 80e6, "usd", "estimate", "The price is published. The volume is not. This keeps the live SKU visible without pretending a usage meter exists.")
+          ]
+        }
+      },
+      {
+        id: "build-work",
+        name: "Workplace",
+        gates: ["build"],
+        sources: "Bloomberg Intelligence, 4 June 2026, on coding agents.",
+        years: {
+          2026: [
+            F("2026 working pond", 12e9, "usd", "estimate", "A step between about $5 billion in 2025 and about $100 billion in 2032. The step is this board's."),
+            F("Capture if a workplace existed", 0.08, "share", "estimate", "Hypothesis. Grok has a model SKU, not an installed base of this size.")
+          ],
+          2030: [
+            F("Midpoint of the $12 billion working pond and the $100 billion 2032 figure", 56e9, "usd", "estimate", "Arithmetic midpoint, not a 2030 forecast. (12 + 100) / 2 = 56."),
+            F("Capture if a workplace existed", 0.08, "share", "estimate", "Same capture rate.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "api",
+    group: "Grok",
+    name: "Grok API",
+    blurb: "The API is on sale. MarketsandMarkets puts generative AI at $185.45 billion in 2026, and infrastructure at 46.1% of it. Fifteen percent, as model-API spend, is this board's cut of the same total. It is not their split. Five percent capture for Grok is a hypothesis. Residency keeps a quarter shut.",
+    counted: true,
+    slices: [
+      {
+        id: "api-open",
+        name: "Regions on sale today",
+        gates: [],
+        hold: true,
+        sources: "MarketsandMarkets generative AI release, July 2026. xAI pricing page, 29 September 2026, for the fact of a commercial API and a US region.",
+        years: {
+          2026: [
+            F("Generative AI market, 2026", 185.45e9, "usd", "estimate", "MarketsandMarkets. A forecast of a wide market, not an API census."),
+            F("Slice treated as model-API spend", 0.15, "share", "estimate", "Not the published 46.1% infrastructure share. Chosen so chips and cloud gear stay out of this line and in Terafab's pond."),
+            F("Grok capture", 0.05, "share", "estimate", "Hypothesis. Consumer share-of-voice is not used as a stand-in."),
+            F("Share already sellable", 0.75, "share", "estimate", "The API has a public price and a US region. The remainder is residency.")
+          ]
+        }
+      },
+      {
+        id: "api-shut",
+        name: "Residency still shut",
+        gates: ["api-res"],
+        hold: true,
+        sources: "Same stack.",
+        years: {
+          2026: [
+            F("Generative AI market, 2026", 185.45e9, "usd", "estimate", "Same market figure."),
+            F("Slice treated as model-API spend", 0.15, "share", "estimate", "Same cut."),
+            F("Grok capture", 0.05, "share", "estimate", "Same hypothesis."),
+            F("Share waiting on residency", 0.25, "share", "estimate", "The complement of 75%.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "terafab",
+    group: "Terafab",
+    name: "Terafab",
+    blurb: "NVIDIA's data-center revenue was $193.7 billion in fiscal 2026, the year that ended in early 2026. Ten percent of that year is the capture if a factory were already yielding. Fiscal 2027 was already running hotter, and this board does not annualize a quarter. TSMC's January to August 2026 revenue was about $106.5 billion. That is the foundry context, and it is not added, or the chips would be counted twice. Musk's 100 to 200 gigawatts a year, and a terawatt in space, are not converted into dollars. Both gates start shut. The bar moves only when the factory and a process partner are both open.",
+    counted: true,
+    slices: [
+      {
+        id: "fab-capture",
+        name: "Ten percent of a published accelerator year",
+        gates: ["fab", "node"],
+        hold: true,
+        sources: "NVIDIA fiscal 2026 data-center revenue as reported in market summaries of the results. Austin American-Statesman, 6 October 2026, for the TSMC discussions, Grimes County, the gigawatt ambition, and TSMC's $106.5 billion.",
+        years: {
+          2026: [
+            F("NVIDIA data-center revenue, fiscal 2026", 193.7e9, "usd", "published", "Full-year figure. Not a calendar-2026 forecast, and not marked up for the hotter fiscal 2027 quarters."),
+            F("Capture if Terafab were yielding", 0.1, "share", "estimate", "This board's share. Ten percent of one published year. Not a build-out of 100 gigawatts.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "premium",
+    group: "X",
+    name: "X Premium",
+    blurb: "Prospectus coverage put 4.4 million paying subscribers on 31 March 2026, about 0.8% of 550 million monthly actives reported for X and Grok together. The bar uses a 2% conversion, not the current rate. Premium is about $84 a year and Premium+ about $395. The 80/20 mix is not disclosed. Subscription revenue in the filings is larger than this line and includes more than Premium.",
+    counted: true,
+    slices: [
+      {
+        id: "prem-std",
+        name: "Premium, stores that can bill",
+        gates: [],
+        hold: true,
+        sources: "Prospectus coverage for the 31 March 2026 counts. Prices from product coverage in 2026, including DansDeals, 24 September 2026.",
+        years: {
+          2026: [
+            F("Monthly actives, X and Grok, 31 March 2026", 550e6, "count", "published", "A combined figure. The company coverage says X alone was not split out."),
+            F("Paid conversion hypothesis", 0.02, "share", "estimate", "Current paying subscribers were 4.4 million, about 0.8%. Two percent is the addressable case, not the run rate."),
+            F("Share on the $84 plan", 0.8, "share", "estimate", "The mix is not disclosed."),
+            F("Price per year", 84, "usd", "published", "Premium list price as reported."),
+            F("Stores that can bill", 0.9, "share", "estimate", "Leaves a closed-store remainder.")
+          ]
+        }
+      },
+      {
+        id: "prem-plus",
+        name: "Premium+, stores that can bill",
+        gates: [],
+        hold: true,
+        sources: "Same counts. Premium+ price as reported.",
+        years: {
+          2026: [
+            F("Monthly actives, X and Grok, 31 March 2026", 550e6, "count", "published", "Same combined figure."),
+            F("Paid conversion hypothesis", 0.02, "share", "estimate", "Same case."),
+            F("Share on the $395 plan", 0.2, "share", "estimate", "The complement of the 80% assumption."),
+            F("Price per year", 395, "usd", "published", "Premium+ list price as reported, about $395."),
+            F("Stores that can bill", 0.9, "share", "estimate", "Same remainder.")
+          ]
+        }
+      },
+      {
+        id: "prem-std-shut",
+        name: "Premium, closed stores",
+        gates: ["prem-geo"],
+        hold: true,
+        sources: "Same stack.",
+        years: {
+          2026: [
+            F("Monthly actives, X and Grok, 31 March 2026", 550e6, "count", "published", "Same combined figure."),
+            F("Paid conversion hypothesis", 0.02, "share", "estimate", "Same case."),
+            F("Share on the $84 plan", 0.8, "share", "estimate", "Same mix."),
+            F("Price per year", 84, "usd", "published", "Same price."),
+            F("Stores that cannot bill", 0.1, "share", "estimate", "The complement of 90%.")
+          ]
+        }
+      },
+      {
+        id: "prem-plus-shut",
+        name: "Premium+, closed stores",
+        gates: ["prem-geo"],
+        hold: true,
+        sources: "Same stack.",
+        years: {
+          2026: [
+            F("Monthly actives, X and Grok, 31 March 2026", 550e6, "count", "published", "Same combined figure."),
+            F("Paid conversion hypothesis", 0.02, "share", "estimate", "Same case."),
+            F("Share on the $395 plan", 0.2, "share", "estimate", "Same mix."),
+            F("Price per year", 395, "usd", "published", "Same price."),
+            F("Stores that cannot bill", 0.1, "share", "estimate", "The complement of 90%.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "money",
+    group: "X",
+    name: "X Money",
+    blurb: "The US account is live, so that slice starts open. It opened to Premium users in the summer of 2026 and to eligible US accounts by 24 September 2026, with Cross River Bank, a Visa card, and a stated yield around 4% to 6%. The yield is a cost, not the TAM. Forty dollars a year is an assumption about fees and interchange, per funded account. Ten million US accounts is not a published count. Non-US licenses start shut. This is the softest arithmetic on the board. New York has limits on the yield. That is noted and not given its own slice.",
+    counted: true,
+    slices: [
+      {
+        id: "money-us",
+        name: "United States",
+        gates: [],
+        hold: true,
+        sources: "Product coverage, June and September 2026, including the Cross River relationship and the US-only rollout.",
+        years: {
+          2026: [
+            F("Funded US accounts, hypothesis", 10e6, "count", "estimate", "Not a disclosed account count."),
+            F("Net revenue per account per year", 40, "usd", "estimate", "Fees and interchange, after the yield. The yield is not counted as revenue.")
+          ]
+        }
+      },
+      {
+        id: "money-intl",
+        name: "Outside the United States",
+        gates: ["money-intl"],
+        hold: true,
+        sources: "No non-US license is treated as granted.",
+        years: {
+          2026: [
+            F("Funded non-US accounts, hypothesis", 30e6, "count", "estimate", "Three times the US assumption. A sketch of the rest of the world, not a census."),
+            F("Net revenue per account per year", 40, "usd", "estimate", "Same fee assumption, which will be wrong in many countries. That is why the slice starts shut.")
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "ads",
+    group: "X",
+    name: "X Ads",
+    blurb: "Added because it is the revenue X actually collects, beside Premium and Money. Coverage of the filings put 2025 advertising at $1.84 billion. The ceiling on this bar is $4.5 billion, near the old ads peak, not a forecast and not Twitter's 2021 total revenue. A quarter stays shut for categories that still will not buy.",
+    counted: true,
+    slices: [
+      {
+        id: "ads-open",
+        name: "Categories buying today",
+        gates: [],
+        hold: true,
+        sources: "2025 ad revenue from prospectus coverage. The ceiling is this board's.",
+        years: {
+          2026: [
+            F("Ads ceiling, near the old peak", 4.5e9, "usd", "estimate", "Hypothesis. 2025 actual advertising was reported at $1.84 billion, which sits inside the open slice and is not the bar."),
+            F("Share of categories open", 0.75, "share", "estimate", "The closed quarter is brand-safety and categories that left.")
+          ]
+        }
+      },
+      {
+        id: "ads-shut",
+        name: "Categories still closed",
+        gates: ["brand"],
+        hold: true,
+        sources: "Same ceiling.",
+        years: {
+          2026: [
+            F("Ads ceiling, near the old peak", 4.5e9, "usd", "estimate", "Same ceiling."),
+            F("Share still closed", 0.25, "share", "estimate", "The complement of 75%.")
+          ]
+        }
+      }
+    ]
+  }
+];
+
+const RANK = { published: 0, derived: 1, estimate: 2, unknown: 3 };
+
+function product(factors) {
+  return factors.reduce(function (acc, factor) { return acc * factor.value; }, 1);
+}
+
+function roundDollars(n) {
+  return Math.round(n);
+}
+
+function lineById(id) {
+  return LINES.filter(function (item) { return item.id === id; })[0];
+}
+
+function usedByRemainder(slice, year) {
+  let used = 0;
+  slice.remainder.lines.forEach(function (id) {
+    const line = lineById(id);
+    if (!line || !line.counted) return;
+    line.slices.forEach(function (part) {
+      if (part.pool === "program" || part.remainder) return;
+      const usd = sliceDollars(part, year);
+      if (usd != null) used += usd;
+    });
+  });
+  return used;
+}
+
+function resolve(slice, year) {
+  if (slice.remainder) {
+    return {
+      factors: [F("Issuer pond", slice.remainder.pond, "usd", "published", slice.remainder.note)],
+      flat: true
+    };
+  }
+  if (slice.years[year]) return { factors: slice.years[year], flat: false };
+  if (year === 2030 && slice.hold && slice.years[2026]) return { factors: slice.years[2026], flat: true };
+  return null;
+}
+
+function sliceDollars(slice, year) {
+  if (slice.remainder) {
+    const rest = slice.remainder.pond - usedByRemainder(slice, year);
+    if (!(rest > 0)) return null;
+    return Math.round(rest);
+  }
+  const pack = resolve(slice, year);
+  if (!pack) return null;
+  return roundDollars(product(pack.factors));
+}
+
+function isOpen(slice, on) {
+  return slice.gates.every(function (id) { return on.has(id); });
+}
+
+function worstKind(factors) {
+  return factors.reduce(function (worst, factor) {
+    return RANK[factor.kind] > RANK[worst] ? factor.kind : worst;
+  }, "published");
+}
+
+function totals(on, year) {
+  const out = { annualOpen: 0, annualShut: 0, programOpen: 0, programShut: 0, rows: [] };
+  LINES.forEach(function (line) {
+    if (!line.counted) return;
+    line.slices.forEach(function (slice) {
+      const usd = sliceDollars(slice, year);
+      if (usd == null) return;
+      const open = isOpen(slice, on);
+      const pool = slice.pool === "program" ? "program" : "annual";
+      if (pool === "program") {
+        if (open) out.programOpen += usd; else out.programShut += usd;
+      } else if (open) out.annualOpen += usd; else out.annualShut += usd;
+      out.rows.push({ line: line.id, slice: slice.id, usd: usd, open: open, pool: pool });
+    });
+  });
+  return out;
+}
+
+function gateName(id) {
+  const gate = GATES.filter(function (item) { return item.id === id; })[0];
+  return gate ? gate.name : id;
+}
+
+function moneyEffect(id, on, year) {
+  const next = new Set(on);
+  if (next.has(id)) next.delete(id); else next.add(id);
+  const before = totals(on, year);
+  const after = totals(next, year);
+  return {
+    annual: after.annualOpen - before.annualOpen,
+    program: after.programOpen - before.programOpen
+  };
+}
+
+function heldText(id, on, year) {
+  let annual = 0;
+  let program = 0;
+  const names = {};
+  LINES.forEach(function (line) {
+    if (!line.counted) return;
+    line.slices.forEach(function (slice) {
+      if (slice.gates.indexOf(id) === -1) return;
+      const usd = sliceDollars(slice, year);
+      if (usd == null) return;
+      const others = slice.gates.filter(function (gateId) { return gateId !== id && !on.has(gateId); });
+      if (others.length) {
+        if (slice.pool === "program") program += usd; else annual += usd;
+        others.forEach(function (gateId) { names[gateId] = true; });
+      }
+    });
+  });
+  return { annual: annual, program: program, names: Object.keys(names) };
+}
+
+function fmt(n) {
+  const value = Math.round(n);
+  const sign = value < 0 ? "−" : "";
+  const abs = Math.abs(value);
+  if (abs >= 1e12) return sign + "$" + (Math.round(abs / 1e10) / 100).toFixed(2) + "T";
+  if (abs >= 1e9) return sign + "$" + trimNum((Math.round(abs / 1e7) / 100).toFixed(2)) + "B";
+  if (abs >= 1e6) return sign + "$" + trimNum((abs / 1e6).toFixed(abs / 1e6 >= 100 ? 1 : 2)) + "M";
+  return sign + "$" + abs.toLocaleString("en-US");
+}
+
+function trimNum(text) {
+  return text.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+}
+
+function fmtFactor(factor) {
+  if (factor.unit === "usd") return fmt(factor.value);
+  if (factor.unit === "share") return trimNum((factor.value * 100).toFixed(1)) + "%";
+  if (factor.unit === "count") {
+    if (Number.isInteger(factor.value)) return factor.value.toLocaleString("en-US");
+    return trimNum(factor.value.toFixed(2));
+  }
+  if (factor.unit === "gw") return String(factor.value) + " GW";
+  return String(factor.value);
+}
+
+function equation(factors, slice, year) {
+  if (slice && slice.remainder && year) {
+    const used = usedByRemainder(slice, year);
+    return fmt(slice.remainder.pond) + " − " + fmt(used) + " = " + fmt(slice.remainder.pond - used);
+  }
+  const parts = factors.map(fmtFactor);
+  return parts.join(" × ") + " = " + fmt(roundDollars(product(factors)));
+}
+
+function readHash() {
+  let raw = "";
+  try {
+    raw = decodeURIComponent(location.hash.replace(/^#/, ""));
+  } catch (err) {
+    raw = "";
+  }
+  let year = 2026;
+  const on = new Set();
+  raw.split("/").filter(Boolean).forEach(function (part) {
+    if (part === "2030" || part === "later") year = 2030;
+    else if (part === "2026" || part === "selftest") return;
+    else part.split(".").forEach(function (id) {
+      if (GATES.some(function (gate) { return gate.id === id; })) on.add(id);
+    });
+  });
+  return { year: year, on: on };
+}
+
+function writeHash(state) {
+  const ids = Array.from(state.on).sort();
+  const bits = [];
+  if (state.year === 2030) bits.push("2030");
+  if (ids.length) bits.push(ids.join("."));
+  const target = bits.length ? location.pathname + location.search + "#" + bits.join("/") : location.pathname + location.search;
+  if ((location.pathname + location.search + location.hash) !== target) history.replaceState(null, "", target);
+}
+
+function boot() {
+  const state = readHash();
+  const app = document.getElementById("app");
+  const live = document.getElementById("live");
+  const pop = el("div", { id: "pop", class: "pop", hidden: "hidden", role: "tooltip" });
+  const dialog = el("dialog", { class: "sheet" });
+  document.body.append(pop, dialog);
+  let lastOpen = null;
+  let sheetLine = null;
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+
+  function render(focus) {
+    const view = totals(state.on, state.year);
+    writeHash(state);
+    app.replaceChildren(renderPage(view));
+    renderSources();
+    if (lastOpen != null && view.annualOpen !== lastOpen) {
+      const num = app.querySelector(".hero-num");
+      if (num) num.classList.add("moved");
+    }
+    lastOpen = view.annualOpen;
+    if (sheetLine && dialog.open) fillSheet(sheetLine);
+    if (focus) {
+      const root = focus.sheet ? dialog : app;
+      const node = root.querySelector('[data-gate="' + focus.id + '"]');
+      if (node) node.focus();
+    }
+    const box = app.querySelector(".linkbox");
+    if (box) box.value = location.href;
+  }
+
+  function renderPage(view) {
+    const annual = view.annualOpen + view.annualShut;
+    return el("div", null,
+      el("section", { class: "hero" },
+        el("p", { class: "kicker" }, "Working paper · " + WHEN),
+        el("h1", null, "SpaceX TAM"),
+        el("p", { class: "lede" }, "The May 2026 S-1 calls $28.5 trillion the largest actionable TAM it can quantify. The parts it prints sum to $28.44 trillion. Green is the narrower case already on this board. Red is the rest of the filing, and it stays shut until that gate is opened. Open is not revenue, and this is not SpaceX guidance."),
+        el("ul", { class: "rules" },
+          el("li", null, "Hover a slice for the arithmetic."),
+          el("li", null, "The filing gates unlock the rest of each printed pond."),
+          el("li", null, "Terafab stays red until both of its own gates are open.")
+        ),
+        el("div", { class: "figure" },
+          el("div", { class: "figure-top" },
+            el("div", null,
+              el("p", { class: "hero-num", "data-usd": String(annual) }, fmt(annual)),
+              el("p", { class: "hero-sub" },
+                el("span", { class: "open" }, fmt(view.annualOpen) + " open"),
+                el("strong", null, fmt(view.annualShut) + " still shut")
+              ),
+              el("p", { class: "scale" }, "The filing's rounded claim is $28.5 trillion. X Money and orbital compute sit outside that claim and inside this sum. Programs, kept out of the sum: " + fmt(view.programOpen) + " open and " + fmt(view.programShut) + " shut. 2025 connectivity revenue was about $11.4 billion. That number is not a slice of the bar.")
+            ),
+            el("div", { class: "year", role: "group", "aria-label": "Year" },
+              yearButton(2026, "2026"),
+              yearButton(2030, "Later")
+            )
+          ),
+          masterBar(view),
+          el("div", { class: "toolbar" },
+            el("button", { class: "text-btn", type: "button", "data-action": "today" }, "Today"),
+            el("button", { class: "text-btn", type: "button", "data-action": "all" }, "Open every gate"),
+            el("button", { class: "text-btn", type: "button", "data-action": "copy" }, "Copy link"),
+            el("input", { class: "linkbox", readonly: "readonly", "aria-label": "Link to this gate state", value: location.href })
+          )
+        )
+      ),
+      el("div", { class: "layout" },
+        el("div", { class: "lines" }, GROUPS.map(renderGroup)),
+        el("aside", { class: "rail", id: "gates" },
+          el("h2", null, "Gates"),
+          el("p", { class: "group-deck" }, "Shut is today's state. The link remembers what you open."),
+          GROUPS.map(function (group) {
+            const gates = GATES.filter(function (gate) { return gate.group === group.id; });
+            if (!gates.length) return null;
+            return el("div", null,
+              el("h2", null, group.id),
+              gates.map(renderGate)
+            );
+          })
+        )
+      )
+    );
+  }
+
+  function yearButton(year, label) {
+    return el("button", { type: "button", "data-year": String(year), "aria-pressed": state.year === year ? "true" : "false" }, label);
+  }
+
+  function masterBar(view) {
+    const groups = GROUPS.map(function (group) {
+      let open = 0;
+      let shut = 0;
+      LINES.forEach(function (line) {
+        if (line.group !== group.id || !line.counted) return;
+        line.slices.forEach(function (slice) {
+          if (slice.pool === "program") return;
+          const usd = sliceDollars(slice, state.year);
+          if (usd == null) return;
+          if (isOpen(slice, state.on)) open += usd; else shut += usd;
+        });
+      });
+      return { id: group.id, open: open, shut: shut };
+    });
+    const bar = el("div", { class: "master-bar" });
+    groups.forEach(function (group) {
+      const total = group.open + group.shut;
+      if (!total) return;
+      const chunk = el("div", { class: "chunk", style: "flex:" + total + " 1 0" });
+      if (group.open) chunk.append(el("i", { class: "open", style: "flex:" + group.open }));
+      if (group.shut) chunk.append(el("i", { class: "shut", style: "flex:" + group.shut }));
+      chunk.style.display = "flex";
+      bar.append(chunk);
+    });
+    return el("div", { class: "master" },
+      bar,
+      el("ul", { class: "key" }, groups.map(function (group) {
+        const total = group.open + group.shut;
+        const text = total ? fmt(group.open) + " open · " + fmt(group.shut) + " shut" : "no dollars on this lens";
+        return el("li", null, el("b", null, group.id), " ", text);
+      }))
+    );
+  }
+
+  function renderGroup(group) {
+    const lines = LINES.filter(function (line) { return line.group === group.id; });
+    return el("section", null,
+      el("h2", null, group.id),
+      el("p", { class: "group-deck" }, group.deck),
+      lines.map(renderLine)
+    );
+  }
+
+  function renderLine(line) {
+    const slices = line.slices.map(function (slice) {
+      return { slice: slice, usd: sliceDollars(slice, state.year) };
+    }).filter(function (item) { return item.usd != null; });
+    const open = slices.reduce(function (sum, item) { return sum + (isOpen(item.slice, state.on) ? item.usd : 0); }, 0);
+    const shut = slices.reduce(function (sum, item) { return sum + (isOpen(item.slice, state.on) ? 0 : item.usd); }, 0);
+    const total = open + shut;
+    const kinds = slices.map(function (item) { return worstKind(resolve(item.slice, state.year).factors); });
+    const kind = kinds.length ? kinds.reduce(function (worst, item) { return RANK[item] > RANK[worst] ? item : worst; }, "published") : "unknown";
+    const later = laterBits(line);
+    const bar = total ? el("div", {
+      class: "bar",
+      role: "img",
+      "aria-label": line.name + ", " + fmt(open) + " open, " + fmt(shut) + " shut",
+      style: "grid-template-columns:" + slices.map(function (item) { return "minmax(18px, " + item.usd + "fr)"; }).join(" ")
+    }, slices.map(function (item) {
+      const opened = isOpen(item.slice, state.on);
+      return el("button", {
+        type: "button",
+        class: "seg " + (opened ? "open" : "shut"),
+        "data-slice": item.slice.id,
+        "data-line": line.id,
+        "aria-label": item.slice.name + ", " + fmt(item.usd) + ", " + (opened ? "open" : "shut")
+      }, el("span", { class: "seg-label" }, fmt(item.usd)));
+    })) : el("div", { class: "bar empty" }, "Not in the total.");
+    return el("article", { class: "line", id: "line-" + line.id },
+      el("header", null,
+        el("h3", null, line.name),
+        el("span", { class: "chip " + kind }, kind)
+      ),
+      el("p", { class: "blurb" }, line.blurb),
+      total ? el("p", { class: "money" },
+        el("strong", null, fmt(open || shut)),
+        open ? " open of " + fmt(total) : " still shut",
+        line.slices.some(function (slice) { return slice.pool === "program"; }) ? " · program, not annual" : ""
+      ) : el("p", { class: "money" }, el("strong", null, "—")),
+      bar,
+      later ? el("p", { class: "eq" }, later) : null,
+      el("button", { type: "button", class: "math", "data-line": line.id }, "Full breakdown")
+    );
+  }
+
+  function laterBits(line) {
+    if (state.year !== 2026) return "";
+    const bits = [];
+    line.slices.forEach(function (slice) {
+      if (slice.years[2026] || !slice.years[2030]) return;
+      bits.push(slice.name + " " + fmt(sliceDollars(slice, 2030)));
+    });
+    return bits.length ? "On the later lens, not in this total: " + bits.join("; ") + "." : "";
+  }
+
+  function renderGate(gate) {
+    const on = state.on.has(gate.id);
+    const effect = moneyEffect(gate.id, state.on, state.year);
+    const held = heldText(gate.id, state.on, state.year);
+    let effectLine = "";
+    if (effect.annual > 0) effectLine = "Opens " + fmt(effect.annual) + " on this lens";
+    else if (effect.annual < 0) effectLine = "Shuts " + fmt(-effect.annual) + " on this lens";
+    else if (effect.program > 0) effectLine = "Opens " + fmt(effect.program) + " of program value";
+    else if (effect.program < 0) effectLine = "Shuts " + fmt(-effect.program) + " of program value";
+    else if (held.annual || held.program) {
+      const amount = held.annual || held.program;
+      effectLine = "Holds " + fmt(amount) + " until " + held.names.map(gateName).join(" and ") + " is open";
+    } else if (state.year === 2026) {
+      const later = moneyEffect(gate.id, state.on, 2030);
+      const laterHeld = heldText(gate.id, state.on, 2030);
+      if (later.annual > 0) effectLine = "No 2026 dollars · later opens " + fmt(later.annual);
+      else if (later.annual < 0) effectLine = "No 2026 dollars · later shuts " + fmt(-later.annual);
+      else if (laterHeld.annual || laterHeld.program) {
+        const laterAmount = laterHeld.annual || laterHeld.program;
+        effectLine = "Holds " + fmt(laterAmount) + " on the later lens until " + laterHeld.names.map(gateName).join(" and ") + " is open";
+      } else effectLine = "No dollars attached";
+    } else effectLine = "No dollars attached";
+    if (state.year === 2026 && effect.annual !== 0) {
+      const laterMove = moneyEffect(gate.id, state.on, 2030);
+      if (laterMove.annual !== effect.annual && laterMove.annual !== 0) {
+        effectLine += " · later " + (laterMove.annual > 0 ? "opens " : "shuts ") + fmt(Math.abs(laterMove.annual));
+      }
+    }
+    return el("button", {
+      type: "button",
+      class: "gate",
+      "data-gate": gate.id,
+      "aria-pressed": on ? "true" : "false"
+    },
+      el("span", { class: "gn" }, el("span", null, gate.name), el("span", { class: "pill" }, on ? "Open" : "Shut")),
+      el("span", { class: "gs" }, gate.today),
+      el("span", { class: "ge" }, effectLine)
+    );
+  }
+
+  function fillSheet(lineId) {
+    const line = LINES.filter(function (item) { return item.id === lineId; })[0];
+    if (!line) return;
+    const blocks = line.slices.map(function (slice) {
+      const pack = resolve(slice, state.year);
+      const body = [el("h4", null, slice.name)];
+      if (!pack) {
+        const later = slice.years[2030] ? fmt(sliceDollars(slice, 2030)) : "not priced";
+        body.push(el("p", { class: "note" }, "Not on the " + (state.year === 2030 ? "later" : "2026") + " lens. Later value: " + later + "."));
+      } else {
+        body.push(el("p", { class: "eq" }, equation(pack.factors, slice, state.year) + (slice.remainder || !pack.flat ? "" : " · repeated, no later source")));
+        pack.factors.forEach(function (factor) {
+          body.push(el("p", { class: "note" }, el("span", { class: "chip " + factor.kind }, factor.kind), " ", factor.label, " · ", fmtFactor(factor), ". ", factor.note));
+        });
+        body.push(el("p", { class: "note" }, slice.gates.length ? "Gates: " + slice.gates.map(gateName).join(", ") + ". " + (isOpen(slice, state.on) ? "All open." : "Still shut.") : "No gate. This slice starts open."));
+        body.push(el("p", { class: "src note" }, slice.sources));
+      }
+      slice.gates.forEach(function (id) {
+        body.push(el("button", { type: "button", class: "text-btn", "data-gate": id, "data-sheet": "1", style: "margin:6px 8px 0 0" }, (state.on.has(id) ? "Shut " : "Open ") + gateName(id)));
+      });
+      return el("div", { class: "slice-block" }, body);
+    });
+    dialog.replaceChildren(el("div", { class: "sheet-body" },
+      el("div", { class: "sheet-top" },
+        el("h3", null, line.name),
+        el("button", { type: "button", class: "text-btn", "data-action": "close" }, "Close")
+      ),
+      el("p", { class: "blurb" }, line.blurb),
+      blocks,
+      el("button", { type: "button", class: "text-btn", "data-action": "close", style: "margin-top:12px" }, "Close")
+    ));
+  }
+
+  function openSheet(lineId) {
+    sheetLine = lineId;
+    fillSheet(lineId);
+    if (!dialog.open) dialog.showModal();
+  }
+
+  function showPop(button) {
+    if (coarse) return;
+    const line = LINES.filter(function (item) { return item.id === button.getAttribute("data-line"); })[0];
+    const slice = line && line.slices.filter(function (item) { return item.id === button.getAttribute("data-slice"); })[0];
+    if (!slice) return;
+    const pack = resolve(slice, state.year);
+    if (!pack) return;
+    pop.replaceChildren(el("div", null,
+      el("strong", null, line.name + " — " + slice.name),
+      el("p", { class: "eqline" }, equation(pack.factors, slice, state.year)),
+      pack.factors.map(function (factor) {
+        return el("p", null, factor.label + " (" + factor.kind + "): " + factor.note);
+      }),
+      el("p", null, slice.gates.length ? "Moves when " + slice.gates.map(gateName).join(" and ") + (slice.gates.length > 1 ? " are" : " is") + " open." : "No gate on this slice."),
+      el("p", { class: "src" }, slice.sources)
+    ));
+    pop.hidden = false;
+    if (!coarse && window.innerWidth > 900) {
+      const rect = button.getBoundingClientRect();
+      const width = pop.offsetWidth;
+      let left = rect.left;
+      if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+      pop.style.left = Math.max(12, left) + "px";
+      pop.style.top = Math.min(window.innerHeight - pop.offsetHeight - 12, rect.bottom + 8) + "px";
+    }
+  }
+
+  document.addEventListener("click", function (event) {
+    const gate = event.target.closest("[data-gate]");
+    if (gate) {
+      const id = gate.getAttribute("data-gate");
+      if (state.on.has(id)) state.on.delete(id); else state.on.add(id);
+      announce(id);
+      render({ id: id, sheet: gate.hasAttribute("data-sheet") || event.target.closest("dialog") });
+      return;
+    }
+    const year = event.target.closest("[data-year]");
+    if (year) {
+      state.year = Number(year.getAttribute("data-year"));
+      announceYear();
+      render();
+      return;
+    }
+    const action = event.target.closest("[data-action]");
+    if (action) {
+      const name = action.getAttribute("data-action");
+      if (name === "today") { state.on.clear(); state.year = 2026; }
+      if (name === "all") GATES.forEach(function (gate) { state.on.add(gate.id); });
+      if (name === "copy") { copyLink(); return; }
+      if (name === "close") { dialog.close(); sheetLine = null; return; }
+      render();
+      return;
+    }
+    const lineButton = event.target.closest("[data-line]");
+    if (lineButton) openSheet(lineButton.getAttribute("data-line"));
+  });
+
+  document.addEventListener("pointerover", function (event) {
+    const slice = event.target.closest("[data-slice]");
+    if (slice) showPop(slice);
+  });
+  document.addEventListener("focusin", function (event) {
+    const slice = event.target.closest("[data-slice]");
+    if (slice) showPop(slice);
+  });
+  document.addEventListener("pointerout", function (event) {
+    const slice = event.target.closest("[data-slice]");
+    if (!slice || slice.contains(event.relatedTarget)) return;
+    pop.hidden = true;
+  });
+  document.addEventListener("focusout", function (event) {
+    const slice = event.target.closest("[data-slice]");
+    if (!slice) return;
+    pop.hidden = true;
+  });
+
+  function announce(id) {
+    const view = totals(state.on, state.year);
+    const open = state.on.has(id);
+    live.textContent = gateName(id) + (open ? " is open. " : " is shut. ") + fmt(view.annualOpen) + " open on this lens.";
+  }
+
+  function announceYear() {
+    const view = totals(state.on, state.year);
+    live.textContent = (state.year === 2030 ? "Later lens. " : "2026 lens. ") + fmt(view.annualOpen) + " open.";
+  }
+
+  function copyLink() {
+    const text = location.href;
+    function showField() {
+      const box = app.querySelector(".linkbox");
+      live.textContent = "Select the link and copy it.";
+      if (box) { box.focus(); box.select(); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        live.textContent = "Link copied.";
+      }, showField);
+    } else showField();
+  }
+
+  function renderSources() {
+    const foot = document.getElementById("sources");
+    foot.replaceChildren(
+      el("h2", null, "How to read the sum"),
+      el("p", null, "The headline is the S-1's printed parts, plus X Money and orbital compute, which the $28.5 trillion claim does not include. Inside a filing pond, the red slice is the pond minus the narrower lines, so those lines are not added twice. The narrower lines still overlap one another: Starshield is not inside the commercial Starlink case, Falcon and Starship both touch launch, and Dragon's crew price includes a launch. Premium, Chat, and Bot can be the same person paying once. This is not a forecast of SpaceX revenue."),
+      el("p", null, "Left off on purpose: Tesla vehicles, energy, and robots; Neuralink; The Boring Company; a priced Mars case. IoT and point-to-point are on the page and unpriced."),
+      el("h2", null, "Sources checked " + WHEN),
+      el("ul", null,
+        item("SpaceX preliminary S-1, 20 May 2026: quantifiable TAM of $28.5 trillion, excluding China and Russia. Printed parts: space-enabled solutions $370 billion; Starlink broadband $870 billion; Starlink mobile $740 billion; AI infrastructure $2.4 trillion; consumer subscriptions $760 billion; digital advertising $600 billion; enterprise applications $22.7 trillion. Those parts sum to $28.44 trillion. Coverage of the filing says the figure is a 2026 sizing at full share, and that orbital data centers are outside it."),
+        item("Connectivity about $11.4 billion of about $18.7 billion company revenue in 2025, from coverage of the May 2026 IPO filing. Q2 2026 connectivity about $4.3 billion. 12 million subscribers at the end of that quarter. ARPU about $66."),
+        item("Quilty Space, via Advanced Television, 24 March 2026: Starlink tracking toward $20 billion in 2026, consumer $11.3 billion, enterprise $1.68 billion, maritime $1.94 billion, aviation up 68%, mobile toward 25 million monthly users."),
+        item("Bernstein, via Investing.com, 3 October 2026: a residential case up to about 150 million subscribers and $65 billion, a selected-unconnected case of $12 to $21 billion, and more than 800 million broadband subscriptions in markets served or enterable."),
+        item("Stratview Research, October 2026: in-flight connectivity $2.9 billion in 2026 and $4.7 billion in 2034."),
+        item("PW Consulting, June 2026: space launch market $18.39 billion in 2026. Next Move Strategy Consulting: launch services $40.12 billion by 2030, and Starship flight 14 on 28 September 2026."),
+        item("NASA crew modification, September 2026: $946 million for three missions, contract total $5.92 billion. HLS selection reported in 2021 near $2.9 billion."),
+        item("MarketsandMarkets, July 2026: generative AI $185.45 billion in 2026. Bloomberg Intelligence, 4 June 2026: coding agents about $5 billion in 2025 and about $100 billion by 2032."),
+        item("NVIDIA data-center revenue, fiscal 2026, $193.7 billion, as reported in summaries of the results. xAI API prices, 29 September 2026."),
+        item("X, from prospectus coverage as of 31 March 2026: about 550 million monthly actives for X and Grok, 4.4 million Premium subscribers, 2025 advertising $1.84 billion. X Money US rollout covered through 24 September 2026."),
+        item("Terafab: Austin American-Statesman, 6 October 2026. TSMC talks described as discussions. Ambition of 100 to 200 gigawatts a year on Earth and a terawatt in space. TSMC revenue about $106.5 billion for January through August 2026."),
+        item("Orbital compute: Ars Technica, 29 September 2026, on SpaceX filings.")
+      )
+    );
+  }
+
+  function item(text) { return el("li", null, text); }
+
+  dialog.addEventListener("close", function () { sheetLine = null; });
+  render();
+}
+
+function audit() {
+  function assert(cond, msg) {
+    if (!cond) throw new Error(msg);
+  }
+  const none = totals(new Set(), 2026);
+  const all = totals(new Set(GATES.map(function (gate) { return gate.id; })), 2026);
+  const fabOnly = totals(new Set(["fab"]), 2026);
+  const both = totals(new Set(["fab", "node"]), 2026);
+  const laterShut = totals(new Set(), 2030);
+  const shipOnly = totals(new Set(["ship"]), 2030);
+  const orb = totals(new Set(["orb", "ship"]), 2030);
+  assert(none.annualOpen + none.annualShut === all.annualOpen + all.annualShut, "gate toggle leaked dollars");
+  assert(fabOnly.annualOpen === none.annualOpen, "factory gate alone moved Terafab");
+  assert(Math.round(both.annualOpen - none.annualOpen) === Math.round(193.7e9 * 0.1), "Terafab capture");
+  assert(none.programOpen === 0 && none.programShut === 2.9e9, "HLS program pool");
+  assert(moneyEffect("hls", new Set(), 2026).annual === 0, "HLS touched the annual sum");
+  assert(moneyEffect("hls", new Set(), 2026).program === 2.9e9, "HLS program effect");
+  assert(moneyEffect("lic-rest", new Set(), 2026).annual === 6.3e9, "landing rights");
+  assert(shipOnly.annualOpen > laterShut.annualOpen, "Starship later");
+  assert(orb.annualOpen > shipOnly.annualOpen, "orbital needs both gates");
+  const ponds = 370e9 + 870e9 + 740e9 + 2.4e12 + 760e9 + 600e9 + 22.7e12;
+  let money = 0;
+  lineById("money").slices.forEach(function (slice) { money += sliceDollars(slice, 2026); });
+  let orbital = 0;
+  lineById("orbital").slices.forEach(function (slice) {
+    const usd = sliceDollars(slice, 2026);
+    if (usd != null) orbital += usd;
+  });
+  assert(Math.round(none.annualOpen + none.annualShut) === Math.round(ponds + money + orbital), "board is the filing plus X Money and orbital");
+  assert(fmt(ponds) === "$28.44T", "printed parts");
+  assert(fmt(2.4e12) === "$2.40T", "infrastructure trillions");
+  assert(fmt(22.7e12) === "$22.70T", "enterprise trillions");
+  assert(fmt(none.annualShut) === "$28.40T", "shut trillions");
+  assert(fmt(1015000000) === "$1.02B", "billion half-up");
+  assert(fmt(185.45e9) === "$185.45B", "genai billions");
+  assert(fmt(193.7e9) === "$193.7B", "nvidia billions");
+  assert(fmt(21e9) === "$21B", "whole billions");
+  assert(fmt(19.37e9) === "$19.37B", "terafab billions");
+  const fabOn = new Set(["fab"]);
+  const heldFab = heldText("fab", fabOn, 2026);
+  assert(heldFab.names.indexOf("node") !== -1 && heldFab.annual === Math.round(193.7e9 * 0.1), "open factory still holds Terafab");
+  assert(moneyEffect("own-net", new Set(["own-net"]), 2030).annual < 0, "own network later shuts when open");
+  LINES.forEach(function (line) {
+    line.slices.forEach(function (slice) {
+      if (slice.gates.indexOf("avi-fleet") === -1) return;
+      assert(fmt(sliceDollars(slice, 2026)) === "$1.02B", "aviation shut display");
+    });
+  });
+  LINES.forEach(function (line) {
+    line.slices.forEach(function (slice) {
+      [2026, 2030].forEach(function (year) {
+        const usd = sliceDollars(slice, year);
+        if (usd == null) return;
+        assert(isFinite(usd) && usd > 0, line.id + " " + slice.id + " " + year);
+      });
+    });
+  });
+  return {
+    open: fmt(none.annualOpen),
+    shut: fmt(none.annualShut),
+    terafab: fmt(both.annualOpen - none.annualOpen),
+    program: fmt(none.programShut),
+    orbital: fmt(orb.annualOpen - shipOnly.annualOpen),
+    laterOpen: fmt(laterShut.annualOpen)
+  };
+}
+
+function el(tag, attrs) {
+  const node = document.createElement(tag);
+  const kids = Array.prototype.slice.call(arguments, 2).flat();
+  if (attrs) {
+    Object.keys(attrs).forEach(function (key) {
+      const value = attrs[key];
+      if (value == null || value === false) return;
+      if (key === "class") node.className = value;
+      else node.setAttribute(key, String(value));
+    });
+  }
+  kids.forEach(function (kid) {
+    if (kid == null || kid === false) return;
+    node.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  });
+  return node;
+}
+
+if (typeof document !== "undefined") boot();
+else print(JSON.stringify(audit()));
+</script>
+</body>
+</html>
