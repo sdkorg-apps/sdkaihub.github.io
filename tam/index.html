@@ -71,24 +71,43 @@
   }
   .lede { max-width: 62ch; color: var(--muted); font-size: 1.08rem; }
   .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+    display: block;
     padding: 8px 0 28px;
   }
   .card {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    width: min(100%, 720px);
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 18px;
     padding: 18px;
     box-shadow: var(--shadow);
     color: inherit;
-    text-decoration: none;
   }
   .card:hover { border-color: var(--copper); }
+  .units {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 28px;
+  }
+  .units > li { display: grid; gap: 6px; align-content: start; }
+  .units > li.wide { grid-column: 1 / -1; }
+  .units h3 { margin: 0; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+  .parts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .parts li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: var(--ink);
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+  .why { color: var(--muted); font-size: 0.86rem; max-width: 68ch; }
   .kicker {
     margin: 0;
     font-family: var(--mono);
@@ -99,13 +118,28 @@
   }
   .card h2 { margin: 0; font-family: var(--serif); font-size: 2rem; font-weight: 600; }
   .card p { margin: 0; color: var(--muted); }
+  .card .kicker { color: var(--copper); }
   .figure {
+    margin: 0;
     font-family: var(--serif);
-    font-size: 1.8rem;
-    letter-spacing: -0.03em;
+    font-size: 2.6rem;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
     color: var(--ink);
   }
-  .go { margin-top: auto; font-weight: 700; color: var(--copper); }
+  .card p.figure { color: var(--ink); }
+  a.go {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: center;
+  }
+  a.go:hover { background: var(--copper); color: var(--paper); }
   .ask {
     border-top: 1px solid var(--line);
     padding: 8px 0 8px;
@@ -173,6 +207,7 @@
     body::before { width: 0; }
     header.top { display: block; }
     header.top .donate { margin-top: 12px; }
+    .units { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -185,15 +220,67 @@
   <main>
     <p class="kicker">Company papers</p>
     <h1>TAM</h1>
-    <p class="lede">Boards that size what a company can address, with the arithmetic on the slice and a gate on anything that is still shut. These are working papers, not the company's guidance.</p>
+    <p class="lede">Each tile shows the business units and the total TAM. The breakdown is $10. These are working papers, not the company's guidance.</p>
     <div class="cards">
-      <a class="card" href="/tam/spacex/">
-        <p class="kicker">S-1 · 20 May 2026</p>
+      <article class="card">
+        <p class="kicker">Total TAM</p>
         <h2>SpaceX</h2>
         <p class="figure">$28.5T</p>
-        <p>Printed parts $28.44T. Green is sourced. Red is the rest of the filing. Grok is broken out beside the print and is not added to it.</p>
-        <span class="go">Open the board</span>
-      </a>
+        <ul class="units">
+          <li>
+            <h3>Starlink</h3>
+            <ul class="parts">
+              <li>Internet</li>
+              <li>Maritime</li>
+              <li>Mobile</li>
+              <li>Direct to cell</li>
+              <li>Aviation</li>
+              <li>IoT</li>
+            </ul>
+          </li>
+          <li>
+            <h3>Starshield</h3>
+            <ul class="parts"><li>Gov</li></ul>
+            <p class="why">One published line. No agency split.</p>
+          </li>
+          <li>
+            <h3>Grok</h3>
+            <ul class="parts">
+              <li>Chat</li>
+              <li>Bot</li>
+              <li>Build</li>
+              <li>API</li>
+            </ul>
+          </li>
+          <li>
+            <h3>X</h3>
+            <ul class="parts">
+              <li>Ads</li>
+              <li>Premium</li>
+              <li>Money</li>
+            </ul>
+          </li>
+          <li class="wide">
+            <h3>Terafab</h3>
+            <ul class="parts">
+              <li>Logic</li>
+              <li>Memory</li>
+              <li>Packaging</li>
+            </ul>
+            <p class="why">A chip plant, not a product on sale. The companies describe those three steps, and chips for computing in space. The $16.8 billion first phase is investment, not sales. No chip revenue is published, so it stays out of the total.</p>
+          </li>
+          <li>
+            <h3>Space</h3>
+            <ul class="parts">
+              <li>Launch</li>
+              <li>Point to point</li>
+              <li>Orbital compute</li>
+            </ul>
+            <p class="why">Point to point and orbital compute are named. The printed total leaves them out.</p>
+          </li>
+        </ul>
+        <a class="go" href="https://buy.stripe.com/9B68wRdxBdbRcty6ET5J602">See the breakdown · $10</a>
+      </article>
     </div>
     <section class="ask" id="request">
       <p class="kicker">Request</p>
