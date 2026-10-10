@@ -180,12 +180,53 @@
     padding: 0;
     background: transparent;
   }
-  .chunk i { display: block; height: 100%; }
-  .chunk i.open { background: var(--open); }
-  .chunk i.shut {
+  .chunk.open { background: var(--open); }
+  .chunk.shut {
     background-color: var(--shut);
     background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.22) 0 5px, transparent 5px 10px);
   }
+  .chunk.lit { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .board { margin-top: 14px; border-top: 1px solid var(--line); }
+  .ev { border-bottom: 1px solid var(--line); }
+  .ev button {
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1.1fr) minmax(0, 1.4fr) auto;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  .ev i { width: 10px; height: 10px; border-radius: 2px; }
+  .ev.open i { background: var(--open); }
+  .ev.shut i { background: var(--shut); }
+  .ev b { font-weight: 650; }
+  .ev .money, .ev .eq { font-family: var(--mono); font-size: 12px; margin: 0; }
+  .ev .eq { color: var(--muted); }
+  .ev .money { color: var(--ink); white-space: nowrap; }
+  .pts { display: none; padding: 0 0 10px 20px; }
+  .ev.on .pts { display: block; }
+  .card .pts { display: block; margin-top: 8px; padding: 0; }
+  .pt { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 8px; margin: 4px 0; font-size: 0.86rem; }
+  .pt b { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--copper); font-weight: 650; padding-top: 3px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0 28px; }
+  .card {
+    text-align: left;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 14px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--ink);
+  }
+  .card.hypothesis { border-left-color: var(--copper); }
+  .card header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .card h3 { margin: 0; font-size: 1rem; }
+  .card .eq { margin: 6px 0; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+  .chip.hypothesis { background: #f8efe4; color: #6a3d12; }
   .key { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 10px 0 0; padding: 0; list-style: none; }
   .key button {
     font-size: 0.82rem;
@@ -199,7 +240,7 @@
   .key b { color: var(--ink); font-weight: 650; }
   .lines { padding: 8px 0 12px; }
   .group { scroll-margin-top: 16px; }
-  .group h2, .bare-wrap h2 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 22px 0 8px; }
+  .group h2, .bare-wrap h2, #grok h2 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 22px 0 8px; }
   .group-deck { margin: -4px 0 10px; color: var(--muted); font-size: 0.92rem; }
   .line {
     background: var(--card);
@@ -313,7 +354,9 @@
   .pop {
     position: fixed;
     z-index: 30;
-    width: min(380px, calc(100vw - 24px));
+    width: min(460px, calc(100vw - 24px));
+    max-height: min(70vh, 420px);
+    overflow: auto;
     background: #1c1914;
     color: #f6f1e6;
     border-radius: 14px;
@@ -321,6 +364,7 @@
     box-shadow: var(--shadow);
     pointer-events: none;
   }
+  .pop.pin { pointer-events: auto; }
   .pop[hidden] { display: none; }
   .pop .eqline { font-family: var(--mono); font-size: 12px; color: #f0d7b4; margin: 6px 0; }
   .pop p { margin: 6px 0; font-size: 0.84rem; color: #e6dfd2; }
@@ -361,6 +405,10 @@
     .tools { margin-top: 12px; }
     .year { justify-content: flex-start; }
     .bare li { grid-template-columns: 1fr; gap: 2px; }
+    .cards { grid-template-columns: 1fr; }
+    .ev button { grid-template-columns: 10px minmax(0, 1fr) auto; }
+    .ev .eq { display: none; }
+    .ev.on .eq { display: block; grid-column: 2 / -1; grid-row: 2; }
     .gate { flex-wrap: wrap; }
     .pop { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; }
   }
@@ -405,24 +453,110 @@ const GROUPS = [
   { id: "x", name: "X", deck: "2025 advertising from filing coverage." }
 ];
 
+const GROK_N = 1.9e6;
+const GROK_PRICE = 30;
+const GROK_CHECK = GROK_N * GROK_PRICE * 12;
+const STARLINK_N = 10.3e6;
+const STARLINK_ARPU = 66;
+const STARLINK_CHECK = STARLINK_N * STARLINK_ARPU * 12;
+const HR = "Hollywood Reporter, 26 May 2026, on the filing.";
+const IBD = "Investor's Business Daily, 21 May 2026, on the filing.";
+const METHOD = "SpaceX preliminary S-1 risk factors, as quoted by Cape Fear Advisors, 22 May 2026.";
+const PRICE = "x.ai/pricing, checked 9 October 2026.";
+
+const GROK = [
+  {
+    id: "chat",
+    name: "Chat",
+    kind: "hypothesis",
+    eq: "1.9 million × $30 × 12",
+    deck: "If every subscriber in the filing count paid the SuperGrok list price. The mix is not printed. Not in the $28.44T.",
+    points: [
+      ["published", "About 1.9 million paid subscribers across SuperGrok, SuperGrok Heavy, and SuperGrok Lite. With about 4.4 million X Premium and Premium+, paid subscribers are about 6.3 million. " + HR],
+      ["published", "SuperGrok is $30 a month and includes Grok Bot. SuperGrok Plus is $100 a month and raises usage on Chat, Imagine, Voice, and Build. Lite and Heavy are listed with no public price. " + PRICE],
+      ["published", "Imagine produced about 10 billion images and over 2 billion videos a month in the first quarter of 2026. No price per image or video. " + HR],
+      ["hypothesis", "The check uses the $30 SuperGrok price on the whole count. It is not revenue, and it is not subtracted from the $760B consumer pond."]
+    ]
+  },
+  {
+    id: "bot",
+    name: "Bot",
+    kind: "unknown",
+    eq: "No separate price",
+    deck: "Grok Bot is included with SuperGrok. No separate count is in the filing, so there is no dollar.",
+    points: [
+      ["published", "The public plan table includes Grok Bot on SuperGrok. " + PRICE],
+      ["unknown", "No standalone fee and no Bot-only subscriber count. A dollar here would be invented."]
+    ]
+  },
+  {
+    id: "build",
+    name: "Build",
+    kind: "unknown",
+    eq: "No published volume",
+    deck: "Build is on the plan table. Plus raises its usage. No seat count and no token volume, so there is no dollar.",
+    points: [
+      ["published", "Grok Build is a row on the plan table. SuperGrok Plus is the tier that states higher Build usage. " + PRICE],
+      ["unknown", "The $2.40T infrastructure print is the compute market. It is not Build revenue."]
+    ]
+  },
+  {
+    id: "api",
+    name: "API",
+    kind: "unknown",
+    eq: "No published volume",
+    deck: "The API is metered separately from the subscriptions. Usage is not published, so there is no dollar.",
+    points: [
+      ["published", "The pricing page has an API tab beside the subscriptions. " + PRICE],
+      ["unknown", "No call volume and no API revenue in the sources used here. Token rates without volume are not a market."]
+    ]
+  }
+];
+
 const UNPRICED = [
-  ["Aviation", "Quilty: up 68% in 2026. No dollar is printed."],
-  ["Direct to cell", "Quilty: 25 million monthly users by the end of 2026. No price is printed."],
-  ["IoT", "No published revenue."],
-  ["Launch", "Flight 14 on 28 September 2026 reached orbit and deployed 26 Starlink satellites. No price is published."],
-  ["Point to point", "No published fare."],
-  ["Orbital compute", "No published dollar."],
-  ["Grok", "Filing coverage: about 1.9 million SuperGrok subscribers. Revenue for that count is not printed."],
-  ["Terafab", "No published dollar."],
-  ["X Premium", "Filing coverage: about 4.4 million Premium subscribers. Revenue for that count is not printed."],
-  ["X Money", "No published account count or fee. Outside this sum."]
+  {
+    name: "X Premium",
+    text: "About 4.4 million Premium and Premium+ subscribers. " + HR + " Revenue for that count is not printed. A list-price multiplication would overlap Grok access, so it is not made."
+  },
+  {
+    name: "X Money",
+    text: "No published account count or fee. Outside this sum."
+  },
+  {
+    name: "Aviation",
+    text: "Quilty: up 68% in 2026. The product page prints no dollar. A conflicting dollar in other coverage is not booked."
+  },
+  {
+    name: "Direct to cell",
+    text: "Quilty: 25 million monthly users by the end of 2026. No price is printed, so nothing is subtracted from the $740B mobile print."
+  },
+  {
+    name: "IoT",
+    text: "No published device count and no published fee."
+  },
+  {
+    name: "Launch",
+    text: "Flight 14 on 28 September 2026 reached orbit and deployed 26 Starlink V3 satellites. No price is published. The $370B print is the market, not this flight."
+  },
+  {
+    name: "Point to point",
+    text: "The Motley Fool, 2 October 2026: the printed TAM does not include Earth-to-Earth transport. No fare is published."
+  },
+  {
+    name: "Orbital compute",
+    text: "The Motley Fool, 2 October 2026: the printed TAM does not include data centers in space. No dollar is published."
+  },
+  {
+    name: "Terafab",
+    text: "No published dollar. Not a share of another company's sales, and not subtracted from the $2.40T infrastructure print."
+  }
 ];
 
 function F(label, value, unit, kind, note) {
   return { label: label, value: value, unit: unit, kind: kind, note: note };
 }
 
-function pond(id, name, blurb, value, lines, note) {
+function pond(id, name, blurb, value, lines, note, points) {
   return {
     id: id,
     group: "filing",
@@ -434,12 +568,13 @@ function pond(id, name, blurb, value, lines, note) {
       name: name,
       gates: [id],
       remainder: { pond: value, lines: lines, note: note },
-      sources: S1
+      sources: S1,
+      points: points
     }]
   };
 }
 
-function sourced(id, group, name, blurb, amount, label, kind, note, sources, asOf) {
+function sourced(id, group, name, blurb, amount, label, kind, note, sources, asOf, points) {
   return {
     id: id,
     group: group,
@@ -453,24 +588,69 @@ function sourced(id, group, name, blurb, amount, label, kind, note, sources, asO
       hold: true,
       asOf: asOf,
       sources: sources,
+      points: points,
       years: { 2026: [F(label, amount, "usd", kind, note)] }
     }]
   };
 }
 
 const LINES = [
-  pond("s1-space", "Space", "S-1 space-enabled solutions.", 370e9, [], "Printed space figure. Nothing on this board is subtracted."),
-  pond("s1-bb", "Starlink broadband", "S-1 Starlink broadband, minus the three Quilty lines.", 870e9, ["residential", "enterprise", "maritime"], "Printed broadband figure."),
-  pond("s1-mobile", "Starlink mobile", "S-1 Starlink mobile. No narrower dollar is published.", 740e9, [], "Printed mobile figure. Direct to cell has users and no price, so it is not subtracted."),
-  pond("s1-infra", "AI infrastructure", "S-1 AI infrastructure. Terafab has no published dollar.", 2.4e12, [], "Printed infrastructure figure."),
-  pond("s1-subs", "Consumer subscriptions", "S-1 consumer subscriptions. No revenue split is published.", 760e9, [], "Printed subscription figure."),
-  pond("s1-ads", "Digital advertising", "S-1 digital advertising, minus 2025 X advertising.", 600e9, ["ads"], "Printed advertising figure."),
-  pond("s1-apps", "Enterprise applications", "S-1 enterprise applications. A digital-economy estimate, not a product forecast.", 22.7e12, [], "Printed enterprise-applications figure."),
-  sourced("residential", "starlink", "Residential and roam", "2026 consumer forecast.", 11.3e9, "Quilty 2026 consumer forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026),
-  sourced("enterprise", "starlink", "Enterprise", "2026 enterprise forecast.", 1.68e9, "Quilty 2026 enterprise forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026),
-  sourced("maritime", "starlink", "Maritime", "2026 maritime forecast.", 1.94e9, "Quilty 2026 maritime forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026),
-  sourced("gov", "gov", "Gov", "2026 Starshield forecast.", 3.2e9, "Quilty 2026 Starshield forecast", "estimate", "Quilty product page, 20 March 2026. Not an agency split, and not subtracted from a printed pond.", QUILTY, 2026),
-  sourced("ads", "x", "Ads", "2025 X advertising.", 1.84e9, "2025 X advertising", "published", "Hollywood Reporter, 26 May 2026, on the filing.", "Hollywood Reporter, 26 May 2026, on the SpaceX filing.", 2025)
+  pond("s1-space", "Space", "S-1 space-enabled solutions.", 370e9, [], "Printed space figure. Nothing on this board is subtracted.", [
+    ["published", "Print: $370 billion. " + S1],
+    ["published", "Method: Novaspace on spacecraft manufacturing, launch services, and related activities. " + METHOD],
+    ["published", "China and Russia are excluded from every print."]
+  ]),
+  pond("s1-bb", "Starlink broadband", "S-1 Starlink broadband, minus the three Quilty lines.", 870e9, ["residential", "enterprise", "maritime"], "Printed broadband figure.", [
+    ["published", "Print: $870 billion. " + S1],
+    ["published", "Method: households, businesses, aircraft, and maritime vessels, times ARPU, times penetration. " + METHOD],
+    ["derived", "Minus Quilty 2026 residential, enterprise, and maritime. Those three are the green Starlink lines."],
+    ["published", "Now: 10.3 million Starlink subscribers on 31 March 2026, at $66 a month that quarter. " + IBD + " That count is starlink.com service lines and leaves out managed enterprise and Gov. This is not the pond."],
+    ["derived", "10.3 million × $66 × 12 = " + fmt(STARLINK_CHECK) + ". This page's annualization of the published count and the quarterly ARPU. It is not the pond."]
+  ]),
+  pond("s1-mobile", "Starlink mobile", "S-1 Starlink mobile. Direct to cell has users and no price.", 740e9, [], "Printed mobile figure. Direct to cell has users and no price, so it is not subtracted.", [
+    ["published", "Print: $740 billion. " + S1],
+    ["published", "The filing describes the same kind of build: counts, ARPU, and penetration, plus enterprise and government opportunity beyond these two connectivity prints. " + METHOD],
+    ["unknown", "Direct to cell is 25 million monthly users in the Quilty forecast, with no price. Nothing is subtracted."]
+  ]),
+  pond("s1-infra", "AI infrastructure", "S-1 AI infrastructure. The factors are not printed.", 2.4e12, [], "Printed infrastructure figure.", [
+    ["published", "Print: $2.40 trillion. " + S1],
+    ["published", "Method: third-party data-center demand, including RAND, plus internal assumptions on the AI share of compute, power, utilization, and price. " + METHOD],
+    ["unknown", "Those factors are not printed. This board does not invent a GW × price equation. Terafab has no published dollar, so it is not subtracted."]
+  ]),
+  pond("s1-subs", "Consumer subscriptions", "The Grok and X subscription market. Not Grok's revenue.", 760e9, [], "Printed subscription figure.", [
+    ["published", "Print: $760 billion. " + S1],
+    ["published", "The Motley Fool, 2 October 2026: this pond, with the advertising pond, is the Grok and X opportunity. It is the market, not a revenue forecast."],
+    ["hypothesis", "The Grok check is " + fmt(GROK_CHECK) + ", from about 1.9 million subscribers at the $30 SuperGrok price. It is not subtracted. The mix of tiers is not printed."]
+  ]),
+  pond("s1-ads", "Digital advertising", "S-1 digital advertising, minus 2025 X advertising.", 600e9, ["ads"], "Printed advertising figure.", [
+    ["published", "Print: $600 billion. " + S1],
+    ["derived", "Minus 2025 X advertising, $1.84 billion. " + HR],
+    ["published", "The filing says advertising remains a core monetization channel for the AI segment. " + HR]
+  ]),
+  pond("s1-apps", "Enterprise applications", "A digital-economy estimate, not a Grok forecast.", 22.7e12, [], "Printed enterprise-applications figure.", [
+    ["published", "Print: $22.70 trillion. " + S1],
+    ["published", "The Motley Fool, 2 October 2026, and HyperFRAME, 24 May 2026: this follows the Digital Cooperation Organization's digital-economy estimate. It is not a software forecast and not Grok revenue."],
+    ["published", "DCO, 11 December 2025: its trends report projects the digital economy at about $28 trillion in 2026. The S-1 prints $22.70 trillion. The two are not forced to match."],
+    ["unknown", "Grok Business, Enterprise, and the API have no published volume, so none is subtracted."]
+  ]),
+  sourced("residential", "starlink", "Residential and roam", "2026 consumer forecast.", 11.3e9, "Quilty 2026 consumer forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026, [
+    ["estimate", "One published forecast: $11.3 billion for 2026 consumer Starlink. Quilty Space, 20 March 2026. Advanced Television, 24 March 2026, reports the same figure."],
+    ["published", "No share of the $870B print is invented on top of this."]
+  ]),
+  sourced("enterprise", "starlink", "Enterprise", "2026 enterprise forecast.", 1.68e9, "Quilty 2026 enterprise forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026, [
+    ["estimate", "One published forecast: $1.68 billion. Quilty Space, 20 March 2026."]
+  ]),
+  sourced("maritime", "starlink", "Maritime", "2026 maritime forecast.", 1.94e9, "Quilty 2026 maritime forecast", "estimate", "Quilty product page, 20 March 2026.", QUILTY, 2026, [
+    ["estimate", "One published forecast: $1.94 billion. Quilty Space, 20 March 2026."]
+  ]),
+  sourced("gov", "gov", "Gov", "2026 Starshield forecast.", 3.2e9, "Quilty 2026 Starshield forecast", "estimate", "Quilty product page, 20 March 2026. Not an agency split, and not subtracted from a printed pond.", QUILTY, 2026, [
+    ["estimate", "One number: $3.2 billion Starshield in 2026. Quilty Space, 20 March 2026."],
+    ["published", "No agency split. Not subtracted from the $370B space print."]
+  ]),
+  sourced("ads", "x", "Ads", "2025 X advertising.", 1.84e9, "2025 X advertising", "published", "Hollywood Reporter, 26 May 2026, on the filing.", "Hollywood Reporter, 26 May 2026, on the SpaceX filing.", 2025, [
+    ["published", "2025 X advertising: $1.84 billion. " + HR],
+    ["derived", "Subtracted from the $600B advertising print so it is not counted twice."]
+  ])
 ];
 
 const RANK = { published: 0, derived: 1, estimate: 2, unknown: 3 };
@@ -657,6 +837,7 @@ function boot() {
   let sheetLine = null;
   let jumpTo = null;
   let pinned = null;
+  let pinnedNode = null;
   const coarse = window.matchMedia("(pointer: coarse)").matches;
 
   function render(focus) {
@@ -673,7 +854,7 @@ function boot() {
     const jump = jumpTo;
     jumpTo = null;
     if (jump) {
-      const seg = app.querySelector('[data-slice="' + jump + '"]');
+      const seg = app.querySelector('.seg[data-slice="' + jump + '"]');
       if (seg) {
         seg.classList.add("lit");
         seg.scrollIntoView({ block: "center", inline: "nearest" });
@@ -696,7 +877,7 @@ function boot() {
         el("h1", null, "SpaceX TAM"),
         el("p", { class: "lede" }, "Preliminary S-1, 20 May 2026. Printed parts sum to $28.44T. The rounded claim is $28.5T. Green is a sourced figure. Red is the rest of that print. Open is not revenue."),
         el("ul", { class: "rules" },
-          el("li", null, "Hover a bar for the evidence."),
+          el("li", null, "The top bar opens the row under it. A line segment opens the note."),
           el("li", null, "The gate on a line opens that red segment."),
           el("li", null, "2027–2030 repeat the latest sourced figure.")
         ),
@@ -728,46 +909,60 @@ function boot() {
         )
       ),
       el("div", { class: "lines" }, GROUPS.map(renderGroup)),
+      el("section", { id: "grok" },
+        el("h2", null, "Grok"),
+        el("p", { class: "group-deck" }, "Chat, Bot, Build, and the API. The checks use published counts and list prices. None of them is added to the $28.44T."),
+        el("div", { class: "cards" }, GROK.map(renderCard))
+      ),
       el("section", { class: "bare-wrap", id: "unpriced" },
         el("h2", null, "Named, no dollar"),
-        el("ul", { class: "bare" }, UNPRICED.map(function (row) {
-          return el("li", null, el("b", null, row[0]), el("span", null, row[1]));
+        el("div", { class: "cards" }, UNPRICED.map(function (row) {
+          return el("article", { class: "card" },
+            el("h3", null, row.name),
+            el("p", null, row.text)
+          );
         }))
       )
     );
   }
 
-  function masterBar(view) {
+  function sliceParts() {
+    const parts = [];
+    LINES.forEach(function (line) {
+      line.slices.forEach(function (slice) {
+        const usd = sliceDollars(slice, state.year);
+        if (usd == null) return;
+        parts.push({ line: line, slice: slice, usd: usd, open: isOpen(slice, state.on) });
+      });
+    });
+    return parts;
+  }
+
+  function masterBar() {
+    const parts = sliceParts();
+    const bar = el("div", { class: "master-bar", role: "group", "aria-label": "Each print, red shut and green open" });
+    parts.forEach(function (part) {
+      bar.append(el("button", {
+        type: "button",
+        class: "chunk " + (part.open ? "open" : "shut"),
+        "data-slice": part.slice.id,
+        "data-line": part.line.id,
+        "aria-label": part.line.name + ", " + fmt(part.usd) + ", " + (part.open ? "open" : "shut"),
+        style: "flex:" + part.usd + " 1 18px"
+      }));
+    });
     const groups = GROUPS.map(function (group) {
       let open = 0;
       let shut = 0;
-      LINES.forEach(function (line) {
-        if (line.group !== group.id) return;
-        line.slices.forEach(function (slice) {
-          const usd = sliceDollars(slice, state.year);
-          if (usd == null) return;
-          if (isOpen(slice, state.on)) open += usd; else shut += usd;
-        });
+      parts.forEach(function (part) {
+        if (part.line.group !== group.id) return;
+        if (part.open) open += part.usd; else shut += part.usd;
       });
       return { id: group.id, name: group.name, open: open, shut: shut };
     }).filter(function (group) { return group.open + group.shut > 0; });
-    const bar = el("div", { class: "master-bar", role: "group", "aria-label": "Groups" });
-    groups.forEach(function (group) {
-      const total = group.open + group.shut;
-      const chunk = el("button", {
-        type: "button",
-        class: "chunk",
-        "data-jump": group.id,
-        "aria-label": group.name + ", " + fmt(total),
-        style: "flex:" + total + " 1 0"
-      });
-      if (group.open) chunk.append(el("i", { class: "open", style: "flex:" + group.open }));
-      if (group.shut) chunk.append(el("i", { class: "shut", style: "flex:" + group.shut }));
-      chunk.style.display = "flex";
-      bar.append(chunk);
-    });
     return el("div", { class: "master" },
       bar,
+      evidenceBoard(),
       el("ul", { class: "key" }, groups.map(function (group) {
         return el("li", null, el("button", { type: "button", "data-jump": group.id },
           el("b", null, group.name),
@@ -775,6 +970,46 @@ function boot() {
           fmt(group.open) + " open · " + fmt(group.shut) + " shut"
         ));
       }))
+    );
+  }
+
+  function evidenceBoard() {
+    return el("div", { class: "board", id: "board" }, sliceParts().map(function (part) {
+      const pack = resolve(part.slice, state.year);
+      const eqText = equation(pack.factors, part.slice, state.year);
+      const shown = eqText === fmt(part.usd) ? part.line.blurb : eqText;
+      return el("div", { class: "ev " + (part.open ? "open" : "shut"), "data-ev": part.slice.id },
+        el("button", {
+          type: "button",
+          "data-slice": part.slice.id,
+          "data-line": part.line.id
+        },
+          el("i"),
+          el("b", null, part.line.name),
+          el("span", { class: "eq" }, shown),
+          el("span", { class: "money" }, fmt(part.usd))
+        ),
+        pointNodes(part.slice.points)
+      );
+    }));
+  }
+
+  function pointNodes(points) {
+    return el("div", { class: "pts" }, (points || []).map(function (point) {
+      return el("p", { class: "pt" }, el("b", null, point[0]), point[1]);
+    }));
+  }
+
+  function renderCard(card) {
+    const eq = card.id === "chat" ? card.eq + " = " + fmt(GROK_CHECK) : card.eq;
+    return el("article", { class: "card " + card.kind, id: "grok-" + card.id },
+      el("header", null,
+        el("h3", null, card.name),
+        el("span", { class: "chip " + card.kind }, card.kind)
+      ),
+      el("p", { class: "eq" }, eq),
+      el("p", null, card.deck),
+      pointNodes(card.points)
     );
   }
 
@@ -875,6 +1110,9 @@ function boot() {
         if (slice.remainder && slice.remainder.lines.length) {
           body.push(el("p", { class: "note" }, "Minus " + slice.remainder.lines.map(function (id) { return lineById(id).name; }).join(", ") + "."));
         }
+        (slice.points || []).forEach(function (point) {
+          body.push(el("p", { class: "note" }, el("span", { class: "chip " + point[0] }, point[0]), " ", point[1]));
+        });
         body.push(el("p", { class: "src note" }, slice.sources));
       }
       return el("div", { class: "slice-block" }, body);
@@ -895,28 +1133,77 @@ function boot() {
     if (!dialog.open) dialog.showModal();
   }
 
+  function clearMarks() {
+    app.querySelectorAll(".ev.on").forEach(function (node) { node.classList.remove("on"); });
+    app.querySelectorAll(".chunk.lit, .seg.lit").forEach(function (node) { node.classList.remove("lit"); });
+  }
+
+  function markSlice(id) {
+    clearMarks();
+    const row = app.querySelector('[data-ev="' + id + '"]');
+    if (row) row.classList.add("on");
+    app.querySelectorAll('[data-slice="' + id + '"]').forEach(function (node) {
+      if (node.classList.contains("chunk") || node.classList.contains("seg")) node.classList.add("lit");
+    });
+  }
+
+  function hidePop() {
+    pop.hidden = true;
+    pop.classList.remove("pin");
+    pop.removeAttribute("data-key");
+  }
+
+  function releasePin() {
+    pinned = null;
+    pinnedNode = null;
+  }
+
+  function stillHome(id, next, fromMaster) {
+    if (!id || !next || !next.closest) return false;
+    if (next.closest("#pop")) return true;
+    if (next.closest('[data-ev="' + id + '"]')) return true;
+    if (next.closest('[data-slice="' + id + '"]')) return true;
+    return !!fromMaster && !!next.closest(".master");
+  }
+
   function showPop(button, force) {
     if (coarse && !force) return;
+    if (!button || !button.isConnected) return;
     const line = lineById(button.getAttribute("data-line"));
     const slice = line && line.slices.filter(function (item) { return item.id === button.getAttribute("data-slice"); })[0];
     if (!slice) return;
     const pack = resolve(slice, state.year);
     if (!pack) return;
+    const key = slice.id + "|" + state.year + "|" + (isOpen(slice, state.on) ? "1" : "0") + "|" + (button.classList.contains("seg") ? "seg" : (button.closest(".board") ? "board" : "chunk"));
+    const reuse = pop.getAttribute("data-key") === key && !pop.hidden;
+    if (button.classList.contains("seg")) {
+      clearMarks();
+      button.classList.add("lit");
+    } else {
+      markSlice(slice.id);
+    }
+    if (button.closest(".board") || button.classList.contains("chunk")) {
+      hidePop();
+      return;
+    }
+    if (reuse) {
+      if (pinned) pop.classList.add("pin");
+      else pop.classList.remove("pin");
+      return;
+    }
     const note = yearNote(pack, state.year);
-    const minus = slice.remainder && slice.remainder.lines.length
-      ? el("p", null, "Minus " + slice.remainder.lines.map(function (id) { return lineById(id).name; }).join(", ") + ".")
-      : null;
     pop.replaceChildren(el("div", null,
-      el("strong", null, line.name),
+      el("strong", null, line.name + " · " + (isOpen(slice, state.on) ? "open" : "shut")),
       el("p", { class: "eqline" }, equation(pack.factors, slice, state.year)),
       note ? el("p", null, note) : null,
-      pack.factors.map(function (factor) {
-        return el("p", null, factor.kind + ": " + factor.note);
+      (slice.points || []).map(function (point) {
+        return el("p", null, point[0] + ". " + point[1]);
       }),
-      minus,
-      el("p", null, slice.gates.length ? "Opens when " + slice.gates.map(gateName).join(" and ") + (slice.gates.length > 1 ? " are" : " is") + " on." : "No gate."),
       el("p", { class: "src" }, slice.sources)
     ));
+    if (pinned) pop.classList.add("pin");
+    else pop.classList.remove("pin");
+    pop.setAttribute("data-key", key);
     pop.hidden = false;
     if (window.innerWidth <= 700) {
       pop.style.left = "";
@@ -935,13 +1222,14 @@ function boot() {
   }
 
   document.addEventListener("click", function (event) {
+    if (event.target.closest("#pop")) return;
     const gate = event.target.closest("[data-gate]");
     if (gate) {
       const id = gate.getAttribute("data-gate");
       if (state.on.has(id)) state.on.delete(id); else state.on.add(id);
       jumpTo = sliceForGate(id);
-      pinned = null;
-      pop.hidden = true;
+      releasePin();
+      hidePop();
       announce(id);
       render({ id: id, sheet: gate.hasAttribute("data-sheet") || !!event.target.closest("dialog") });
       return;
@@ -949,8 +1237,8 @@ function boot() {
     const year = event.target.closest("[data-year]");
     if (year) {
       state.year = Number(year.getAttribute("data-year"));
-      pinned = null;
-      pop.hidden = true;
+      releasePin();
+      hidePop();
       announceYear();
       render();
       return;
@@ -958,6 +1246,7 @@ function boot() {
     const action = event.target.closest("[data-action]");
     if (action) {
       const name = action.getAttribute("data-action");
+      if (name === "today" || name === "all") { releasePin(); hidePop(); }
       if (name === "today") { state.on.clear(); state.year = 2026; }
       if (name === "all") GATES.forEach(function (item) { state.on.add(item.id); });
       if (name === "copy") { copyLink(); return; }
@@ -973,41 +1262,68 @@ function boot() {
     }
     const sliceBtn = event.target.closest("[data-slice]");
     if (sliceBtn) {
-      app.querySelectorAll(".seg.lit").forEach(function (node) { node.classList.remove("lit"); });
-      sliceBtn.classList.add("lit");
+      if (sliceBtn.closest(".board") && pinnedNode === sliceBtn) {
+        releasePin();
+        clearMarks();
+        hidePop();
+        return;
+      }
       pinned = sliceBtn.getAttribute("data-slice");
+      pinnedNode = sliceBtn;
       showPop(sliceBtn, true);
       return;
     }
     const lineButton = event.target.closest("[data-line]");
     if (lineButton) { openSheet(lineButton.getAttribute("data-line")); return; }
-    pinned = null;
-    pop.hidden = true;
+    if (event.target.closest("[data-ev]")) return;
+    releasePin();
+    clearMarks();
+    hidePop();
   });
+
+  let buttonsDown = 0;
+  document.addEventListener("pointerdown", function () { buttonsDown += 1; });
+  document.addEventListener("pointerup", function () { buttonsDown = Math.max(0, buttonsDown - 1); });
+  document.addEventListener("pointercancel", function () { buttonsDown = Math.max(0, buttonsDown - 1); });
 
   document.addEventListener("pointerover", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (slice) showPop(slice, false);
+    if (!slice) return;
+    if (pinned && pinnedNode && slice !== pinnedNode) return;
+    showPop(slice, false);
   });
   document.addEventListener("focusin", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (slice) showPop(slice, true);
+    if (!slice) return;
+    if (pinned && pinnedNode && slice !== pinnedNode) return;
+    showPop(slice, true);
   });
   document.addEventListener("pointerout", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (!slice || slice.contains(event.relatedTarget)) return;
-    if (pinned) {
-      const node = app.querySelector('[data-slice="' + pinned + '"]');
-      if (node) showPop(node, true);
-      return;
+    const ev = event.target.closest("[data-ev]");
+    const inPop = event.target.closest("#pop");
+    const inMaster = event.target.closest(".master");
+    let id = slice ? slice.getAttribute("data-slice") : (ev ? ev.getAttribute("data-ev") : "");
+    if (!id && (inPop || inMaster)) {
+      const open = app.querySelector(".ev.on");
+      id = open ? open.getAttribute("data-ev") : (pinned || "");
     }
-    pop.hidden = true;
+    if (!id) return;
+    const fromMaster = !!inMaster || !!(ev && ev.closest(".master"));
+    if (stillHome(id, event.relatedTarget, fromMaster)) return;
+    if (pinned && pinnedNode && pinnedNode.isConnected) return;
+    clearMarks();
+    hidePop();
   });
   document.addEventListener("focusout", function (event) {
-    if (pinned) return;
+    if (pinned || buttonsDown) return;
+    const open = app.querySelector(".ev.on");
     const slice = event.target.closest("[data-slice]");
-    if (!slice) return;
-    pop.hidden = true;
+    const id = open ? open.getAttribute("data-ev") : (slice ? slice.getAttribute("data-slice") : "");
+    if (!id) return;
+    if (stillHome(id, event.relatedTarget, false)) return;
+    clearMarks();
+    hidePop();
   });
 
   function announce(id) {
@@ -1043,9 +1359,14 @@ function boot() {
       el("ul", null,
         item("SpaceX preliminary S-1, 20 May 2026, as quoted by The Wall Street Journal: quantifiable TAM of $28.5 trillion, excluding China and Russia. Space-enabled solutions $370 billion. Starlink broadband $870 billion. Starlink mobile $740 billion. AI infrastructure $2.4 trillion. Consumer subscriptions $760 billion. Digital advertising $600 billion. Enterprise applications $22.7 trillion."),
         item("Quilty Space, Starlink Financial Overview, 20 March 2026: 2026 consumer $11.3 billion, enterprise $1.68 billion, maritime $1.94 billion, Starshield $3.2 billion. Aviation up 68%, with no dollar on that line. Direct to cell: 25 million monthly users, with no price on that line. Advanced Television, 24 March 2026, reports the $20 billion, $11.3 billion, $1.68 billion, and $1.94 billion figures."),
-        item("Hollywood Reporter, 26 May 2026, on the filing: 2025 X advertising $1.84 billion. About 4.4 million X Premium subscribers and about 1.9 million SuperGrok subscribers."),
+        item("Hollywood Reporter, 26 May 2026, on the filing: 2025 X advertising $1.84 billion. About 6.3 million paid subscribers, of which about 4.4 million are X Premium and Premium+ and about 1.9 million are SuperGrok, SuperGrok Heavy, and SuperGrok Lite. Imagine produced about 10 billion images and over 2 billion videos a month in the first quarter of 2026."),
+        item("x.ai/pricing, 9 October 2026: SuperGrok $30 a month, including Grok Bot. SuperGrok Plus $100 a month, with higher usage on Chat, Imagine, Voice, and Build. The API is a separate tab. Lite and Heavy are listed without a public price."),
+        item("Investor's Business Daily, 21 May 2026, on the filing: 10.3 million Starlink subscribers on 31 March 2026. ARPU $66 that quarter."),
+        item("SpaceX preliminary S-1 risk factors, as quoted by Cape Fear Advisors, 22 May 2026: space uses Novaspace; connectivity uses counts, ARPU, and penetration; AI infrastructure uses third-party compute demand, including RAND, plus internal assumptions. The factors themselves are not printed."),
+        item("The Motley Fool, 2 October 2026: the consumer-subscription and advertising ponds are the Grok and X opportunity, and the enterprise print follows the Digital Cooperation Organization's digital-economy estimate. The printed TAM does not include data centers in space or Earth-to-Earth transport."),
+        item("Digital Cooperation Organization, 11 December 2025: digital economy projected at about $28 trillion in 2026. The S-1 prints $22.70 trillion."),
         item("Filing coverage of 2025 results: revenue about $18.7 billion, connectivity about $11.4 billion."),
-        item("Starship flight 14, 28 September 2026: first orbit, 26 Starlink V3 satellites deployed. No price published.")
+        item("Starship flight 14, 28 September 2026: reached orbit, 26 Starlink V3 satellites deployed. No price published.")
       )
     );
   }
@@ -1094,7 +1415,16 @@ function audit() {
   });
   assert(resolve(lineById("ads").slices[0], 2026).flat === false, "ads 2026 is not a later hold");
   assert(yearNote(resolve(lineById("ads").slices[0], 2026), 2026) === "Figure is 2025.", "ads year note");
-  const blob = JSON.stringify({ lines: LINES, gates: GATES, groups: GROUPS, unpriced: UNPRICED });
+  assert(fmt(GROK_CHECK) === "$684M", "grok check");
+  assert(Math.round(GROK_CHECK) === Math.round(1.9e6 * 30 * 12), "grok product");
+  assert(fmt(STARLINK_CHECK) === "$8.16B", "starlink now");
+  const bbPoints = lineById("s1-bb").slices[0].points;
+  const publishedNow = bbPoints.filter(function (point) { return point[0] === "published" && point[1].indexOf("10.3 million") !== -1; })[0];
+  const derivedNow = bbPoints.filter(function (point) { return point[0] === "derived" && point[1].indexOf(fmt(STARLINK_CHECK)) !== -1; })[0];
+  assert(!!publishedNow && publishedNow[1].indexOf("×") === -1, "subscriber count stays published");
+  assert(!!derivedNow && derivedNow[1].indexOf("× $66 × 12") !== -1, "annualization stays derived");
+  assert(!LINES.some(function (line) { return line.id === "chat" || line.id === "bot" || line.id === "build" || line.id === "api"; }), "grok stayed out of the sum");
+  const blob = JSON.stringify({ lines: LINES, gates: GATES, groups: GROUPS, unpriced: UNPRICED, grok: GROK });
   assert(!/civilian|nasa|dragon|hls|itar/i.test(blob), "banned content");
   assert(!LINES.some(function (line) { return line.id === "terafab" || line.id === "starship" || line.id === "hls"; }), "unpriced line entered the sum");
   LINES.forEach(function (line) {
