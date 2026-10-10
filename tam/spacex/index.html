@@ -1281,6 +1281,11 @@ function boot() {
     hidePop();
   });
 
+  let buttonsDown = 0;
+  document.addEventListener("pointerdown", function () { buttonsDown += 1; });
+  document.addEventListener("pointerup", function () { buttonsDown = Math.max(0, buttonsDown - 1); });
+  document.addEventListener("pointercancel", function () { buttonsDown = Math.max(0, buttonsDown - 1); });
+
   document.addEventListener("pointerover", function (event) {
     const slice = event.target.closest("[data-slice]");
     if (!slice) return;
@@ -1311,10 +1316,12 @@ function boot() {
     hidePop();
   });
   document.addEventListener("focusout", function (event) {
-    if (pinned) return;
+    if (pinned || buttonsDown) return;
+    const open = app.querySelector(".ev.on");
     const slice = event.target.closest("[data-slice]");
-    if (!slice) return;
-    if (stillHome(slice.getAttribute("data-slice"), event.relatedTarget, !!slice.closest(".master"))) return;
+    const id = open ? open.getAttribute("data-ev") : (slice ? slice.getAttribute("data-slice") : "");
+    if (!id) return;
+    if (stillHome(id, event.relatedTarget, false)) return;
     clearMarks();
     hidePop();
   });
