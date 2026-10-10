@@ -71,16 +71,14 @@
   }
   .lede { max-width: 62ch; color: var(--muted); font-size: 1.08rem; }
   .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    display: block;
     padding: 8px 0 28px;
   }
   .card {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: min(100%, 380px);
+    width: min(100%, 720px);
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 18px;
@@ -89,9 +87,27 @@
     color: inherit;
   }
   .card:hover { border-color: var(--copper); }
-  .units { list-style: none; margin: 2px 0 0; padding: 0; display: grid; gap: 4px; }
-  .units li { color: var(--ink); font-size: 0.98rem; }
-  .units span { color: var(--muted); }
+  .units {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 28px;
+  }
+  .units > li { display: grid; gap: 6px; align-content: start; }
+  .units > li.wide { grid-column: 1 / -1; }
+  .units h3 { margin: 0; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
+  .parts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .parts li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 9px;
+    color: var(--ink);
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+  .why { color: var(--muted); font-size: 0.86rem; max-width: 68ch; }
   .kicker {
     margin: 0;
     font-family: var(--mono);
@@ -191,6 +207,7 @@
     body::before { width: 0; }
     header.top { display: block; }
     header.top .donate { margin-top: 12px; }
+    .units { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -210,11 +227,57 @@
         <h2>SpaceX</h2>
         <p class="figure">$28.5T</p>
         <ul class="units">
-          <li>Starlink</li>
-          <li>Starshield</li>
-          <li>Grok <span>· Chat, Bot, Build, API</span></li>
-          <li>Terafab</li>
-          <li>X <span>· Money, Premium</span></li>
+          <li>
+            <h3>Starlink</h3>
+            <ul class="parts">
+              <li>Internet</li>
+              <li>Maritime</li>
+              <li>Mobile</li>
+              <li>Direct to cell</li>
+              <li>Aviation</li>
+              <li>IoT</li>
+            </ul>
+          </li>
+          <li>
+            <h3>Starshield</h3>
+            <ul class="parts"><li>Gov</li></ul>
+            <p class="why">One published line. No agency split.</p>
+          </li>
+          <li>
+            <h3>Grok</h3>
+            <ul class="parts">
+              <li>Chat</li>
+              <li>Bot</li>
+              <li>Build</li>
+              <li>API</li>
+            </ul>
+          </li>
+          <li>
+            <h3>X</h3>
+            <ul class="parts">
+              <li>Ads</li>
+              <li>Premium</li>
+              <li>Money</li>
+            </ul>
+          </li>
+          <li class="wide">
+            <h3>Terafab</h3>
+            <ul class="parts">
+              <li>Logic</li>
+              <li>Memory</li>
+              <li>Packaging</li>
+            </ul>
+            <p class="why">A chip plant, not a product on sale. The companies describe those three steps, and chips for computing in space. The $16.8 billion first phase is investment, not sales. No chip revenue is published, so it stays out of the total.</p>
+          </li>
+          <li>
+            <h3>Space</h3>
+            <ul class="parts">
+              <li>Launch</li>
+              <li>Point to point</li>
+              <li>Orbital compute</li>
+            </ul>
+            <p class="why">Point to point and orbital compute are named. The printed total leaves them out.</p>
+          </li>
         </ul>
         <a class="go" href="https://buy.stripe.com/9B68wRdxBdbRcty6ET5J602">See the breakdown · $10</a>
       </article>
