@@ -355,6 +355,8 @@
     position: fixed;
     z-index: 30;
     width: min(460px, calc(100vw - 24px));
+    max-height: min(70vh, 420px);
+    overflow: auto;
     background: #1c1914;
     color: #f6f1e6;
     border-radius: 14px;
@@ -362,6 +364,7 @@
     box-shadow: var(--shadow);
     pointer-events: none;
   }
+  .pop.pin { pointer-events: auto; }
   .pop[hidden] { display: none; }
   .pop .eqline { font-family: var(--mono); font-size: 12px; color: #f0d7b4; margin: 6px 0; }
   .pop p { margin: 6px 0; font-size: 0.84rem; color: #e6dfd2; }
@@ -405,6 +408,7 @@
     .cards { grid-template-columns: 1fr; }
     .ev button { grid-template-columns: 10px minmax(0, 1fr) auto; }
     .ev .eq { display: none; }
+    .ev.on .eq { display: block; grid-column: 2 / -1; grid-row: 2; }
     .gate { flex-wrap: wrap; }
     .pop { left: 12px !important; right: 12px; top: auto !important; bottom: 12px; width: auto; }
   }
@@ -600,7 +604,8 @@ const LINES = [
     ["published", "Print: $870 billion. " + S1],
     ["published", "Method: households, businesses, aircraft, and maritime vessels, times ARPU, times penetration. " + METHOD],
     ["derived", "Minus Quilty 2026 residential, enterprise, and maritime. Those three are the green Starlink lines."],
-    ["published", "Now: 10.3 million Starlink subscribers on 31 March 2026, at $66 a month that quarter. " + IBD + " 10.3 million × $66 × 12 = " + fmt(STARLINK_CHECK) + ". That count is starlink.com service lines and leaves out managed enterprise and Gov. This is not the pond."]
+    ["published", "Now: 10.3 million Starlink subscribers on 31 March 2026, at $66 a month that quarter. " + IBD + " That count is starlink.com service lines and leaves out managed enterprise and Gov. This is not the pond."],
+    ["derived", "10.3 million × $66 × 12 = " + fmt(STARLINK_CHECK) + ". This page's annualization of the published count and the quarterly ARPU. It is not the pond."]
   ]),
   pond("s1-mobile", "Starlink mobile", "S-1 Starlink mobile. Direct to cell has users and no price.", 740e9, [], "Printed mobile figure. Direct to cell has users and no price, so it is not subtracted.", [
     ["published", "Print: $740 billion. " + S1],
@@ -832,6 +837,7 @@ function boot() {
   let sheetLine = null;
   let jumpTo = null;
   let pinned = null;
+  let pinnedNode = null;
   const coarse = window.matchMedia("(pointer: coarse)").matches;
 
   function render(focus) {
@@ -848,7 +854,7 @@ function boot() {
     const jump = jumpTo;
     jumpTo = null;
     if (jump) {
-      const seg = app.querySelector('[data-slice="' + jump + '"]');
+      const seg = app.querySelector('.seg[data-slice="' + jump + '"]');
       if (seg) {
         seg.classList.add("lit");
         seg.scrollIntoView({ block: "center", inline: "nearest" });
@@ -1127,9 +1133,13 @@ function boot() {
     if (!dialog.open) dialog.showModal();
   }
 
-  function markSlice(id) {
+  function clearMarks() {
     app.querySelectorAll(".ev.on").forEach(function (node) { node.classList.remove("on"); });
     app.querySelectorAll(".chunk.lit, .seg.lit").forEach(function (node) { node.classList.remove("lit"); });
+  }
+
+  function markSlice(id) {
+    clearMarks();
     const row = app.querySelector('[data-ev="' + id + '"]');
     if (row) row.classList.add("on");
     app.querySelectorAll('[data-slice="' + id + '"]').forEach(function (node) {
@@ -1137,16 +1147,38 @@ function boot() {
     });
   }
 
+  function hidePop() {
+    pop.hidden = true;
+    pop.classList.remove("pin");
+  }
+
+  function releasePin() {
+    pinned = null;
+    pinnedNode = null;
+  }
+
+  function stillHome(id, next) {
+    if (!id || !next || !next.closest) return false;
+    if (next.closest('[data-ev="' + id + '"]')) return true;
+    return !!next.closest('[data-slice="' + id + '"]');
+  }
+
   function showPop(button, force) {
     if (coarse && !force) return;
+    if (!button || !button.isConnected) return;
     const line = lineById(button.getAttribute("data-line"));
     const slice = line && line.slices.filter(function (item) { return item.id === button.getAttribute("data-slice"); })[0];
     if (!slice) return;
     const pack = resolve(slice, state.year);
     if (!pack) return;
-    markSlice(slice.id);
+    if (button.classList.contains("seg")) {
+      clearMarks();
+      button.classList.add("lit");
+    } else {
+      markSlice(slice.id);
+    }
     if (button.closest(".board")) {
-      pop.hidden = true;
+      hidePop();
       return;
     }
     const note = yearNote(pack, state.year);
@@ -1159,6 +1191,8 @@ function boot() {
       }),
       el("p", { class: "src" }, slice.sources)
     ));
+    if (pinned) pop.classList.add("pin");
+    else pop.classList.remove("pin");
     pop.hidden = false;
     if (window.innerWidth <= 700) {
       pop.style.left = "";
@@ -1177,13 +1211,14 @@ function boot() {
   }
 
   document.addEventListener("click", function (event) {
+    if (event.target.closest("#pop")) return;
     const gate = event.target.closest("[data-gate]");
     if (gate) {
       const id = gate.getAttribute("data-gate");
       if (state.on.has(id)) state.on.delete(id); else state.on.add(id);
       jumpTo = sliceForGate(id);
-      pinned = null;
-      pop.hidden = true;
+      releasePin();
+      hidePop();
       announce(id);
       render({ id: id, sheet: gate.hasAttribute("data-sheet") || !!event.target.closest("dialog") });
       return;
@@ -1191,8 +1226,8 @@ function boot() {
     const year = event.target.closest("[data-year]");
     if (year) {
       state.year = Number(year.getAttribute("data-year"));
-      pinned = null;
-      pop.hidden = true;
+      releasePin();
+      hidePop();
       announceYear();
       render();
       return;
@@ -1200,6 +1235,7 @@ function boot() {
     const action = event.target.closest("[data-action]");
     if (action) {
       const name = action.getAttribute("data-action");
+      if (name === "today" || name === "all") releasePin();
       if (name === "today") { state.on.clear(); state.year = 2026; }
       if (name === "all") GATES.forEach(function (item) { state.on.add(item.id); });
       if (name === "copy") { copyLink(); return; }
@@ -1215,14 +1251,22 @@ function boot() {
     }
     const sliceBtn = event.target.closest("[data-slice]");
     if (sliceBtn) {
+      if (sliceBtn.closest(".board") && pinnedNode === sliceBtn) {
+        releasePin();
+        clearMarks();
+        hidePop();
+        return;
+      }
       pinned = sliceBtn.getAttribute("data-slice");
+      pinnedNode = sliceBtn;
       showPop(sliceBtn, true);
       return;
     }
     const lineButton = event.target.closest("[data-line]");
     if (lineButton) { openSheet(lineButton.getAttribute("data-line")); return; }
-    pinned = null;
-    pop.hidden = true;
+    releasePin();
+    clearMarks();
+    hidePop();
   });
 
   document.addEventListener("pointerover", function (event) {
@@ -1235,23 +1279,24 @@ function boot() {
   });
   document.addEventListener("pointerout", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (!slice) return;
-    const row = slice.closest(".ev") || slice;
-    if (row.contains(event.relatedTarget)) return;
-    if (pinned) {
-      const node = app.querySelector('[data-slice="' + pinned + '"]');
-      if (node) showPop(node, true);
+    const ev = event.target.closest("[data-ev]");
+    const id = slice ? slice.getAttribute("data-slice") : (ev ? ev.getAttribute("data-ev") : "");
+    if (!id) return;
+    if (stillHome(id, event.relatedTarget)) return;
+    if (pinned && pinnedNode && pinnedNode.isConnected) {
+      showPop(pinnedNode, true);
       return;
     }
-    app.querySelectorAll(".ev.on").forEach(function (node) { node.classList.remove("on"); });
-    app.querySelectorAll(".chunk.lit, .seg.lit").forEach(function (node) { node.classList.remove("lit"); });
-    pop.hidden = true;
+    clearMarks();
+    hidePop();
   });
   document.addEventListener("focusout", function (event) {
     if (pinned) return;
     const slice = event.target.closest("[data-slice]");
     if (!slice) return;
-    pop.hidden = true;
+    if (stillHome(slice.getAttribute("data-slice"), event.relatedTarget)) return;
+    clearMarks();
+    hidePop();
   });
 
   function announce(id) {
@@ -1346,6 +1391,11 @@ function audit() {
   assert(fmt(GROK_CHECK) === "$684M", "grok check");
   assert(Math.round(GROK_CHECK) === Math.round(1.9e6 * 30 * 12), "grok product");
   assert(fmt(STARLINK_CHECK) === "$8.16B", "starlink now");
+  const bbPoints = lineById("s1-bb").slices[0].points;
+  const publishedNow = bbPoints.filter(function (point) { return point[0] === "published" && point[1].indexOf("10.3 million") !== -1; })[0];
+  const derivedNow = bbPoints.filter(function (point) { return point[0] === "derived" && point[1].indexOf(fmt(STARLINK_CHECK)) !== -1; })[0];
+  assert(!!publishedNow && publishedNow[1].indexOf("×") === -1, "subscriber count stays published");
+  assert(!!derivedNow && derivedNow[1].indexOf("× $66 × 12") !== -1, "annualization stays derived");
   assert(!LINES.some(function (line) { return line.id === "chat" || line.id === "bot" || line.id === "build" || line.id === "api"; }), "grok stayed out of the sum");
   const blob = JSON.stringify({ lines: LINES, gates: GATES, groups: GROUPS, unpriced: UNPRICED, grok: GROK });
   assert(!/civilian|nasa|dragon|hls|itar/i.test(blob), "banned content");
