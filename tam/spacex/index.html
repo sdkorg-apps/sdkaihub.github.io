@@ -240,7 +240,7 @@
   .key b { color: var(--ink); font-weight: 650; }
   .lines { padding: 8px 0 12px; }
   .group { scroll-margin-top: 16px; }
-  .group h2, .bare-wrap h2 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 22px 0 8px; }
+  .group h2, .bare-wrap h2, #grok h2 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 22px 0 8px; }
   .group-deck { margin: -4px 0 10px; color: var(--muted); font-size: 0.92rem; }
   .line {
     background: var(--card);
@@ -877,7 +877,7 @@ function boot() {
         el("h1", null, "SpaceX TAM"),
         el("p", { class: "lede" }, "Preliminary S-1, 20 May 2026. Printed parts sum to $28.44T. The rounded claim is $28.5T. Green is a sourced figure. Red is the rest of that print. Open is not revenue."),
         el("ul", { class: "rules" },
-          el("li", null, "Hover red or green. The row opens the evidence."),
+          el("li", null, "The top bar opens the row under it. A line segment opens the note."),
           el("li", null, "The gate on a line opens that red segment."),
           el("li", null, "2027–2030 repeat the latest sourced figure.")
         ),
@@ -900,7 +900,6 @@ function boot() {
             )
           ),
           masterBar(view),
-          evidenceBoard(),
           el("div", { class: "toolbar" },
             el("button", { class: "text-btn", type: "button", "data-action": "today" }, "Reset"),
             el("button", { class: "text-btn", type: "button", "data-action": "all" }, "Open every gate"),
@@ -963,6 +962,7 @@ function boot() {
     }).filter(function (group) { return group.open + group.shut > 0; });
     return el("div", { class: "master" },
       bar,
+      evidenceBoard(),
       el("ul", { class: "key" }, groups.map(function (group) {
         return el("li", null, el("button", { type: "button", "data-jump": group.id },
           el("b", null, group.name),
@@ -1150,6 +1150,7 @@ function boot() {
   function hidePop() {
     pop.hidden = true;
     pop.classList.remove("pin");
+    pop.removeAttribute("data-key");
   }
 
   function releasePin() {
@@ -1157,10 +1158,12 @@ function boot() {
     pinnedNode = null;
   }
 
-  function stillHome(id, next) {
+  function stillHome(id, next, fromMaster) {
     if (!id || !next || !next.closest) return false;
+    if (next.closest("#pop")) return true;
     if (next.closest('[data-ev="' + id + '"]')) return true;
-    return !!next.closest('[data-slice="' + id + '"]');
+    if (next.closest('[data-slice="' + id + '"]')) return true;
+    return !!fromMaster && !!next.closest(".master");
   }
 
   function showPop(button, force) {
@@ -1171,6 +1174,8 @@ function boot() {
     if (!slice) return;
     const pack = resolve(slice, state.year);
     if (!pack) return;
+    const key = slice.id + "|" + state.year + "|" + (isOpen(slice, state.on) ? "1" : "0") + "|" + (button.classList.contains("seg") ? "seg" : (button.closest(".board") ? "board" : "chunk"));
+    const reuse = pop.getAttribute("data-key") === key && !pop.hidden;
     if (button.classList.contains("seg")) {
       clearMarks();
       button.classList.add("lit");
@@ -1179,6 +1184,11 @@ function boot() {
     }
     if (button.closest(".board")) {
       hidePop();
+      return;
+    }
+    if (reuse) {
+      if (pinned) pop.classList.add("pin");
+      else pop.classList.remove("pin");
       return;
     }
     const note = yearNote(pack, state.year);
@@ -1193,6 +1203,7 @@ function boot() {
     ));
     if (pinned) pop.classList.add("pin");
     else pop.classList.remove("pin");
+    pop.setAttribute("data-key", key);
     pop.hidden = false;
     if (window.innerWidth <= 700) {
       pop.style.left = "";
@@ -1235,7 +1246,7 @@ function boot() {
     const action = event.target.closest("[data-action]");
     if (action) {
       const name = action.getAttribute("data-action");
-      if (name === "today" || name === "all") releasePin();
+      if (name === "today" || name === "all") { releasePin(); hidePop(); }
       if (name === "today") { state.on.clear(); state.year = 2026; }
       if (name === "all") GATES.forEach(function (item) { state.on.add(item.id); });
       if (name === "copy") { copyLink(); return; }
@@ -1264,6 +1275,7 @@ function boot() {
     }
     const lineButton = event.target.closest("[data-line]");
     if (lineButton) { openSheet(lineButton.getAttribute("data-line")); return; }
+    if (event.target.closest("[data-ev]")) return;
     releasePin();
     clearMarks();
     hidePop();
@@ -1271,22 +1283,33 @@ function boot() {
 
   document.addEventListener("pointerover", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (slice) showPop(slice, false);
+    if (!slice) return;
+    if (pinned && pinnedNode && slice !== pinnedNode) return;
+    showPop(slice, false);
   });
   document.addEventListener("focusin", function (event) {
     const slice = event.target.closest("[data-slice]");
-    if (slice) showPop(slice, true);
+    if (!slice) return;
+    if (pinned && slice !== pinnedNode) {
+      pinned = slice.getAttribute("data-slice");
+      pinnedNode = slice;
+    }
+    showPop(slice, true);
   });
   document.addEventListener("pointerout", function (event) {
     const slice = event.target.closest("[data-slice]");
     const ev = event.target.closest("[data-ev]");
-    const id = slice ? slice.getAttribute("data-slice") : (ev ? ev.getAttribute("data-ev") : "");
-    if (!id) return;
-    if (stillHome(id, event.relatedTarget)) return;
-    if (pinned && pinnedNode && pinnedNode.isConnected) {
-      showPop(pinnedNode, true);
-      return;
+    const inPop = event.target.closest("#pop");
+    const inMaster = event.target.closest(".master");
+    let id = slice ? slice.getAttribute("data-slice") : (ev ? ev.getAttribute("data-ev") : "");
+    if (!id && (inPop || inMaster)) {
+      const open = app.querySelector(".ev.on");
+      id = open ? open.getAttribute("data-ev") : (pinned || "");
     }
+    if (!id) return;
+    const fromMaster = !!inMaster || !!(ev && ev.closest(".master"));
+    if (stillHome(id, event.relatedTarget, fromMaster)) return;
+    if (pinned && pinnedNode && pinnedNode.isConnected) return;
     clearMarks();
     hidePop();
   });
@@ -1294,7 +1317,7 @@ function boot() {
     if (pinned) return;
     const slice = event.target.closest("[data-slice]");
     if (!slice) return;
-    if (stillHome(slice.getAttribute("data-slice"), event.relatedTarget)) return;
+    if (stillHome(slice.getAttribute("data-slice"), event.relatedTarget, !!slice.closest(".master"))) return;
     clearMarks();
     hidePop();
   });
