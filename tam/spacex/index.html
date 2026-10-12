@@ -88,6 +88,8 @@
     font-weight: 700;
   }
   a.pay:hover { background: var(--copper); color: var(--paper); }
+  a.code { color: var(--muted); font-weight: 700; text-decoration: none; }
+  a.code:hover { color: var(--copper); }
   :focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
   @media (max-width: 700px) {
     body::before { width: 0; }
@@ -105,8 +107,9 @@
   <main>
     <p class="kicker">SpaceX</p>
     <h1>Breakdown</h1>
-    <p class="lede">The tile lists the business units and the total. The evidence behind them is $10. Payment opens in this browser, and the breakdown opens after Stripe confirms it.</p>
+    <p class="lede">The tile lists the business units and the total. The evidence is $10, or a code. Payment opens in this browser, and the breakdown opens after Stripe confirms it.</p>
     <a class="pay" href="https://buy.stripe.com/9B68wRdxBdbRcty6ET5J602">See the breakdown · $10</a>
+    <p><a class="code" href="https://tam-board.sdkaihub.com/code">Have a code</a></p>
   </main>
 </div>
 </body>

@@ -140,6 +140,16 @@
     text-align: center;
   }
   a.go:hover { background: var(--copper); color: var(--paper); }
+  a.code {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+  }
+  a.code:hover { color: var(--copper); }
   .ask {
     border-top: 1px solid var(--line);
     padding: 8px 0 8px;
@@ -220,7 +230,7 @@
   <main>
     <p class="kicker">Company papers</p>
     <h1>TAM</h1>
-    <p class="lede">Each tile shows the business units and the total TAM. The breakdown is $10. These are working papers, not the company's guidance.</p>
+    <p class="lede">Each tile shows the business units and the total TAM. The breakdown is $10, or a code. These are working papers, not the company's guidance.</p>
     <div class="cards">
       <article class="card">
         <p class="kicker">Total TAM</p>
@@ -280,6 +290,7 @@
           </li>
         </ul>
         <a class="go" href="https://buy.stripe.com/9B68wRdxBdbRcty6ET5J602">See the breakdown · $10</a>
+        <a class="code" href="https://tam-board.sdkaihub.com/code">Have a code</a>
       </article>
     </div>
     <section class="ask" id="request">
