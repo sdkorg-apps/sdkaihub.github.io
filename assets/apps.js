@@ -78,24 +78,18 @@
       mark: null,
       pitch: "",
       primary: {
-        href: "/roadster-rally/play/",
+        href: "/roadster-rally/play/?map=classic",
         label: "Play",
         note: "Classic BETA in the browser",
       },
       links: [],
+      // Reviewed plate only — no baked BETA, no gameplay strip.
       hero: {
-        src: "/assets/roadster-rally-poster.jpg",
-        width: 1280,
+        src: "/assets/roadster-rally-crop.png",
+        width: 880,
         height: 720,
-        alt: "Roadster Rally Classic BETA. Photoreal Roadster on a wet night track.",
-        href: "/roadster-rally/play/",
-      },
-      // Single photoreal strip (not cartoon hub cards) — for later re-ship.
-      strip: {
-        src: "/assets/roadster-gameplay-photoreal.jpg",
-        width: 1280,
-        height: 720,
-        alt: "Roadster Rally gameplay — photoreal ribbon, hop and dodge.",
+        alt: "Roadster Rally Classic. Photoreal Roadster mid-jump on a wet night track.",
+        href: "/roadster-rally/play/?map=classic",
       },
       accent: "rally",
     },
@@ -241,19 +235,6 @@
       );
       heroWrap.appendChild(heroLink);
       body.appendChild(heroWrap);
-    }
-
-    if (app.accent === "rally" && app.strip) {
-      var strip = el("div", { className: "rally-strip" });
-      strip.appendChild(
-        el("img", {
-          src: app.strip.src,
-          width: String(app.strip.width),
-          height: String(app.strip.height),
-          alt: app.strip.alt,
-        })
-      );
-      body.appendChild(strip);
     }
 
     if (app.accent === "rally" && app.primary) {
