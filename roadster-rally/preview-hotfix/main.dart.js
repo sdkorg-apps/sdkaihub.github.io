@@ -61583,7 +61583,7 @@ s=r.c
 s.toString
 A.WD(s).rR(A.aec(new A.a4b(),null,t.H)).b0(new A.a4c(r),t.P)},
 O(a){var s,r,q,p,o,n,m,l,k,j,i=this,h=null,g=A.d1(a,B.iG,t.w).w.a,f=g.a,e=g.b
-if(f<500&&e>f){s=B.c.fL(720*(f/880))
+if(f<500){s=B.c.fL(720*(f/880))
 r=2*B.c.fL(66.24000000000001)
 q=B.c.fL((e-(r+-28+s+26+56))*0.45)
 p=q+r+-28
@@ -61609,7 +61609,7 @@ p=t.E
 return A.acW(A.d([A.iJ("ROADSTER",r),A.aft(A.YP(A.d([A.iJ("RALLY",r),B.It,n],p),B.aT,B.d4),B.Fl)],p),B.aS,B.d4)},
 EB(a){var s=null,r=A.a9p(s,s,B.aR,s,s,s,0,s,s,B.ac,s,s,B.cK,s,new A.cJ(A.kR(8),B.t),s,s,s,s,s)
 return A.adn(A.iJ("PLAY",A.a8x().$3$fontSize$height$letterSpacing(a,1,4)),this.gWp(),r)},
-Cb(){return A.zQ(A.iJ("build 05114a5",A.Mt().$2$color$fontSize(B.ac.tl(0.45),12)),null,null)}}
+Cb(){return A.zQ(A.iJ("build 46e48c6",A.Mt().$2$color$fontSize(B.ac.tl(0.45),12)),null,null)}}
 A.a4a.prototype={
 $0(){var s=A.kz(this.b.a.j(0,"high_score"))
 if(s==null)s=0
