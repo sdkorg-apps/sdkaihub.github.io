@@ -72,23 +72,23 @@
     },
     {
       id: "roadster",
-      eyebrowLive: "Play",
+      eyebrowLive: "BETA",
       eyebrow: "Arcade",
       name: "Roadster Rally",
       mark: null,
-      pitch: "Hop cars, flip over trucks, dodge lanes, and fill the meter for a ×2 boost.",
+      pitch: "",
       primary: {
-        href: "/roadster-rally/",
+        href: "/roadster-rally/play/",
         label: "Play now",
-        note: "Play in the browser",
+        note: "Classic BETA in the browser",
       },
-      links: [{ href: "/roadster-rally/", label: "Maps: Classic and Night Track" }],
+      links: [],
       hero: {
-        src: "/assets/roadster-rally-poster.jpg",
+        src: "/assets/roadster-card-classic.jpg",
         width: 1280,
         height: 720,
-        alt: "Roadster Rally. White Roadster on a wet night track with red light posts.",
-        href: "/roadster-rally/",
+        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        href: "/roadster-rally/play/",
       },
       accent: "rally",
     },
@@ -214,7 +214,9 @@
       titleRow.appendChild(cta);
     }
     body.appendChild(titleRow);
-    body.appendChild(el("p", { className: "app-pitch", text: app.pitch }));
+    if (app.pitch) {
+      body.appendChild(el("p", { className: "app-pitch", text: app.pitch }));
+    }
 
     // Hero art sits under the pitch so it stays visible without equal-height stretch.
     if (app.hero) {

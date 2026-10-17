@@ -10,9 +10,9 @@ GitHub Pages. That fact drives every rule below.
 The public homepage is an **app hub** (Founder 2026-10-17): equal cards for
 live apps, driven by `assets/apps.js` (`SDK_APPS`). Orgora Charts and
 Roadster Rally ship first. Orgora keeps its store badges and full content.
-Roadster Rally links to `/roadster-rally/` (map select); the Flutter web
-build lives at `/roadster-rally/play/` with optional `?map=classic` /
-`?map=night`. Do not list Penni or other in-development apps on
+Roadster Rally is Classic-only BETA: hub poster and Play go to
+`/roadster-rally/play/`; review candidates deploy to
+`/roadster-rally/preview/` with a `GIT_SHA` build id. Do not list Penni or other in-development apps on
 sdkaihub.com until the Founder says so. This repo is the public website:
 the homepage, and per-app privacy policy and support pages
 (`orgora-charts/`). `CNAME` binds the custom domain and the
