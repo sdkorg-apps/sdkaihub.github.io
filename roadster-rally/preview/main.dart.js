@@ -19744,11 +19744,11 @@ _.ay=b
 _.ch=c
 _.CW=d
 _.cx=e
-_.dx=null
-_.dy=f
-_.fr=g
-_.fx=h
-_.fy=i
+_.cy=null
+_.db=f
+_.dx=g
+_.dy=h
+_.fr=i
 _.nB$=j
 _.a=0
 _.f=_.e=_.d=_.c=_.b=null
@@ -59473,10 +59473,10 @@ o=p?r.CW*28:r.a*37
 n=r.r
 m=p?Math.min(7,n*0.28):Math.min(4,n)
 g.translate(Math.sin(o)*m,Math.cos(o*0.85)*m*0.4+q)
-n=h.dx
+n=h.cy
 if(n==null){n=new A.NH(77,A.d([],t.Bq))
 n.Py()
-n=h.dx=new A.ND(r,h.CW,h.cx,h.ay,h.ch,n)}n.a3K(a,f,e)
+n=h.cy=new A.ND(r,h.CW,h.cx,h.ay,h.ch,n)}n.a3K(a,f,e)
 l=B.c.av(r.y,0,1)
 n=B.c.av(f*0.15,84,160)
 k=h.CW
@@ -59512,7 +59512,7 @@ j=A.a3()
 j.sm9(A.acR(new A.z(q,c*0.55),c*0.75,A.d([B.T,A.aB(B.c.af(k*100),0,0,0)],l)))
 a.bA(new A.A(0,0,o,n),j)}},
 UV(a){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d=this
-for(s=d.ax.cx,r=s.length,q=a.a,p=d.fy,o=d.fx,n=d.fr,m=0;m<s.length;s.length===r||(0,A.u)(s),++m){l=s[m]
+for(s=d.ax.cx,r=s.length,q=a.a,p=d.fr,o=d.dy,n=d.dx,m=0;m<s.length;s.length===r||(0,A.u)(s),++m){l=s[m]
 k=B.c.af(B.c.av(l.e,0,1)*255)
 j=l.f
 A:{if(0===j){n.r=A.aB(k,255,220,120).gp()
@@ -59528,7 +59528,7 @@ e=i.c5()
 q.drawCircle(g,f,l.r*h*1.35,e)
 e.delete()}},
 QT(a,b,c){var s,r,q,p,o,n,m,l,k=B.c.av(this.ax.w,0,1)
-for(s=b.a,r=b.b-4,q=this.dy,p=90*k,o=a.a,n=0;n<8;++n){m=Math.cos(n*3.141592653589793/4)
+for(s=b.a,r=b.b-4,q=this.db,p=90*k,o=a.a,n=0;n<8;++n){m=Math.cos(n*3.141592653589793/4)
 q.r=A.aB(B.c.af(p),196,181,154).gp()
 l=q.c5()
 o.drawCircle(s+m*(18+n*3)*k,r,6+n,l)
@@ -60051,7 +60051,7 @@ n=new A.fg(B.b0,B.au,B.bG,B.aQ)
 n.r=B.aP.gp()
 e=n.c5()
 r.drawCircle(o-28-f*18,b,6,e)
-e.delete()}d.Dr(a1,"build 230ba4b",new A.z(c[0]-10,s-14),10,B.yc,!0)
+e.delete()}d.Dr(a1,"build 45bd03a",new A.z(c[0]-10,s-14),10,B.yc,!0)
 b=d.to
 if(b.length!==0)d.mI(a1,b,new A.z(c[0]/2,c[1]*0.18),20,B.jG,!0)},
 v4(a,b,c,d,e,f,g){var s,r=null,q=A.Et(r,r,r,r,A.vw(r,r,r,r,r,r,r,r,r,A.jW(r,r,e,r,r,r,r,r,r,r,r,d,r,r,B.e9,r,r,!0,r,0.5,r,r,r,r,r,r),b),B.av,B.J,r,B.dQ,B.aU)
@@ -60654,7 +60654,7 @@ O(a){var s=null,r=this.d.m1(0.85)
 return A.SF(B.ah,!0,A.n_(8),A.acZ(!1,A.n_(8),!0,A.a9w(A.a8d(A.mb(this.c,A.pQ().$4$color$fontSize$fontWeight$letterSpacing(B.a8,18,B.e9,1)),s,s),64,s),s,!0,s,s,s,s,s,s,this.e,s,s,s),B.a7,r,0,s,s,s,s,s,B.c3)}}
 A.GT.prototype={
 O(a){var s=null,r=A.n_(8),q=A.abI(B.aP),p=t.F
-return A.SF(B.ah,!0,s,A.a8d(new A.j4(B.wu,A.A2(new A.hp(B.A9,A.ac6(A.d([A.mb("SESSION OVER",A.aaH().$2$color$fontSize(B.a8,40)),B.Iq,A.mb("Score  "+this.c,A.pQ().$3$color$fontSize$fontWeight(B.bT,20,B.ay)),B.Ip,A.mb("build 230ba4b",A.pQ().$2$color$fontSize(B.a8.m1(0.5),12)),B.Io,A.a9m(A.d([A.nu(A.acy(B.Ne,this.d,A.acz(s,s,s,s,s,s,s,s,s,s,s,B.vc,s,s,s,s,s,s,s,s)),1),B.ve,A.nu(new A.Cd(this.e,s,s,s,A.ann(s,s,s,s,s,s,s,s,s,B.a8,s,B.vc,s,s,s,B.wq,s,s,s,s),s,s,!1,s,s,B.Nd,s),1)],p),B.bq)],p),B.bq,B.pJ),s),new A.eO(B.dY,s,q,r,s,s,B.b1),B.bW),s),s,s),B.a7,B.y,0,s,s,s,s,s,B.c3)}}
+return A.SF(B.ah,!0,s,A.a8d(new A.j4(B.wu,A.A2(new A.hp(B.A9,A.ac6(A.d([A.mb("SESSION OVER",A.aaH().$2$color$fontSize(B.a8,40)),B.Iq,A.mb("Score  "+this.c,A.pQ().$3$color$fontSize$fontWeight(B.bT,20,B.ay)),B.Ip,A.mb("build 45bd03a",A.pQ().$2$color$fontSize(B.a8.m1(0.5),12)),B.Io,A.a9m(A.d([A.nu(A.acy(B.Ne,this.d,A.acz(s,s,s,s,s,s,s,s,s,s,s,B.vc,s,s,s,s,s,s,s,s)),1),B.ve,A.nu(new A.Cd(this.e,s,s,s,A.ann(s,s,s,s,s,s,s,s,s,B.a8,s,B.vc,s,s,s,B.wq,s,s,s,s),s,s,!1,s,s,B.Nd,s),1)],p),B.bq)],p),B.bq,B.pJ),s),new A.eO(B.dY,s,q,r,s,s,B.b1),B.bW),s),s,s),B.a7,B.y,0,s,s,s,s,s,B.c3)}}
 A.rQ.prototype={
 ap(){return new A.H0()}}
 A.H0.prototype={
@@ -60679,7 +60679,7 @@ O(a){var s=null,r=A.cZ(a,B.iM,t.w).w.a.a>=720,q=r?32:18,p=A.nu(A.mb("ROADSTER RA
 n=A.a9m(A.d([p,B.ve,A.ac7(A.mb("BETA",A.pQ().$4$color$fontSize$fontWeight$letterSpacing(B.bT,12,B.ay,1.2)),new A.eO(s,s,o,n,s,s,B.b1),s,B.A6,B.A7,s)],m),B.aE)
 o=A.mb("High score  "+this.d,A.pQ().$3$color$fontSize$fontWeight(B.bT,14,B.ay))
 p=r?280:1/0
-return A.ae9(A.A2(A.a9o(new A.hp(new A.bk(q,16,q,16),A.ac6(A.d([n,B.Im,o,B.Iw,A.a9w(A.acy(B.Nc,new A.a3j(this),s),52,p),B.In,A.mb("build 230ba4b",A.pQ().$2$color$fontSize(B.a8.m1(0.45),12))],m),B.aE,B.hU),s),!0),B.wv,B.bW))}}
+return A.ae9(A.A2(A.a9o(new A.hp(new A.bk(q,16,q,16),A.ac6(A.d([n,B.Im,o,B.Iw,A.a9w(A.acy(B.Nc,new A.a3j(this),s),52,p),B.In,A.mb("build 45bd03a",A.pQ().$2$color$fontSize(B.a8.m1(0.45),12))],m),B.aE,B.hU),s),!0),B.wv,B.bW))}}
 A.a3k.prototype={
 $1(a){var s=this.a
 if(s.c==null||s.e)return
