@@ -216,6 +216,26 @@
     body.appendChild(titleRow);
     body.appendChild(el("p", { className: "app-pitch", text: app.pitch }));
 
+    // Hero art sits under the pitch so it stays visible without equal-height stretch.
+    if (app.hero) {
+      var heroWrap = el("div", { className: "card-media card-media--inline" });
+      var heroLink = el("a", {
+        className: "card-hero",
+        href: app.hero.href || (app.primary && app.primary.href) || "#",
+        "aria-label": app.name + " — open",
+      });
+      heroLink.appendChild(
+        el("img", {
+          src: app.hero.src,
+          width: String(app.hero.width),
+          height: String(app.hero.height),
+          alt: app.hero.alt,
+        })
+      );
+      heroWrap.appendChild(heroLink);
+      body.appendChild(heroWrap);
+    }
+
     if (app.features && app.features.length) {
       var features = el("div", { className: "features" });
       app.features.forEach(function (f) {
@@ -265,23 +285,6 @@
 
     if (app.media === "orgora") {
       card.appendChild(renderOrgoraMedia());
-    } else if (app.hero) {
-      var media = el("div", { className: "card-media" });
-      var heroLink = el("a", {
-        className: "card-hero",
-        href: app.hero.href || app.primary.href,
-        "aria-label": app.name + " — open",
-      });
-      heroLink.appendChild(
-        el("img", {
-          src: app.hero.src,
-          width: String(app.hero.width),
-          height: String(app.hero.height),
-          alt: app.hero.alt,
-        })
-      );
-      media.appendChild(heroLink);
-      card.appendChild(media);
     }
 
     return card;
