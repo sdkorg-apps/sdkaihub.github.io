@@ -1,46 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/roadster-rally/">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Roadster Rally — jump the crowd, net the goons, keep the red rocket shiny.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Roadster Rally">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>Roadster Rally</title>
-  <link rel="manifest" href="manifest.json">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Roadster Rally — pick Classic or Night Track and play in the browser.">
+<title>Roadster Rally — choose a map</title>
+<link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
+<style>
+  :root {
+    --ink: #f8fafc;
+    --muted: #94a3b8;
+    --line: #2a3648;
+    --paper: #0a1018;
+    --card: #121a26;
+    --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(225, 29, 72, 0.18), transparent 55%),
+      radial-gradient(900px 500px at 10% 0%, rgba(14, 165, 183, 0.12), transparent 50%),
+      var(--paper);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  a { color: #7de7ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header, main, footer { width: min(960px, calc(100% - 36px)); margin: 0 auto; }
+  header {
+    padding: 22px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700; letter-spacing: -0.03em; font-size: 1.05rem; color: var(--ink);
+  }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { width: 22px; height: 22px; display: block; }
+  nav a { color: var(--muted); font-weight: 600; font-size: 0.92rem; }
+  h1 {
+    margin: 28px 0 8px;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+  .lede { margin: 0 0 28px; color: var(--muted); max-width: 36rem; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding-bottom: 48px;
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .map {
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .map:hover { transform: translateY(-3px); }
+  .map.classic:hover {
+    border-color: #e8c547;
+    box-shadow: 0 16px 36px rgba(232, 197, 71, 0.18);
+  }
+  .map.night:hover {
+    border-color: #7de7ff;
+    box-shadow: 0 18px 40px rgba(225, 29, 72, 0.28), 0 0 24px rgba(125, 231, 255, 0.16);
+  }
+  .map img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #05080e;
+  }
+  .map-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .map h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .map.classic h2 { color: #fff7d6; }
+  .map.night h2 { color: #e7fbff; }
+  .play {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: #fff;
+    background: #e11d48;
+  }
+  .play:hover { text-decoration: none; filter: brightness(1.08); }
+  .map.classic .play { background: #c9a227; color: #0e1520; }
+  .map.night .play { background: linear-gradient(90deg, #e11d48, #0ea5b7); color: #fff; }
+  footer { padding: 0 0 36px; color: var(--muted); font-size: 0.85rem; }
+</style>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
-  <script src="flutter_bootstrap.js" async></script>
+  <header>
+    <a class="brand" href="/">
+      <img class="brand-mark" src="/assets/sdkaihub_mark.png" width="22" height="22" alt="">
+      SDK AI Hub
+    </a>
+    <nav aria-label="Site">
+      <a href="/">Home</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Roadster Rally</h1>
+    <p class="lede">Choose a map, then play in the browser.</p>
+    <div class="grid">
+      <article class="map classic">
+        <img
+          src="/assets/roadster-card-classic.jpg"
+          width="1280"
+          height="720"
+          alt="Classic map. White Roadster mid-flip over a red truck."
+        >
+        <div class="map-body">
+          <h2>Classic</h2>
+          <a class="play" href="/roadster-rally/play/?map=classic">Play</a>
+        </div>
+      </article>
+      <article class="map night">
+        <img
+          src="/assets/roadster-card-night.jpg"
+          width="1280"
+          height="720"
+          alt="Night Track map. White Roadster mid-flip on wet asphalt."
+        >
+        <div class="map-body">
+          <h2>Night Track</h2>
+          <a class="play" href="/roadster-rally/play/?map=night">Play</a>
+        </div>
+      </article>
+    </div>
+  </main>
+  <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
 </html>

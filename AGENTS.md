@@ -10,7 +10,8 @@ GitHub Pages. That fact drives every rule below.
 The public homepage is **Orgora Charts** first (Founder 2026-09-20: hide
 other products for now). **Exception (Founder 2026-10-16):** Roadster Rally
 may appear as a poster tile on the homepage linking to `/roadster-rally/`
-(Flutter web build). Do not list Penni or other in-development apps on
+(map select). The Flutter web build lives at `/roadster-rally/play/`
+with optional `?map=classic` / `?map=night` deep links. Do not list Penni or other in-development apps on
 sdkaihub.com until the Founder says so. This repo is the public website:
 the homepage, and per-app privacy policy and support pages
 (`orgora-charts/`). `CNAME` binds the custom domain and the
