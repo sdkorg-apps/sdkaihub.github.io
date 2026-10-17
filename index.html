@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Orgora Charts — private org charts for sales. Tag Economic Buyers and Champions. Charts stay in your Google Drive or OneDrive.">
+<meta name="description" content="SDK AI Hub apps: Orgora Charts for private org charts, and Roadster Rally in the browser.">
 <meta name="apple-itunes-app" content="app-id=6792418699">
 <title>SDK AI Hub — software by SDK Equipment LLC</title>
 <link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
@@ -75,38 +75,15 @@
   }
   .apps {
     display: grid;
-    grid-template-columns: 1.12fr 0.88fr;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
-    align-items: start;
+    align-items: stretch;
     padding: 28px 0 48px;
   }
   @media (max-width: 900px) {
     .apps { grid-template-columns: 1fr; }
   }
-  .rally-poster {
-    display: block;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid #243041;
-    background: #0e1520;
-    box-shadow: var(--shadow);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    position: sticky;
-    top: 16px;
-  }
-  .rally-poster:hover {
-    text-decoration: none;
-    transform: translateY(-3px);
-    border-color: #e11d48;
-    box-shadow: 0 18px 40px rgba(225, 29, 72, 0.22);
-  }
-  .rally-poster img {
-    display: block;
-    width: 100%;
-    height: auto;
-    background: #0e1520;
-  }
-  .card {
+  .app-card {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 22px;
@@ -114,8 +91,48 @@
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .app-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--green);
+    box-shadow: 0 18px 44px rgba(28, 44, 32, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    .app-card:hover { box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); }
+  }
+  .app-card--rally:hover {
+    border-color: #e11d48;
+    box-shadow: 0 18px 44px rgba(225, 29, 72, 0.22);
   }
   .card-body { padding: 24px 24px 8px; flex: 1 1 auto; }
+  .app-pitch { margin: 0 0 14px; }
+  .card-media {
+    padding: 8px 24px 24px;
+    margin-top: auto;
+  }
+  .card-hero {
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #0e1520;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card-hero:hover { text-decoration: none; transform: translateY(-2px); }
+  .card-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #0e1520;
+  }
+  .app-card--rally .btn.primary {
+    background: #e11d48;
+    color: #fff;
+  }
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
   h2 { margin: 10px 0 8px; font-size: 1.7rem; letter-spacing: -0.03em; }
@@ -295,146 +312,38 @@
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <h1>Your data stays yours.</h1>
-        <p class="lede">Orgora Charts maps the buying committee. Charts stay in your Drive — we never host your files.</p>
+        <h1>Pick an app. Jump in.</h1>
+        <p class="lede">Orgora Charts for private org charts. Roadster Rally to play in the browser. More apps can join this hub later.</p>
       </div>
     </section>
-    <section class="apps" aria-label="Apps">
-      <article class="card">
-        <div class="card-body">
-          <div class="eyebrow"><span class="live">Live</span> Org charts</div>
-          <div class="app-title">
-            <div class="app-title-left">
-              <img class="app-mark orgora-mark" src="/assets/orgora_mark.png" width="44" height="44" alt="Orgora mark">
-              <h2>Orgora Charts</h2>
-            </div>
-            <a class="open-cta" href="/orgora/">
-              <span class="btn primary">Open in the browser</span>
-              <span class="open-note">Log in with Google or Microsoft</span>
-            </a>
+    <section class="apps" data-app-hub aria-label="Apps"></section>
+    <noscript>
+      <section class="apps" aria-label="Apps">
+        <article class="app-card">
+          <div class="card-body">
+            <h2>Orgora Charts</h2>
+            <p>Private org charts. Charts stay in your Drive.</p>
+            <p><a class="btn primary" href="/orgora/">Open in the browser</a></p>
+            <p class="links">
+              <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699">App Store</a> ·
+              <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699?mt=12">Mac App Store</a> ·
+              <a href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba">Chrome Web Store</a>
+            </p>
           </div>
-          <p>Map the buying committee — not just the org chart. Tag Economic Buyers and Champions, run MEDDIC on the tree, and keep the map in your Drive. iPhone, iPad, Mac, and the web. Free to start.</p>
-          <div class="features">
-            <div class="feature">
-              <div class="feature-brands">
-                <img src="/assets/logo-google.svg" width="28" height="28" alt="Google">
-                <img src="/assets/logo-onedrive.svg" width="28" height="28" alt="Microsoft OneDrive">
-              </div>
-              <strong>Your Drive or OneDrive</strong>
-              <p>Continue with Google or Microsoft so charts save in cloud storage you already own. We never host your files.</p>
-            </div>
-            <div class="feature">
-              <div class="feature-brands">
-                <img src="/assets/logo-linkedin.svg" width="28" height="28" alt="LinkedIn">
-              </div>
-              <strong>Clip from LinkedIn</strong>
-              <p>Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.</p>
-            </div>
+        </article>
+        <article class="app-card app-card--rally">
+          <div class="card-body">
+            <h2>Roadster Rally</h2>
+            <p>Hop cars, flip over trucks, dodge lanes, and boost ×2.</p>
+            <p><a class="btn primary" href="/roadster-rally/">Play now</a></p>
+            <p class="links"><a href="/roadster-rally/">Maps: Classic and Night Track</a></p>
           </div>
-          <div class="store-badges" aria-label="Get Orgora Charts">
-            <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699" aria-label="Download on the App Store">
-              <img class="app-store-badge" src="/assets/download-on-the-app-store.svg" width="120" height="40" alt="Download on the App Store">
-            </a>
-            <a href="https://apps.apple.com/us/app/orgora-charts/id6792418699?mt=12" aria-label="Download on the Mac App Store">
-              <img class="app-store-badge" src="/assets/download-on-the-mac-app-store.svg" width="156" height="40" alt="Download on the Mac App Store">
-            </a>
-            <a href="https://chromewebstore.google.com/detail/orgora-clipper/knhanhbopbmibdlepnieiindfilicjba" aria-label="Available in the Chrome Web Store">
-              <img class="cws-badge" src="/assets/available-in-chrome-web-store.png" width="206" height="58" alt="Available in the Chrome Web Store">
-            </a>
-          </div>
-          <p class="links">
-            <a href="/orgora-charts/clipper.html">Safari and Chrome setup</a> ·
-            <a href="/orgora-charts/">Support</a> ·
-            <a href="/orgora-charts/privacy.html">Privacy policy</a>
-          </p>
-        </div>
-        <div class="shots">
-          <div class="reel" data-reel>
-            <div class="reel-frame">
-              <img class="is-on" src="/assets/orgora-shot-orgora-wide.jpg" width="1792" height="1008" alt="Orgora Charts. A chart with Economic Buyer, Champion, and Gatekeeper." data-label="Orgora" data-caption="Orgora. Economic Buyer, Champion, and Gatekeeper on the chart.">
-              <img src="/assets/orgora-shot-devices-wide.jpg" width="1792" height="1008" alt="Orgora Charts on an iPad, with the person sheet on an iPhone." data-label="iPhone and iPad" data-caption="The chart on iPad, and a person on iPhone." aria-hidden="true">
-              <img src="/assets/orgora-shot-meeting.jpg" width="1792" height="1008" alt="A meeting with the Orgora sample chart on the screen." data-label="The chart" data-caption="The same chart, up on the screen." aria-hidden="true">
-            </div>
-            <div class="reel-bar">
-              <button type="button" class="reel-nav" data-reel-prev aria-label="Previous screen">‹</button>
-              <p class="reel-caption"></p>
-              <button type="button" class="reel-nav" data-reel-next aria-label="Next screen">›</button>
-            </div>
-            <div class="reel-dots" role="tablist" aria-label="Product screens"></div>
-          </div>
-          <figure class="tour" id="tour">
-            <video controls playsinline preload="none" poster="/assets/orgora-tour.jpg">
-              <source src="/assets/orgora-tour.mp4" type="video/mp4">
-            </video>
-            <figcaption>Watch a short tour of Orgora Charts. Created with Grok.</figcaption>
-          </figure>
-          <div class="feature feature-shot">
-            <strong>Import contacts from your inbox</strong>
-            <p>On iPhone and Mac, connect Microsoft or Gmail and Find people — scan your own mail for work domains and start a new org chart from a company. Credentials stay on the device. LinkedIn clips land the same way: a person on the chart, not a file we host.</p>
-          </div>
-        </div>
-      </article>
-
-      <a class="rally-poster" href="/roadster-rally/" aria-label="Roadster Rally — choose a map">
-        <img
-          src="/assets/roadster-rally-poster.jpg"
-          width="1280"
-          height="720"
-          alt="Roadster Rally. White Roadster on a wet night track."
-        >
-      </a>
-    </section>
+        </article>
+      </section>
+    </noscript>
   </main>
   <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
-  <script>
-    (function () {
-      var root = document.querySelector("[data-reel]");
-      if (!root) return;
-      var slides = Array.prototype.slice.call(root.querySelectorAll(".reel-frame img"));
-      var caption = root.querySelector(".reel-caption");
-      var dots = root.querySelector(".reel-dots");
-      var i = 0;
-      var timer = 0;
-      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      function show(n) {
-        i = (n + slides.length) % slides.length;
-        slides.forEach(function (img, idx) {
-          var on = idx === i;
-          img.classList.toggle("is-on", on);
-          img.setAttribute("aria-hidden", on ? "false" : "true");
-        });
-        caption.textContent = slides[i].getAttribute("data-caption") || "";
-        Array.prototype.forEach.call(dots.children, function (button, idx) {
-          button.setAttribute("aria-current", idx === i ? "true" : "false");
-        });
-      }
-      function arm() {
-        clearInterval(timer);
-        if (reduce || document.hidden) return;
-        timer = setInterval(function () { show(i + 1); }, 5000);
-      }
-      slides.forEach(function (img, idx) {
-        var button = document.createElement("button");
-        button.type = "button";
-        button.setAttribute("role", "tab");
-        button.setAttribute("aria-label", img.getAttribute("data-label") || ("Screen " + (idx + 1)));
-        button.addEventListener("click", function () { show(idx); arm(); });
-        dots.appendChild(button);
-      });
-      root.querySelector("[data-reel-prev]").addEventListener("click", function () { show(i - 1); arm(); });
-      root.querySelector("[data-reel-next]").addEventListener("click", function () { show(i + 1); arm(); });
-      root.addEventListener("mouseenter", function () { clearInterval(timer); });
-      root.addEventListener("mouseleave", arm);
-      root.addEventListener("focusin", function () { clearInterval(timer); });
-      root.addEventListener("focusout", function (event) {
-        if (!root.contains(event.relatedTarget)) arm();
-      });
-      document.addEventListener("visibilitychange", arm);
-      show(0);
-      arm();
-    })();
-  </script>
-
+  <script src="/assets/apps.js"></script>
   <script src="/assets/visit.js" defer></script>
 </body>
 </html>
