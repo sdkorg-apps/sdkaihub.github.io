@@ -79,17 +79,44 @@
       pitch: "",
       primary: {
         href: "/roadster-rally/play/",
-        label: "Play now",
+        label: "Play",
         note: "Classic BETA in the browser",
       },
       links: [],
       hero: {
-        src: "/assets/roadster-card-classic.jpg",
+        src: "/assets/roadster-rally-poster.jpg",
         width: 1280,
         height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        alt: "Roadster Rally Classic BETA. Photoreal Roadster mid-jump on a wet night track.",
         href: "/roadster-rally/play/",
       },
+      gameplay: [
+        {
+          src: "/assets/roadster-gameplay-hop.jpg",
+          width: 1280,
+          height: 720,
+          alt: "Roadster Rally — hop over a sedan.",
+          label: "Hop",
+          caption: "Tap to hop over traffic.",
+        },
+        {
+          src: "/assets/roadster-gameplay-flip.jpg",
+          width: 1280,
+          height: 720,
+          alt: "Roadster Rally — flip over a truck.",
+          label: "Flip",
+          caption: "Tap again in the air to flip.",
+        },
+        {
+          src: "/assets/roadster-gameplay-cruise.jpg",
+          width: 1280,
+          height: 720,
+          alt: "Roadster Rally — dodge and boost on the ribbon.",
+          label: "Dodge",
+          caption: "Dodge lanes and boost when clear.",
+        },
+      ],
+      howto: "Tap to hop, tap again to flip. Dodge. Boost.",
       accent: "rally",
     },
   ];
@@ -207,7 +234,8 @@
     titleLeft.appendChild(el("h2", { text: app.name }));
     titleRow.appendChild(titleLeft);
 
-    if (app.primary) {
+    // Rally keeps Play in the stack below the poster; Orgora keeps the title CTA.
+    if (app.primary && app.accent !== "rally") {
       var cta = el("a", { className: "open-cta", href: app.primary.href });
       cta.appendChild(el("span", { className: "btn primary", text: app.primary.label }));
       if (app.primary.note) cta.appendChild(el("span", { className: "open-note", text: app.primary.note }));
@@ -218,9 +246,10 @@
       body.appendChild(el("p", { className: "app-pitch", text: app.pitch }));
     }
 
-    // Hero art sits under the pitch so it stays visible without equal-height stretch.
+    // Hero art — Rally stacks poster + gameplay fill after the body.
+    var heroWrap = null;
     if (app.hero) {
-      var heroWrap = el("div", { className: "card-media card-media--inline" });
+      heroWrap = el("div", { className: "card-media card-media--inline" });
       var heroLink = el("a", {
         className: "card-hero",
         href: app.hero.href || (app.primary && app.primary.href) || "#",
@@ -235,7 +264,7 @@
         })
       );
       heroWrap.appendChild(heroLink);
-      body.appendChild(heroWrap);
+      if (app.accent !== "rally") body.appendChild(heroWrap);
     }
 
     if (app.features && app.features.length) {
@@ -284,6 +313,71 @@
     }
 
     card.appendChild(body);
+
+    if (app.accent === "rally" && heroWrap) {
+      // Poster + gameplay fill the stretched card; howto/Play sit below so they
+      // never clip under overflow when matching Orgora's height.
+      var stack = el("div", { className: "rally-stack" });
+      stack.appendChild(heroWrap);
+
+      if (app.gameplay && app.gameplay.length) {
+        var strip = el("div", { className: "rally-playstrip", "data-reel": "" });
+        var frame = el("div", { className: "reel-frame" });
+        app.gameplay.forEach(function (shot, idx) {
+          var attrs = {
+            src: shot.src,
+            width: String(shot.width),
+            height: String(shot.height),
+            alt: shot.alt,
+            "data-label": shot.label,
+            "data-caption": shot.caption,
+          };
+          if (idx === 0) attrs.className = "is-on";
+          else attrs["aria-hidden"] = "true";
+          frame.appendChild(el("img", attrs));
+        });
+        strip.appendChild(frame);
+        strip.appendChild(
+          el("div", { className: "reel-bar" }, [
+            el("button", {
+              type: "button",
+              className: "reel-nav",
+              "data-reel-prev": "",
+              "aria-label": "Previous gameplay shot",
+              text: "‹",
+            }),
+            el("p", { className: "reel-caption" }),
+            el("button", {
+              type: "button",
+              className: "reel-nav",
+              "data-reel-next": "",
+              "aria-label": "Next gameplay shot",
+              text: "›",
+            }),
+          ])
+        );
+        strip.appendChild(
+          el("div", { className: "reel-dots", role: "tablist", "aria-label": "Gameplay shots" })
+        );
+        stack.appendChild(strip);
+      }
+      card.appendChild(stack);
+
+      if (app.howto) {
+        card.appendChild(el("p", { className: "rally-howto", text: app.howto }));
+      }
+      if (app.primary) {
+        card.appendChild(
+          el("div", { className: "rally-play" }, [
+            el("a", {
+              className: "btn primary",
+              href: app.primary.href,
+              text: app.primary.label,
+            }),
+          ])
+        );
+      }
+    }
 
     if (app.media === "orgora") {
       card.appendChild(renderOrgoraMedia());
