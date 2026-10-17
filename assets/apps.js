@@ -84,10 +84,10 @@
       },
       links: [],
       hero: {
-        src: "/assets/roadster-card-classic.jpg",
+        src: "/assets/roadster-rally-poster.jpg",
         width: 1280,
         height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        alt: "Roadster Rally Classic BETA. Photoreal Roadster mid-jump on a wet night track.",
         href: "/roadster-rally/play/",
       },
       accent: "rally",
