@@ -22459,12 +22459,7 @@ q=s[1]
 s=s[2]
 p=b[2]
 return A.c([o*m+l*k+j*n,o*r+l*q+j*s,o*p[0]+l*p[1]+j*p[2]],t.n)},
-aAD(){var s=A.aw8().gOz().i(0,"map"),r=s==null?null:B.d.nk(s).toLowerCase()
-if(r==null||r.length===0)return null
-A:{if("classic"===r||"c"===r){s=A.ank(B.qw)
-break A}if("night"===r||"nighttrack"===r||"night-track"===r||"n"===r){s=A.ank(B.qx)
-break A}s=null
-break A}return s},
+aAD(){return A.ank(B.qw)},
 asX(a){var s,r,q=A.c([],t.s)
 for(s=0;s<a.length;++s){r=a.key(s)
 r.toString

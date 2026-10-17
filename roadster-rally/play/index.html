@@ -31,8 +31,30 @@
 
   <title>Roadster Rally</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; background: #0e1520; }
+    /* Hide the map picker for one beat while Classic auto-launches. */
+    #classic-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0e1520;
+      pointer-events: none;
+    }
+  </style>
+  <script>
+    // Classic-only boot: every visit (including ?map=night) lands in Classic.
+    (function () {
+      try {
+        var u = new URL(location.href);
+        u.searchParams.set("map", "classic");
+        history.replaceState(null, "", u.pathname + "?" + u.searchParams.toString() + u.hash);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+  <div id="classic-boot" aria-hidden="true"></div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
@@ -43,5 +65,26 @@
   -->
   <script src="flutter_bootstrap.js" async></script>
   <script src="/assets/visit.js" defer></script>
+  <script>
+    (function () {
+      var dropped = false;
+      function drop() {
+        if (dropped) return;
+        dropped = true;
+        var el = document.getElementById("classic-boot");
+        if (el) el.remove();
+      }
+      var n = 0;
+      var iv = setInterval(function () {
+        n += 1;
+        if (document.querySelector("flt-glass-pane") || document.querySelector("canvas") || n > 60) {
+          clearInterval(iv);
+          // Post-frame Classic launch + route push.
+          setTimeout(drop, 500);
+        }
+      }, 50);
+      setTimeout(drop, 4000);
+    })();
+  </script>
 </body>
 </html>
