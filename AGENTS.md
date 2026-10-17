@@ -7,11 +7,12 @@ GitHub Pages. That fact drives every rule below.
 ## What this is
 
 **SDK AI Hub** (a brand of SDK Equipment LLC) builds apps. **Orgora Charts** is the privacy-first product: it does not host customer charts and it does not run analytics. That promise is Orgora only. Other apps may store user data. Do not describe the company, or a non-Orgora app, as collecting zero data.
-The public homepage is **Orgora Charts** first (Founder 2026-09-20: hide
-other products for now). **Exception (Founder 2026-10-16):** Roadster Rally
-may appear as a poster tile on the homepage linking to `/roadster-rally/`
-(map select). The Flutter web build lives at `/roadster-rally/play/`
-with optional `?map=classic` / `?map=night` deep links. Do not list Penni or other in-development apps on
+The public homepage is an **app hub** (Founder 2026-10-17): equal cards for
+live apps, driven by `assets/apps.js` (`SDK_APPS`). Orgora Charts and
+Roadster Rally ship first. Orgora keeps its store badges and full content.
+Roadster Rally links to `/roadster-rally/` (map select); the Flutter web
+build lives at `/roadster-rally/play/` with optional `?map=classic` /
+`?map=night`. Do not list Penni or other in-development apps on
 sdkaihub.com until the Founder says so. This repo is the public website:
 the homepage, and per-app privacy policy and support pages
 (`orgora-charts/`). `CNAME` binds the custom domain and the
