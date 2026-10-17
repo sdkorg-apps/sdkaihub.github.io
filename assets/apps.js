@@ -73,22 +73,29 @@
     {
       id: "roadster",
       eyebrowLive: "BETA",
-      eyebrow: "Arcade",
+      eyebrow: "",
       name: "Roadster Rally",
       mark: null,
       pitch: "",
       primary: {
         href: "/roadster-rally/play/",
-        label: "Play now",
+        label: "Play",
         note: "Classic BETA in the browser",
       },
       links: [],
       hero: {
-        src: "/assets/roadster-card-classic.jpg",
+        src: "/assets/roadster-rally-poster.jpg",
         width: 1280,
         height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        alt: "Roadster Rally Classic BETA. Photoreal Roadster on a wet night track.",
         href: "/roadster-rally/play/",
+      },
+      // Single photoreal strip (not cartoon hub cards) — for later re-ship.
+      strip: {
+        src: "/assets/roadster-gameplay-photoreal.jpg",
+        width: 1280,
+        height: 720,
+        alt: "Roadster Rally gameplay — photoreal ribbon, hop and dodge.",
       },
       accent: "rally",
     },
@@ -184,12 +191,9 @@
     });
     var body = el("div", { className: "card-body" });
 
-    body.appendChild(
-      el("div", { className: "eyebrow" }, [
-        el("span", { className: "live", text: app.eyebrowLive }),
-        document.createTextNode(" " + app.eyebrow),
-      ])
-    );
+    var eyebrowKids = [el("span", { className: "live", text: app.eyebrowLive })];
+    if (app.eyebrow) eyebrowKids.push(document.createTextNode(" " + app.eyebrow));
+    body.appendChild(el("div", { className: "eyebrow" }, eyebrowKids));
 
     var titleRow = el("div", { className: "app-title" });
     var titleLeft = el("div", { className: "app-title-left" });
@@ -207,7 +211,8 @@
     titleLeft.appendChild(el("h2", { text: app.name }));
     titleRow.appendChild(titleLeft);
 
-    if (app.primary) {
+    // Rally: Play sits under the media (no empty stretch band). Orgora keeps title CTA.
+    if (app.primary && app.accent !== "rally") {
       var cta = el("a", { className: "open-cta", href: app.primary.href });
       cta.appendChild(el("span", { className: "btn primary", text: app.primary.label }));
       if (app.primary.note) cta.appendChild(el("span", { className: "open-note", text: app.primary.note }));
@@ -236,6 +241,31 @@
       );
       heroWrap.appendChild(heroLink);
       body.appendChild(heroWrap);
+    }
+
+    if (app.accent === "rally" && app.strip) {
+      var strip = el("div", { className: "rally-strip" });
+      strip.appendChild(
+        el("img", {
+          src: app.strip.src,
+          width: String(app.strip.width),
+          height: String(app.strip.height),
+          alt: app.strip.alt,
+        })
+      );
+      body.appendChild(strip);
+    }
+
+    if (app.accent === "rally" && app.primary) {
+      body.appendChild(
+        el("div", { className: "rally-play" }, [
+          el("a", {
+            className: "btn primary",
+            href: app.primary.href,
+            text: app.primary.label,
+          }),
+        ])
+      );
     }
 
     if (app.features && app.features.length) {
