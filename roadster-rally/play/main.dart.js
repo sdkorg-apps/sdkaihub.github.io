@@ -68015,7 +68015,7 @@ q=r?Math.sin(c.ax.a*11)*0.55:0
 r=c.ax
 p=r.at>0?2.4:1
 o=(r.r+Math.abs(q))*p
-b.translate(Math.sin(r.a*37)*o,Math.cos(r.a*29)*o*0.45+q)
+b.translate(Math.sin(r.a*37)*Math.min(o,12),Math.cos(r.a*29)*Math.min(o,12)*0.45+q)
 if(s){s=c.dx
 if(s==null){s=new A.RC(77,A.c([],t.Bq))
 s.Wa()
@@ -68996,31 +68996,33 @@ s=r.x1
 if(s>0){s-=a
 r.x1=s
 if(s<=0)r.to=""}},
-v1(a){var s,r,q,p,o,n,m,l,k,j,i,h=this,g=h.gnt().p1.ax.gC()
-h.ya(a,"SCORE  "+h.p1,new A.i(18,18),22,B.a9)
-h.ya(a,"COMBO  x"+B.f.am(h.p3,1,99),new A.i(18,46),14,B.eo)
-h.ya(a,""+h.p4+" MPH  \xb7  "+h.R8,new A.i(18,68),14,B.kl)
-s=B.c.am(h.RG,0,1)
-r=h.rx?"BOOST  "+B.c.O(h.ry,1)+"s   \xd72":"BOOST  "+B.c.a6(s*100)+"%"
+v1(a){var s,r,q,p,o,n,m,l,k,j,i,a4,a5,h=this,g=h.gnt().p1.ax.gC()
 q=g.a
 p=q[0]
-o=Math.min(280,p*0.42)
-n=(p-o)/2
+a4=p<500
+h.ya(a,"SCORE  "+h.p1,new A.i(18,18),a4?18:22,B.a9)
+h.ya(a,"COMBO  x"+B.f.am(h.p3,1,99),new A.i(18,a4?42:46),14,B.eo)
+h.ya(a,""+h.p4+" MPH  \xb7  "+h.R8,new A.i(18,a4?62:68),14,B.kl)
+s=B.c.am(h.RG,0,1)
+r=h.rx?"BOOST  "+B.c.O(h.ry,1)+"s   \xd72":"BOOST  "+B.c.a6(s*100)+"%"
+o=Math.min(a4?168:280,p*(a4?0.4:0.42))
+n=a4?p-o-16:(p-o)/2
 m=h.rx?B.A7:B.a9
-h.yb(a,r,new A.i(p/2,16),13,m,!0)
-l=A.fu(new A.z(n,38,n+o,48),B.vx)
+a5=a4?52:16
+h.yb(a,r,new A.i(a4?n+o/2:p/2,a5),13,m,!0)
+l=A.fu(new A.z(n,a5+22,n+o,a5+32),B.vx)
 $.V()
 m=A.a3()
 m.r=B.AF.gn()
 a.dD(l,m)
-if(s>0){p=A.fu(new A.z(n,38,n+o*s,48),B.vx)
+if(s>0){p=A.fu(new A.z(n,a5+22,n+o*s,a5+32),B.vx)
 m=A.a3()
 m.r=(h.rx?B.kn:B.b4).gn()
 a.dD(p,m)}for(p=a.a,k=0;k<h.p2;++k){m=q[0]
 j=new A.bw(B.A,B.x,B.E,B.z)
 j.r=B.b4.gn()
 i=j.b5()
-p.drawCircle(m-28-k*22,30,8,i)
+p.drawCircle(m-(a4?70:28)-k*22,a4?78:30,8,i)
 i.delete()}p=h.to
 if(p.length!==0)h.yb(a,p,new A.i(q[0]/2,q[1]*0.18),20,B.kl,!0)},
 yb(a,b,c,d,e,f){var s=null,r=A.HM(s,s,s,s,A.xC(s,s,s,s,s,s,s,s,s,A.kZ(s,s,e,s,s,s,s,s,s,s,s,d,s,s,B.db,s,s,!0,s,0.6,s,s,s,s,s,s),b),B.aI,B.N,s,B.ef,B.ba)
@@ -69467,7 +69469,7 @@ $S:445}
 A.MO.prototype={}
 A.Gr.prototype={
 P(a){var s=null,r=A.afI(B.ag,B.zj,B.h5,!0),q=A.atU(r.ok).a4G(B.a9,B.a9),p=A.adH().$3$color$fontSize$letterSpacing(B.a9,28,1.2)
-return new A.vk(new A.uC(this.c,s),"Roadster Rally",r.a6y(new A.BG(B.M,0,p,B.Kr,s),new A.oL(A.aiC(s,s,B.b4,s,s,s,s,s,s,B.a9,s,s,B.BM,s,B.IG,s,s,s,A.lw().$3$fontSize$fontWeight$letterSpacing(16,B.aU,0.4),s)),q),!1,s)}}
+return new A.vk(new A.mm(B.Gh,s),"Roadster Rally",r.a6y(new A.BG(B.M,0,p,B.Kr,s),new A.oL(A.aiC(s,s,B.b4,s,s,s,s,s,s,B.a9,s,s,B.BM,s,B.IG,s,s,s,A.lw().$3$fontSize$fontWeight$letterSpacing(16,B.aU,0.4),s)),q),!1,s)}}
 A.mm.prototype={
 aq(){return new A.yJ()}}
 A.yJ.prototype={
@@ -69581,7 +69583,7 @@ q===$&&A.a()
 q.ne(1)}},
 $S:47}
 A.a8q.prototype={
-$0(){return A.ZS(this.a).ur()},
+$0(){v.G.window.location.assign("/")},
 $S:0}
 A.a8r.prototype={
 $0(){var s=this.a.d
@@ -69594,7 +69596,7 @@ s===$&&A.a()
 return s.ne(1)},
 $S:0}
 A.a8t.prototype={
-$0(){return A.ZS(this.a).ur()},
+$0(){v.G.window.location.assign("/")},
 $S:0}
 A.qB.prototype={
 P(a){var s=null,r=this.d.f_(0.85)
@@ -73467,7 +73469,7 @@ B.AU=new A.m(1,0.48627450980392156,0.2901960784313726,0.11764705882352941,B.e)
 B.kN=new A.m(1,0.9098039215686274,0.7215686274509804,0.42745098039215684,B.e)
 B.Rz=new A.m(1,0.7686274509803922,0.6392156862745098,0.35294117647058826,B.e)
 B.Gf=new A.j0(B.Gi,"Desert Dash","Mirage traffic and sand traps. Coming soon.",B.qy,B.AU,B.kN,!1,!0,null,B.i3,B.kN)
-B.eP=s([B.Gh,B.Gg,B.Gf],A.ab("v<j0>"))
+B.eP=s([B.Gh],A.ab("v<j0>"))
 B.k=new A.vf(0,"ignored")
 B.lE=new A.e(100)
 B.i9=new A.e(32)
@@ -74993,7 +74995,7 @@ B.O7=new A.l(!0,B.l,null,".AppleSystemUIFont",null,null,null,null,null,null,null
 B.Lm=new A.l(!0,B.l,null,".AppleSystemUIFont",null,null,null,null,null,null,null,null,null,null,null,null,null,B.h,null,null,null,"blackRedwoodCity labelSmall",null,null,null,null)
 B.Pc=new A.d5(B.N3,B.M2,B.N4,B.Nv,B.LK,B.LS,B.Mk,B.Nq,B.Mw,B.NR,B.Lf,B.Lx,B.NO,B.O7,B.Lm)
 B.Pd=new A.qf("RETRY",null,null,null,null)
-B.Pe=new A.qf("MAPS",null,null,null,null)
+B.Pe=new A.qf("HOME",null,null,null,null)
 B.RK=new A.a54(0,"system")
 B.Hd=new A.i(0.056,0.024)
 B.Hm=new A.i(0.108,0.3085)

@@ -18,7 +18,8 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Roadster Rally — jump the crowd, net the goons, keep the red rocket shiny.">
+  <meta name="description" content="Roadster Rally — hop cars, flip over trucks, and dodge traffic.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -32,14 +33,55 @@
   <title>Roadster Rally</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    html, body { margin: 0; background: #0e1520; }
-    /* Hide the map picker for one beat while Classic auto-launches. */
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #030207;
+      overflow: hidden;
+    }
+    /* Finished title plate — Flutter is not loaded until PLAY / tap. */
     #classic-boot {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: #0e1520;
+      background: #030207;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    #classic-boot .stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #classic-boot img.plate {
+      position: absolute;
+      display: block;
+      max-width: none;
       pointer-events: none;
+      user-select: none;
+    }
+    #classic-boot button.play {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: transparent;
+      font-size: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+    #classic-boot button.play:focus-visible {
+      outline: 2px solid #e8c547;
+      outline-offset: 3px;
+    }
+    flt-glass-pane, flt-scene-host, flutter-view {
+      overflow: hidden !important;
     }
   </style>
   <script>
@@ -54,7 +96,12 @@
   </script>
 </head>
 <body>
-  <div id="classic-boot" aria-hidden="true"></div>
+  <div id="classic-boot" role="button" tabindex="0" aria-label="Play Roadster Rally">
+    <div class="stage">
+      <img class="plate" alt="Roadster Rally" width="1024" height="768" draggable="false">
+      <button type="button" class="play" aria-label="Play">PLAY</button>
+    </div>
+  </div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
@@ -63,27 +110,108 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
-  <script src="flutter_bootstrap.js" async></script>
   <script src="/assets/visit.js" defer></script>
   <script>
     (function () {
-      var dropped = false;
-      function drop() {
-        if (dropped) return;
-        dropped = true;
-        var el = document.getElementById("classic-boot");
-        if (el) el.remove();
+      var started = false;
+      var boot = document.getElementById("classic-boot");
+      var plate = boot.querySelector("img.plate");
+      var playBtn = boot.querySelector("button.play");
+      var layouts = null;
+      var keys = [
+        "title_1024x768_right.png",
+        "title_1024x640_right.png",
+        "title_1366x1024_right.png",
+        "title_390x844_phone.png"
+      ];
+
+      function start() {
+        if (started) return;
+        started = true;
+        boot.remove();
+        var s = document.createElement("script");
+        s.src = "flutter_bootstrap.js";
+        s.async = true;
+        document.body.appendChild(s);
       }
-      var n = 0;
-      var iv = setInterval(function () {
-        n += 1;
-        if (document.querySelector("flt-glass-pane") || document.querySelector("canvas") || n > 60) {
-          clearInterval(iv);
-          // Post-frame Classic launch + route push.
-          setTimeout(drop, 500);
+
+      function pickKey(w, h) {
+        if (w < 500) return "title_390x844_phone.png";
+        var best = keys[0];
+        var bestScore = Infinity;
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          if (k.indexOf("phone") !== -1) continue;
+          var L = layouts[k];
+          var score = Math.abs(L.W - w) + Math.abs(L.H - h) * 1.25;
+          if (score < bestScore) {
+            bestScore = score;
+            best = k;
+          }
         }
-      }, 50);
-      setTimeout(drop, 4000);
+        return best;
+      }
+
+      function layoutBoot() {
+        if (!layouts) return;
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        var key = pickKey(w, h);
+        var L = layouts[key];
+        var scale = Math.min(w / L.W, h / L.H);
+        var dw = L.W * scale;
+        var dh = L.H * scale;
+        var ox = (w - dw) / 2;
+        var oy = (h - dh) / 2;
+        if (plate.getAttribute("src") !== "boot/" + key) {
+          plate.src = "boot/" + key;
+          plate.width = L.W;
+          plate.height = L.H;
+        }
+        plate.style.width = dw + "px";
+        plate.style.height = dh + "px";
+        plate.style.left = ox + "px";
+        plate.style.top = oy + "px";
+        var p = L.play;
+        playBtn.style.left = ox + p[0] * scale + "px";
+        playBtn.style.top = oy + p[1] * scale + "px";
+        playBtn.style.width = (p[2] - p[0]) * scale + "px";
+        playBtn.style.height = (p[3] - p[1]) * scale + "px";
+      }
+
+      fetch("boot/layout.json", { cache: "no-cache" })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          layouts = j;
+          layoutBoot();
+        })
+        .catch(function () {
+          // Fallback plate if layout.json fails — still block Flutter until tap.
+          plate.src = "boot/title_1024x768_right.png";
+          plate.style.inset = "0";
+          plate.style.width = "100%";
+          plate.style.height = "100%";
+          plate.style.objectFit = "contain";
+          playBtn.style.left = "50%";
+          playBtn.style.top = "83.5%";
+          playBtn.style.width = "35%";
+          playBtn.style.height = "8%";
+          playBtn.style.transform = "translate(-50%, 0)";
+        });
+
+      window.addEventListener("resize", layoutBoot);
+      // Any tap / PLAY / keyboard starts — Flutter is not loaded until then.
+      boot.addEventListener("pointerdown", start);
+      playBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        start();
+      });
+      boot.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          start();
+        }
+      });
     })();
   </script>
 </body>
