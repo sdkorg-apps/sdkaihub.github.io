@@ -82,7 +82,7 @@
         label: "Play now",
         note: "Classic BETA in the browser",
       },
-      links: [{ href: "/roadster-rally/preview/", label: "Preview build" }],
+      links: [],
       hero: {
         src: "/assets/roadster-card-classic.jpg",
         width: 1280,
