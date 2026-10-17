@@ -79,49 +79,139 @@
     gap: 20px;
     padding: 28px 0 48px;
   }
-  .poster-card {
-    display: block;
-    color: inherit;
+  .rally {
     background: #0e1520;
-    border: 1px solid var(--line);
+    border: 1px solid #243041;
     border-radius: 22px;
     overflow: hidden;
     box-shadow: var(--shadow);
-    transition: transform .18s ease, border-color .18s ease;
-  }
-  .poster-card:hover {
-    text-decoration: none;
-    transform: translateY(-2px);
-    border-color: #e11d48;
-  }
-  .poster-card img {
-    display: block;
-    width: 100%;
-    height: auto;
-    background: #0e1520;
-  }
-  .poster-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 22px 20px;
-    background: linear-gradient(180deg, #121a26 0%, #0e1520 100%);
-  }
-  .poster-meta h2 {
-    margin: 0 0 4px;
-    font-size: 1.45rem;
     color: #f8fafc;
   }
-  .poster-meta p {
-    margin: 0;
-    color: #94a3b8;
-    font-size: 0.95rem;
+  .rally-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 20px;
+    padding: 22px 22px 8px;
   }
-  .poster-meta .btn {
-    flex: 0 0 auto;
+  .rally-head .eyebrow { margin-bottom: 6px; }
+  .rally-head h2 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    letter-spacing: -0.03em;
+    color: #f8fafc;
+  }
+  .rally-head p {
+    margin: 6px 0 0;
+    color: #94a3b8;
+    max-width: 40rem;
+    font-size: 0.98rem;
+  }
+  .rally-head .btn {
     background: #e11d48;
     color: #fff;
+  }
+  .rally-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 14px 18px 20px;
+  }
+  @media (max-width: 760px) {
+    .rally-grid { grid-template-columns: 1fr; }
+  }
+  .map-card {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #2a3648;
+    background: linear-gradient(180deg, #121a26 0%, #0b111a 100%);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .map-card:hover {
+    text-decoration: none;
+    transform: translateY(-4px);
+  }
+  .map-card.classic:hover {
+    border-color: #e8c547;
+    box-shadow: 0 16px 36px rgba(232, 197, 71, 0.18);
+  }
+  .map-card.night:hover {
+    border-color: #7de7ff;
+    box-shadow: 0 18px 40px rgba(225, 29, 72, 0.28), 0 0 28px rgba(125, 231, 255, 0.18);
+  }
+  .map-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #0a1018;
+  }
+  .map-card-body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .map-card h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: #f8fafc;
+  }
+  .map-card.night h3 { color: #e7fbff; }
+  .map-card.classic h3 { color: #fff7d6; }
+  .map-card p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+  .map-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .map-tags span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 5px 9px;
+    border-radius: 999px;
+    border: 1px solid #334155;
+    background: rgba(0,0,0,0.35);
+    color: #e2e8f0;
+  }
+  .map-card.night .map-tags span {
+    border-color: rgba(125, 231, 255, 0.45);
+    color: #d9f7ff;
+  }
+  .map-card.classic .map-tags span {
+    border-color: rgba(232, 197, 71, 0.4);
+    color: #fff1b8;
+  }
+  .map-card .play {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    background: #e11d48;
+    border-radius: 999px;
+    padding: 7px 12px;
+  }
+  .map-card.night .play {
+    background: linear-gradient(90deg, #e11d48, #0ea5b7);
+  }
+  .map-card.classic .play {
+    background: #c9a227;
+    color: #0e1520;
   }
   .card {
     background: var(--card);
@@ -392,22 +482,56 @@
         </div>
       </article>
 
-      <a class="poster-card" href="/roadster-rally/" aria-label="Play Roadster Rally in the browser">
-        <img
-          src="/assets/roadster-rally-poster.jpg"
-          width="1600"
-          height="900"
-          alt="Roadster Rally poster. A cherry-red roadster jumps a night highway while a net flies toward cartoon goons."
-        >
-        <div class="poster-meta">
+      <section class="rally" aria-labelledby="rally-title">
+        <div class="rally-head">
           <div>
             <div class="eyebrow"><span class="live">Play</span> Arcade</div>
-            <h2>Roadster Rally</h2>
-            <p>Jump the crowd. Net the goons. Keep the red rocket shiny.</p>
+            <h2 id="rally-title">Roadster Rally</h2>
+            <p>Behind-the-car chase. Hop traffic, flip over trucks, dodge lanes, and fill the meter for a ×2 boost.</p>
           </div>
-          <span class="btn">Play in browser</span>
+          <a class="btn" href="/roadster-rally/">Open game</a>
         </div>
-      </a>
+        <div class="rally-grid">
+          <a class="map-card classic" href="/roadster-rally/" aria-label="Play Classic map in Roadster Rally">
+            <img
+              src="/assets/roadster-card-classic.jpg"
+              width="1280"
+              height="720"
+              alt="Classic map. White Roadster mid-flip over a red truck on the original chase cam."
+            >
+            <div class="map-card-body">
+              <h3>Classic</h3>
+              <p>The original chase cam. Clear traffic with a hop, or flip over the big trucks.</p>
+              <div class="map-tags">
+                <span>Hop + mid-air flip</span>
+                <span>Lane dodge</span>
+                <span>Speed ramp</span>
+                <span>Boost ×2</span>
+              </div>
+              <span class="play">Play Classic</span>
+            </div>
+          </a>
+          <a class="map-card night" href="/roadster-rally/" aria-label="Play Night Track map in Roadster Rally">
+            <img
+              src="/assets/roadster-card-night.jpg"
+              width="1280"
+              height="720"
+              alt="Night Track map. White Roadster mid-flip over a truck on wet asphalt with red posts and stadium lights."
+            >
+            <div class="map-card-body">
+              <h3>Night Track</h3>
+              <p>Wet asphalt, red posts, stadium lights. Same chase — photoreal night.</p>
+              <div class="map-tags">
+                <span>Hop + mid-air flip</span>
+                <span>Lane dodge</span>
+                <span>Speed ramp</span>
+                <span>Boost ×2</span>
+              </div>
+              <span class="play">Play Night Track</span>
+            </div>
+          </a>
+        </div>
+      </section>
     </section>
   </main>
   <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
