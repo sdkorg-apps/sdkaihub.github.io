@@ -80,14 +80,14 @@
       primary: {
         href: "/roadster-rally/play/",
         label: "Play now",
-        note: "Classic BETA in the browser",
+        note: "Classic in the browser",
       },
       links: [],
       hero: {
-        src: "/assets/roadster-card-classic.jpg",
-        width: 1280,
+        src: "/assets/roadster-rally-poster.png",
+        width: 880,
         height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        alt: "Roadster Rally Classic. White Roadster on the open road.",
         href: "/roadster-rally/play/",
       },
       accent: "rally",
