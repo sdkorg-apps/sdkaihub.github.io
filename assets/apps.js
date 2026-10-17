@@ -218,9 +218,10 @@
       body.appendChild(el("p", { className: "app-pitch", text: app.pitch }));
     }
 
-    // Hero art sits under the pitch so it stays visible without equal-height stretch.
+    // Hero art — for Rally, attach after body so it flex-fills equal card height.
+    var heroWrap = null;
     if (app.hero) {
-      var heroWrap = el("div", { className: "card-media card-media--inline" });
+      heroWrap = el("div", { className: "card-media card-media--inline" });
       var heroLink = el("a", {
         className: "card-hero",
         href: app.hero.href || (app.primary && app.primary.href) || "#",
@@ -235,7 +236,7 @@
         })
       );
       heroWrap.appendChild(heroLink);
-      body.appendChild(heroWrap);
+      if (app.accent !== "rally") body.appendChild(heroWrap);
     }
 
     if (app.features && app.features.length) {
@@ -284,6 +285,8 @@
     }
 
     card.appendChild(body);
+    // Rally poster is a card-level flex child so cover-fill matches Orgora height.
+    if (heroWrap && app.accent === "rally") card.appendChild(heroWrap);
 
     if (app.media === "orgora") {
       card.appendChild(renderOrgoraMedia());
