@@ -69583,7 +69583,7 @@ q===$&&A.a()
 q.ne(1)}},
 $S:47}
 A.a8q.prototype={
-$0(){v.G.window.location.href="/"},
+$0(){v.G.window.location.assign("/")},
 $S:0}
 A.a8r.prototype={
 $0(){var s=this.a.d
@@ -69596,7 +69596,7 @@ s===$&&A.a()
 return s.ne(1)},
 $S:0}
 A.a8t.prototype={
-$0(){v.G.window.location.href="/"},
+$0(){v.G.window.location.assign("/")},
 $S:0}
 A.qB.prototype={
 P(a){var s=null,r=this.d.f_(0.85)

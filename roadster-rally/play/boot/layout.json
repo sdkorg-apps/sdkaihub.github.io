@@ -1,0 +1,514 @@
+{
+ "title_1024x768_right.png": {
+  "W": 1024,
+  "H": 768,
+  "variant": "right",
+  "scale": 1.0666666666666667,
+  "crop_rect": [
+   85,
+   0,
+   1024,
+   768
+  ],
+  "title_xy": [
+   40,
+   34
+  ],
+  "title_px": 81,
+  "chip_h": 26,
+  "play": [
+   333,
+   641,
+   691,
+   705
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 0,
+   "bottom": 200,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 85,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   40,
+   49,
+   451,
+   108
+  ],
+  "chip_bbox": [
+   466,
+   65,
+   525,
+   91
+  ],
+  "car_screen": [
+   105,
+   160,
+   725,
+   501
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.96,
+  "fade_step_max_y": 1.98,
+  "alpha_step_outside_car_rows": 2.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_1024x768_centre.png": {
+  "W": 1024,
+  "H": 768,
+  "variant": "centre",
+  "scale": 1.0666666666666667,
+  "crop_rect": [
+   42,
+   0,
+   981,
+   768
+  ],
+  "title_xy": [
+   40,
+   34
+  ],
+  "title_px": 81,
+  "chip_h": 26,
+  "play": [
+   333,
+   641,
+   691,
+   705
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 120,
+   "bottom": 200,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 42,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   40,
+   49,
+   451,
+   108
+  ],
+  "chip_bbox": [
+   466,
+   65,
+   525,
+   91
+  ],
+  "car_screen": [
+   62,
+   160,
+   682,
+   501
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.98,
+  "fade_step_max_y": 1.98,
+  "alpha_step_outside_car_rows": 2.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_1024x640_right.png": {
+  "W": 1024,
+  "H": 640,
+  "variant": "right",
+  "scale": 0.8888888888888888,
+  "crop_rect": [
+   242,
+   0,
+   1024,
+   640
+  ],
+  "title_xy": [
+   40,
+   28
+  ],
+  "title_px": 67,
+  "chip_h": 22,
+  "play": [
+   333,
+   534,
+   691,
+   598
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 0,
+   "bottom": 166,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 104,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   40,
+   41,
+   380,
+   90
+  ],
+  "chip_bbox": [
+   393,
+   54,
+   442,
+   76
+  ],
+  "car_screen": [
+   258,
+   133,
+   775,
+   417
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.96,
+  "fade_step_max_y": 1.98,
+  "alpha_step_outside_car_rows": 2.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_1024x640_centre.png": {
+  "W": 1024,
+  "H": 640,
+  "variant": "centre",
+  "scale": 0.8888888888888888,
+  "crop_rect": [
+   121,
+   0,
+   903,
+   640
+  ],
+  "title_xy": [
+   40,
+   28
+  ],
+  "title_px": 67,
+  "chip_h": 22,
+  "play": [
+   333,
+   534,
+   691,
+   598
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 120,
+   "bottom": 166,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 104,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   40,
+   41,
+   380,
+   90
+  ],
+  "chip_bbox": [
+   393,
+   54,
+   442,
+   76
+  ],
+  "car_screen": [
+   137,
+   133,
+   654,
+   417
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.98,
+  "fade_step_max_y": 1.98,
+  "alpha_step_outside_car_rows": 2.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_1366x1024_right.png": {
+  "W": 1366,
+  "H": 1024,
+  "variant": "right",
+  "scale": 1.4222222222222223,
+  "crop_rect": [
+   114,
+   0,
+   1366,
+   1024
+  ],
+  "title_xy": [
+   54,
+   46
+  ],
+  "title_px": 108,
+  "chip_h": 35,
+  "play": [
+   444,
+   855,
+   922,
+   919
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 0,
+   "bottom": 266,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 104,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   54,
+   67,
+   601,
+   145
+  ],
+  "chip_bbox": [
+   622,
+   88,
+   701,
+   123
+  ],
+  "car_screen": [
+   141,
+   213,
+   967,
+   668
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.96,
+  "fade_step_max_y": 0.99,
+  "alpha_step_outside_car_rows": 1.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_1366x1024_centre.png": {
+  "W": 1366,
+  "H": 1024,
+  "variant": "centre",
+  "scale": 1.4222222222222223,
+  "crop_rect": [
+   57,
+   0,
+   1309,
+   1024
+  ],
+  "title_xy": [
+   54,
+   46
+  ],
+  "title_px": 108,
+  "chip_h": 35,
+  "play": [
+   444,
+   855,
+   922,
+   919
+  ],
+  "fades": {
+   "left": 120,
+   "left_car": 16,
+   "right": 120,
+   "bottom": 266,
+   "top": 0
+  },
+  "phone": false,
+  "edge_layer": {
+   "E": "#04060C",
+   "outer_ramp_px": 57,
+   "inner_fade_px": 16,
+   "band_crop_y": [
+    80,
+    150,
+    440,
+    490
+   ]
+  },
+  "title_bbox": [
+   54,
+   67,
+   601,
+   145
+  ],
+  "chip_bbox": [
+   622,
+   88,
+   701,
+   123
+  ],
+  "car_screen": [
+   84,
+   213,
+   910,
+   668
+  ],
+  "alpha_max_step_levels": 3.0,
+  "fade_step_max_x": 2.98,
+  "fade_step_max_y": 0.99,
+  "alpha_step_outside_car_rows": 1.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  },
+  "play_rule": "width=0.35W, height=max(64,0.0625H), centred, top=0.835H"
+ },
+ "title_390x844_phone.png": {
+  "W": 390,
+  "H": 844,
+  "variant": "phone",
+  "scale": 0.4431818181818182,
+  "crop_rect": [
+   0,
+   256,
+   390,
+   575
+  ],
+  "title_xy": [
+   22,
+   152
+  ],
+  "title_px": 72,
+  "chip_h": 26,
+  "play": [
+   22,
+   601,
+   368,
+   657
+  ],
+  "fades": {
+   "left": 0,
+   "left_car": 0,
+   "right": 0,
+   "bottom": 96,
+   "top": 48
+  },
+  "phone": true,
+  "title_line2": [
+   22,
+   233,
+   151,
+   283
+  ],
+  "title_bbox": [
+   22,
+   166,
+   246,
+   283
+  ],
+  "chip_bbox": [
+   165,
+   245,
+   224,
+   271
+  ],
+  "car_screen": [
+   8,
+   322,
+   265,
+   464
+  ],
+  "alpha_max_step_levels": 6.0,
+  "fade_step_max_x": 0.0,
+  "fade_step_max_y": 2.98,
+  "alpha_step_outside_car_rows": 6.0,
+  "checks": {
+   "play_overlaps_car": false,
+   "title_overlaps_car": false,
+   "chip_overlaps_car": false,
+   "title_inside": true,
+   "chip_inside": true,
+   "play_inside": true
+  }
+ }
+}
