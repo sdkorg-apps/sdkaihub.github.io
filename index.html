@@ -79,6 +79,50 @@
     gap: 20px;
     padding: 28px 0 48px;
   }
+  .poster-card {
+    display: block;
+    color: inherit;
+    background: #0e1520;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .poster-card:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+    border-color: #e11d48;
+  }
+  .poster-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #0e1520;
+  }
+  .poster-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px 20px;
+    background: linear-gradient(180deg, #121a26 0%, #0e1520 100%);
+  }
+  .poster-meta h2 {
+    margin: 0 0 4px;
+    font-size: 1.45rem;
+    color: #f8fafc;
+  }
+  .poster-meta p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.95rem;
+  }
+  .poster-meta .btn {
+    flex: 0 0 auto;
+    background: #e11d48;
+    color: #fff;
+  }
   .card {
     background: var(--card);
     border: 1px solid var(--line);
@@ -347,6 +391,23 @@
           </div>
         </div>
       </article>
+
+      <a class="poster-card" href="/roadster-rally/" aria-label="Play Roadster Rally in the browser">
+        <img
+          src="/assets/roadster-rally-poster.jpg"
+          width="1600"
+          height="900"
+          alt="Roadster Rally poster. A cherry-red roadster jumps a night highway while a net flies toward cartoon goons."
+        >
+        <div class="poster-meta">
+          <div>
+            <div class="eyebrow"><span class="live">Play</span> Arcade</div>
+            <h2>Roadster Rally</h2>
+            <p>Jump the crowd. Net the goons. Keep the red rocket shiny.</p>
+          </div>
+          <span class="btn">Play in browser</span>
+        </div>
+      </a>
     </section>
   </main>
   <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
