@@ -77,7 +77,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    align-items: stretch;
+    align-items: start;
     padding: 28px 0 48px;
   }
   @media (max-width: 900px) {
@@ -92,7 +92,6 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    align-self: stretch;
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   }
   .app-card:hover {
@@ -107,7 +106,7 @@
     border-color: #e11d48;
     box-shadow: 0 18px 44px rgba(225, 29, 72, 0.22);
   }
-  .card-body { padding: 24px 24px 8px; flex: 0 0 auto; }
+  .card-body { padding: 24px 24px 8px; flex: 1 1 auto; }
   .app-pitch { margin: 0 0 14px; }
   .card-media { padding: 8px 24px 24px; }
   .card-media--inline { padding: 0 0 14px; }
@@ -128,131 +127,9 @@
     object-fit: cover;
     background: #0e1520;
   }
-  /* Roadster: whole poster on top, then gameplay + how-to + Play fill height. */
-  .app-card--rally .card-body { padding-bottom: 8px; }
-  .app-card--rally .rally-stack {
-    flex: 1 1 0;
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr);
-    gap: 12px;
-    margin: 0 14px;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .app-card--rally .card-media--inline {
-    flex: 0 0 auto;
-    margin: 0;
-    padding: 0;
-  }
-  .app-card--rally .card-hero {
-    display: block;
-    position: relative;
-    width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #0e1520;
-  }
-  .app-card--rally .card-hero img {
-    position: static;
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-    object-position: center;
-    background: #0e1520;
-  }
-  .app-card--rally .rally-playstrip {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: #0e1520;
-  }
-  .app-card--rally .rally-playstrip .reel {
-    display: contents;
-  }
-  .app-card--rally .rally-playstrip .reel-frame {
-    position: relative;
-    flex: 1 1 auto;
-    min-height: 96px;
-    border: 0;
-    border-radius: 0;
-    overflow: hidden;
-    background: #0e1520;
-  }
-  .app-card--rally .rally-playstrip .reel-frame img {
-    position: absolute;
-    inset: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    border: 0;
-    border-radius: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .45s ease;
-  }
-  .app-card--rally .rally-playstrip .reel-frame img.is-on {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .app-card--rally .rally-playstrip .reel-dots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding: 0 10px 10px;
-    background: rgba(10, 16, 24, 0.92);
-  }
-  .app-card--rally .rally-playstrip .reel-bar {
-    padding: 6px 10px 8px;
-    background: rgba(10, 16, 24, 0.92);
-  }
-  .app-card--rally .rally-howto {
-    flex: 0 0 auto;
-    margin: 10px 24px 0;
-    color: var(--muted);
-    font-size: 0.92rem;
-    font-weight: 600;
-    line-height: 1.35;
-  }
-  .app-card--rally .rally-play {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: flex-start;
-    margin: 10px 24px 18px;
-  }
   .app-card--rally .btn.primary {
     background: #e11d48;
     color: #fff;
-  }
-  @media (min-width: 901px) {
-    /* Side-by-side: keep gameplay strip as a band so howto + Play stay in view
-       while the stack still flex-fills to Orgora's card height. */
-    .app-card--rally .rally-playstrip {
-      max-height: 200px;
-    }
-    .app-card--rally .rally-playstrip .reel-bar,
-    .app-card--rally .rally-playstrip .reel-dots {
-      display: none;
-    }
-  }
-  @media (max-width: 900px) {
-    /* Stacked: natural height like today — don't force a tall fill strip. */
-    .app-card--rally .rally-stack { flex: 0 0 auto; }
-    .app-card--rally .rally-playstrip {
-      flex: 0 0 auto;
-      min-height: 0;
-    }
-    .app-card--rally .rally-playstrip .reel-frame {
-      min-height: 0;
-      aspect-ratio: 16 / 9;
-    }
   }
   .eyebrow { display: flex; gap: 8px; align-items: center; font-size: 0.78rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); }
   .live { background: var(--mint); color: var(--green); border-radius: 999px; padding: 3px 8px; }
