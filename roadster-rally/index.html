@@ -3,33 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Roadster Rally — pick Classic or Night Track and play in the browser.">
-<title>Roadster Rally — choose a map</title>
+<meta name="description" content="Roadster Rally — Classic BETA. Hop cars, flip over trucks, play in the browser.">
+<title>Roadster Rally — BETA</title>
 <link rel="icon" href="/assets/sdkaihub_mark.png" type="image/png">
+<!-- Legacy Night / map-select deep links land on Classic play. -->
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var map = (q.get("map") || "").toLowerCase();
+    if (map === "night" || map === "classic") {
+      location.replace("/roadster-rally/play/");
+    }
+  })();
+</script>
 <style>
   :root {
     --ink: #f8fafc;
     --muted: #94a3b8;
     --line: #2a3648;
     --paper: #0a1018;
-    --card: #121a26;
-    --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    --accent: #e8c547;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     color: var(--ink);
     background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(225, 29, 72, 0.18), transparent 55%),
-      radial-gradient(900px 500px at 10% 0%, rgba(14, 165, 183, 0.12), transparent 50%),
+      radial-gradient(1100px 520px at 70% -8%, rgba(232, 197, 71, 0.16), transparent 55%),
+      radial-gradient(800px 480px at 8% 10%, rgba(53, 88, 122, 0.22), transparent 50%),
       var(--paper);
-    line-height: 1.5;
     min-height: 100vh;
+    line-height: 1.45;
   }
   a { color: #7de7ff; text-decoration: none; }
   a:hover { text-decoration: underline; }
-  header, main, footer { width: min(960px, calc(100% - 36px)); margin: 0 auto; }
+  header, main, footer { width: min(920px, calc(100% - 36px)); margin: 0 auto; }
   header {
     padding: 22px 0 8px;
     display: flex;
@@ -39,80 +48,82 @@
   }
   .brand {
     display: flex; align-items: center; gap: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-weight: 700; letter-spacing: -0.03em; font-size: 1.05rem; color: var(--ink);
   }
   .brand:hover { text-decoration: none; }
   .brand-mark { width: 22px; height: 22px; display: block; }
-  nav a { color: var(--muted); font-weight: 600; font-size: 0.92rem; }
-  h1 {
-    margin: 28px 0 8px;
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
+  nav a {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--muted); font-weight: 600; font-size: 0.92rem;
   }
-  .lede { margin: 0 0 28px; color: var(--muted); max-width: 36rem; }
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    padding-bottom: 48px;
-  }
-  @media (max-width: 720px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-  .map {
-    display: flex;
-    flex-direction: column;
-    background: var(--card);
+  .hero {
+    position: relative;
+    margin: 20px 0 28px;
+    min-height: min(72vh, 560px);
     border: 1px solid var(--line);
-    border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-  }
-  .map:hover { transform: translateY(-3px); }
-  .map.classic:hover {
-    border-color: #e8c547;
-    box-shadow: 0 16px 36px rgba(232, 197, 71, 0.18);
-  }
-  .map.night:hover {
-    border-color: #7de7ff;
-    box-shadow: 0 18px 40px rgba(225, 29, 72, 0.28), 0 0 24px rgba(125, 231, 255, 0.16);
-  }
-  .map img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
     background: #05080e;
   }
-  .map-body {
-    padding: 16px 18px 18px;
+  .hero img {
+    display: block;
+    width: 100%;
+    height: min(72vh, 560px);
+    object-fit: cover;
+  }
+  .hero-copy {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 28px 22px 24px;
+    background: linear-gradient(transparent, rgba(5, 8, 14, 0.92) 45%);
+  }
+  .title-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: baseline;
     gap: 12px;
+    flex-wrap: wrap;
   }
-  .map h2 {
+  h1 {
     margin: 0;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    font-weight: 700;
   }
-  .map.classic h2 { color: #fff7d6; }
-  .map.night h2 { color: #e7fbff; }
+  .beta {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    border: 1px solid rgba(232, 197, 71, 0.85);
+    padding: 4px 9px;
+    border-radius: 3px;
+  }
   .play {
     display: inline-block;
-    border-radius: 999px;
-    padding: 10px 16px;
+    margin-top: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    border-radius: 4px;
+    padding: 12px 22px;
     font-weight: 700;
-    font-size: 0.92rem;
-    color: #fff;
-    background: #e11d48;
+    font-size: 0.95rem;
+    color: #0e1520;
+    background: var(--accent);
   }
-  .play:hover { text-decoration: none; filter: brightness(1.08); }
-  .map.classic .play { background: #c9a227; color: #0e1520; }
-  .map.night .play { background: linear-gradient(90deg, #e11d48, #0ea5b7); color: #fff; }
-  footer { padding: 0 0 36px; color: var(--muted); font-size: 0.85rem; }
+  .play:hover { text-decoration: none; filter: brightness(1.06); }
+  .note {
+    margin: 0 0 40px;
+    color: var(--muted);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.9rem;
+  }
+  footer {
+    padding: 0 0 36px;
+    color: var(--muted);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+  }
 </style>
 </head>
 <body>
@@ -126,34 +137,22 @@
     </nav>
   </header>
   <main>
-    <h1>Roadster Rally</h1>
-    <p class="lede">Choose a map, then play in the browser.</p>
-    <div class="grid">
-      <article class="map classic">
-        <img
-          src="/assets/roadster-card-classic.jpg"
-          width="1280"
-          height="720"
-          alt="Classic map. White Roadster mid-flip over a red truck."
-        >
-        <div class="map-body">
-          <h2>Classic</h2>
-          <a class="play" href="/roadster-rally/play/?map=classic">Play</a>
+    <a class="hero" href="/roadster-rally/play/" aria-label="Play Roadster Rally">
+      <img
+        src="/assets/roadster-card-classic.jpg"
+        width="1280"
+        height="720"
+        alt="Roadster Rally Classic. White Roadster mid-flip over a red truck."
+      >
+      <div class="hero-copy">
+        <div class="title-row">
+          <h1>Roadster Rally</h1>
+          <span class="beta">BETA</span>
         </div>
-      </article>
-      <article class="map night">
-        <img
-          src="/assets/roadster-card-night.jpg"
-          width="1280"
-          height="720"
-          alt="Night Track map. White Roadster mid-flip on wet asphalt."
-        >
-        <div class="map-body">
-          <h2>Night Track</h2>
-          <a class="play" href="/roadster-rally/play/?map=night">Play</a>
-        </div>
-      </article>
-    </div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+    <p class="note">Classic only. Review builds: <a href="/roadster-rally/preview/">/roadster-rally/preview/</a></p>
   </main>
   <footer>SDK AI Hub is a brand of SDK Equipment LLC.</footer>
 </body>
