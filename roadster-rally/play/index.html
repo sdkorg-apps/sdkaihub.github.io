@@ -18,7 +18,8 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Roadster Rally — jump the crowd, net the goons, keep the red rocket shiny.">
+  <meta name="description" content="Roadster Rally — hop cars, flip over trucks, and dodge traffic.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -32,14 +33,33 @@
   <title>Roadster Rally</title>
   <link rel="manifest" href="manifest.json">
   <style>
-    html, body { margin: 0; background: #0e1520; }
-    /* Hide the map picker for one beat while Classic auto-launches. */
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #0e1520;
+      overflow: hidden;
+    }
+    /* Tap-to-start: Flutter is not loaded until the player taps. */
     #classic-boot {
       position: fixed;
       inset: 0;
       z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #0e1520;
-      pointer-events: none;
+      color: #f4f0e6;
+      font: 700 18px/1.2 "Space Grotesk", "Segoe UI", sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #classic-boot span { pointer-events: none; }
+    /* Clip crash-shake so the canvas can't flash a dark strip at the edge. */
+    flt-glass-pane, flt-scene-host, flutter-view {
+      overflow: hidden !important;
     }
   </style>
   <script>
@@ -54,7 +74,9 @@
   </script>
 </head>
 <body>
-  <div id="classic-boot" aria-hidden="true"></div>
+  <div id="classic-boot" role="button" tabindex="0" aria-label="Tap to start Roadster Rally">
+    <span>TAP TO START</span>
+  </div>
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader
@@ -63,27 +85,28 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
-  <script src="flutter_bootstrap.js" async></script>
   <script src="/assets/visit.js" defer></script>
   <script>
     (function () {
-      var dropped = false;
-      function drop() {
-        if (dropped) return;
-        dropped = true;
+      var started = false;
+      function start() {
+        if (started) return;
+        started = true;
         var el = document.getElementById("classic-boot");
         if (el) el.remove();
+        var s = document.createElement("script");
+        s.src = "flutter_bootstrap.js";
+        s.async = true;
+        document.body.appendChild(s);
       }
-      var n = 0;
-      var iv = setInterval(function () {
-        n += 1;
-        if (document.querySelector("flt-glass-pane") || document.querySelector("canvas") || n > 60) {
-          clearInterval(iv);
-          // Post-frame Classic launch + route push.
-          setTimeout(drop, 500);
+      var boot = document.getElementById("classic-boot");
+      boot.addEventListener("pointerdown", start);
+      boot.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          start();
         }
-      }, 50);
-      setTimeout(drop, 4000);
+      });
     })();
   </script>
 </body>
