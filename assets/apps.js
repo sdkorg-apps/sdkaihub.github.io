@@ -84,10 +84,10 @@
       },
       links: [],
       hero: {
-        src: "/assets/roadster-card-classic.jpg",
+        src: "/assets/roadster-card-r13.jpg",
         width: 1280,
         height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
+        alt: "Roadster Rally Classic. White Roadster hopping over a sedan on a sunny countryside road.",
         href: "/roadster-rally/play/",
       },
       accent: "rally",
