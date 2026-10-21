@@ -63717,7 +63717,7 @@ q=b8.x1
 if(q.length!==0){j=b8.Y
 i=j.gar()
 d=c2?13:15
-b8.Fc(c3,q,new A.w(i.a,j.b),d,B.k6,!0)}if(b8.y2)b8.Fd(c3,"build 7dc72e80994bc65e87a51b36199ca08f47d818ad \xb7 run "+b8.y1,new A.w(b9,c1-14),9,B.yT,!0)},
+b8.Fc(c3,q,new A.w(i.a,j.b),d,B.k6,!0)}if(b8.y2)b8.Fd(c3,"build b8fbe86bbea25137dbad3b3169d2d5d5a30f594f \xb7 run "+b8.y1,new A.w(b9,c1-14),9,B.yT,!0)},
 Db(a,b,c,d,e,f){var s,r,q=c+7,p=A.v3(new A.u(b,c,b+d,q),B.vd)
 $.a1()
 s=A.ae()
@@ -63886,7 +63886,7 @@ h===$&&A.b()
 b4=h.Y
 b5=h.A
 d=A.y(e,d)
-d.l(0,"build","7dc72e80994bc65e87a51b36199ca08f47d818ad")
+d.l(0,"build","b8fbe86bbea25137dbad3b3169d2d5d5a30f594f")
 h=$.agt
 $.agt=h+1
 d.l(0,"f",h)
@@ -65009,7 +65009,7 @@ a=t.E
 a0=A.c([A.Rt(A.hQ(n,1,a2,!1,A.nm().$2$color$fontSize(B.R,m),a2),B.cC),A.dX(a2,j,a2),A.hQ("Score  "+a1.c,a2,a2,a2,A.jp().$3$color$fontSize$fontWeight(B.h5,l,B.ar),a2)],a)
 if(q)B.b.J(a0,A.c([A.dX(a2,j,a2),A.Rt(A.hQ("FINISH BONUS  +500",1,a2,!1,A.jp().$3$color$fontSize$fontWeight(B.by,l,B.ar),a2),B.cC),A.dX(a2,j,a2),A.hQ("Time  "+(a3+":"+s),a2,a2,a2,A.jp().$3$color$fontSize$fontWeight(B.by,l,B.ar),a2)],a))
 a0.push(A.dX(a2,j,a2))
-a3=B.d.ae("7dc72e80994bc65e87a51b36199ca08f47d818ad",0,7)
+a3=B.d.ae("b8fbe86bbea25137dbad3b3169d2d5d5a30f594f",0,7)
 s=p?10:11
 a0.push(A.Rt(A.hQ("build "+a3,1,a2,!1,A.jp().$2$color$fontSize(B.R.iO(0.5),s),a2),B.cC))
 a0.push(A.dX(a2,j,a2))
@@ -65051,7 +65051,7 @@ return A.aeY(A.hQ("PLAY",s,s,s,A.nm().$3$fontSize$height$letterSpacing(a,1,4),s)
 Hj(){var s=null
 return A.fc(s,A.hQ("TAP OR PRESS TO START",1,B.bO,s,A.nm().$3$color$fontSize$letterSpacing(B.R,15,0.8),B.dE),s,s,16,64,12,s)},
 Dh(){var s=null
-return A.aau(A.hQ("build 7dc72e80994bc65e87a51b36199ca08f47d818ad",s,s,s,A.jp().$2$color$fontSize(B.R.iO(0.45),12),s),s,s)}}
+return A.aau(A.hQ("build b8fbe86bbea25137dbad3b3169d2d5d5a30f594f",s,s,s,A.jp().$2$color$fontSize(B.R.iO(0.45),12),s),s,s)}}
 A.Jh.prototype={
 R(a){return new A.oi(B.Ql,null,null,B.b0,B.jv,!0,null)}}
 A.Ji.prototype={
