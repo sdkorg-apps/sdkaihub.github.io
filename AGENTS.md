@@ -8,12 +8,13 @@ GitHub Pages. That fact drives every rule below.
 
 **SDK AI Hub** (a brand of SDK Equipment LLC) builds apps. **Orgora Charts** is the privacy-first product: it does not host customer charts and it does not run analytics. That promise is Orgora only. Other apps may store user data. Do not describe the company, or a non-Orgora app, as collecting zero data.
 The public homepage is an **app hub** (Founder 2026-10-17): equal cards for
-live apps, driven by `assets/apps.js` (`SDK_APPS`). Orgora Charts and
-Roadster Rally ship first. Orgora keeps its store badges and full content.
-Roadster Rally is Classic-only BETA: hub poster and Play go to
-`/roadster-rally/play/`; review candidates deploy to
-`/roadster-rally/preview/` with a `GIT_SHA` build id. Do not list Penni or other in-development apps on
-sdkaihub.com until the Founder says so. This repo is the public website:
+live apps, driven by `assets/apps.js` (`SDK_APPS`). Orgora Charts ships on
+the hub with its store badges and full content. **Roadster Rally is hidden
+from the homepage** (Founder 2026-10-23); do not re-add its card to
+`SDK_APPS` or the `index.html` noscript fallback unless the Founder asks.
+The game can still live under `/roadster-rally/play/` and
+`/roadster-rally/preview/` with a `GIT_SHA` build id. Do not list Penni or
+other in-development apps on sdkaihub.com until the Founder says so. This repo is the public website:
 the homepage, and per-app privacy policy and support pages
 (`orgora-charts/`). `CNAME` binds the custom domain and the
 `google*.html` file is Google site verification — never delete or rename
