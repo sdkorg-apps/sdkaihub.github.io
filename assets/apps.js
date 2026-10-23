@@ -1,6 +1,6 @@
 /**
  * Homepage app hub. Add a new object to `SDK_APPS` to ship another card.
- * Orgora keeps its full store links and media; Roadster is the arcade entry.
+ * Orgora keeps its full store links and media. Roadster Rally is not listed.
  */
 (function () {
   var SDK_APPS = [
@@ -69,28 +69,6 @@
         { href: "/orgora-charts/privacy.html", label: "Privacy policy" },
       ],
       media: "orgora",
-    },
-    {
-      id: "roadster",
-      eyebrowLive: "BETA",
-      eyebrow: "Arcade",
-      name: "Roadster Rally",
-      mark: null,
-      pitch: "",
-      primary: {
-        href: "/roadster-rally/play/",
-        label: "Play now",
-        note: "Classic BETA in the browser",
-      },
-      links: [],
-      hero: {
-        src: "/assets/roadster-card-classic.jpg",
-        width: 1280,
-        height: 720,
-        alt: "Roadster Rally Classic. White Roadster mid-flip over a red truck.",
-        href: "/roadster-rally/play/",
-      },
-      accent: "rally",
     },
   ];
 
