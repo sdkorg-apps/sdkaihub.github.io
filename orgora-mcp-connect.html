@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orgora Charts · Connect</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://alcdn.msauth.net/browser/2.38.2/js/msal-browser.min.js" async></script>
+  <style>
+    :root { color-scheme: light; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      font-family: "Iowan Old Style", Palatino, Georgia, serif; color:#1a1a1a;
+      background: radial-gradient(1200px 600px at 10% -10%, #dde8ff 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #ffe8d2 0%, transparent 50%), #f7f4ef; }
+    main { width:min(420px,92vw); background:#fff; border:1px solid #e6e2dc; padding:28px; }
+    .brand { font:13px ui-sans-serif,system-ui; letter-spacing:.08em; text-transform:uppercase; color:#5c5c5c; margin:0 0 8px; }
+    h1 { font-size:1.4rem; margin:0 0 12px; font-weight:600; }
+    p { color:#5c5c5c; line-height:1.45; }
+    button { appearance:none; border:1px solid #e6e2dc; background:#111; color:#fff; padding:12px 14px;
+      font:600 .95rem ui-sans-serif,system-ui,sans-serif; cursor:pointer; width:100%; }
+    button:disabled { opacity:.5; cursor:default; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">Orgora Charts</p>
+    <h1>Connect for Grok Bot</h1>
+    <p id="status">Continue with your Orgora account. Charts stay in your Drive or OneDrive — Orgora does not store them.</p>
+    <p><button type="button" id="go">Continue</button></p>
+  </main>
+  <script>
+    const GOOGLE_CLIENT_ID = "230813554864-vr623b4jhaqmkee59eugos8k5valb8t9.apps.googleusercontent.com";
+    const MICROSOFT_CLIENT_ID = "1a189b04-c127-4555-b384-4db5abd23e07";
+    const MCP = "https://orgora-mcp.sdkaihub.com";
+    // Already registered Entra SPA redirect (same as public Orgora web).
+    const MS_REDIRECT = "https://sdkaihub.com/orgora/";
+    const GOOGLE_SCOPE = "openid email profile https://www.googleapis.com/auth/drive.file";
+    const MS_SCOPES = ["openid","email","profile","offline_access","User.Read","Files.ReadWrite"];
+
+    const params = new URLSearchParams(location.search);
+    const state = params.get("state") || "";
+    const provider = (params.get("provider") || "google").toLowerCase();
+    const statusEl = document.getElementById("status");
+    const go = document.getElementById("go");
+
+    function setStatus(t) { statusEl.textContent = t; }
+
+    function finishOnWorker(accessToken) {
+      const url = MCP + "/bridge/" + (provider === "microsoft" ? "microsoft" : "google") + "#" +
+        new URLSearchParams({ state: state, access_token: accessToken }).toString();
+      location.href = url;
+    }
+
+    if (!state) {
+      setStatus("Missing Connect state. Start again from Grok Bot → Connect Orgora.");
+      go.disabled = true;
+    } else if (provider === "microsoft") {
+      go.textContent = "Continue with Microsoft";
+      setStatus("Continue with Microsoft. Charts stay in your OneDrive — Orgora does not store them.");
+      go.onclick = async () => {
+        go.disabled = true;
+        setStatus("Opening Microsoft…");
+        try {
+          if (!window.msal) {
+            await new Promise((resolve) => {
+              const t = setInterval(() => { if (window.msal) { clearInterval(t); resolve(); } }, 40);
+            });
+          }
+          const pca = new msal.PublicClientApplication({
+            auth: {
+              clientId: MICROSOFT_CLIENT_ID,
+              authority: "https://login.microsoftonline.com/common",
+              redirectUri: MS_REDIRECT,
+            },
+            cache: { cacheLocation: "sessionStorage" },
+          });
+          await pca.initialize();
+          const result = await pca.loginPopup({ scopes: MS_SCOPES, prompt: "select_account" });
+          const token = result && result.accessToken;
+          if (!token) {
+            setStatus("Microsoft did not return a token.");
+            go.disabled = false;
+            return;
+          }
+          setStatus("Finishing…");
+          finishOnWorker(token);
+        } catch (e) {
+          setStatus(e && e.message ? e.message : "Microsoft sign-in failed.");
+          go.disabled = false;
+        }
+      };
+    } else {
+      go.textContent = "Continue with Google";
+      setStatus("Continue with Google. Charts stay in your Drive — Orgora does not store them.");
+      function ready(fn) {
+        if (window.google && google.accounts && google.accounts.oauth2) fn();
+        else setTimeout(() => ready(fn), 40);
+      }
+      ready(() => {
+        const client = google.accounts.oauth2.initTokenClient({
+          client_id: GOOGLE_CLIENT_ID,
+          scope: GOOGLE_SCOPE,
+          callback: (resp) => {
+            if (resp.error) {
+              setStatus("Google sign-in failed: " + (resp.error_description || resp.error));
+              go.disabled = false;
+              return;
+            }
+            setStatus("Finishing…");
+            finishOnWorker(resp.access_token);
+          },
+        });
+        go.onclick = () => {
+          go.disabled = true;
+          setStatus("Opening Google…");
+          client.requestAccessToken({ prompt: "" });
+        };
+      });
+    }
+  </script>
+</body>
+</html>
