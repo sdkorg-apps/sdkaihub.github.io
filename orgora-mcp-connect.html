@@ -88,7 +88,14 @@
                   go.disabled = false;
                   return;
                 }
-                try { await pca.clearCache(); } catch (_) {}
+                // MSAL 2.38.2 has no public clearCache(); drop hub-origin session keys.
+                try {
+                  for (const k of Object.keys(sessionStorage)) {
+                    if (/msal/i.test(k) || k.indexOf(MICROSOFT_CLIENT_ID) !== -1) {
+                      sessionStorage.removeItem(k);
+                    }
+                  }
+                } catch (_) {}
                 setStatus("Finishing…");
                 finishOnWorker(token);
               })
