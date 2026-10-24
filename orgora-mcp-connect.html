@@ -26,7 +26,7 @@
     <p class="brand">Orgora Charts</p>
     <h1>Connect for Grok Bot</h1>
     <p id="status">Continue with your Orgora account. Charts stay in your Drive or OneDrive — Orgora does not store them.</p>
-    <p><button type="button" id="go">Continue</button></p>
+    <p><button type="button" id="go" disabled>Continue</button></p>
   </main>
   <script>
     const GOOGLE_CLIENT_ID = "230813554864-vr623b4jhaqmkee59eugos8k5valb8t9.apps.googleusercontent.com";
@@ -51,22 +51,21 @@
       location.href = url;
     }
 
+    function whenReady(pred, fn) {
+      if (pred()) fn();
+      else setTimeout(() => whenReady(pred, fn), 40);
+    }
+
     if (!state) {
       setStatus("Missing Connect state. Start again from Grok Bot → Connect Orgora.");
       go.disabled = true;
     } else if (provider === "microsoft") {
       go.textContent = "Continue with Microsoft";
-      setStatus("Continue with Microsoft. Charts stay in your OneDrive — Orgora does not store them.");
-      go.onclick = async () => {
-        go.disabled = true;
-        setStatus("Opening Microsoft…");
+      setStatus("Loading Microsoft…");
+      let pca = null;
+      whenReady(() => !!window.msal, async () => {
         try {
-          if (!window.msal) {
-            await new Promise((resolve) => {
-              const t = setInterval(() => { if (window.msal) { clearInterval(t); resolve(); } }, 40);
-            });
-          }
-          const pca = new msal.PublicClientApplication({
+          pca = new msal.PublicClientApplication({
             auth: {
               clientId: MICROSOFT_CLIENT_ID,
               authority: "https://login.microsoftonline.com/common",
@@ -75,47 +74,74 @@
             cache: { cacheLocation: "sessionStorage" },
           });
           await pca.initialize();
-          const result = await pca.loginPopup({ scopes: MS_SCOPES, prompt: "select_account" });
-          const token = result && result.accessToken;
-          if (!token) {
-            setStatus("Microsoft did not return a token.");
-            go.disabled = false;
-            return;
-          }
-          setStatus("Finishing…");
-          finishOnWorker(token);
-        } catch (e) {
-          setStatus(e && e.message ? e.message : "Microsoft sign-in failed.");
+          setStatus("Continue with Microsoft. Charts stay in your OneDrive — Orgora does not store them.");
           go.disabled = false;
+          go.onclick = () => {
+            // loginPopup must start in the click turn (no await before it).
+            go.disabled = true;
+            setStatus("Opening Microsoft…");
+            pca.loginPopup({ scopes: MS_SCOPES, prompt: "select_account" })
+              .then(async (result) => {
+                const token = result && result.accessToken;
+                if (!token) {
+                  setStatus("Microsoft did not return a token.");
+                  go.disabled = false;
+                  return;
+                }
+                // MSAL 2.38.2 has no public clearCache(); drop hub-origin session keys.
+                try {
+                  for (const k of Object.keys(sessionStorage)) {
+                    if (/msal/i.test(k) || k.indexOf(MICROSOFT_CLIENT_ID) !== -1) {
+                      sessionStorage.removeItem(k);
+                    }
+                  }
+                } catch (_) {}
+                setStatus("Finishing…");
+                finishOnWorker(token);
+              })
+              .catch((e) => {
+                setStatus(e && e.message ? e.message : "Microsoft sign-in failed.");
+                go.disabled = false;
+              });
+          };
+        } catch (e) {
+          setStatus(e && e.message ? e.message : "Microsoft Connect failed to load.");
         }
-      };
+      });
     } else {
       go.textContent = "Continue with Google";
-      setStatus("Continue with Google. Charts stay in your Drive — Orgora does not store them.");
-      function ready(fn) {
-        if (window.google && google.accounts && google.accounts.oauth2) fn();
-        else setTimeout(() => ready(fn), 40);
-      }
-      ready(() => {
-        const client = google.accounts.oauth2.initTokenClient({
-          client_id: GOOGLE_CLIENT_ID,
-          scope: GOOGLE_SCOPE,
-          callback: (resp) => {
-            if (resp.error) {
-              setStatus("Google sign-in failed: " + (resp.error_description || resp.error));
+      setStatus("Loading Google…");
+      whenReady(
+        () => !!(window.google && google.accounts && google.accounts.oauth2),
+        () => {
+          const client = google.accounts.oauth2.initTokenClient({
+            client_id: GOOGLE_CLIENT_ID,
+            scope: GOOGLE_SCOPE,
+            callback: (resp) => {
+              if (resp.error) {
+                setStatus("Google sign-in failed: " + (resp.error_description || resp.error));
+                go.disabled = false;
+                return;
+              }
+              setStatus("Finishing…");
+              finishOnWorker(resp.access_token);
+            },
+            error_callback: (err) => {
+              const msg = (err && (err.message || err.type)) || "Google sign-in was closed.";
+              setStatus(String(msg));
               go.disabled = false;
-              return;
-            }
-            setStatus("Finishing…");
-            finishOnWorker(resp.access_token);
-          },
-        });
-        go.onclick = () => {
-          go.disabled = true;
-          setStatus("Opening Google…");
-          client.requestAccessToken({ prompt: "" });
-        };
-      });
+            },
+          });
+          setStatus("Continue with Google. Charts stay in your Drive — Orgora does not store them.");
+          go.disabled = false;
+          go.onclick = () => {
+            go.disabled = true;
+            setStatus("Opening Google…");
+            // select_account avoids silent reuse of another tab's Google session.
+            client.requestAccessToken({ prompt: "select_account" });
+          };
+        },
+      );
     }
   </script>
 </body>
