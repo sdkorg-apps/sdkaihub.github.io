@@ -33,6 +33,13 @@
           title: "Clip from LinkedIn",
           body: "Safari Clipper ships in the app. Chrome Clipper is on the Chrome Web Store. Nothing is sent to us.",
         },
+        {
+          brands: [{ src: "/assets/logo-grok.svg", alt: "Grok" }],
+          title: "Orgora Charts on Grok Bot",
+          body: "Open the Orgora Charts Bot template on x.ai — Connect Orgora, use mail that is already in Grok, pull logos, and confirm LinkedIn profiles.",
+          href: "https://x.ai/bot/IjSACxW3NzaxO8vIqTke_",
+          linkLabel: "Open Grok Bot template",
+        },
       ],
       storeBadges: [
         {
@@ -64,6 +71,10 @@
         },
       ],
       links: [
+        {
+          href: "https://x.ai/bot/IjSACxW3NzaxO8vIqTke_",
+          label: "Orgora Charts on Grok Bot",
+        },
         { href: "/orgora-charts/clipper.html", label: "Safari and Chrome setup" },
         { href: "/orgora-charts/", label: "Support" },
         { href: "/orgora-charts/privacy.html", label: "Privacy policy" },
@@ -229,6 +240,18 @@
         }
         box.appendChild(el("strong", { text: f.title }));
         box.appendChild(el("p", { text: f.body }));
+        if (f.href) {
+          box.appendChild(
+            el("p", { className: "feature-link" }, [
+              el("a", {
+                href: f.href,
+                target: "_blank",
+                rel: "noopener noreferrer",
+                text: f.linkLabel || "Open",
+              }),
+            ])
+          );
+        }
         features.appendChild(box);
       });
       body.appendChild(features);
