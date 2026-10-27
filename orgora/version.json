@@ -1,1 +1,5 @@
-{"app_name": "orgora_charts", "version": "1.0.11", "build_number": "60", "package_name": "orgora_charts"}
+{
+  "version": "1.0.12",
+  "build": 61,
+  "sha": "a06df81"
+}
